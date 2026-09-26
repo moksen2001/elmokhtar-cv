@@ -732,6 +732,29 @@ html.qopen{overflow:hidden}
 .demo-cta p{margin:0;flex:1 1 240px;font-size:.88rem;color:var(--ink-2)}
 .demo-cta .btn{background:var(--sun);border-color:var(--sun);color:#1b1405}
 /* ==== ENH4-END ==== */
+/* ==== ENH5-START ==== */
+/* ==== ENH5: logos ==== */
+.co.lg{background:#fff;border-color:transparent;padding:7px 10px;min-width:0;max-width:140px;height:44px}
+.co.lg img{height:100%;width:auto;max-width:118px;object-fit:contain;display:block}
+.co.lg.sq{padding:0;width:44px;overflow:hidden}
+.co.lg.sq img{height:100%;max-width:none}
+.track span.ml img{height:clamp(22px,2.6vw,30px);width:auto;display:block;filter:brightness(0) invert(1);opacity:.72;transition:opacity .2s}
+.track span.ml.tall img{height:clamp(30px,3.4vw,40px)}
+:root:not([data-theme="dark"]) .track span.ml img{filter:brightness(0);opacity:.62}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .track span.ml img{filter:brightness(0) invert(1);opacity:.72}}
+.marquee:hover .track span.ml img{opacity:.95}
+.qv-path li .qlg{display:inline-grid;place-items:center;vertical-align:middle;height:20px;padding:2px 5px;margin-right:6px;border-radius:5px;background:#fff}
+.qv-path li .qlg img{height:100%;width:auto;max-width:74px}
+@media (max-width:760px){.co.lg{height:30px;padding:4px 7px;max-width:110px}.co.lg.sq{width:30px;padding:0}.co.lg img{max-width:96px}}
+/* ==== ENH5: mail ==== */
+.row .acts{display:flex;gap:6px;flex:none}
+.row a.go.mail{background:var(--sun);color:#1b1405}
+.row .dl>summary.go{display:inline-flex;align-items:center;gap:6px;font:600 .82rem var(--body);padding:8px 12px;border-radius:9px;background:var(--bg);color:var(--ink);cursor:pointer}
+.row .dl>summary.go svg{width:15px;height:15px}
+.row .dl-menu small{font-family:var(--body);text-transform:none;letter-spacing:0;opacity:1;font-size:.78rem}
+.row .dl-menu a{color:var(--ink)}
+.row b a{color:inherit;text-decoration:none;border-bottom:1px dashed color-mix(in srgb,currentColor 40%,transparent)}
+/* ==== ENH5-END ==== */
 </style>
 </head>
 <body>
@@ -804,7 +827,7 @@ html.qopen{overflow:hidden}
         <div><div class="k"><span class="num" data-to="4">4</span></div><div class="v">sectors: pharma, investment banking, central banking, tech startup</div></div>
       </div>
     <!--ENH2:hire--><div class="card hire rv" role="group" aria-label="Hiring for…"><span class="hk">Hiring for…</span><span class="hp">Pick a role: I will highlight the experience, projects and skills that matter to you.</span><div class="hire-roles"><button type="button" data-r="po" aria-pressed="false">Product Owner</button><button type="button" data-r="ia" aria-pressed="false">AI &amp; automation</button><button type="button" data-r="dx" aria-pressed="false">Digital transformation &amp; UX</button></div><div class="hire-st" hidden aria-live="polite"><span></span><a href="#parcours">See experience ↓</a><button type="button">Show everything</button></div></div><!--/ENH2:hire--></div>
-    <div class="marquee" aria-label="Organizations I have worked or studied with"><div class="track"><span>Servier</span><span>Société Générale CIB</span><span>Banque de France</span><span>NEOMA Business School</span><span>MBA ESG</span><span>Socium</span><span>Groupe ISM</span><span>UNDP</span><span>Scrum.org</span><span aria-hidden="true">Servier</span><span aria-hidden="true">Société Générale CIB</span><span aria-hidden="true">Banque de France</span><span aria-hidden="true">NEOMA Business School</span><span aria-hidden="true">MBA ESG</span><span aria-hidden="true">Socium</span><span aria-hidden="true">Groupe ISM</span><span aria-hidden="true">UNDP</span><span aria-hidden="true">Scrum.org</span></div></div>
+    <div class="marquee" aria-label="Organizations I have worked or studied with"><div class="track"><span class="ml"><img src="../img/logos/servier.png" alt="Servier" height="30"></span><span class="ml"><img src="../img/logos/sgcib.png" alt="Société Générale CIB" height="30"></span><span class="ml tall"><img src="../img/logos/bdf.png" alt="Banque de France" height="30"></span><span>NEOMA Business School</span><span>MBA ESG</span><span>Socium</span><span class="ml tall"><img src="../img/logos/ism-line.png" alt="Groupe ISM" height="30"></span><span>UNDP</span><span>Scrum.org</span><span class="ml" aria-hidden="true"><img src="../img/logos/servier.png" alt="" height="30"></span><span class="ml" aria-hidden="true"><img src="../img/logos/sgcib.png" alt="" height="30"></span><span class="ml tall" aria-hidden="true"><img src="../img/logos/bdf.png" alt="" height="30"></span><span aria-hidden="true">NEOMA Business School</span><span aria-hidden="true">MBA ESG</span><span aria-hidden="true">Socium</span><span class="ml tall" aria-hidden="true"><img src="../img/logos/ism-line.png" alt="" height="30"></span><span aria-hidden="true">UNDP</span><span aria-hidden="true">Scrum.org</span></div></div>
   </section>
 
   <!-- PROFIL -->
@@ -1303,7 +1326,7 @@ html.qopen{overflow:hidden}
         <p>Product, AI, digital transformation: I reply quickly by email or on LinkedIn.</p>
       </div>
       <div class="chan">
-        <div class="row"><div class="t"><small>Email</small><b id="mail">elmokhtarberrada@gmail.com</b></div><button type="button" data-copy="mail">Copy</button></div>
+        <div class="row"><div class="t"><small>Email</small><b id="mail"><a href="mailto:elmokhtarberrada@gmail.com?subject=Reaching%20out%20from%20your%20interactive%20CV&amp;body=Hello%20El%20Mokhtar%2C%0A%0A">elmokhtarberrada@gmail.com</a></b></div><div class="acts"><button type="button" data-copy="mail">Copy</button><a class="go mail" href="mailto:elmokhtarberrada@gmail.com?subject=Reaching%20out%20from%20your%20interactive%20CV&amp;body=Hello%20El%20Mokhtar%2C%0A%0A" aria-label="Send an email to El Mokhtar">Write</a></div></div>
         <div class="row"><div class="t"><small>Phone</small><b id="tel">+33 7 83 73 17 92</b></div><button type="button" data-copy="tel">Copy</button></div>
         <div class="row"><div class="t"><small>LinkedIn</small><b>linkedin.com/in/elmokhtar-berrada</b></div><a class="go" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener">Open</a></div>
       <!--ENH2:crow--><div class="row"><div class="t"><small>CV PDF</small><b>Download my CV</b></div><!--ENH2:dl--><details class="dl"><summary class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF</summary><div class="dl-menu" role="menu"><a href="../cv/CV_El_Mokhtar_Berrada_EN_light.pdf" download><i class="l"></i>Light version<small>best for printing</small></a><a href="../cv/CV_El_Mokhtar_Berrada_EN_dark.pdf" download><i class="d"></i>Dark version<small>for screens</small></a><a href="../cv/CV_El_Mokhtar_Berrada_EN_mixed.pdf" download><i class="m"></i>Mixed version<small>dark header and sidebar</small></a><a class="other" href="../cv/CV_El_Mokhtar_Berrada_FR_clair.pdf" download>Version française →</a></div></details><!--/ENH2:dl--></div><!--/ENH2:crow--></div>
@@ -1717,7 +1740,7 @@ html.qopen{overflow:hidden}
   var dlg=document.getElementById('dlg'); if(dlg) dlg.addEventListener('close',function(){ prev=null; });
 })();
 </script>
-<!--ENH4:qv--><div class="qv" hidden role="dialog" aria-modal="true" aria-labelledby="qv-t"><div class="qv-p"><div class="qv-bar" aria-hidden="true"><i></i></div><button type="button" class="qv-x" aria-label="Close">✕</button><div class="qv-top" class="st" style="--s:1"><img src="../img/portrait.jpg" alt=""><div><div class="k">Quick read · 30 seconds</div><h2 id="qv-t">El Mokhtar Berrada</h2></div></div><p class="qv-who" class="st" style="--s:2">Proxy Product Owner at <b>Servier</b> (R&amp;D, France's 2<sup>nd</sup>-largest pharmaceutical group), on a work-study contract until September 2027. MSc in Project Management at NEOMA.</p><div class="st" style="--s:3"><h3>What I bring</h3><div class="qv-str"><div><b>Product &amp; Agile</b>User Stories, Build &amp; Run backlog, acceptance testing, adoption tracking. PSPO I certified.</div><div><b>AI &amp; automation</b>−30% processing time at SG CIB, Copilot prompts adopted in Paris, Geneva and India, finalist of the GBIS hackathon (80+ teams).</div><div><b>UX &amp; transformation</b>UX/UI redesign at Banque de France (10 Figma screens), Focal-Shift and Yema prototypes.</div></div></div><div class="st" style="--s:4"><h3>Experience</h3><ul class="qv-path"><li><time>2026 – 27</time><div><b>Servier</b> · <span>Proxy Product Owner · Digital Solutions R&amp;D</span></div></li><li><time>2025 – 26</time><div><b>Société Générale CIB</b> · <span>Assistant Product Owner, AI · Trade Finance</span></div></li><li><time>2025</time><div><b>Banque de France</b> · <span>Digital Project Officer · IT Dept, Case Management</span></div></li><li><time>2022 – 23</time><div><b>Socium</b> · <span>Intern, then Multimedia Project Officer · Dakar</span></div></li><li><time>2021 – 23</time><div><b>Groupe ISM</b> · <span>Digital communication, promoted to coach · Dakar</span></div></li></ul></div><div class="qv-2"><div class="st" style="--s:5"><h3>Education</h3><p>MSc in Project Management, NEOMA (2026 – 27) · MBA in Digital Strategy, MBA ESG (2024 – 26) · BSc Business Information Systems, Groupe ISM</p></div><div class="st" style="--s:6"><h3>Languages</h3><p>French · English (TOEIC 905/990) · Moroccan Arabic · Wolof</p></div></div><div class="qv-act" class="st" style="--s:7"><a class="btn primary" href="../cv/CV_El_Mokhtar_Berrada_EN_light.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download my CV</a><a class="btn" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a class="btn" href="mailto:elmokhtarberrada@gmail.com">Email me</a><button type="button" class="btn" data-qclose>See the full site</button></div></div></div><!--/ENH4:qv-->
+<!--ENH4:qv--><div class="qv" hidden role="dialog" aria-modal="true" aria-labelledby="qv-t"><div class="qv-p"><div class="qv-bar" aria-hidden="true"><i></i></div><button type="button" class="qv-x" aria-label="Close">✕</button><div class="qv-top" class="st" style="--s:1"><img src="../img/portrait.jpg" alt=""><div><div class="k">Quick read · 30 seconds</div><h2 id="qv-t">El Mokhtar Berrada</h2></div></div><p class="qv-who" class="st" style="--s:2">Proxy Product Owner at <b>Servier</b> (R&amp;D, France's 2<sup>nd</sup>-largest pharmaceutical group), on a work-study contract until September 2027. MSc in Project Management at NEOMA.</p><div class="st" style="--s:3"><h3>What I bring</h3><div class="qv-str"><div><b>Product &amp; Agile</b>User Stories, Build &amp; Run backlog, acceptance testing, adoption tracking. PSPO I certified.</div><div><b>AI &amp; automation</b>−30% processing time at SG CIB, Copilot prompts adopted in Paris, Geneva and India, finalist of the GBIS hackathon (80+ teams).</div><div><b>UX &amp; transformation</b>UX/UI redesign at Banque de France (10 Figma screens), Focal-Shift and Yema prototypes.</div></div></div><div class="st" style="--s:4"><h3>Experience</h3><ul class="qv-path"><li><time>2026 – 27</time><div><b>Servier</b> · <span>Proxy Product Owner · Digital Solutions R&amp;D</span></div></li><li><time>2025 – 26</time><div><b>Société Générale CIB</b> · <span>Assistant Product Owner, AI · Trade Finance</span></div></li><li><time>2025</time><div><b>Banque de France</b> · <span>Digital Project Officer · IT Dept, Case Management</span></div></li><li><time>2022 – 23</time><div><b>Socium</b> · <span>Intern, then Multimedia Project Officer · Dakar</span></div></li><li><time>2021 – 23</time><div><b>Groupe ISM</b> · <span>Digital communication, promoted to coach · Dakar</span></div></li></ul></div><div class="qv-2"><div class="st" style="--s:5"><h3>Education</h3><p>MSc in Project Management, NEOMA (2026 – 27) · MBA in Digital Strategy, MBA ESG (2024 – 26) · BSc Business Information Systems, Groupe ISM</p></div><div class="st" style="--s:6"><h3>Languages</h3><p>French · English (TOEIC 905/990) · Moroccan Arabic · Wolof</p></div></div><div class="qv-act" class="st" style="--s:7"><a class="btn primary" href="../cv/CV_El_Mokhtar_Berrada_EN_light.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download my CV</a><a class="btn" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a class="btn" href="mailto:elmokhtarberrada@gmail.com?subject=Reaching%20out%20from%20your%20interactive%20CV&amp;body=Hello%20El%20Mokhtar%2C%0A%0A">Email me</a><button type="button" class="btn" data-qclose>See the full site</button></div></div></div><!--/ENH4:qv-->
 <script id="enh4">
 (function(){
   var qv=document.querySelector('.qv'), b=document.querySelector('.quick-btn'); if(!qv||!b) return;
@@ -1729,6 +1752,23 @@ html.qopen{overflow:hidden}
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&qv.classList.contains('on')) close(); });
   var cp=qv.querySelector('[data-mail]'); if(cp) cp.addEventListener('click',function(){ try{ navigator.clipboard.writeText(cp.dataset.mail); }catch(e){} });
   if(/[?&]quick\b/.test(location.search)||location.hash==='#30s') setTimeout(open,400);
+})();
+</script>
+<script id="enh5">
+(function(){
+  var L={"Servier": "../img/logos/servier.png", "Société Générale CIB": "../img/logos/sgcib.png", "Banque de France": "../img/logos/bdf.png", "Groupe ISM": "../img/logos/ism.png"};
+  /* timeline badges: real logos where we have them, monogram otherwise */
+  document.querySelectorAll('.rel').forEach(function(r){
+    var a=r.querySelector('.org a, .org b'), co=r.querySelector('.co'); if(!a||!co) return;
+    var n=a.textContent.trim(), src=L[n]; if(!src) return;
+    co.textContent=''; co.classList.add('lg'); if(/ism\.png$/.test(src)) co.classList.add('sq');
+    var im=new Image(); im.src=src; im.alt=''; im.decoding='async'; co.appendChild(im); co.title=n;
+  });
+  /* quick read: small logo before each organisation */
+  document.querySelectorAll('.qv-path li b').forEach(function(b){
+    var src=L[b.textContent.trim()]; if(!src||b.previousElementSibling&&b.previousElementSibling.className==='qlg') return;
+    var s=document.createElement('span'); s.className='qlg'; var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); b.parentNode.insertBefore(s,b);
+  });
 })();
 </script>
 </body>
