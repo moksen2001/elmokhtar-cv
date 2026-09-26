@@ -6,6 +6,11 @@ LOGOS = {  # organisation name as written in the .org line -> (file, monochrome 
   "Société Générale CIB": ("sgcib.png","sgcib.png"),
   "Banque de France": ("bdf.png","bdf.png"),
   "Groupe ISM": ("ism.png","ism-line.png"),
+  "Socium": ("socium.png","socium.png"),
+  "NEOMA Business School": ("neoma.png","neoma.png"),
+  "MBA ESG": ("esg.png","esg.png"),
+  "PNUD": ("undp.png","undp-line.png"),
+  "UNDP": ("undp.png","undp-line.png"),
 }
 T = {
  'fr': dict(write="Écrire", subject="Prise de contact depuis votre CV interactif",
@@ -29,6 +34,14 @@ CSS = r"""
 .qv-path li .qlg{display:inline-grid;place-items:center;vertical-align:middle;height:20px;padding:2px 5px;margin-right:6px;border-radius:5px;background:#fff}
 .qv-path li .qlg img{height:100%;width:auto;max-width:74px}
 @media (max-width:760px){.co.lg{height:30px;padding:4px 7px;max-width:110px}.co.lg.sq{width:30px;padding:0}.co.lg.sq img{width:30px;height:30px}.co.lg img{max-width:96px}}
+.school{position:relative}
+.slg{position:absolute;top:18px;right:18px;height:38px;padding:6px 9px;border-radius:9px;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}
+.slg img{height:26px;width:auto;max-width:110px;display:block}
+.slg.sq{padding:0;width:38px;overflow:hidden}.slg.sq img{width:38px;height:38px;max-width:none;object-fit:cover}
+.school .yr{padding-right:130px;display:block}
+.elg{float:right;margin:0 0 6px 12px;height:34px;border-radius:8px;overflow:hidden}
+.elg img{height:34px;width:auto;display:block}
+@media (max-width:560px){.slg{height:32px;top:14px;right:14px}.slg img{height:20px}.school .yr{padding-right:0;margin-top:44px}}
 /* ==== ENH5: mail ==== */
 .row .acts{display:flex;gap:6px;flex:none}
 .row a.go.mail{background:var(--sun);color:#1b1405}
@@ -48,7 +61,7 @@ def run(path, lang):
 
     # marquee: swap organisation names for monochrome logos (idempotent: plain spans disappear)
     for name,(_,mono) in LOGOS.items():
-        cls='ml tall' if name in ('Banque de France','Groupe ISM') else 'ml'
+        cls='ml tall' if name in ('Banque de France','Groupe ISM','PNUD','UNDP','NEOMA Business School') else 'ml'
         s=s.replace('<span>%s</span>'%name,'<span class="%s"><img src="%simg/logos/%s" alt="%s" height="30"></span>'%(cls,pre,mono,name))
         s=s.replace('<span aria-hidden="true">%s</span>'%name,'<span class="%s" aria-hidden="true"><img src="%simg/logos/%s" alt="" height="30"></span>'%(cls,pre,mono))
 
@@ -71,6 +84,17 @@ JS = r"""
     var n=a.textContent.trim(), src=L[n]; if(!src) return;
     co.textContent=''; co.classList.add('lg'); if(/ism\.png$/.test(src)) co.classList.add('sq');
     var im=new Image(); im.src=src; im.alt=''; im.decoding='async'; co.appendChild(im); co.title=n;
+  });
+  /* education cards: school logo in the corner */
+  document.querySelectorAll('.school').forEach(function(c){
+    var a=c.querySelector('.sn a'); if(!a||c.querySelector('.slg')) return; var src=L[a.textContent.trim()]; if(!src) return;
+    var s=document.createElement('span'); s.className='slg'+(/ism\.png$/.test(src)?' sq':''); s.setAttribute('aria-hidden','true');
+    var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); c.appendChild(s);
+  });
+  /* UN volunteer card */
+  document.querySelectorAll('.eng-list .card.en h3').forEach(function(h){
+    if(!/PNUD|UNDP/.test(h.textContent)||h.parentNode.querySelector('.elg')) return;
+    var s=document.createElement('span'); s.className='elg'; s.setAttribute('aria-hidden','true'); var im=new Image(); im.src=L['PNUD']; im.alt=''; s.appendChild(im); h.parentNode.insertBefore(s,h.parentNode.firstChild);
   });
   /* quick read: small logo before each organisation */
   document.querySelectorAll('.qv-path li b').forEach(function(b){

@@ -746,6 +746,14 @@ html.qopen{overflow:hidden}
 .qv-path li .qlg{display:inline-grid;place-items:center;vertical-align:middle;height:20px;padding:2px 5px;margin-right:6px;border-radius:5px;background:#fff}
 .qv-path li .qlg img{height:100%;width:auto;max-width:74px}
 @media (max-width:760px){.co.lg{height:30px;padding:4px 7px;max-width:110px}.co.lg.sq{width:30px;padding:0}.co.lg.sq img{width:30px;height:30px}.co.lg img{max-width:96px}}
+.school{position:relative}
+.slg{position:absolute;top:18px;right:18px;height:38px;padding:6px 9px;border-radius:9px;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}
+.slg img{height:26px;width:auto;max-width:110px;display:block}
+.slg.sq{padding:0;width:38px;overflow:hidden}.slg.sq img{width:38px;height:38px;max-width:none;object-fit:cover}
+.school .yr{padding-right:130px;display:block}
+.elg{float:right;margin:0 0 6px 12px;height:34px;border-radius:8px;overflow:hidden}
+.elg img{height:34px;width:auto;display:block}
+@media (max-width:560px){.slg{height:32px;top:14px;right:14px}.slg img{height:20px}.school .yr{padding-right:0;margin-top:44px}}
 /* ==== ENH5: mail ==== */
 .row .acts{display:flex;gap:6px;flex:none}
 .row a.go.mail{background:var(--sun);color:#1b1405}
@@ -909,7 +917,7 @@ html.qopen{overflow:hidden}
         <div><div class="k"><span class="num" data-to="4">4</span></div><div class="v">sectors: pharma, investment banking, central banking, tech startup</div></div>
       </div>
     <!--ENH2:hire--><div class="card hire rv" role="group" aria-label="Hiring for…"><span class="hk">Hiring for…</span><span class="hp">Pick a role: I will highlight the experience, projects and skills that matter to you.</span><div class="hire-roles"><button type="button" data-r="po" aria-pressed="false">Product Owner</button><button type="button" data-r="ia" aria-pressed="false">AI &amp; automation</button><button type="button" data-r="dx" aria-pressed="false">Digital transformation &amp; UX</button></div><div class="hire-st" hidden aria-live="polite"><span></span><a href="#parcours">See experience ↓</a><button type="button">Show everything</button></div></div><!--/ENH2:hire--></div>
-    <div class="marquee" aria-label="Organizations I have worked or studied with"><div class="track"><span class="ml"><img src="../img/logos/servier.png" alt="Servier" height="30"></span><span class="ml"><img src="../img/logos/sgcib.png" alt="Société Générale CIB" height="30"></span><span class="ml tall"><img src="../img/logos/bdf.png" alt="Banque de France" height="30"></span><span>NEOMA Business School</span><span>MBA ESG</span><span>Socium</span><span class="ml tall"><img src="../img/logos/ism-line.png" alt="Groupe ISM" height="30"></span><span>UNDP</span><span>Scrum.org</span><span class="ml" aria-hidden="true"><img src="../img/logos/servier.png" alt="" height="30"></span><span class="ml" aria-hidden="true"><img src="../img/logos/sgcib.png" alt="" height="30"></span><span class="ml tall" aria-hidden="true"><img src="../img/logos/bdf.png" alt="" height="30"></span><span aria-hidden="true">NEOMA Business School</span><span aria-hidden="true">MBA ESG</span><span aria-hidden="true">Socium</span><span class="ml tall" aria-hidden="true"><img src="../img/logos/ism-line.png" alt="" height="30"></span><span aria-hidden="true">UNDP</span><span aria-hidden="true">Scrum.org</span></div></div>
+    <div class="marquee" aria-label="Organizations I have worked or studied with"><div class="track"><span class="ml"><img src="../img/logos/servier.png" alt="Servier" height="30"></span><span class="ml"><img src="../img/logos/sgcib.png" alt="Société Générale CIB" height="30"></span><span class="ml tall"><img src="../img/logos/bdf.png" alt="Banque de France" height="30"></span><span class="ml tall"><img src="../img/logos/neoma.png" alt="NEOMA Business School" height="30"></span><span class="ml"><img src="../img/logos/esg.png" alt="MBA ESG" height="30"></span><span class="ml"><img src="../img/logos/socium.png" alt="Socium" height="30"></span><span class="ml tall"><img src="../img/logos/ism-line.png" alt="Groupe ISM" height="30"></span><span class="ml tall"><img src="../img/logos/undp-line.png" alt="UNDP" height="30"></span><span>Scrum.org</span><span class="ml" aria-hidden="true"><img src="../img/logos/servier.png" alt="" height="30"></span><span class="ml" aria-hidden="true"><img src="../img/logos/sgcib.png" alt="" height="30"></span><span class="ml tall" aria-hidden="true"><img src="../img/logos/bdf.png" alt="" height="30"></span><span class="ml tall" aria-hidden="true"><img src="../img/logos/neoma.png" alt="" height="30"></span><span class="ml" aria-hidden="true"><img src="../img/logos/esg.png" alt="" height="30"></span><span class="ml" aria-hidden="true"><img src="../img/logos/socium.png" alt="" height="30"></span><span class="ml tall" aria-hidden="true"><img src="../img/logos/ism-line.png" alt="" height="30"></span><span class="ml tall" aria-hidden="true"><img src="../img/logos/undp-line.png" alt="" height="30"></span><span aria-hidden="true">Scrum.org</span></div></div>
   </section>
 
   <!-- PROFIL -->
@@ -1838,13 +1846,24 @@ html.qopen{overflow:hidden}
 </script>
 <script id="enh5">
 (function(){
-  var L={"Servier": "../img/logos/servier.png", "Société Générale CIB": "../img/logos/sgcib.png", "Banque de France": "../img/logos/bdf.png", "Groupe ISM": "../img/logos/ism.png"};
+  var L={"Servier": "../img/logos/servier.png", "Société Générale CIB": "../img/logos/sgcib.png", "Banque de France": "../img/logos/bdf.png", "Groupe ISM": "../img/logos/ism.png", "Socium": "../img/logos/socium.png", "NEOMA Business School": "../img/logos/neoma.png", "MBA ESG": "../img/logos/esg.png", "PNUD": "../img/logos/undp.png", "UNDP": "../img/logos/undp.png"};
   /* timeline badges: real logos where we have them, monogram otherwise */
   document.querySelectorAll('.rel').forEach(function(r){
     var a=r.querySelector('.org a, .org b'), co=r.querySelector('.co'); if(!a||!co) return;
     var n=a.textContent.trim(), src=L[n]; if(!src) return;
     co.textContent=''; co.classList.add('lg'); if(/ism\.png$/.test(src)) co.classList.add('sq');
     var im=new Image(); im.src=src; im.alt=''; im.decoding='async'; co.appendChild(im); co.title=n;
+  });
+  /* education cards: school logo in the corner */
+  document.querySelectorAll('.school').forEach(function(c){
+    var a=c.querySelector('.sn a'); if(!a||c.querySelector('.slg')) return; var src=L[a.textContent.trim()]; if(!src) return;
+    var s=document.createElement('span'); s.className='slg'+(/ism\.png$/.test(src)?' sq':''); s.setAttribute('aria-hidden','true');
+    var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); c.appendChild(s);
+  });
+  /* UN volunteer card */
+  document.querySelectorAll('.eng-list .card.en h3').forEach(function(h){
+    if(!/PNUD|UNDP/.test(h.textContent)||h.parentNode.querySelector('.elg')) return;
+    var s=document.createElement('span'); s.className='elg'; s.setAttribute('aria-hidden','true'); var im=new Image(); im.src=L['PNUD']; im.alt=''; s.appendChild(im); h.parentNode.insertBefore(s,h.parentNode.firstChild);
   });
   /* quick read: small logo before each organisation */
   document.querySelectorAll('.qv-path li b').forEach(function(b){
