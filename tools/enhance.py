@@ -21,7 +21,7 @@ SKILLS = [  # FR, EN, linked experiences
   ("Power Automate",         "Power Automate",         ["sg"]),
   ("Power Query / Excel",    "Power Query / Excel",    ["sg"]),
   ("PEGA",                   "PEGA",                   ["bdf"]),
-  ("Jira / Confluence",      "Jira / Confluence",      ["sg","bdf"]),
+  ("Jira / Confluence",      "Jira / Confluence",      ["sv","bdf","pr"]),
   ("Figma & UX/UI",          "Figma & UX/UI",          ["bdf","pr"]),
   ("PHP / MySQL / API",      "PHP / MySQL / API",      ["pr"]),
   ("Gestion de projet multimédia","Multimedia project management",["so","ism"]),
@@ -231,13 +231,13 @@ def html_block(lang):
 def run(path,lang):
     s=open(path,encoding='utf-8').read()
     s=re.sub(r'\n?/\* ==== ENH-START ==== \*/.*?/\* ==== ENH-END ==== \*/\n?','',s,flags=re.S)
-    s=re.sub(r'<!--ENH:cst-->.*?<!--/ENH:cst-->','',s,flags=re.S)
+    s=re.sub(r'<!--ENH:cst-->.*?<!--/ENH:cst-->\s*','',s,flags=re.S)
     s=re.sub(r'\n?<script id="enh">.*?</script>\n?','\n',s,flags=re.S)
     s=s.replace('</style>','/* ==== ENH-START ==== */'+CSS+'/* ==== ENH-END ==== */\n</style>',1)
     # constellation goes right after the skills grid, before the Engagements head
     anchor='<div class="head rv" style="margin-top:72px">'
     assert s.count(anchor)==1, path
-    s=s.replace(anchor, html_block(lang)+'\n\n      '+anchor,1)
+    s=s.replace(anchor, html_block(lang)+anchor,1)
     s=s.replace('</body>','<script id="enh">'+JS+'</script>\n</body>',1)
     open(path,'w',encoding='utf-8').write(s)
     print('ok',path)
