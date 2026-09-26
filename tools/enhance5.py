@@ -20,7 +20,7 @@ CSS = r"""
 .co.lg{background:#fff;border-color:transparent;padding:7px 10px;min-width:0;max-width:140px;height:44px}
 .co.lg img{height:100%;width:auto;max-width:118px;object-fit:contain;display:block}
 .co.lg.sq{padding:0;width:44px;overflow:hidden}
-.co.lg.sq img{height:100%;max-width:none}
+.co.lg.sq img{width:44px;height:44px;max-width:none;object-fit:cover}
 .track span.ml img{height:clamp(22px,2.6vw,30px);width:auto;display:block;filter:brightness(0) invert(1);opacity:.72;transition:opacity .2s}
 .track span.ml.tall img{height:clamp(30px,3.4vw,40px)}
 :root:not([data-theme="dark"]) .track span.ml img{filter:brightness(0);opacity:.62}
@@ -28,7 +28,7 @@ CSS = r"""
 .marquee:hover .track span.ml img{opacity:.95}
 .qv-path li .qlg{display:inline-grid;place-items:center;vertical-align:middle;height:20px;padding:2px 5px;margin-right:6px;border-radius:5px;background:#fff}
 .qv-path li .qlg img{height:100%;width:auto;max-width:74px}
-@media (max-width:760px){.co.lg{height:30px;padding:4px 7px;max-width:110px}.co.lg.sq{width:30px;padding:0}.co.lg img{max-width:96px}}
+@media (max-width:760px){.co.lg{height:30px;padding:4px 7px;max-width:110px}.co.lg.sq{width:30px;padding:0}.co.lg.sq img{width:30px;height:30px}.co.lg img{max-width:96px}}
 /* ==== ENH5: mail ==== */
 .row .acts{display:flex;gap:6px;flex:none}
 .row a.go.mail{background:var(--sun);color:#1b1405}
