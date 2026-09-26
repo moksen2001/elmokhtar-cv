@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="utf-8">
+<script id="theme-init">try{var t=localStorage.getItem("emb-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0C6A58">
+<meta name="theme-color" content="#0C1413">
 <meta property="og:title" content="El Mokhtar Berrada · CV interactif">
 <meta property="og:description" content="Proxy Product Owner chez Servier. Produit, IA et automatisation, de la Trade Finance à la R&amp;D pharmaceutique.">
 <meta property="og:image" content="https://moksen2001.github.io/elmokhtar-cv/img/portrait.jpg">
@@ -550,6 +551,65 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
   .rel .ring{display:none}
 }
 /* ==== ENH-END ==== */
+/* ==== ENH2-START ==== */
+/* ==== ENH2: theme toggle ==== */
+.tools{display:flex;align-items:center;gap:8px;flex:none}
+.theme-btn{all:unset;box-sizing:border-box;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:color .2s,border-color .2s,transform .5s cubic-bezier(.3,1.6,.5,1)}
+.theme-btn:hover{color:var(--ink);border-color:var(--ink-2)}
+.theme-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.theme-btn svg{width:17px;height:17px;grid-area:1/1;transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+.theme-btn .moon{opacity:0;transform:rotate(-90deg) scale(.5)}
+:root[data-theme="dark"] .theme-btn .sun{opacity:0;transform:rotate(90deg) scale(.5)}
+:root[data-theme="dark"] .theme-btn .moon{opacity:1;transform:none}
+.theme-btn.spin{transform:rotate(180deg)}
+html.theming *,html.theming *::before,html.theming *::after{transition:background-color .45s,border-color .45s,color .45s,fill .45s,stroke .45s!important}
+@media (max-width:860px){.tools{margin-left:auto}.tools .lang-sw{margin-left:0}}
+/* ==== ENH2: CV download menu ==== */
+.dl{position:relative}
+.hero .cta{position:relative;z-index:20}
+.dl[open]{z-index:40}
+.dl>summary{list-style:none}
+.dl>summary::-webkit-details-marker{display:none}
+.dl>summary svg{width:17px;height:17px}
+.dl[open]>summary{border-color:var(--teal);color:var(--teal)}
+.dl-menu{position:absolute;left:0;top:calc(100% + 8px);z-index:30;min-width:250px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);display:grid;gap:2px;animation:dlin .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes dlin{from{opacity:0;transform:translateY(-6px) scale(.98)}}
+.dl-menu a{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center;text-decoration:none;color:var(--ink);padding:9px 10px;border-radius:10px;font-size:.92rem;font-weight:600}
+.dl-menu a:hover,.dl-menu a:focus-visible{background:var(--surface-2);outline:none}
+.dl-menu a i{grid-row:span 2;width:28px;height:28px;border-radius:8px;border:1px solid var(--line)}
+.dl-menu a i.l{background:linear-gradient(135deg,#fff 60%,#EEF3F0 60%)}
+.dl-menu a i.d{background:linear-gradient(135deg,#0D1615 60%,#15211F 60%)}
+.dl-menu a i.m{background:linear-gradient(90deg,#fff 62%,#15211F 62%);box-shadow:inset 0 7px 0 #0D1615}
+.dl-menu a small{font-weight:400;color:var(--muted);font-size:.78rem}
+.dl-menu .other{grid-template-columns:1fr;font-weight:500;color:var(--teal);border-top:1px solid var(--line);border-radius:0 0 10px 10px;margin-top:4px;padding-top:10px;font-size:.86rem}
+.contact .dl .dl-menu{left:auto;right:0;top:auto;bottom:calc(100% + 8px)}
+/* ==== ENH2: hiring filter ==== */
+.hire{margin-top:30px;padding:18px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.hire .hk{font-family:var(--display);font-weight:700;font-size:1.08rem;white-space:nowrap}
+.hire .hp{color:var(--muted);font-size:.88rem;flex:1 1 260px}
+.hire-roles{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.hire-roles button{all:unset;box-sizing:border-box;cursor:pointer;padding:9px 15px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:.92rem;color:var(--ink-2);background:var(--bg);transition:background .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.hire-roles button:hover{border-color:var(--teal);color:var(--ink)}
+.hire-roles button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.hire-roles button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--on-teal);transform:scale(1.04)}
+.hire-st{width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;font-size:.88rem;color:var(--ink-2);min-height:1.6em}
+.hire-st a{color:var(--teal);font-weight:600;text-decoration:none}
+.hire-st button{all:unset;cursor:pointer;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.hire-st[hidden]{display:flex;visibility:hidden}
+.fx-dim{opacity:.34;filter:saturate(.3);transition:opacity .5s,filter .5s}
+.fx-dim:hover{opacity:.8;filter:none}
+.fx-fit{position:relative;transition:opacity .5s,filter .5s,box-shadow .5s}
+.card.fx-fit,.rel.fx-fit .body{box-shadow:0 0 0 1.5px var(--sun),var(--shadow)}
+.fx-badge{position:absolute;top:10px;right:10px;z-index:3;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--sun);color:#1b1405;animation:pop .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+.hire-float{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140%);z-index:60;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.88rem;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.4,.5,1);max-width:calc(100vw - 32px)}
+.hire-float.on{transform:translate(-50%,0)}
+.hire-float b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hire-float button{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 18%,transparent)}
+.hire-float button:focus-visible{outline:2px solid var(--sun)}
+.proj .vis img.shot{object-position:left top}
+@media (prefers-reduced-motion:reduce){.fx-badge,.dl-menu{animation:none}.hire-float{transition:none}}
+/* ==== ENH2-END ==== */
 </style>
 </head>
 <body>
@@ -570,7 +630,7 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
       <a href="#competences">Compétences</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="lang-sw" role="group" aria-label="Langue / Language"><a href="./" lang="fr" hreflang="fr" aria-current="page">FR</a><a href="en/" lang="en" hreflang="en">EN</a></div>
+    <div class="tools"><!--ENH2:tb--><button type="button" class="theme-btn" aria-label="Changer de thème (clair / sombre)"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><!--/ENH2:tb--><div class="lang-sw" role="group" aria-label="Langue / Language"><a href="./" lang="fr" hreflang="fr" aria-current="page">FR</a><a href="en/" lang="en" hreflang="en">EN</a></div></div>
   </div>
 </header>
 
@@ -593,7 +653,7 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
               LinkedIn</a>
             <a class="btn" href="#contact">Me contacter</a>
-          </div>
+          <!--ENH2:dl--><details class="dl"><summary class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Télécharger mon CV</summary><div class="dl-menu" role="menu"><a href="cv/CV_El_Mokhtar_Berrada_FR_clair.pdf" download><i class="l"></i>Version claire<small>idéale à imprimer</small></a><a href="cv/CV_El_Mokhtar_Berrada_FR_sombre.pdf" download><i class="d"></i>Version sombre<small>pour l'écran</small></a><a href="cv/CV_El_Mokhtar_Berrada_FR_mixte.pdf" download><i class="m"></i>Version mixte<small>en-tête et colonne sombres</small></a><a class="other" href="cv/CV_El_Mokhtar_Berrada_EN_light.pdf" download>English version →</a></div></details><!--/ENH2:dl--></div>
         </div>
 
         <div class="portrait in d2">
@@ -622,7 +682,7 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
         <div><div class="k">−<span class="num" data-to="30">30</span><em>%</em></div><div class="v">de temps de traitement grâce à un outil de reporting automatisé que j'ai conçu</div></div>
         <div><div class="k"><span class="num" data-to="4">4</span></div><div class="v">secteurs : pharma, banque d'investissement, banque centrale, startup tech</div></div>
       </div>
-    </div>
+    <!--ENH2:hire--><div class="card hire rv" role="group" aria-label="Vous recrutez pour…"><span class="hk">Vous recrutez pour…</span><span class="hp">Choisissez un poste : je mets en avant les expériences, projets et compétences qui comptent pour vous.</span><div class="hire-roles"><button type="button" data-r="po" aria-pressed="false">Product Owner</button><button type="button" data-r="ia" aria-pressed="false">IA &amp; automatisation</button><button type="button" data-r="dx" aria-pressed="false">Transformation digitale &amp; UX</button></div><div class="hire-st" hidden aria-live="polite"><span></span><a href="#parcours">Voir le parcours ↓</a><button type="button">Tout afficher</button></div></div><!--/ENH2:hire--></div>
     <div class="marquee" aria-label="Organisations de mon parcours"><div class="track"><span>Servier</span><span>Société Générale CIB</span><span>Banque de France</span><span>NEOMA Business School</span><span>MBA ESG</span><span>Socium</span><span>Groupe ISM</span><span>PNUD</span><span>Scrum.org</span><span aria-hidden="true">Servier</span><span aria-hidden="true">Société Générale CIB</span><span aria-hidden="true">Banque de France</span><span aria-hidden="true">NEOMA Business School</span><span aria-hidden="true">MBA ESG</span><span aria-hidden="true">Socium</span><span aria-hidden="true">Groupe ISM</span><span aria-hidden="true">PNUD</span><span aria-hidden="true">Scrum.org</span></div></div>
   </section>
 
@@ -820,7 +880,7 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
         </button>
 
         <button class="card proj rv" data-p="p-focal">
-          <div class="vis"><img src="img/focal.jpg" alt="Matériel photo sur une étagère" loading="lazy"></div>
+          <div class="vis"><img src="img/focal-site.jpg" alt="Page d'accueil du prototype Focal-Shift : location et revente de matériel photo et vidéo" loading="lazy" class="shot"></div>
           <div class="pb">
             <span class="ctx2">MBA ESG · challenge de fin d'études · sept. 2026</span>
             <h3>Focal-Shift</h3>
@@ -895,7 +955,7 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
           <p>Dans une équipe de consultants, j'avais la charge du prototype, de la conformité RGPD (consentement, cookies, suppression de compte) et du plan de tagging. J'ai développé le POC avec Claude comme copilote de développement, puis rédigé le dossier qui justifie les choix techniques.</p>
           <h4>Stack</h4>
           <div class="meta"><span class="tag">PHP 8</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">API REST · OpenAPI</span></div>
-        </div>
+        <!--ENH2:fimg--><img src="img/focal-site.jpg" alt="Page d'accueil du prototype Focal-Shift : location et revente de matériel photo et vidéo" loading="lazy"><!--/ENH2:fimg--></div>
         <div id="p-veille" data-k="MBA ESG · Certification RNCP 40601 · Bloc 1">
           <h3>Rapport de veille stratégique</h3>
           <div class="meta"><span class="tag">Rapport de 14 pages</span><span class="tag">Présentation de 10 slides</span><span class="tag">Juin – juillet 2026</span></div>
@@ -1083,6 +1143,8 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
 
       
 
+      
+
       <!--ENH:cst--><div class="card cst rv" role="group" aria-label="Carte interactive des compétences et des expériences"><div class="cst-top"><div><span class="eyebrow">Compétences × expériences</span><h3>Où je les ai utilisées</h3></div><div><p>Survolez ou touchez une compétence pour voir dans quelles expériences je l'ai mise en pratique, ou l'inverse.</p><span class="cst-hint"><i></i>Démo automatique · touchez pour explorer</span></div></div><div class="cst-grid"><svg class="cst-svg" aria-hidden="true"></svg><div class="cst-col ex"><button type="button" class="cst-n" data-id="sv"><b>Servier</b><small>R&amp;D pharma · 2026–27</small></button><button type="button" class="cst-n" data-id="sg"><b>Société Générale CIB</b><small>Trade Finance · 2025–26</small></button><button type="button" class="cst-n" data-id="bdf"><b>Banque de France</b><small>DGSI · 2025</small></button><button type="button" class="cst-n" data-id="so"><b>Socium</b><small>Startup RH · 2022–23</small></button><button type="button" class="cst-n" data-id="ism"><b>Groupe ISM</b><small>Soft Skills Academy · 2021–23</small></button><button type="button" class="cst-n" data-id="pr"><b>Projets d'études</b><small>Focal-Shift · Yema</small></button></div><div class="cst-col sk"><button type="button" class="cst-n" data-x="sv sg bdf">Backlog &amp; User Stories</button><button type="button" class="cst-n" data-x="sv sg bdf">Scrum / Agile</button><button type="button" class="cst-n" data-x="sv sg bdf">Recette / UAT</button><button type="button" class="cst-n" data-x="sv bdf pr">Ateliers de cadrage</button><button type="button" class="cst-n" data-x="sv sg">Adoption &amp; conduite du changement</button><button type="button" class="cst-n" data-x="sg pr">Copilot &amp; IA générative</button><button type="button" class="cst-n" data-x="sg">Agent IA</button><button type="button" class="cst-n" data-x="sg">Power Automate</button><button type="button" class="cst-n" data-x="sg">Power Query / Excel</button><button type="button" class="cst-n" data-x="bdf">PEGA</button><button type="button" class="cst-n" data-x="sg bdf">Jira / Confluence</button><button type="button" class="cst-n" data-x="bdf pr">Figma &amp; UX/UI</button><button type="button" class="cst-n" data-x="pr">PHP / MySQL / API</button><button type="button" class="cst-n" data-x="so ism">Gestion de projet multimédia</button><button type="button" class="cst-n" data-x="so ism">Communication digitale</button></div></div></div><!--/ENH:cst-->
 
       <div class="head rv" style="margin-top:72px">
@@ -1117,7 +1179,7 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
         <div class="row"><div class="t"><small>E-mail</small><b id="mail">elmokhtarberrada@gmail.com</b></div><button type="button" data-copy="mail">Copier</button></div>
         <div class="row"><div class="t"><small>Téléphone</small><b id="tel">+33 7 83 73 17 92</b></div><button type="button" data-copy="tel">Copier</button></div>
         <div class="row"><div class="t"><small>LinkedIn</small><b>linkedin.com/in/elmokhtar-berrada</b></div><a class="go" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener">Ouvrir</a></div>
-      </div>
+      <!--ENH2:crow--><div class="row"><div class="t"><small>CV PDF</small><b>Télécharger mon CV</b></div><!--ENH2:dl--><details class="dl"><summary class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF</summary><div class="dl-menu" role="menu"><a href="cv/CV_El_Mokhtar_Berrada_FR_clair.pdf" download><i class="l"></i>Version claire<small>idéale à imprimer</small></a><a href="cv/CV_El_Mokhtar_Berrada_FR_sombre.pdf" download><i class="d"></i>Version sombre<small>pour l'écran</small></a><a href="cv/CV_El_Mokhtar_Berrada_FR_mixte.pdf" download><i class="m"></i>Version mixte<small>en-tête et colonne sombres</small></a><a class="other" href="cv/CV_El_Mokhtar_Berrada_EN_light.pdf" download>English version →</a></div></details><!--/ENH2:dl--></div><!--/ENH2:crow--></div>
     </section>
     <footer><span>© 2026 El Mokhtar Berrada · Site conçu et développé avec Claude</span><span>Casablanca · Tanger · Dakar · Paris</span></footer>
   </div>
@@ -1445,6 +1507,61 @@ footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;
   var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(draw,150); },{passive:true});
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(draw);
   setTimeout(draw,1400);
+})();
+</script>
+<!--ENH2:float--><div class="hire-float" role="status"><b></b><button type="button" aria-label="Retirer le filtre">✕</button></div><!--/ENH2:float-->
+<script id="enh2">
+(function(){
+  var L=document.documentElement.lang==='en'?'en':'fr', T={"fr": {"badge": "Pertinent", "status": "{x} expériences · {p} projets · {s} blocs de compétences mis en avant", "float": "Filtre"}, "en": {"badge": "Relevant", "status": "{x} roles · {p} projects · {s} skill groups highlighted", "float": "Filter"}}[L];
+  var root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* theme toggle */
+  var tb=document.querySelector('.theme-btn');
+  if(tb) tb.addEventListener('click',function(){
+    var next=root.dataset.theme==='dark'?'light':'dark';
+    if(!reduce){ root.classList.add('theming'); setTimeout(function(){root.classList.remove('theming')},500); }
+    root.dataset.theme=next; tb.classList.toggle('spin');
+    try{ localStorage.setItem('emb-theme',next); }catch(e){}
+    var m=document.querySelector('meta[name=theme-color]'); if(m) m.content=next==='dark'?'#0C1413':'#F3F5F3';
+  });
+  /* close download menus on outside click / Esc */
+  var dls=[].slice.call(document.querySelectorAll('details.dl'));
+  document.addEventListener('click',function(e){ dls.forEach(function(d){ if(d.open&&!d.contains(e.target)) d.open=false; }); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') dls.forEach(function(d){ d.open=false; }); });
+  /* hiring filter */
+  var MAP={
+    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
+    ia:{rel:['sg','sv'],proj:['p-agent','p-focal','p-veille'],sk:[1,4],cst:['sg','pr']},
+    dx:{rel:['bdf','so','ism','sv'],proj:['p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
+  };
+  var RELID=['sv','sg','bdf','so','ism'];
+  var rels=[].slice.call(document.querySelectorAll('.rel')), projs=[].slice.call(document.querySelectorAll('.proj')), sks=[].slice.call(document.querySelectorAll('.skills .sk'));
+  var box=document.querySelector('.hire'); if(!box) return;
+  var btns=[].slice.call(box.querySelectorAll('.hire-roles button')), st=box.querySelector('.hire-st'), stx=st.querySelector('span');
+  var fl=document.querySelector('.hire-float'), flb=fl.querySelector('b');
+  function badge(el){ if(el.querySelector(':scope > .fx-badge')) return; var b=document.createElement('span'); b.className='fx-badge'; b.textContent='✓ '+T.badge; el.appendChild(b); }
+  function clear(){
+    document.querySelectorAll('.fx-dim,.fx-fit').forEach(function(e){e.classList.remove('fx-dim','fx-fit')});
+    document.querySelectorAll('.fx-badge').forEach(function(b){b.remove()});
+  }
+  function apply(k){
+    clear(); btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.r===k)); });
+    if(!k){ st.hidden=true; fl.classList.remove('on'); return; }
+    var m=MAP[k];
+    rels.forEach(function(r,i){ var ok=m.rel.indexOf(RELID[i])>-1; r.classList.add(ok?'fx-fit':'fx-dim'); if(ok) badge(r.querySelector('.body')); });
+    projs.forEach(function(p){ var ok=m.proj.indexOf(p.dataset.p)>-1; p.classList.add(ok?'fx-fit':'fx-dim'); if(ok) badge(p); });
+    sks.forEach(function(s,i){ var ok=m.sk.indexOf(i)>-1; s.classList.add(ok?'fx-fit':'fx-dim'); if(ok) badge(s); });
+    document.querySelectorAll('.cst-col.ex .cst-n').forEach(function(n){ n.classList.add(m.cst.indexOf(n.dataset.id)>-1?'fx-fit':'fx-dim'); });
+    stx.textContent=T.status.replace('{x}',m.rel.length).replace('{p}',m.proj.length).replace('{s}',m.sk.length);
+    st.hidden=false;
+    var lbl=btns.filter(function(b){return b.dataset.r===k})[0]; flb.textContent=T.float+' : '+(lbl?lbl.textContent:'');
+    fl.classList.add('on'); fl.dataset.k=k;
+  }
+  var cur=null;
+  btns.forEach(function(b){ b.addEventListener('click',function(){ cur=(cur===b.dataset.r)?null:b.dataset.r; apply(cur); }); });
+  st.querySelector('button').addEventListener('click',function(){ cur=null; apply(null); });
+  fl.querySelector('button').addEventListener('click',function(){ cur=null; apply(null); });
+  /* hide the floating chip while the filter card itself is on screen */
+  if('IntersectionObserver' in window) new IntersectionObserver(function(es){ es.forEach(function(e){ fl.style.visibility=e.isIntersecting?'hidden':''; }); },{threshold:.2}).observe(box);
 })();
 </script>
 </body>
