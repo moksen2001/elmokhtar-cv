@@ -163,6 +163,7 @@ def run(path,lang):
     s=re.sub(r'<!--ENH2:(\w+)-->.*?<!--/ENH2:\1-->\n?','',s,flags=re.S)
     s=re.sub(r'\n?<script id="enh2">.*?</script>','',s,flags=re.S)
     s=re.sub(r'\n?<script id="theme-init">.*?</script>','',s,flags=re.S)
+    s=re.sub(r'<!--ENH4:qb-->.*?<!--/ENH4:qb-->','',s,flags=re.S)
     s=re.sub(r'<div class="tools">(<div class="lang-sw".*?</div>)</div>',r'\1',s,flags=re.S)
     # dark by default (before first paint) + remembered choice
     s=re.sub(r'<html lang="(\w+)"[^>]*>',r'<html lang="\1" data-theme="dark">',s,count=1)

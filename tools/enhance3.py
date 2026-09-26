@@ -14,7 +14,7 @@ T = {
     ("t-rit",  "",  50, "+",  "rituels agiles animés ou suivis", "Daily, Sprint Review et rétrospectives dans une équipe Scrum de 14 personnes", "Banque de France"),
     ("t-stu",  "",  5000, "+","étudiants touchés par nos événements", "Soft Skills Academy, avec des équipes de 10+ bénévoles", "Groupe ISM"),
    ],
-   back="← Retour au projet", bub=["Copilot · Power Automate","4 langues · FR EN AR WO","2 titres RNCP niveau 7"],
+   back="← Retour au projet", bub=["4 langues · FR EN AR WO","2 titres RNCP niveau 7"],
    gal_h="Le prototype en images", gal=[("fs-catalogue","Catalogue d'achat avec filtres et prix du neuf"),("fs-produit","Fiche produit en location avec devis"),
        ("fs-conseil","Conseil par questionnaire en 5 étapes"),("fs-admin","Back-office : modération, litiges, journal d'audit"),("fs-api","API REST documentée (OpenAPI, Swagger)")]),
  'en': dict(eb="By the numbers", h="What the numbers say",
@@ -28,7 +28,7 @@ T = {
     ("t-rit",  "",  50, "+", "agile ceremonies run or attended", "Dailies, sprint reviews and retrospectives in a 14-person Scrum team", "Banque de France"),
     ("t-stu",  "",  5000, "+","students reached by our events", "Soft Skills Academy, leading teams of 10+ volunteers", "Groupe ISM"),
    ],
-   back="← Back to project", bub=["Copilot · Power Automate","4 languages · FR EN AR WO","2× RNCP Level 7 titles"],
+   back="← Back to project", bub=["4 languages · FR EN AR WO","2× RNCP Level 7 titles"],
    gal_h="The prototype in pictures", gal=[("fs-catalogue","Purchase catalog with filters and new-price comparison"),("fs-produit","Rental product page with instant quote"),
        ("fs-conseil","5-step advice questionnaire"),("fs-admin","Back office: moderation, disputes, audit log"),("fs-api","Documented REST API (OpenAPI, Swagger)")]),
 }
@@ -85,7 +85,7 @@ CSS = r"""
 .float-badge{opacity:0;animation:bubin .7s cubic-bezier(.3,1.6,.5,1) forwards,bob 5s ease-in-out infinite}
 .float-badge.b2{animation-delay:.9s,-1.7s}.float-badge.b3{animation-delay:1.2s,-3.1s}.float-badge.b4{animation-delay:1.5s,-.9s}
 @keyframes bubin{from{opacity:0;transform:scale(.6) translateY(10px)}to{opacity:1}}
-@media (max-width:860px){.float-badge.b2{right:10px;left:auto;top:auto;bottom:150px}.float-badge.b3{display:none}.float-badge.b4{right:10px;top:12px;left:auto}}
+@media (max-width:860px){.float-badge.b2{right:10px;left:auto;top:auto;bottom:150px}.float-badge.b3{left:10px;top:auto;bottom:150px}.float-badge.b4{right:10px;top:12px;left:auto}}
 @media (max-width:460px){.float-badge.b4{display:none}}
 @media (prefers-reduced-motion:reduce){.float-badge{opacity:1;animation:none}}
 .fsg-back{all:unset;cursor:pointer;display:inline-block;margin-bottom:12px;font-weight:600;color:var(--teal)}
@@ -179,7 +179,7 @@ def run(path,lang):
     ICO=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.9L19 9.7l-4.2 3 1.5 5.3L12 15l-4.3 3 1.5-5.3L5 9.7l5.2-1.8z"/></svg>',
          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.5 5.5 5.5 7M11 5c-.8 3.5-3 6.2-6.5 7.8M13 21l4-10 4 10M14.5 17.5h5"/></svg>',
          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>']
-    bub=''.join('<span class="float-badge b%d">%s%s</span>'%(i+2,ICO[i],txt) for i,txt in enumerate(t['bub']))
+    bub=''.join('<span class="float-badge %s">%s%s</span>'%(c,ICO[i+1],txt) for i,(c,txt) in enumerate(zip(['b3','b4'],t['bub'])))
     m=re.search(r'<span class="float-badge">.*?</span>',s,flags=re.S)
     s=s[:m.end()]+'<!--ENH3:bub-->'+bub+'<!--/ENH3:bub-->'+s[m.end():]
     s=s.replace('</body>','<script id="enh3">'+JS.replace('__BACK__',json.dumps(t['back'],ensure_ascii=False))+'</script>\n</body>',1)

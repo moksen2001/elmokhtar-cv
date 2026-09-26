@@ -662,7 +662,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 .float-badge{opacity:0;animation:bubin .7s cubic-bezier(.3,1.6,.5,1) forwards,bob 5s ease-in-out infinite}
 .float-badge.b2{animation-delay:.9s,-1.7s}.float-badge.b3{animation-delay:1.2s,-3.1s}.float-badge.b4{animation-delay:1.5s,-.9s}
 @keyframes bubin{from{opacity:0;transform:scale(.6) translateY(10px)}to{opacity:1}}
-@media (max-width:860px){.float-badge.b2{right:10px;left:auto;top:auto;bottom:150px}.float-badge.b3{display:none}.float-badge.b4{right:10px;top:12px;left:auto}}
+@media (max-width:860px){.float-badge.b2{right:10px;left:auto;top:auto;bottom:150px}.float-badge.b3{left:10px;top:auto;bottom:150px}.float-badge.b4{right:10px;top:12px;left:auto}}
 @media (max-width:460px){.float-badge.b4{display:none}}
 @media (prefers-reduced-motion:reduce){.float-badge{opacity:1;animation:none}}
 .fsg-back{all:unset;cursor:pointer;display:inline-block;margin-bottom:12px;font-weight:600;color:var(--teal)}
@@ -678,6 +678,60 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 @media (max-width:620px){.fsg{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.nt .bars i,.nt .dots80 i,.nt .scr i,.nt .ticks i,.nt .ppl svg{transition:none!important;transform:none!important;opacity:1!important}.spark path{stroke-dashoffset:0!important;transition:none!important}.spark .area,.spark circle{opacity:1!important}}
 /* ==== ENH3-END ==== */
+/* ==== ENH4-START ==== */
+/* ==== ENH4: quick read ==== */
+@media (min-width:861px){nav.links a{padding:8px 9px}.top .wrap{gap:14px}}
+@media (min-width:861px) and (max-width:1180px){.brand .full{display:none}}
+.quick-btn{all:unset;box-sizing:border-box;height:34px;padding:0 12px 0 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--sun) 55%,var(--line));display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--sun);transition:background .2s,color .2s}
+.quick-btn svg{width:15px;height:15px}
+.quick-btn:hover{background:var(--sun);color:#1b1405}
+.quick-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+html.qopen{overflow:hidden}
+.qv{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,#000 55%,transparent);opacity:0;pointer-events:none;transition:opacity .3s}
+.qv.on{opacity:1;pointer-events:auto}
+.qv-p{position:relative;width:min(760px,100%);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);padding:26px 28px 24px;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,1.2,.3,1)}
+.qv.on .qv-p{transform:none}
+.qv-bar{position:sticky;top:-26px;margin:-26px -28px 18px;height:4px;background:var(--line);border-radius:22px 22px 0 0;overflow:hidden;z-index:2}
+.qv-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--sun));transform-origin:left;transform:scaleX(0)}
+.qv.on .qv-bar i{animation:qfill 30s linear forwards}
+@keyframes qfill{to{transform:scaleX(1)}}
+.qv-x{all:unset;position:absolute;right:16px;top:16px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;cursor:pointer;border:1px solid var(--line);color:var(--ink-2);z-index:3;background:var(--surface)}
+.qv-x:focus-visible{outline:2px solid var(--teal)}
+.qv-top{display:flex;gap:16px;align-items:center;padding-right:40px}
+.qv-top img{width:64px;height:64px;border-radius:16px;object-fit:cover;object-position:top}
+.qv-top .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sun)}
+.qv-top h2{font-size:1.6rem;margin:2px 0 0;line-height:1.1}
+.qv-who{margin:14px 0 0;color:var(--ink-2);font-size:1rem;line-height:1.55}
+.qv h3{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:20px 0 10px}
+.qv-str{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.qv-str div{padding:12px 14px;border-radius:14px;background:var(--surface-2);font-size:.88rem;line-height:1.45;color:var(--ink-2)}
+.qv-str b{display:block;color:var(--ink);font-size:.95rem;margin-bottom:4px}
+.qv-path{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.qv-path li{display:grid;grid-template-columns:78px 1fr;gap:12px;font-size:.92rem;align-items:baseline}
+.qv-path time{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.qv-path b{color:var(--ink)}
+.qv-path span{color:var(--ink-2)}
+.qv-2{display:grid;grid-template-columns:1fr 1fr;gap:4px 22px}
+.qv-2 p{margin:0;font-size:.9rem;color:var(--ink-2);line-height:1.5}
+.qv-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.qv-act .btn svg{width:17px;height:17px}
+.qv .st{opacity:0;transform:translateY(10px)}
+.qv.on .st{animation:qin .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--s)*70ms + 120ms)}
+@keyframes qin{to{opacity:1;transform:none}}
+@media (max-width:640px){
+  .qv{padding:0;place-items:end center}
+  .qv-p{border-radius:22px 22px 0 0;max-height:92dvh;padding:22px 18px 18px}
+  .qv-bar{margin:-22px -18px 16px;top:-22px}
+  .qv-str,.qv-2{grid-template-columns:1fr}
+  .qv-top h2{font-size:1.35rem}
+  .quick-btn span{display:none}.quick-btn{padding:0 9px}
+}
+@media (prefers-reduced-motion:reduce){.qv .st{opacity:1;transform:none;animation:none!important}.qv-p{transition:none}.qv.on .qv-bar i{animation:none;transform:scaleX(1)}}
+/* ==== ENH4: demo link ==== */
+.demo-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:14px 0 4px;padding:14px 16px;border-radius:14px;border:1px dashed color-mix(in srgb,var(--sun) 60%,var(--line));background:color-mix(in srgb,var(--sun) 7%,transparent)}
+.demo-cta p{margin:0;flex:1 1 240px;font-size:.88rem;color:var(--ink-2)}
+.demo-cta .btn{background:var(--sun);border-color:var(--sun);color:#1b1405}
+/* ==== ENH4-END ==== */
 </style>
 </head>
 <body>
@@ -698,7 +752,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
       <a href="#competences">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="tools"><!--ENH2:tb--><button type="button" class="theme-btn" aria-label="Toggle theme (light / dark)"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><!--/ENH2:tb--><div class="lang-sw" role="group" aria-label="Language / Langue"><a href="../" lang="fr" hreflang="fr">FR</a><a href="./" lang="en" hreflang="en" aria-current="page">EN</a></div></div>
+    <div class="tools"><!--ENH4:qb--><button type="button" class="quick-btn" aria-label="Quick read: my profile in 30 seconds" title="Quick read: my profile in 30 seconds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>30 s</span></button><!--/ENH4:qb--><!--ENH2:tb--><button type="button" class="theme-btn" aria-label="Toggle theme (light / dark)"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><!--/ENH2:tb--><div class="lang-sw" role="group" aria-label="Language / Langue"><a href="../" lang="fr" hreflang="fr">FR</a><a href="./" lang="en" hreflang="en" aria-current="page">EN</a></div></div>
   </div>
 </header>
 
@@ -725,7 +779,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
         </div>
 
         <div class="portrait in d2">
-          <span class="float-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>PSPO I certified</span><!--ENH3:bub--><span class="float-badge b2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.9L19 9.7l-4.2 3 1.5 5.3L12 15l-4.3 3 1.5-5.3L5 9.7l5.2-1.8z"/></svg>Copilot · Power Automate</span><span class="float-badge b3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.5 5.5 5.5 7M11 5c-.8 3.5-3 6.2-6.5 7.8M13 21l4-10 4 10M14.5 17.5h5"/></svg>4 languages · FR EN AR WO</span><span class="float-badge b4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>2× RNCP Level 7 titles</span><!--/ENH3:bub-->          <div class="photo"><img src="../img/portrait.jpg" alt="Portrait of El Mokhtar Berrada" width="574" height="766"></div>
+          <span class="float-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>PSPO I certified</span><!--ENH3:bub--><span class="float-badge b3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.5 5.5 5.5 7M11 5c-.8 3.5-3 6.2-6.5 7.8M13 21l4-10 4 10M14.5 17.5h5"/></svg>4 languages · FR EN AR WO</span><span class="float-badge b4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>2× RNCP Level 7 titles</span><!--/ENH3:bub-->          <div class="photo"><img src="../img/portrait.jpg" alt="Portrait of El Mokhtar Berrada" width="574" height="766"></div>
           <div class="route" aria-label="Journey: Casablanca, Tangier, Dakar, Paris">
             <svg viewBox="0 0 330 90" role="img" aria-hidden="true">
               <path class="path" d="M20 50 C 50 60, 80 30, 110 42 S 180 64, 210 52 S 280 30, 310 40"/>
@@ -1014,8 +1068,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
         </div>
         <div id="p-focal" data-k="MBA ESG · Final professional challenge">
           <h3>Focal-Shift</h3>
-          <div class="meta"><span class="award">My role: prototype, GDPR and tagging</span><span class="tag">3-day hackathon</span><span class="tag">September 2026</span></div>
-          <p>My final professional challenge: a 3-day hackathon that completes my MBA ESG degree and the RNCP Level 7 title “Digital Innovation Manager”.</p>
+          <div class="meta"><span class="award">My role: prototype, GDPR and tagging</span><span class="tag">3-day hackathon</span><span class="tag">September 2026</span></div><!--ENH4:demo--><div class="demo-cta"><p>Clickable static version of the prototype (in French): home, catalog, product pages and advice.</p><a class="btn" href="../focal-shift-demo/" target="_blank" rel="noopener">Try the demo ↗</a></div><!--/ENH4:demo-->          <p>My final professional challenge: a 3-day hackathon that completes my MBA ESG degree and the RNCP Level 7 title “Digital Innovation Manager”.</p>
           <p>A marketplace to buy, rent or list photo and video equipment. Beyond the catalog, two ideas set it apart: <b>reverse requests</b> (users post what they need and owners send them a kit offer) and an <b>inspiration</b> journey (pick a visual style, get a kit and a budget).</p>
           <h4>What the demo covers</h4>
           <p>Purchase flow, rentals with instant quotes and condition reports, explained price estimates, questionnaire-based recommendations, account area, and a moderation back office with dispute handling and an audit log. User stories prioritized (P0, P1) by profile, GDPR and consent built in, documented REST API.</p>
@@ -1023,7 +1076,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
           <p>In a team of consultants, I was responsible for the prototype, GDPR compliance (consent, cookies, account deletion) and the tagging plan. I built the POC with Claude as my coding copilot, then wrote the document explaining the technical choices.</p>
           <h4>Stack</h4>
           <div class="meta"><span class="tag">PHP 8</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">REST API · OpenAPI</span></div>
-        </div>
+        <!--ENH3:gal--><h4>The prototype in pictures</h4><div class="fsg"><figure data-img="../img/fs-catalogue.jpg" data-cap="Purchase catalog with filters and new-price comparison"><img src="../img/fs-catalogue.jpg" alt="Purchase catalog with filters and new-price comparison" loading="lazy"><figcaption>Purchase catalog with filters and new-price comparison</figcaption></figure><figure data-img="../img/fs-produit.jpg" data-cap="Rental product page with instant quote"><img src="../img/fs-produit.jpg" alt="Rental product page with instant quote" loading="lazy"><figcaption>Rental product page with instant quote</figcaption></figure><figure data-img="../img/fs-conseil.jpg" data-cap="5-step advice questionnaire"><img src="../img/fs-conseil.jpg" alt="5-step advice questionnaire" loading="lazy"><figcaption>5-step advice questionnaire</figcaption></figure><figure data-img="../img/fs-admin.jpg" data-cap="Back office: moderation, disputes, audit log"><img src="../img/fs-admin.jpg" alt="Back office: moderation, disputes, audit log" loading="lazy"><figcaption>Back office: moderation, disputes, audit log</figcaption></figure><figure data-img="../img/fs-api.jpg" data-cap="Documented REST API (OpenAPI, Swagger)"><img src="../img/fs-api.jpg" alt="Documented REST API (OpenAPI, Swagger)" loading="lazy"><figcaption>Documented REST API (OpenAPI, Swagger)</figcaption></figure></div><!--/ENH3:gal--></div>
         <div id="p-veille" data-k="MBA ESG · RNCP 40601 certification · Block 1">
           <h3>Strategic intelligence report</h3>
           <div class="meta"><span class="tag">14-page report</span><span class="tag">10-slide presentation</span><span class="tag">June – July 2026</span></div>
@@ -1662,6 +1715,20 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
     body.scrollTop=0;
   });
   var dlg=document.getElementById('dlg'); if(dlg) dlg.addEventListener('close',function(){ prev=null; });
+})();
+</script>
+<!--ENH4:qv--><div class="qv" hidden role="dialog" aria-modal="true" aria-labelledby="qv-t"><div class="qv-p"><div class="qv-bar" aria-hidden="true"><i></i></div><button type="button" class="qv-x" aria-label="Close">✕</button><div class="qv-top" class="st" style="--s:1"><img src="../img/portrait.jpg" alt=""><div><div class="k">Quick read · 30 seconds</div><h2 id="qv-t">El Mokhtar Berrada</h2></div></div><p class="qv-who" class="st" style="--s:2">Proxy Product Owner at <b>Servier</b> (R&amp;D, France's 2<sup>nd</sup>-largest pharmaceutical group), on a work-study contract until September 2027. MSc in Project Management at NEOMA.</p><div class="st" style="--s:3"><h3>What I bring</h3><div class="qv-str"><div><b>Product &amp; Agile</b>User Stories, Build &amp; Run backlog, acceptance testing, adoption tracking. PSPO I certified.</div><div><b>AI &amp; automation</b>−30% processing time at SG CIB, Copilot prompts adopted in Paris, Geneva and India, finalist of the GBIS hackathon (80+ teams).</div><div><b>UX &amp; transformation</b>UX/UI redesign at Banque de France (10 Figma screens), Focal-Shift and Yema prototypes.</div></div></div><div class="st" style="--s:4"><h3>Experience</h3><ul class="qv-path"><li><time>2026 – 27</time><div><b>Servier</b> · <span>Proxy Product Owner · Digital Solutions R&amp;D</span></div></li><li><time>2025 – 26</time><div><b>Société Générale CIB</b> · <span>Assistant Product Owner, AI · Trade Finance</span></div></li><li><time>2025</time><div><b>Banque de France</b> · <span>Digital Project Officer · IT Dept, Case Management</span></div></li><li><time>2022 – 23</time><div><b>Socium</b> · <span>Intern, then Multimedia Project Officer · Dakar</span></div></li><li><time>2021 – 23</time><div><b>Groupe ISM</b> · <span>Digital communication, promoted to coach · Dakar</span></div></li></ul></div><div class="qv-2"><div class="st" style="--s:5"><h3>Education</h3><p>MSc in Project Management, NEOMA (2026 – 27) · MBA in Digital Strategy, MBA ESG (2024 – 26) · BSc Business Information Systems, Groupe ISM</p></div><div class="st" style="--s:6"><h3>Languages</h3><p>French · English (TOEIC 905/990) · Moroccan Arabic · Wolof</p></div></div><div class="qv-act" class="st" style="--s:7"><a class="btn primary" href="../cv/CV_El_Mokhtar_Berrada_EN_light.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download my CV</a><a class="btn" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a class="btn" href="mailto:elmokhtarberrada@gmail.com">Email me</a><button type="button" class="btn" data-qclose>See the full site</button></div></div></div><!--/ENH4:qv-->
+<script id="enh4">
+(function(){
+  var qv=document.querySelector('.qv'), b=document.querySelector('.quick-btn'); if(!qv||!b) return;
+  var root=document.documentElement, last=null;
+  function open(){ last=document.activeElement; qv.hidden=false; void qv.offsetWidth; qv.classList.add('on'); root.classList.add('qopen'); qv.querySelector('.qv-x').focus({preventScroll:true}); }
+  function close(){ qv.classList.remove('on'); root.classList.remove('qopen'); setTimeout(function(){ qv.hidden=true; },300); if(last&&last.focus) last.focus({preventScroll:true}); }
+  b.addEventListener('click',open);
+  qv.addEventListener('click',function(e){ if(e.target===qv||e.target.closest('.qv-x,[data-qclose]')) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&qv.classList.contains('on')) close(); });
+  var cp=qv.querySelector('[data-mail]'); if(cp) cp.addEventListener('click',function(){ try{ navigator.clipboard.writeText(cp.dataset.mail); }catch(e){} });
+  if(/[?&]quick\b/.test(location.search)||location.hash==='#30s') setTimeout(open,400);
 })();
 </script>
 </body>

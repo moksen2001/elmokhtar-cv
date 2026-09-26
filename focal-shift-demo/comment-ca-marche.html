@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comment ça marche : acheter, louer ou proposer son matériel | Focal-Shift</title>
+<meta name="description" content="Les parcours Focal-Shift étape par étape : acheter d’occasion, louer à la journée, proposer son matériel, publier un besoin.">
+<meta name="theme-color" content="#181d22">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='none' stroke='%238f5f30' stroke-width='3'/><circle cx='16' cy='16' r='5' fill='%238f5f30'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=1790149055">
+<script>
+  // Consent Mode v2 : tout est refusé par défaut, avant tout chargement de tag.
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+    analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted',
+    wait_for_update: 500
+  });
+  window.FS_GTM_ID = "";
+</script>
+</head>
+<body class="page-comment"><div id="fs-demo-bar" style="position:sticky;top:0;z-index:9999;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;padding:9px 16px;background:#c9a15f;color:#1d1a15;font:600 14px/1.3 Figtree,system-ui,sans-serif;text-align:center">
+<span>Démo statique du prototype Focal-Shift · challenge de fin d'études MBA ESG</span>
+<a href="../" style="color:#1d1a15;text-decoration:underline">← Retour au CV d'El Mokhtar Berrada</a></div>
+<div id="fs-toast" role="status" style="position:fixed;left:50%;bottom:24px;transform:translate(-50%,160%);z-index:10000;max-width:min(92vw,520px);padding:12px 18px;border-radius:12px;background:#ece6dc;color:#1d1a15;font:500 14px/1.4 Figtree,system-ui,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.3,1.4,.5,1)"></div>
+<script>
+(function(){
+  var t=document.getElementById('fs-toast'),h;
+  function say(m){ t.textContent=m; t.style.transform='translate(-50%,0)'; clearTimeout(h); h=setTimeout(function(){t.style.transform='translate(-50%,160%)'},3200); }
+  var MSG="Démo statique : cette action nécessite la version complète (PHP + MySQL). Parcourez l'accueil, le catalogue, les fiches produit et le conseil.";
+  document.addEventListener('click',function(e){ var a=e.target.closest('a[data-off]'); if(a){ e.preventDefault(); say(MSG); } },true);
+  document.addEventListener('submit',function(e){
+    var f=e.target;
+    if(f.hasAttribute('data-conseil')){ e.preventDefault(); var d=new FormData(f), u=d.get('usage')||'voyage', m=d.get('mode')==='location'?'location':'achat';
+      if(['voyage','rue','portrait','sport','nature','video'].indexOf(u)<0) u='voyage'; location.href='conseil-r-'+u+'-'+m+'.html'; return; }
+    e.preventDefault(); say(MSG);
+  },true);
+})();
+</script>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html" aria-label="Focal-Shift, retour à l’accueil">
+      <svg class="logo-marque" viewBox="0 0 32 32" aria-hidden="true" width="30" height="30"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="5" fill="currentColor"/></svg>
+      <span>Focal-Shift</span>
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav-principale"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" x2="20" y1="12" y2="12" /> <line x1="4" x2="20" y1="6" y2="6" /> <line x1="4" x2="20" y1="18" y2="18" /></svg><span class="sr-only">Menu</span></button>
+    <nav id="nav-principale" aria-label="Navigation principale">
+      <ul>
+                  <li><a href="catalogue-modeachat.html"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="21" r="1" /> <circle cx="19" cy="21" r="1" /> <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>Acheter</a></li>
+                  <li><a href="catalogue-modelocation.html"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /></svg>Louer</a></li>
+                  <li><a href="conseil.html"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></svg>Conseil</a></li>
+                  <li><a href="comment-ca-marche.html" aria-current="page"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /> <path d="M13 6h8" /> <path d="M13 12h8" /> <path d="M13 18h8" /></svg>Comment ça marche</a></li>
+              </ul>
+      <a class="btn-proposer" href="#" data-off><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 16h6" /> <path d="M19 13v6" /> <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" /> <path d="m7.5 4.27 9 5.15" /> <polyline points="3.29 7 12 12 20.71 7" /> <line x1="12" x2="12" y1="22" y2="12" /></svg>Proposer mon matériel</a>
+      <div class="nav-compte">
+                  <a class="lien-connexion" href="#" data-off>Se connecter</a>
+              </div>
+    </nav>
+  </div>
+</header>
+<main id="contenu" tabindex="-1">
+<section class="page-tete">
+  <div class="wrap etroit" data-reveal>
+    <p class="tete-sur"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /> <path d="M13 6h8" /> <path d="M13 12h8" /> <path d="M13 18h8" /></svg>Comment ça marche</p>
+    <h1>Quatre façons d’utiliser Focal-Shift</h1>
+    <p class="lead">Chaque parcours est pensé pour que vous sachiez toujours ce qui va se passer, et ce que vous allez payer, avant de vous engager.</p>
+    <nav class="sommaire-parcours" aria-label="Choisir un parcours">
+      <a href="#acheter" class="sp-achat"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="21" r="1" /> <circle cx="19" cy="21" r="1" /> <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>Acheter d’occasion</a><a href="#louer" class="sp-location"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /></svg>Louer à la journée</a><a href="#proposer" class="sp-proposer"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 16h6" /> <path d="M19 13v6" /> <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" /> <path d="m7.5 4.27 9 5.15" /> <polyline points="3.29 7 12 12 20.71 7" /> <line x1="12" x2="12" y1="22" y2="12" /></svg>Proposer son matériel</a><a href="#besoin" class="sp-besoin"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></svg>Publier un besoin</a>    </nav>
+  </div>
+</section>
+
+<section class="section parcours parcours-achat" id="acheter" aria-labelledby="t-acheter">
+  <div class="wrap">
+    <div class="section-tete" data-reveal>
+      <span class="parcours-ico"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="21" r="1" /> <circle cx="19" cy="21" r="1" /> <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg></span>
+      <h2 id="t-acheter">Acheter d’occasion</h2>
+      <p class="lead">Du matériel contrôlé, moins cher que le neuf, avec le prix neuf affiché pour comparer.</p>
+    </div>
+    <ol class="frise-parcours" data-reveal-groupe>
+            <li data-reveal>
+        <span class="fp-num">1</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8" /> <path d="m21 21-4.3-4.3" /></svg>Chercher</h3>
+          <p>Filtrez par catégorie, budget, état ou marque. Chaque annonce affiche son prix neuf de référence et ce que vous économisez.</p>
+          <a class="lien-fort" href="catalogue-modeachat.html">Voir le matériel d’occasion <svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></a>        </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">2</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></svg>Vérifier</h3>
+          <p>La fiche détaille l’état, ce qui a été contrôlé, le compteur de déclenchements et la garantie. Le prix total, frais et livraison compris, est affiché avant tout engagement.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">3</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="21" r="1" /> <circle cx="19" cy="21" r="1" /> <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>Commander</h3>
+          <p>Choisissez la livraison assurée ou la remise en main propre. L’annonce est aussitôt réservée pour vous : personne d’autre ne peut l’acheter pendant votre paiement.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">4</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>Payer en sécurité</h3>
+          <p>Le paiement est conservé par Focal-Shift et n’est versé au vendeur qu’après votre réception.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">5</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m16 16 2 2 4-4" /> <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" /> <path d="m7.5 4.27 9 5.15" /> <polyline points="3.29 7 12 12 20.71 7" /> <line x1="12" x2="12" y1="22" y2="12" /></svg>Recevoir et suivre</h3>
+          <p>Suivez chaque étape (payée, expédiée, livrée) depuis votre compte. Vous disposez de 14 jours pour signaler un écart avec l’annonce.</p>
+                  </div>
+      </li>
+          </ol>
+  </div>
+</section>
+<section class="section parcours parcours-location" id="louer" aria-labelledby="t-louer">
+  <div class="wrap">
+    <div class="section-tete" data-reveal>
+      <span class="parcours-ico"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /></svg></span>
+      <h2 id="t-louer">Louer à la journée</h2>
+      <p class="lead">Le matériel pro, le temps de votre projet, avec l’assurance incluse et une caution restituée au retour.</p>
+    </div>
+    <ol class="frise-parcours" data-reveal-groupe>
+            <li data-reveal>
+        <span class="fp-num">1</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /></svg>Indiquer vos dates</h3>
+          <p>Sur la page Louer, commencez par vos dates : seul le matériel libre sur toute la période s’affiche, avec le prix total.</p>
+          <a class="lien-fort" href="catalogue-modelocation.html">Chercher par dates <svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></a>        </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">2</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" /> <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /> <path d="M12 17.5v-11" /></svg>Voir le devis</h3>
+          <p>Remise automatique de 10 % dès 3 jours et 20 % dès 7 jours, assurance et frais détaillés, caution indiquée. Rien n’est caché.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">3</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></svg>Réserver</h3>
+          <p>Vos dates sont verrouillées dès le paiement. La caution est une simple empreinte bancaire, jamais débitée sans litige constaté.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">4</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /> <path d="M13 6h8" /> <path d="M13 12h8" /> <path d="M13 18h8" /></svg>Récupérer le matériel</h3>
+          <p>Le propriétaire fait l’état des lieux de départ, accessoire par accessoire. Vous confirmez la bonne réception.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">5</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /> <path d="M3 3v5h5" /></svg>Rendre et récupérer sa caution</h3>
+          <p>État des lieux de retour : si tout est conforme, la location est clôturée et la caution libérée automatiquement.</p>
+                  </div>
+      </li>
+          </ol>
+  </div>
+</section>
+<section class="section parcours parcours-proposer" id="proposer" aria-labelledby="t-proposer">
+  <div class="wrap">
+    <div class="section-tete" data-reveal>
+      <span class="parcours-ico"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 16h6" /> <path d="M19 13v6" /> <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" /> <path d="m7.5 4.27 9 5.15" /> <polyline points="3.29 7 12 12 20.71 7" /> <line x1="12" x2="12" y1="22" y2="12" /></svg></span>
+      <h2 id="t-proposer">Proposer son matériel</h2>
+      <p class="lead">Louez ou vendez ce qui dort chez vous. Publier est gratuit ; une commission n’est prélevée que si une location a lieu.</p>
+    </div>
+    <ol class="frise-parcours" data-reveal-groupe>
+            <li data-reveal>
+        <span class="fp-num">1</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="16" height="20" x="4" y="2" rx="2" /> <line x1="8" x2="16" y1="6" y2="6" /> <line x1="16" x2="16" y1="14" y2="18" /> <path d="M16 10h.01" /> <path d="M12 10h.01" /> <path d="M8 10h.01" /> <path d="M12 14h.01" /> <path d="M8 14h.01" /> <path d="M12 18h.01" /> <path d="M8 18h.01" /></svg>Estimer</h3>
+          <p>Calculez gratuitement ce que votre matériel vaut à la revente, et ce qu’il peut rapporter en location.</p>
+          <a class="lien-fort" href="#" data-off>Faire le calcul <svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></a>        </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">2</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 16h6" /> <path d="M19 13v6" /> <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" /> <path d="m7.5 4.27 9 5.15" /> <polyline points="3.29 7 12 12 20.71 7" /> <line x1="12" x2="12" y1="22" y2="12" /></svg>Publier</h3>
+          <p>Choisissez votre modèle dans notre référentiel : prix et caractéristiques se remplissent seuls. Indiquez l’état et votre prix.</p>
+          <a class="lien-fort" href="#" data-off>Proposer mon matériel <svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></a>        </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">3</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m9 12 2 2 4-4" /></svg>Être vérifié</h3>
+          <p>L’équipe contrôle chaque annonce avant sa mise en ligne. C’est un gage de qualité qui fait louer et vendre plus vite.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">4</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="m9 16 2 2 4-4" /></svg>Recevoir des réservations</h3>
+          <p>Suivez vos locations et vos ventes dans votre espace. Vous restez libre de rendre votre matériel indisponible.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">5</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" /> <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" /> <path d="m2 16 6 6" /> <circle cx="16" cy="9" r="2.9" /> <circle cx="6" cy="5" r="3" /></svg>Être payé</h3>
+          <p>Après l’état des lieux de retour pour une location, ou la réception pour une vente. En cas de dommage, la caution et l’assurance vous protègent.</p>
+                  </div>
+      </li>
+          </ol>
+  </div>
+</section>
+<section class="section parcours parcours-besoin" id="besoin" aria-labelledby="t-besoin">
+  <div class="wrap">
+    <div class="section-tete" data-reveal>
+      <span class="parcours-ico"><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></svg></span>
+      <h2 id="t-besoin">Publier un besoin</h2>
+      <p class="lead">Notre différence : vous décrivez ce que vous voulez réaliser, les propriétaires qui ont le bon matériel viennent à vous.</p>
+    </div>
+    <ol class="frise-parcours" data-reveal-groupe>
+            <li data-reveal>
+        <span class="fp-num">1</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></svg>Décrire</h3>
+          <p>Votre projet, vos dates, votre lieu, votre budget et ce que vous possédez déjà. Pas besoin de connaître les références.</p>
+          <a class="lien-fort" href="#" data-off>Publier mon besoin <svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></a>        </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">2</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /> <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /></svg>Recevoir des offres</h3>
+          <p>Les propriétaires dont le matériel correspond vous proposent un kit complet, un prix total et un mode de remise.</p>
+                  </div>
+      </li>
+            <li data-reveal>
+        <span class="fp-num">3</span>
+        <div class="fp-corps">
+          <h3><svg class="ico " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" /> <path d="m9 12 2 2 4-4" /></svg>Choisir</h3>
+          <p>Comparez le contenu, le prix et la distance, puis confirmez l’offre qui vous convient. Aucun paiement avant votre choix.</p>
+                  </div>
+      </li>
+          </ol>
+  </div>
+</section>
+
+<section class="section section-teinte">
+  <div class="wrap etroit" style="text-align:center" data-reveal>
+    <h2>Une question sur le fonctionnement ?</h2>
+    <p class="lead">Les réponses aux questions les plus fréquentes sont sur l’accueil, et celles des propriétaires sur la page dédiée.</p>
+    <div class="actions actions-centre">
+      <a class="btn btn-ghost" href="index.html">Questions fréquentes</a>
+      <a class="btn btn-ghost" href="#" data-off>Questions des propriétaires</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-logo"><svg viewBox="0 0 32 32" aria-hidden="true" width="26" height="26"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="5" fill="currentColor"/></svg>Focal-Shift</p>
+      <p class="footer-texte">Le matériel photo et vidéo pour votre prochain projet. Location, achat et revente entre créateurs, en économie circulaire.</p>
+    </div>
+    <div>
+      <p class="footer-titre">Acheter et louer</p>
+      <ul class="footer-links">
+        <li><a href="catalogue-modeachat.html">Acheter d’occasion</a></li>
+        <li><a href="catalogue-modelocation.html">Louer du matériel</a></li>
+        <li><a href="conseil.html">Conseil par usage</a></li>
+        <li><a href="#" data-off>Publier un besoin</a></li>
+        <li><a href="inspiration.html">Partir d’une inspiration</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-titre">Vendre et proposer</p>
+      <ul class="footer-links">
+        <li><a href="#" data-off><strong>Proposer mon matériel</strong></a></li>
+        <li><a href="#" data-off>Estimer mon matériel</a></li>
+        <li><a href="#" data-off>Vendre ou louer ?</a></li>
+        <li><a href="#" data-off>Espace propriétaire</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-titre">Focal-Shift</p>
+      <ul class="footer-links">
+        <li><a href="comment-ca-marche.html">Comment ça marche</a></li>
+        <li><a href="#" data-off>API pour les développeurs</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+        <li><button type="button" class="link-button" data-open-consent>Gérer mes cookies</button></li>
+      </ul>
+    </div>
+    <p class="footer-mention">Prototype réalisé pour le Digital Consulting Project, MBA ESG, septembre 2026. Données de démonstration fictives. Photos libres de droits (CC0, StockSnap et Rawpixel), icônes Lucide.</p>
+  </div>
+</footer>
+
+<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consent-titre" hidden>
+  <div class="consent-inner">
+    <h2 id="consent-titre">Vos préférences de cookies</h2>
+    <p>Nous utilisons une mesure d’audience pour comprendre quels parcours fonctionnent. Aucun cookie publicitaire. Vous pouvez changer d’avis à tout moment en bas de page.</p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-ghost" data-consent="refuse">Tout refuser</button>
+      <button type="button" class="btn btn-ghost" data-consent-details>Personnaliser</button>
+      <button type="button" class="btn" data-consent="accept">Tout accepter</button>
+    </div>
+    <form class="consent-details" hidden>
+      <label class="check"><input type="checkbox" checked disabled> Nécessaires au fonctionnement (session, sécurité)</label>
+      <label class="check"><input type="checkbox" name="analytics"> Mesure d’audience (Google Analytics 4 via Tag Manager)</label>
+      <button type="button" class="btn" data-consent="save">Enregistrer mes choix</button>
+    </form>
+  </div>
+</div>
+
+<script>window.FS_QUEUE = [];</script>
+<script src="assets/js/consent.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
