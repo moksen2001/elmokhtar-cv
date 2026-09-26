@@ -1,0 +1,1243 @@
+<title>El Mokhtar Berrada</title>
+<meta name="description" content="Proxy Product Owner chez Servier. Produit, IA et automatisation, de la Trade Finance à la R&D pharmaceutique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F5F3; --surface:#FFFFFF; --surface-2:#E7EDEA; --ink:#12201F; --ink-2:#34463F; --muted:#5F706B;
+  --line:#D3DCD8; --teal:#0C6A58; --teal-2:#0A5648; --teal-soft:#DCEDE7; --sun:#B97C0C; --sun-soft:#F6EAD0; --on-teal:#FFFFFF;
+  --shadow:0 1px 2px rgba(18,32,31,.05),0 10px 30px rgba(18,32,31,.07);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:14px; --wrap:1140px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1413; --surface:#131F1E; --surface-2:#1A2927; --ink:#E5ECE9; --ink-2:#C0CCC8; --muted:#8D9D98;
+    --line:#253734; --teal:#46B99D; --teal-2:#63CBB1; --teal-soft:#153029; --sun:#E6AE48; --sun-soft:#2D2413; --on-teal:#06201A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1413; --surface:#131F1E; --surface-2:#1A2927; --ink:#E5ECE9; --ink-2:#C0CCC8; --muted:#8D9D98;
+  --line:#253734; --teal:#46B99D; --teal-2:#63CBB1; --teal-soft:#153029; --sun:#E6AE48; --sun-soft:#2D2413; --on-teal:#06201A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.02em}
+.eyebrow{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:var(--teal);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--sun);border-radius:2px}
+
+/* progress + header */
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--teal),var(--sun));z-index:60}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 95%,transparent);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+header.top.scrolled{box-shadow:0 6px 20px -14px rgba(0,0,0,.25)}
+header.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:1.02rem;white-space:nowrap}
+.mark{width:34px;height:34px;border-radius:10px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:.8rem;letter-spacing:.02em}
+nav.links{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+nav.links::-webkit-scrollbar{display:none}
+nav.links a{text-decoration:none;font-size:.92rem;color:var(--ink-2);padding:8px 12px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+nav.links a:hover{background:var(--surface-2);color:var(--ink)}
+nav.links a.active{background:var(--ink);color:var(--bg)}
+@media (max-width:860px){
+  .top .wrap{flex-wrap:wrap;height:auto;padding-block:10px;gap:8px}
+  nav.links{margin-left:0;width:100%;order:3;margin-inline:-4px}
+  .brand .full{display:none}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;font:600 .95rem/1 var(--body);padding:13px 18px;border-radius:12px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--ink-2);box-shadow:var(--shadow)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:var(--on-teal)}
+.btn.primary:hover{background:var(--teal-2);border-color:var(--teal-2)}
+.btn svg{width:17px;height:17px;flex:none}
+
+/* hero */
+.hero{padding-block:56px 40px}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:9px;padding:7px 13px 7px 11px;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-size:.86rem;font-weight:600}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 color-mix(in srgb,var(--teal) 60%,transparent);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.9rem);font-weight:800;letter-spacing:-.035em;margin-top:22px;line-height:.98}
+.hero h1 .l2{color:var(--teal)}
+.lede{font-size:clamp(1.12rem,1.8vw,1.35rem);color:var(--ink-2);margin-top:24px;max-width:36ch;line-height:1.45}
+.rot{display:inline-grid;vertical-align:bottom;color:var(--ink);font-weight:600}
+.rot span{grid-area:1/1;justify-self:start;transition:opacity .45s,transform .45s;white-space:nowrap}
+.rot span:not(.on){opacity:0;transform:translateY(.45em)}
+.rot span.on{box-shadow:inset 0 -.32em 0 var(--sun-soft)}
+.hero-sub{color:var(--muted);margin-top:14px;max-width:52ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+.portrait{position:relative;justify-self:end;width:100%;max-width:370px}
+.portrait .photo{border-radius:22px;overflow:hidden;aspect-ratio:574/700;background:var(--surface-2);box-shadow:var(--shadow);position:relative}
+.portrait .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.route{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px 12px}
+.route svg{width:100%;height:auto;overflow:visible}
+.route .path{fill:none;stroke:var(--teal);stroke-width:2;stroke-dasharray:4 5}
+.route .dot{fill:var(--surface);stroke:var(--teal);stroke-width:2.5}
+.route .dot.now{fill:var(--sun);stroke:var(--sun)}
+.route text{font-family:var(--body);font-size:12.5px;fill:var(--ink);font-weight:600}
+.route text.s{font-size:10.5px;fill:var(--muted);font-weight:400;font-family:var(--mono)}
+.route .plane{fill:var(--teal)}
+@media (max-width:860px){
+  .hero{padding-block:32px 24px}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .portrait{justify-self:start;max-width:420px}
+}
+
+/* tldr */
+.tldr{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+.tldr > div{padding:20px 22px;border-right:1px solid var(--line)}
+.tldr > div:last-child{border-right:0}
+.tldr .k{font-family:var(--display);font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.tldr .k em{font-style:normal;color:var(--teal)}
+.tldr .v{color:var(--muted);font-size:.9rem;margin-top:4px;line-height:1.4}
+@media (max-width:860px){.tldr{grid-template-columns:1fr 1fr}.tldr>div:nth-child(2){border-right:0}.tldr>div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+/* sections */
+section.block{padding-block:88px 16px}
+.head{display:grid;grid-template-columns:1fr 1fr;gap:28px 56px;align-items:end;margin-bottom:40px}
+.head h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-top:12px;letter-spacing:-.03em}
+.head p{color:var(--ink-2);max-width:52ch}
+@media (max-width:860px){.head{grid-template-columns:1fr;gap:14px}section.block{padding-block:64px 8px}}
+
+/* 30 seconds */
+.brief{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.facts{padding:8px 24px}
+.fact{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.fact:last-child{border-bottom:0}
+.fact dt{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding-top:3px}
+.fact dd{margin:0;font-weight:500}
+.fact dd small{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.ways{display:grid;gap:14px;align-content:start}
+.leftcol{display:grid;gap:14px;align-content:start}
+.story{padding:24px 26px;display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;margin-top:22px}
+.story .eyebrow{grid-column:1/-1}
+@media (max-width:860px){.story{grid-template-columns:1fr}}
+.story p{color:var(--ink-2);font-size:.97rem}
+
+.way{padding:22px 24px;display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start}
+.way .ic{width:44px;height:44px;border-radius:12px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center}
+.way .ic svg{width:22px;height:22px}
+.way h3{font-size:1.18rem;font-weight:600}
+.way p{color:var(--ink-2);margin-top:6px;font-size:.97rem}
+blockquote.conv{margin:0;padding:22px 24px;border-radius:18px;background:var(--ink);color:var(--bg);position:relative}
+blockquote.conv p{font-family:var(--display);font-size:1.15rem;line-height:1.4;font-weight:500}
+blockquote.conv cite{display:block;margin-top:12px;font-style:normal;font-size:.85rem;opacity:.72}
+@media (max-width:860px){.brief{grid-template-columns:1fr}.fact{grid-template-columns:1fr;gap:2px}}
+
+/* experience changelog */
+.xp{display:grid;gap:18px;position:relative}
+.rel{display:grid;grid-template-columns:150px 1fr;gap:28px;position:relative}
+.rel .when{padding-top:26px;text-align:right}
+.ver{display:inline-block;font-family:var(--mono);font-size:.78rem;font-weight:500;padding:4px 10px;border-radius:8px;background:var(--surface-2);color:var(--ink-2)}
+.rel.current .ver{background:var(--sun-soft);color:var(--sun)}
+.when .d{display:block;color:var(--muted);font-size:.86rem;margin-top:8px;line-height:1.35}
+.rel .body{padding:24px 26px 20px;position:relative;transition:border-color .25s,box-shadow .25s}
+.rel .body:hover{border-color:color-mix(in srgb,var(--teal) 45%,var(--line));box-shadow:var(--shadow)}
+.rel .body::before{content:"";position:absolute;left:-19px;top:30px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2.5px solid var(--teal)}
+.rel.current .body::before{background:var(--sun);border-color:var(--sun)}
+.xp::before{content:"";position:absolute;left:172px;top:32px;bottom:32px;width:2px;background:repeating-linear-gradient(var(--line) 0 6px,transparent 6px 11px)}
+.rhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px}
+.rel h3{font-size:1.32rem;font-weight:700}
+.org{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:6px;color:var(--ink-2);font-size:.95rem}
+.org a{font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--sun);padding-bottom:1px}
+.org a:hover{color:var(--teal);border-color:var(--teal)}
+.org .sep{width:4px;height:4px;border-radius:50%;background:var(--line)}
+.tag{font-size:.78rem;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.ctx{color:var(--muted);font-size:.93rem;margin-top:12px;max-width:72ch}
+ul.pts{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+ul.pts li{position:relative;padding-left:20px;color:var(--ink-2);max-width:78ch}
+ul.pts li::before{content:"";position:absolute;left:2px;top:.66em;width:8px;height:2px;background:var(--teal);border-radius:2px}
+ul.pts li b{color:var(--ink);font-weight:600}
+.caps{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;align-items:center}
+.caps .lbl{font-family:var(--mono);font-size:.72rem;color:var(--teal);margin-right:4px;text-transform:uppercase;letter-spacing:.08em}
+.caps span:not(.lbl){font-size:.82rem;padding:4px 10px;border-radius:8px;background:var(--teal-soft);color:var(--teal);font-weight:500}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.more > div{overflow:hidden}
+.more.open{grid-template-rows:1fr}
+.toggle{margin-top:14px;background:none;border:0;padding:6px 0;font:600 .9rem var(--body);color:var(--teal);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.toggle svg{width:16px;height:16px;transition:transform .3s}
+.toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
+@media (max-width:760px){
+  .rel{grid-template-columns:1fr;gap:8px;padding-left:22px}
+  .rel .when{text-align:left;padding-top:0;display:flex;gap:10px;align-items:center}
+  .when .d{margin-top:0}
+  .xp::before{left:4px;top:8px}
+  .rel .body::before{left:-24px;top:-22px}
+  .rel .body{padding:20px}
+}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.proj{grid-column:span 3;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0;transition:transform .3s,box-shadow .3s,border-color .3s}
+.proj.big{grid-column:span 6}
+.proj:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--teal) 40%,var(--line))}
+.proj .vis{aspect-ratio:16/9;background:var(--surface-2);position:relative;overflow:hidden}
+.proj .vis img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.proj:hover .vis img{transform:scale(1.04)}
+.proj .pb{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.proj .ctx2{font-family:var(--mono);font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.proj h3{font-size:1.28rem;font-weight:700}
+.proj p{color:var(--ink-2);font-size:.95rem}
+.proj .foot{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.award{font-size:.8rem;font-weight:600;color:var(--sun);background:var(--sun-soft);padding:4px 10px;border-radius:999px}
+.open-lbl{white-space:nowrap;font-size:.88rem;font-weight:600;color:var(--teal);display:inline-flex;gap:6px;align-items:center;margin-left:auto}
+.open-lbl svg{width:16px;height:16px;transition:transform .25s}
+.proj:hover .open-lbl svg{transform:translateX(3px)}
+/* flow visual (agent IA) */
+.flow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:18px;background:radial-gradient(120% 90% at 0% 0%,var(--teal-soft),transparent 60%),var(--surface-2)}
+.flow .n{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 10px;font-size:.76rem;line-height:1.25;text-align:center;flex:1;max-width:120px;font-weight:600}
+.flow .n small{display:block;font-weight:400;color:var(--muted);font-size:.68rem;margin-top:3px}
+.flow .n.ai{background:var(--teal);color:var(--on-teal);border-color:var(--teal)}
+.flow .n.ai small{color:var(--on-teal);opacity:.8}
+.flow .ar{color:var(--teal);flex:none;width:16px;height:16px}
+.flow .n.ai{animation:glow 2.8s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--teal) 18%,transparent)}}
+.typo{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 20px;overflow:hidden}
+.typo b{font-family:var(--display);font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;letter-spacing:-.04em;line-height:.9;position:relative}
+.typo i{font-style:normal;font-family:var(--mono);font-size:.72rem;opacity:.8;position:relative;margin-top:8px}
+.typo.baykat{background:#E9E0C6;color:#3D3514}
+.typo.baykat::before{content:"";position:absolute;inset:-20%;background:repeating-linear-gradient(-12deg,transparent 0 22px,rgba(61,53,20,.08) 22px 24px)}
+.typo.veille{background:var(--ink);color:var(--bg)}
+.typo.veille::before{content:"";position:absolute;right:16px;top:16px;width:80px;height:64px;background:linear-gradient(var(--sun),var(--sun)) 0 100%/14px 34% no-repeat,linear-gradient(var(--teal),var(--teal)) 22px 100%/14px 58% no-repeat,linear-gradient(var(--teal),var(--teal)) 44px 100%/14px 80% no-repeat,linear-gradient(var(--sun),var(--sun)) 66px 100%/14px 100% no-repeat}
+.typo.jubox{background:#E3E4F7;color:#2B2F74}
+.typo.jubox::before{content:"";position:absolute;right:-30px;top:-30px;width:170px;height:170px;border-radius:50%;background:rgba(43,47,116,.12);box-shadow:-70px 60px 0 -30px rgba(43,47,116,.09)}
+@media (max-width:1000px){.proj{grid-column:span 6}}
+@media (max-width:640px){.projects{grid-template-columns:1fr}.proj,.proj.big{grid-column:auto}}
+
+/* IA */
+.ai-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:22px;align-items:start}
+.method{padding:26px;background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.method h3{font-size:1.25rem;font-weight:700}
+.method > p{opacity:.75;margin-top:8px;font-size:.95rem}
+.steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:16px;counter-reset:st}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:12px;counter-increment:st}
+.steps li::before{content:"0" counter(st);font-family:var(--mono);font-size:.8rem;color:var(--sun);padding-top:3px}
+.steps b{display:block;font-weight:600}
+.steps span{opacity:.75;font-size:.93rem}
+.made{padding:8px 24px}
+.made h3{font-size:1.05rem;font-weight:600;padding:16px 0 4px;display:flex;align-items:center;gap:10px}
+.mk{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.mk:last-child{border-bottom:0}
+.mk b{font-weight:600}
+.mk span{color:var(--ink-2);font-size:.92rem;grid-column:1}
+.mk time{font-family:var(--mono);font-size:.74rem;color:var(--muted);grid-row:1;grid-column:2;white-space:nowrap;padding-top:3px}
+.pill{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:6px;background:var(--teal-soft);color:var(--teal)}
+@media (max-width:900px){.ai-grid{grid-template-columns:1fr}}
+
+/* dialog */
+dialog{border:0;padding:0;border-radius:20px;max-width:min(860px,calc(100vw - 24px));width:100%;max-height:calc(100vh - 40px);background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(8,16,15,.55);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:translateY(16px) scale(.98)}}
+.dlg{display:flex;flex-direction:column;max-height:calc(100vh - 40px)}
+.dlg-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.dlg-top .mono{color:var(--muted)}
+.x{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center;flex:none}
+.x:hover{background:var(--surface-2)}
+.dlg-body{overflow:auto;padding:24px 26px 28px}
+.dlg-body h3{font-size:1.8rem;font-weight:700}
+.dlg-body h4{font-size:1rem;margin-top:22px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-weight:500;color:var(--teal)}
+.dlg-body p{color:var(--ink-2);margin-top:12px}
+.dlg-body img{border-radius:12px;margin-top:18px;border:1px solid var(--line)}
+.dlg-body .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.lb img{margin:0;border:0;border-radius:0;width:100%}
+.lb .dlg-body{padding:0;background:#fff}
+
+/* testimonials */
+.voices{display:grid;grid-template-columns:320px 1fr;gap:24px}
+.who{display:grid;gap:10px;align-content:start}
+.who button{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:center;text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.who button:hover{transform:translateX(3px)}
+.who button[aria-selected="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.who img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.who b{display:block;font-weight:600;line-height:1.25}
+.who small{display:block;color:var(--muted);font-size:.82rem;line-height:1.35;margin-top:2px}
+.stage{padding:34px 36px 28px;position:relative;overflow:hidden;min-height:100%}
+.stage .q{position:absolute;right:26px;top:6px;font-family:var(--display);font-size:9rem;line-height:1;color:var(--teal-soft);pointer-events:none;font-weight:800}
+.panels{display:grid;position:relative}
+.panel{grid-area:1/1;visibility:hidden;opacity:0;transform:translateX(24px);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s .6s}
+.panel.show{visibility:visible;opacity:1;transform:none;transition:opacity .5s .1s,transform .6s cubic-bezier(.2,.8,.2,1) .1s,visibility 0s}
+.panel .rel2{display:inline-flex;gap:8px;align-items:center;font-size:.84rem;color:var(--teal);font-weight:600;background:var(--teal-soft);padding:5px 11px;border-radius:999px}
+.panel blockquote{margin:18px 0 0;font-family:var(--display);font-size:clamp(1.15rem,2vw,1.42rem);line-height:1.45;font-weight:500;color:var(--ink);max-width:62ch}
+.panel blockquote p + p{margin-top:12px}
+.panel .sig{display:flex;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+.panel .sig img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.panel .sig b{display:block}
+.panel .sig small{color:var(--muted)}
+.panel .sig .btn{margin-left:auto;padding:10px 14px;font-size:.88rem}
+.panel .lang{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:14px}
+.dots{display:flex;gap:6px;margin-top:22px}
+.dots i{width:22px;height:4px;border-radius:4px;background:var(--line);transition:width .3s;position:relative;overflow:hidden}
+.dots i.on{width:46px}
+.dots i::after{content:"";position:absolute;inset:0;background:var(--teal);transform:scaleX(0);transform-origin:left}
+.dots i.on::after{animation:fill var(--dur,9s) linear forwards}
+.dots.paused i.on::after{animation:none;transform:scaleX(1)}
+@keyframes fill{to{transform:scaleX(1)}}
+@media (max-width:860px){
+  .voices{grid-template-columns:1fr}
+  .who{grid-template-columns:repeat(4,auto);justify-content:start;gap:8px;overflow-x:auto}
+  .who button{grid-template-columns:48px;padding:6px;border-radius:50%}
+  .who button > span{display:none}
+  .who img{width:48px;height:48px}
+  .stage{padding:26px 22px}
+  .panel .sig .btn{margin-left:0}
+}
+
+/* education */
+.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.school{padding:24px;display:flex;flex-direction:column;gap:10px}
+.school .yr{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.school h3{font-size:1.2rem;font-weight:700}
+.school .sn a{font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--sun)}
+.school .sn a:hover{color:var(--teal);border-color:var(--teal)}
+.school .rncp{font-size:.84rem;color:var(--teal);font-weight:600}
+.school p{color:var(--ink-2);font-size:.94rem}
+.grades{margin-top:auto;padding-top:12px;display:grid;gap:7px;border-top:1px solid var(--line)}
+.grades div{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--ink-2)}
+.grades b{font-family:var(--mono);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.school.now{border-color:color-mix(in srgb,var(--sun) 55%,var(--line))}
+@media (max-width:900px){.edu{grid-template-columns:1fr}}
+
+/* certifications */
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cert{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;padding:12px;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.cert:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--teal) 40%,var(--line))}
+.cert .th{width:96px;aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:#fff;border:1px solid var(--line);padding:0;cursor:zoom-in;display:block}
+.cert .th img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cert:hover .th img{transform:scale(1.08)}
+.cert .ct{display:block;min-width:0}
+.cert b{display:block;font-weight:600;line-height:1.3}
+.cert small{display:block;color:var(--muted);font-size:.84rem;margin-top:3px}
+.vf{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:8px}
+.vf a{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--teal);text-decoration:none}
+.vf a:hover{text-decoration:underline}
+.vf svg,.more-certs svg{width:13px;height:13px;flex:none}
+.vf .nolink{font-size:.78rem;color:var(--muted)}
+.cert.key{border-color:color-mix(in srgb,var(--teal) 50%,var(--line))}
+.more-certs{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}
+.more-certs .lbl{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-right:4px}
+.more-certs a,.more-certs .static{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);text-decoration:none;color:var(--ink);transition:transform .25s,border-color .25s}
+.more-certs a:hover{transform:translateY(-2px);border-color:var(--teal)}
+.more-certs b{font-weight:600;font-size:.9rem}
+.more-certs small{color:var(--muted);font-size:.8rem}
+.more-certs a svg{color:var(--teal)}
+.also{margin-top:16px;color:var(--muted);font-size:.92rem}
+.also b{color:var(--ink-2);font-weight:600}
+@media (max-width:900px){.certs{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.certs{grid-template-columns:1fr}}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sk{padding:22px 24px}
+.sk h3{font-size:1.05rem;font-weight:600;display:flex;align-items:center;gap:10px}
+.sk h3 i{width:9px;height:9px;border-radius:3px;background:var(--teal);display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chips span{font-size:.86rem;padding:5px 11px;border-radius:9px;background:var(--surface-2);color:var(--ink-2)}
+@media (max-width:900px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.skills{grid-template-columns:1fr}}
+
+/* engagement */
+.eng{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gallery figure{margin:0;border-radius:16px;overflow:hidden;position:relative;background:var(--surface-2);cursor:zoom-in}
+.gallery figure:first-child{grid-column:1/-1}
+.gallery img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .6s}
+.gallery figure:hover img{transform:scale(1.03)}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;font-size:.78rem;background:rgba(10,20,19,.72);color:#fff;padding:5px 10px;border-radius:8px;backdrop-filter:blur(6px)}
+.eng-list{display:grid;gap:14px;align-content:start}
+.en{padding:20px 22px}
+.en .yr{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.en h3{font-size:1.1rem;font-weight:600;margin-top:4px}
+.en p{color:var(--ink-2);font-size:.94rem;margin-top:6px}
+.see-cert{margin-top:14px;display:inline-flex;align-items:center;gap:12px;padding:6px 14px 6px 6px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--teal);font:600 .86rem var(--body);cursor:zoom-in;transition:transform .25s,border-color .25s}
+.see-cert:hover{transform:translateY(-2px);border-color:var(--teal)}
+.see-cert img{width:64px;height:44px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}
+.side{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.side .en ul{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px}
+.side .en li{display:flex;justify-content:space-between;gap:10px;font-size:.93rem}
+.side .en li span{color:var(--muted);font-size:.86rem;text-align:right}
+@media (max-width:900px){.eng{grid-template-columns:1fr}}
+@media (max-width:520px){.side{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}}
+
+/* contact */
+.contact{margin-top:88px;margin-bottom:40px;border-radius:26px;background:var(--ink);color:var(--bg);padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+.contact::after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;border:2px dashed color-mix(in srgb,var(--bg) 18%,transparent);animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.contact h2{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:800;letter-spacing:-.03em}
+.contact p{margin-top:14px;opacity:.78;max-width:44ch}
+.chan{display:grid;gap:10px;position:relative;z-index:1}
+.row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:color-mix(in srgb,var(--bg) 8%,transparent);border:1px solid color-mix(in srgb,var(--bg) 14%,transparent)}
+.row .t{flex:1;min-width:0}
+.row small{display:block;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.6}
+.row b{display:block;font-weight:600;overflow-wrap:anywhere;user-select:all}
+.row a.b{text-decoration:none}
+.row button,.row a.go{flex:none;font:600 .82rem var(--body);padding:8px 12px;border-radius:9px;border:0;background:var(--bg);color:var(--ink);cursor:pointer;text-decoration:none}
+.row button.ok{background:var(--sun);color:#1b1405}
+@media (max-width:860px){.contact{grid-template-columns:1fr}.row b{font-size:.9rem}}
+footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* ---------- motion layer ---------- */
+.hero{position:relative;overflow:hidden}
+.orbs{position:absolute;inset:0;pointer-events:none;z-index:0}
+.orbs i{position:absolute;border-radius:50%;opacity:.55}
+.orbs i:nth-child(1){width:620px;height:620px;left:-180px;top:-220px;background:radial-gradient(circle,var(--teal-soft) 0,transparent 68%);animation:drift1 18s ease-in-out infinite alternate}
+.orbs i:nth-child(2){width:520px;height:520px;right:-160px;top:120px;background:radial-gradient(circle,var(--sun-soft) 0,transparent 68%);animation:drift2 22s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(120px,80px) scale(1.1)}}
+@keyframes drift2{to{transform:translate(-90px,-60px) scale(.92)}}
+.hero .wrap{position:relative;z-index:1}
+.hero h1 .ch{display:inline-block;animation:chr .9s cubic-bezier(.2,.9,.25,1.2) both;animation-delay:calc(var(--i) * 35ms + 120ms)}
+@keyframes chr{from{transform:translateY(.35em) rotate(6deg)}}
+.photo{transition:transform .5s cubic-bezier(.2,.8,.2,1);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.float-badge{position:absolute;left:-18px;top:28px;display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:12px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);font-size:.84rem;font-weight:600;animation:bob 5s ease-in-out infinite;z-index:2}
+.float-badge.b2{left:auto;right:-14px;top:auto;bottom:150px;animation-delay:-2.5s}
+.float-badge svg{width:16px;height:16px;color:var(--teal)}
+.float-badge.b2 svg{color:var(--sun)}
+@keyframes bob{50%{transform:translateY(-9px)}}
+@media (max-width:860px){.float-badge{left:10px;top:12px;font-size:.8rem}.float-badge.b2{left:10px;right:auto;top:auto;bottom:150px}}
+.route .traveler{fill:var(--sun)}
+/* marquee */
+.marquee{margin-top:40px;overflow:hidden;border-block:1px solid var(--line);padding-block:16px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:scrollx 38s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-family:var(--display);font-weight:700;font-size:clamp(1.1rem,2vw,1.5rem);letter-spacing:-.01em;color:var(--ink-2);padding-inline:26px;white-space:nowrap;display:inline-flex;align-items:center;gap:26px}
+.track span::after{content:"";width:8px;height:8px;border-radius:2px;background:var(--sun);transform:rotate(45deg)}
+.track span:nth-child(even){color:var(--muted);font-weight:600}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+/* timeline progress */
+.xp-fill{position:absolute;left:172px;top:32px;bottom:32px;width:2px;background:linear-gradient(var(--sun),var(--teal));transform-origin:top;transform:scaleY(0);z-index:0;border-radius:2px}
+.rel .body::before{transition:transform .4s cubic-bezier(.3,1.8,.5,1),background .3s;z-index:1}
+.rel.lit .body::before{transform:scale(1.35);background:var(--teal)}
+.rel.current.lit .body::before{background:var(--sun)}
+@media (max-width:760px){.xp-fill{left:4px;top:8px}}
+/* cards: spotlight */
+.card{position:relative}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--teal) 11%,transparent),transparent 60%);opacity:0;transition:opacity .35s}
+.card:hover::after{opacity:1}
+.method::after{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--sun) 16%,transparent),transparent 60%)}
+.proj{transform-style:preserve-3d}
+.proj.tilt{transition:transform .15s linear,box-shadow .3s,border-color .3s}
+/* buttons */
+.btn{position:relative;overflow:hidden}
+.btn.primary::before{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn.primary:hover::before{left:120%}
+.btn svg{transition:transform .3s}
+.btn:hover svg{transform:translateY(2px)}
+/* contact orbit */
+.contact::before{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;border:1px solid color-mix(in srgb,var(--bg) 14%,transparent);animation:spin 24s linear infinite reverse}
+/* counters */
+.num{font-variant-numeric:tabular-nums}
+
+/* reveal */
+.rv{transition:opacity .8s cubic-bezier(.2,.8,.2,1) var(--d,0ms),transform .9s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
+.rv.pre{opacity:0;transform:translateY(38px) scale(.985)}
+.head .eyebrow::before{transition:transform .8s cubic-bezier(.2,.8,.2,1) .2s;transform-origin:left}
+.head.pre .eyebrow::before{transform:scaleX(0)}
+.sk .chips span{transition:opacity .45s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i,0) * 35ms + 250ms)}
+.sk.pre .chips span{opacity:0;transform:scale(.7)}
+.caps span{transition:opacity .4s,transform .4s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i,0) * 60ms + 300ms)}
+.rel.pre .caps span{opacity:0;transform:translateY(8px)}
+.hero .in{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.hero .in.d1{animation-delay:.08s}.hero .in.d2{animation-delay:.16s}.hero .in.d3{animation-delay:.24s}.hero .in.d4{animation-delay:.32s}
+@keyframes rise{from{transform:translateY(18px)}}
+.route .path{stroke-dashoffset:0;animation:dash 30s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-180}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<div class="progress" id="progress"></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="Retour en haut"><span class="mark">EMB</span><span class="full">El Mokhtar Berrada</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#profil">Profil</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#projets">Projets</a>
+      <a href="#ia">IA</a>
+      <a href="#temoignages">Témoignages</a>
+      <a href="#formation">Formation</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="accueil">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orbs" aria-hidden="true"><i></i><i></i></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="status in"><span class="pulse"></span>Proxy Product Owner chez Servier · R&amp;D</span>
+          <h1 class="in d1">El Mokhtar<br><span class="l2">Berrada</span></h1>
+          <p class="lede in d2">Je traduis des besoins métier en produits digitaux utiles, pour
+            <span class="rot" id="rot" aria-live="off"><span class="on">la R&amp;D pharmaceutique</span><span>la Trade Finance</span><span>une banque centrale</span><span>des clients en Afrique de l'Ouest</span></span></p>
+          <p class="hero-sub in d3">Marocain-sénégalais, né à Casablanca, grandi à Tanger et à Dakar, installé à Paris. Backlog, IA, automatisation et UX au service des équipes qui utilisent vraiment les outils.</p>
+          <div class="cta in d4">
+            <a class="btn primary" href="#parcours">Voir mon parcours
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+            <a class="btn" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn</a>
+            <a class="btn" href="#contact">Me contacter</a>
+          </div>
+        </div>
+
+        <div class="portrait in d2">
+          <span class="float-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>PSPO I certifié</span>
+          <div class="photo"><img src="img/portrait.jpg" alt="Portrait d'El Mokhtar Berrada" width="574" height="766"></div>
+          <div class="route" aria-label="Trajectoire : Casablanca, Tanger, Dakar, Paris">
+            <svg viewBox="0 0 330 90" role="img" aria-hidden="true">
+              <path class="path" d="M20 50 C 50 60, 80 30, 110 42 S 180 64, 210 52 S 280 30, 310 40"/>
+              <circle class="dot" cx="20" cy="50" r="6"/>
+              <circle class="dot" cx="110" cy="42" r="6"/>
+              <circle class="dot" cx="210" cy="52" r="6"/>
+              <circle class="dot now" cx="310" cy="40" r="6.5"/>
+              <circle class="traveler" r="3.6"><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear" path="M20 50 C 50 60, 80 30, 110 42 S 180 64, 210 52 S 280 30, 310 40"/></circle>
+              <text x="6" y="73">Casablanca</text><text class="s" x="6" y="85">naissance</text>
+              <text x="110" y="15" text-anchor="middle">Tanger</text><text class="s" x="110" y="28" text-anchor="middle">enfance</text>
+              <text x="210" y="75" text-anchor="middle">Dakar</text><text class="s" x="210" y="87" text-anchor="middle">collège → 1ers postes</text>
+              <text x="324" y="13" text-anchor="end">Paris</text><text class="s" x="324" y="26" text-anchor="end">depuis 2024</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="tldr rv">
+        <div><div class="k"><span class="num" data-to="905">905</span><em>/990</em></div><div class="v">au TOEIC en avril 2026 : C1 en compréhension écrite, B2 en compréhension orale</div></div>
+        <div><div class="k">Finaliste</div><div class="v">parmi 80+ équipes au hackathon mondial GBIS « AI for Clients »</div></div>
+        <div><div class="k">−<span class="num" data-to="30">30</span><em>%</em></div><div class="v">de temps de traitement grâce à un outil de reporting automatisé que j'ai conçu</div></div>
+        <div><div class="k"><span class="num" data-to="4">4</span></div><div class="v">secteurs : pharma, banque d'investissement, banque centrale, startup tech</div></div>
+      </div>
+    </div>
+    <div class="marquee" aria-label="Organisations de mon parcours"><div class="track"><span>Servier</span><span>Société Générale CIB</span><span>Banque de France</span><span>NEOMA Business School</span><span>MBA ESG</span><span>Socium</span><span>Groupe ISM</span><span>PNUD</span><span>Scrum.org</span><span aria-hidden="true">Servier</span><span aria-hidden="true">Société Générale CIB</span><span aria-hidden="true">Banque de France</span><span aria-hidden="true">NEOMA Business School</span><span aria-hidden="true">MBA ESG</span><span aria-hidden="true">Socium</span><span aria-hidden="true">Groupe ISM</span><span aria-hidden="true">PNUD</span><span aria-hidden="true">Scrum.org</span></div></div>
+  </section>
+
+  <!-- PROFIL -->
+  <section class="block" id="profil">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Profil</span><h2>L'essentiel en 30 secondes</h2></div>
+        <p>Ce que je fais aujourd'hui, ce que j'apporte, et la manière dont je travaille avec les équipes métier et tech.</p>
+      </div>
+      <div class="brief">
+        <div class="leftcol">
+        <dl class="card facts rv">
+          <div class="fact"><dt>Aujourd'hui</dt><dd>Proxy Product Owner FederateS, Digital Factory de Servier<small>Alternance · sept. 2026 – sept. 2027 · Suresnes</small></dd></div>
+          <div class="fact"><dt>Formation</dt><dd>MSc Management de Projet, NEOMA Business School<small>Après un MBA Stratégie Digitale (MBA ESG) · RNCP niveau 7</small></dd></div>
+          <div class="fact"><dt>Spécialités</dt><dd>Backlog Build &amp; Run, User Stories, recette, IA et automatisation, UX/UI</dd></div>
+          <div class="fact"><dt>Certifié</dt><dd>Professional Scrum Product Owner I (PSPO I)<small>Scrum.org · avril 2026</small></dd></div>
+          <div class="fact"><dt>Langues</dt><dd>Français, anglais, arabe marocain, wolof<small>TOEIC 905/990 · avril 2026</small></dd></div>
+          <div class="fact"><dt>Basé à</dt><dd>Paris, Île-de-France</dd></div>
+        </dl>
+
+        </div>
+        <div class="ways">
+          <div class="card way rv">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8"/><path d="M16 5.5a3 3 0 0 1 0 5.6M18 14.6c1.5.6 2.5 2.1 2.8 4.4"/></svg></div>
+            <div><h3>Partir du métier</h3><p>Ateliers de cadrage, interviews et observation du process avant de parler solution. Chez Banque de France, le portail Case Management a été co-construit avec ses utilisateurs.</p></div>
+          </div>
+          <div class="card way rv">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+            <div><h3>Automatiser sans fragiliser</h3><p>IA et automatisation là où elles font gagner du temps, avec les contrôles qu'exige un environnement réglementé.</p></div>
+          </div>
+          <div class="card way rv">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/></svg></div>
+            <div><h3>Mesurer l'adoption</h3><p>Formation des utilisateurs, support après mise en production, suivi de l'usage. Un produit livré mais peu utilisé n'a pas rempli son rôle.</p></div>
+          </div>
+          <blockquote class="conv rv">
+            <p>« L'IA ne crée de valeur en Back Office que si elle s'intègre à un process existant sans en fragiliser la robustesse ni la conformité. »</p>
+            <cite>Ce que m'a appris le hackathon GBIS « AI for Clients »</cite>
+          </blockquote>
+        </div>
+      </div>
+      <div class="card story rv"><span class="eyebrow">Mon histoire</span><p>Je suis né à Casablanca et j'ai grandi à Tanger jusqu'à mes 12 ans. J'ai ensuite vécu au Sénégal, où j'ai fait mon collège, mon lycée et mes études supérieures, puis je suis arrivé à Paris en 2024.</p><p>Père marocain, mère sénégalaise : passer d'une culture à l'autre est un réflexe depuis l'enfance. C'est le même exercice que je fais chaque jour entre équipes métier, tech et utilisateurs, et avec des collègues en Europe, en Asie et en Amérique.</p></div>
+    </div>
+  </section>
+
+  <!-- PARCOURS -->
+  <section class="block" id="parcours">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Parcours</span><h2>Mon parcours, version par version</h2></div>
+        <p>Présenté comme les notes de version d'un produit : chaque étape a ajouté de nouvelles capacités à la précédente. La plus récente en premier.</p>
+      </div>
+
+      <div class="xp"><span class="xp-fill" aria-hidden="true"></span>
+        <!-- v5 Servier -->
+        <article class="rel current rv">
+          <div class="when"><span class="ver">v5 · actuelle</span><span class="d">Sept. 2026 –<br>sept. 2027</span></div>
+          <div class="card body">
+            <div class="rhead"><h3>Proxy Product Owner · Digital Solutions R&amp;D</h3></div>
+            <div class="org"><a href="https://servier.com" target="_blank" rel="noopener">Servier</a><span class="sep"></span><span>Digital Factory (Digital, Data, IA &amp; SI)</span><span class="sep"></span><span>Suresnes</span><span class="tag">Alternance</span></div>
+            <p class="ctx">Groupe pharmaceutique international et indépendant, gouverné par une Fondation. Je travaille sur <b>FederateS</b>, le cockpit digital qui consolide les projets thérapeutiques du Groupe pour les équipes R&amp;D, en lien direct avec la Global Digital Product Manager R&amp;D.</p>
+            <ul class="pts">
+              <li>Collecte et clarification des besoins avec les équipes R&amp;D, animation des <b>ateliers de cadrage fonctionnel</b></li>
+              <li>Rédaction des <b>User Stories</b> et critères d'acceptation, contribution à la <b>priorisation du backlog Build &amp; Run</b> (fonctionnalités, développements IA, expérience utilisateur)</li>
+              <li>Rituels agiles, suivi des développements avec l'équipe tech, recette fonctionnelle</li>
+              <li>Suivi de l'<b>adoption utilisateurs</b> avec les équipes change management, supports de reporting</li>
+            </ul>
+            <div class="caps"><span class="lbl">+ capacités</span><span>Produit à l'échelle d'une R&amp;D mondiale</span><span>Build &amp; Run</span><span>Adoption &amp; change</span></div>
+          </div>
+        </article>
+
+        <!-- v4 SG CIB -->
+        <article class="rel rv">
+          <div class="when"><span class="ver">v4</span><span class="d">Août 2025 –<br>sept. 2026</span></div>
+          <div class="card body">
+            <div class="rhead"><h3>Assistant Product Owner IA · Trade Finance</h3></div>
+            <div class="org"><a href="https://wholesale.banking.societegenerale.com" target="_blank" rel="noopener">Société Générale CIB</a><span class="sep"></span><span>La Défense</span><span class="tag">Alternance</span></div>
+            <p class="ctx">Équipe projet du pôle Trade &amp; Commodity Finance (6 Product Owners, 1 Program Manager), au service des équipes Back et Middle Office de Paris, Genève et New York.</p>
+            <ul class="pts">
+              <li>Pilotage et amélioration continue des logiciels internes Commodity Trade Finance pour <b>200+ utilisateurs</b> en Europe, Asie et Amériques</li>
+              <li>Conception de solutions d'<b>IA et d'automatisation</b> pour les équipes BO/MO (100+ collaborateurs)</li>
+              <li><b>Citizen Developer</b> : outil de reporting Komgo vs AllTRA, <b>−30 % de temps de traitement</b></li>
+              <li>Prompts <b>Copilot</b> pour générer les documents récurrents du Middle Office, étendus à l'équipe de Bangalore, et mini-application navigateur qui remplit automatiquement des formulaires pour des utilisateurs non techniques</li>
+              <li><b>Finaliste du hackathon mondial GBIS « AI for Clients »</b> (80+ équipes) avec un agent IA pour les Lettres de Crédit</li>
+            </ul>
+            <div class="more" id="m-sg"><div>
+              <ul class="pts">
+                <li>Co-construction avec un collègue IT d'un cas d'usage d'<b>automatisation de l'assignation des tâches</b>, de l'idée au prototype fonctionnel</li>
+                <li>Organisation et pilotage des tests <b>UAT</b> du logiciel Financing Doc Store (migration FDC → Azure) : scénarios, suivi des anomalies, accompagnement au changement</li>
+                <li>Outil de consolidation des données de crédit (Facility, Outstanding &amp; Collateral) sous Excel/Power Query : fusion TOMCAT/CAPTAIN, mapping, contrôles de cohérence, reporting automatisé pour le Middle Office Paris</li>
+                <li>Analyse des données Digitrade et reporting multi-régions (New York, Paris, Hong Kong, Singapour, Genève)</li>
+                <li>Contribution à l'organisation des <b>Tech &amp; AI Days 2026</b>, événement Groupe sur l'IA, la data et la transformation digitale</li>
+                <li>30+ formations internes validées : data, gestion de projet, BCBS 239, LCB-FT, sanctions internationales, RGPD, sécurité de l'information, IA</li>
+              </ul>
+            </div></div>
+            <button class="toggle" aria-expanded="false" aria-controls="m-sg">Tout le détail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="caps"><span class="lbl">+ capacités</span><span>IA &amp; automatisation</span><span>Power Platform · Copilot</span><span>Recette UAT</span><span>Trade Finance</span></div>
+          </div>
+        </article>
+
+        <!-- v3 BdF -->
+        <article class="rel rv">
+          <div class="when"><span class="ver">v3</span><span class="d">Janv. –<br>juil. 2025</span></div>
+          <div class="card body">
+            <div class="rhead"><h3>Chargé de Projet Digital · DGSI Case Management</h3></div>
+            <div class="org"><a href="https://www.banque-france.fr" target="_blank" rel="noopener">Banque de France</a><span class="sep"></span><span>Paris</span><span class="tag">Stage · 7 mois</span></div>
+            <p class="ctx">Équipe agile de 14 personnes (Product Manager, Scrum Master, architectes, Business Analysts) sur des produits construits sur la plateforme PEGA.</p>
+            <ul class="pts">
+              <li><b>10+ User Stories</b> rédigées et <b>50+ rituels agiles</b> (Daily, Sprint Review, Rétrospective)</li>
+              <li>Refonte <b>UX/UI du portail interne</b> Case Management : analyse des besoins, <b>10 écrans prototypés sur Figma</b>, suivi du développement</li>
+              <li>Ateliers participatifs centrés utilisateur pour co-construire le contenu du portail</li>
+            </ul>
+            <div class="more" id="m-bdf"><div>
+              <ul class="pts">
+                <li>Formulaire Jira automatisé pour la création de tickets : délais réduits, demandes centralisées</li>
+                <li>Coordination du projet vidéo OPECA Rejets (Case/RPA – TOPAZE) : script, intervenants, postproduction, diffusion</li>
+                <li>Dossier stratégique de 10+ pages sur le rôle du Product Owner dans les projets PEGA</li>
+                <li>Intégration des exigences de cybersécurité et de conformité bancaire, formation des utilisateurs et support après mise en production</li>
+              </ul>
+            </div></div>
+            <button class="toggle" aria-expanded="false" aria-controls="m-bdf">Tout le détail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="caps"><span class="lbl">+ capacités</span><span>Scrum</span><span>User Stories</span><span>UX/UI Figma</span><span>PEGA</span></div>
+          </div>
+        </article>
+
+        <!-- v2 Socium -->
+        <article class="rel rv">
+          <div class="when"><span class="ver">v2</span><span class="d">Nov. 2022 –<br>nov. 2023</span></div>
+          <div class="card body">
+            <div class="rhead"><h3>Stagiaire puis Chargé de Projet Multimédia</h3></div>
+            <div class="org"><a href="http://socium.link" target="_blank" rel="noopener">Socium</a><span class="sep"></span><span>Dakar, Sénégal</span><span class="tag">Stage, puis temps plein</span></div>
+            <p class="ctx">Startup qui développe des solutions RH (SIRH) pour les entreprises africaines, avec des clients dans 15 pays. Recruté en stage pendant ma 3<sup>e</sup> année de Licence, puis embauché à temps plein à la fin de mes études.</p>
+            <ul class="pts">
+              <li>Coordination de projets multimédia pour de grands comptes : <b>Orange, Auchan, Mazars, Heetch, Free</b></li>
+              <li>Contenus adaptés à 5 plateformes (YouTube, Instagram, LinkedIn, Facebook, X) : <b>+30 % d'engagement</b> en moyenne</li>
+              <li>Participation à la stratégie marketing et commerciale, planning éditorial et reporting</li>
+            </ul>
+            <div class="caps"><span class="lbl">+ capacités</span><span>Gestion de projets clients</span><span>Stratégie de contenu</span><span>Suite Adobe</span></div>
+          </div>
+        </article>
+
+        <!-- v1 ISM -->
+        <article class="rel rv">
+          <div class="when"><span class="ver">v1</span><span class="d">Sept. 2021 –<br>août 2023</span></div>
+          <div class="card body">
+            <div class="rhead"><h3>Chargé de Communication Digitale, promu Coach</h3></div>
+            <div class="org"><a href="https://www.groupeism.sn" target="_blank" rel="noopener">Groupe ISM</a><span class="sep"></span><span>Soft Skills Academy</span><span class="sep"></span><span>Dakar</span><span class="tag">En parallèle des études</span></div>
+            <p class="ctx">Recruté par la Soft Skills Academy du Groupe ISM en 2<sup>e</sup> année, promu Coach en communication digitale en 3<sup>e</sup> année. La même année, j'ai été nommé <b>chef du pôle communication de l'ISM Club IT</b>.</p>
+            <ul class="pts">
+              <li>Organisation d'événements réunissant <b>5 000+ étudiants</b> (Welcoming Day, African Genius Festival, mois thématiques)</li>
+              <li>Animation de débats devant 20 à 50 étudiants, <b>encadrement d'équipes de 10+ bénévoles</b></li>
+              <li>Plannings éditoriaux multicanaux, campagnes, photo et vidéo (300+ photos traitées par événement)</li>
+            </ul>
+            <div class="caps"><span class="lbl">+ capacités</span><span>Leadership d'équipe</span><span>Prise de parole</span><span>Communication digitale</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section class="block" id="projets">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Projets</span><h2>Ce que j'ai conçu</h2></div>
+        <p>Hackathons, projets d'école et prototypes. Cliquez sur un projet pour voir le contexte, mon rôle et les livrables.</p>
+      </div>
+      <div class="projects">
+        <button class="card proj big rv" data-p="p-agent">
+          <div class="vis">
+            <div class="flow" aria-hidden="true">
+              <div class="n">Lettre de crédit<small>document non structuré</small></div>
+              <svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <div class="n ai">Agent IA<small>Power Automate</small></div>
+              <svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <div class="n">Contrôles<small>validation Back Office</small></div>
+            </div>
+          </div>
+          <div class="pb">
+            <span class="ctx2">Société Générale CIB · oct. – nov. 2025</span>
+            <h3>Agent IA pour le Back Office Trade Finance</h3>
+            <p>Un agent qui automatise le traitement des Lettres de Crédit tout en gardant le niveau de contrôle d'un process réglementé.</p>
+            <div class="foot"><span class="award">Finaliste · 80+ équipes</span><span class="open-lbl">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
+        <button class="card proj big rv" data-p="p-yema">
+          <div class="vis"><img src="img/yema-thumb.jpg" alt="Maquettes de l'application Yema Watch Club" loading="lazy"></div>
+          <div class="pb">
+            <span class="ctx2">MBA ESG · Mobile Apps · mai 2026</span>
+            <h3>Yema Watch Club</h3>
+            <p>Application mobile premium pour l'horloger français Yema : essayage en réalité augmentée, collection et club membres.</p>
+            <div class="foot"><span class="award">PO · UX/UI · Chef de projet</span><span class="open-lbl">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
+        <button class="card proj rv" data-p="p-focal">
+          <div class="vis"><img src="img/focal.jpg" alt="Matériel photo sur une étagère" loading="lazy"></div>
+          <div class="pb">
+            <span class="ctx2">MBA ESG · challenge de fin d'études · sept. 2026</span>
+            <h3>Focal-Shift</h3>
+            <p>Marketplace d'achat et de location de matériel photo et vidéo. J'ai construit le prototype fonctionnel.</p>
+            <div class="foot"><span class="award">Prototype &amp; RGPD</span><span class="open-lbl">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
+        <button class="card proj rv" data-p="p-veille">
+          <div class="vis"><div class="typo veille"><b>Veille</b><i>IA · Back Office · Trade Finance</i></div></div>
+          <div class="pb">
+            <span class="ctx2">MBA ESG · juin 2026</span>
+            <h3>Rapport de veille stratégique</h3>
+            <p>Comment l'IA transforme le Back Office Trade Finance : tendances, acteurs et recommandations.</p>
+            <div class="foot"><span class="open-lbl">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
+        <button class="card proj rv" data-p="p-baykat">
+          <div class="vis"><div class="typo baykat"><b>Baykat</b><i>financement participatif agricole · Sénégal</i></div></div>
+          <div class="pb">
+            <span class="ctx2">Groupe ISM · projet de fin d'études · 2023</span>
+            <h3>Baykat</h3>
+            <p>Plateforme qui relie agriculteurs sénégalais et investisseurs locaux ou de la diaspora.</p>
+            <div class="foot"><span class="open-lbl">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
+        <button class="card proj rv" data-p="p-jubox">
+          <div class="vis"><div class="typo jubox"><b>JUBOX</b><i>jeux éducatifs pour enfants</i></div></div>
+          <div class="pb">
+            <span class="ctx2">Global Entrepreneurship Week · nov. 2022</span>
+            <h3>JUBOX</h3>
+            <p>Plateforme de jeux éducatifs pilotée en hackathon, pitchée devant un jury.</p>
+            <div class="foot"><span class="award">Top 10 · 100+ projets</span><span class="open-lbl">Voir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+      </div>
+
+      <!-- project details -->
+      <div hidden>
+        <div id="p-agent" data-k="Société Générale CIB · Hackathon GBIS « AI for Clients »">
+          <h3>Agent IA pour le Back Office Trade Finance</h3>
+          <div class="meta"><span class="award">Finaliste parmi 80+ équipes</span><span class="tag">Équipe de 5</span><span class="tag">Oct. – nov. 2025</span></div>
+          <p>Hackathon mondial de Société Générale dédié à l'usage de l'IA au service des clients et des équipes internes. Notre équipe a conçu un agent IA qui automatise des tâches Back Office sur les <b>Lettres de Crédit</b>, orchestré via Power Automate. L'objectif : réduire le temps de traitement manuel de documents non structurés sans baisser le niveau de contrôle exigé sur un process réglementé.</p>
+          <h4>Mon rôle</h4>
+          <p>Structuration fonctionnelle du besoin : cadrage du cas d'usage, priorisation des tâches à automatiser selon leur valeur et leur risque, articulation entre la logique métier Trade Finance et la faisabilité technique.</p>
+          <h4>Outils</h4>
+          <div class="meta"><span class="tag">Power Automate</span><span class="tag">Power Platform</span><span class="tag">IA générative</span></div>
+          <h4>Ce que j'en retiens</h4>
+          <p>L'IA ne crée de valeur en Back Office que si elle s'intègre à un process existant sans en fragiliser la robustesse ni la conformité. C'est la règle que j'applique aujourd'hui comme Product Owner.</p>
+        </div>
+        <div id="p-yema" data-k="MBA ESG Paris · Cours Mobile Apps · Travail final">
+          <h3>Yema Watch Club</h3>
+          <div class="meta"><span class="award">Product Owner · UX/UI Designer · Chef de projet</span><span class="tag">Équipe de 4</span><span class="tag">Mai 2026</span></div>
+          <p>Application mobile premium (iOS et Android) pour Yema, horloger français fondé en 1948 à Besançon. Le constat : le client du luxe veut vivre la marque avant d'acheter, alors que le digital de Yema reste surtout transactionnel. La réponse : un showroom digital avec <b>essayage en réalité augmentée</b>, gestion de collection avec preuve d'authenticité, et un <b>club membres</b> avec conciergerie.</p>
+          <h4>Livrables</h4>
+          <p>Étude de marché et benchmark concurrentiel, 3 personas, fonctionnalités V1, parcours utilisateur, cahier des charges (arbitrage natif contre React Native), maquettes complètes de l'application, MVP et plan de tests utilisateurs, fiche store et stratégie ASO, plan de déploiement.</p>
+          <h4>Méthode</h4>
+          <div class="meta"><span class="tag">Sprints de 2 semaines</span><span class="tag">Figma</span><span class="tag">Jira</span><span class="tag">Miro</span><span class="tag">GitHub</span></div>
+          <img src="img/yema-screens-1.jpg" alt="Écrans onboarding et catalogue de Yema Watch Club" loading="lazy">
+          <img src="img/yema-screens-2.jpg" alt="Écrans essayage AR, collection, club VIP et profil" loading="lazy">
+        </div>
+        <div id="p-focal" data-k="MBA ESG · Challenge professionnel de fin d'études">
+          <h3>Focal-Shift</h3>
+          <div class="meta"><span class="award">Mon rôle : prototype, RGPD et tagging</span><span class="tag">Hackathon de 3 jours</span><span class="tag">Septembre 2026</span></div>
+          <p>Mon challenge professionnel de fin d'études : un hackathon de 3 jours qui valide mon diplôme du MBA ESG et le titre RNCP niveau 7 « Manager de l'Innovation Numérique ».</p>
+          <p>Marketplace pour acheter, louer ou proposer du matériel photo et vidéo. Au-delà du catalogue, deux idées différenciantes : la <b>demande inversée</b> (l'utilisateur publie son besoin, les propriétaires lui envoient une offre de kit) et un parcours <b>inspiration</b> (choisir un rendu visuel, obtenir un kit et un budget).</p>
+          <h4>Ce qui est démontrable</h4>
+          <p>Parcours achat, location avec devis instantané et états des lieux, estimation de prix expliquée, conseil par questionnaire, espace compte, et un back-office de modération avec gestion des litiges et journal d'audit. User stories priorisées (P0, P1) par profil, RGPD et consentement intégrés, API REST documentée.</p>
+          <h4>Mon rôle</h4>
+          <p>Dans une équipe de consultants, j'avais la charge du prototype, de la conformité RGPD (consentement, cookies, suppression de compte) et du plan de tagging. J'ai développé le POC avec Claude comme copilote de développement, puis rédigé le dossier qui justifie les choix techniques.</p>
+          <h4>Stack</h4>
+          <div class="meta"><span class="tag">PHP 8</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">API REST · OpenAPI</span></div>
+        </div>
+        <div id="p-veille" data-k="MBA ESG · Certification RNCP 40601 · Bloc 1">
+          <h3>Rapport de veille stratégique</h3>
+          <div class="meta"><span class="tag">Rapport de 14 pages</span><span class="tag">Présentation de 10 slides</span><span class="tag">Juin – juillet 2026</span></div>
+          <p>Veille sur l'automatisation par l'IA des opérations Back Office en Trade Finance, le domaine que je pratiquais au quotidien chez SG CIB (Komgo, AllTRA, Digitrade, Power Automate).</p>
+          <h4>Contenu</h4>
+          <p>Quatre grandes tendances analysées comme signaux, benchmark des banques (HSBC, BNP Paribas, Standard Chartered, DBS) et des éditeurs (Finastra, Surecomp, Cleareye.ai), analyses PESTEL et SWOT, trois recommandations stratégiques et leurs modalités de diffusion, infographies de données de marché sourcées.</p>
+          <h4>Méthode</h4>
+          <p>Sources académiques, cabinets d'analyse et annonces d'éditeurs, croisées puis synthétisées avec l'aide de Claude. Chaque chiffre du rapport renvoie à sa source.</p>
+        </div>
+        <div id="p-baykat" data-k="Groupe ISM · Projet de fin d'études · Licence">
+          <h3>Baykat</h3>
+          <div class="meta"><span class="tag">Janv. – sept. 2023</span><span class="tag">Livrable de 98 pages</span></div>
+          <p>Plateforme d'investissement participatif dans l'agriculture sénégalaise. Elle met en relation des agriculteurs qui cherchent un financement avec des investisseurs locaux et de la diaspora qui veulent soutenir une campagne agricole avec un retour sur investissement.</p>
+          <h4>Mon rôle</h4>
+          <p>Pilotage du projet de bout en bout : étude de marché, business model, benchmark, analyse des risques, personas, définition des fonctionnalités clés, UX/UI, stratégie de lancement, structure de coûts et perspectives d'expansion en Afrique. Prototype d'application mobile : investissement, suivi de projet, dons, messagerie, vente directe.</p>
+          <h4>Outils</h4>
+          <div class="meta"><span class="tag">Figma</span><span class="tag">Trello</span><span class="tag">Google Workspace</span><span class="tag">Agile</span></div>
+        </div>
+        <div id="p-jubox" data-k="Hackathon · Global Entrepreneurship Week 2022">
+          <h3>JUBOX</h3>
+          <div class="meta"><span class="award">Top 10 sur 100+ projets</span><span class="tag">Novembre 2022</span></div>
+          <p>Plateforme d'apprentissage ludique pour enfants, développée en hackathon pendant ma deuxième année de Licence. J'ai piloté le projet et pitché devant le jury.</p>
+          <h4>Mon rôle</h4>
+          <p>Gestion de projet, maquettes et prototypes de deux jeux : <b>Anima</b> (reconnaître les bruits d'animaux) et <b>Yaram</b> (apprendre les parties du corps, « yaram » signifie « corps » en wolof).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IA -->
+  <section class="block" id="ia">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">IA au quotidien</span><h2>Comment je travaille avec l'IA</h2></div>
+        <p>L'IA générative est un outil de travail quotidien : Copilot et Power Automate en entreprise, Claude pour mes projets depuis mars 2026. Voici ce que j'ai produit avec, et la règle que je m'applique.</p>
+      </div>
+      <div class="ai-grid">
+        <div class="card method rv">
+          <h3>Ma méthode</h3>
+          <p>L'IA accélère la production. Le cadrage et la validation restent mon travail.</p>
+          <ol class="steps">
+            <li><div><b>Cadrer</b><span>Je définis le besoin, le périmètre et ce qu'un bon résultat doit contenir avant de demander quoi que ce soit.</span></div></li>
+            <li><div><b>Produire et trier</b><span>J'itère avec l'outil, puis je garde ou j'écarte chaque proposition selon ma connaissance du métier.</span></div></li>
+            <li><div><b>Vérifier</b><span>Chaque chiffre a une source, chaque livrable est relu. Tout ce que je présente, je peux le défendre en entretien.</span></div></li>
+          </ol>
+        </div>
+        <div class="card made rv">
+          <h3><span class="pill">Avec Claude</span>Réalisations</h3>
+          <div class="mk"><b>Prototype Focal-Shift</b><time>sept. 2026</time><span>Site PHP/MySQL fonctionnel et API REST documentée, réalisés en 3 jours pour mon challenge de fin d'études au MBA ESG</span></div>
+          <div class="mk"><b>Ce site</b><time>sept. 2026</time><span>Conception, contenu vérifié à partir de mes documents et recommandations, développement</span></div>
+          <div class="mk"><b>Analyse de données pour une simulation PMO</b><time>sept. 2026</time><span>Régressions multiples pour arbitrer un budget entre leviers de performance projet, cours de méthodes quantitatives NEOMA</span></div>
+          <div class="mk"><b>Rapport de veille IA et Trade Finance</b><time>juin 2026</time><span>Rapport de 14 pages avec infographies et présentation de 10 slides</span></div>
+          <div class="mk"><b>Yema Watch Club</b><time>avr. – mai 2026</time><span>Cahier des charges, parcours utilisateur (39 écrans, 5 pop-ups) et maquettes de l'application</span></div>
+          <h3><span class="pill">En entreprise</span>Société Générale CIB</h3>
+          <div class="mk"><b>Copilot et Power Automate</b><time>2025 – 2026</time><span>Prompts de génération de documents Middle Office, mini-application de remplissage de formulaires, agent IA finaliste du hackathon GBIS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES -->
+  <section class="block" id="temoignages">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Témoignages</span><h2>Ce qu'en disent ceux qui ont travaillé avec moi</h2></div>
+        <p>Extraits de recommandations publiées sur LinkedIn par deux managers directs, un collègue Product Owner et une enseignante. Chaque auteur est joignable via son profil.</p>
+      </div>
+      <div class="voices rv">
+        <div class="who" role="tablist" aria-label="Auteurs des recommandations">
+          <button role="tab" id="tab-0" aria-selected="true" aria-controls="v-0"><img src="img/t-fred.jpg" alt=""><span><b>Fred Yoba</b><small>Manager direct · SG CIB</small></span></button>
+          <button role="tab" id="tab-1" aria-selected="false" aria-controls="v-1" tabindex="-1"><img src="img/t-jd.jpg" alt=""><span><b>Jean-Daniel O. Afouda</b><small>Product Owner Data &amp; IA · SG CIB</small></span></button>
+          <button role="tab" id="tab-2" aria-selected="false" aria-controls="v-2" tabindex="-1"><img src="img/t-marie.jpg" alt=""><span><b>Marie Bitschené</b><small>Manager directe · Banque de France</small></span></button>
+          <button role="tab" id="tab-3" aria-selected="false" aria-controls="v-3" tabindex="-1"><img src="img/t-marina.jpg" alt=""><span><b>Marina Ferreira Duarte</b><small>Enseignante · Design Thinking &amp; UX</small></span></button>
+        </div>
+        <div class="card stage">
+          <span class="q" aria-hidden="true">“</span>
+          <div class="panels">
+          <div class="panel show" role="tabpanel" id="v-0" aria-labelledby="tab-0">
+            <span class="rel2">Mon responsable direct chez Société Générale CIB</span>
+            <blockquote lang="en"><p>“I highly recommend [El Mokhtar], who has shown a natural appetite for the Product Owner role and a strong interest in AI-related topics. […] He greatly supported our users by helping them automate their tasks, proposing and demonstrating AI‑powered solutions with confidence and clarity.”</p><p>“During our hackathon, he was a real driving force, bringing ideas and contributing actively.”</p></blockquote>
+            <div class="sig"><img src="img/t-fred.jpg" alt="Photo de Fred Yoba"><div><b>Fred Yoba</b><small>Product Owner · Software Project Management · sept. 2026</small></div><a class="btn" href="https://www.linkedin.com/in/fred-yoba-b475ab28" target="_blank" rel="noopener">Voir son profil LinkedIn</a></div>
+            <div class="lang">Recommandation rédigée en anglais</div>
+          </div>
+          <div class="panel" role="tabpanel" id="v-1" aria-labelledby="tab-1" aria-hidden="true">
+            <span class="rel2">Collègue au pôle Trade Finance, autre équipe</span>
+            <blockquote><p>« Mokhtar se distingue par un profil très complet, qui allie une vraie solidité technique à une forte approche produit et une compréhension fine des besoins métier. En tant que Product Owner, il sait structurer les sujets, clarifier les enjeux, prioriser efficacement et faire avancer les échanges dans le bon sens. »</p><p>« J'ai particulièrement apprécié sa capacité à naviguer avec aisance entre les aspects fonctionnels, techniques et opérationnels. »</p></blockquote>
+            <div class="sig"><img src="img/t-jd.jpg" alt="Photo de Jean-Daniel O. Afouda"><div><b>Jean-Daniel O. Afouda</b><small>Product Owner Data &amp; IA · AI Agent Process Manager · SG CIB · mai 2026</small></div><a class="btn" href="https://www.linkedin.com/in/jean-daniel-o-afouda-9a5400a7" target="_blank" rel="noopener">Voir son profil LinkedIn</a></div>
+          </div>
+          <div class="panel" role="tabpanel" id="v-2" aria-labelledby="tab-2" aria-hidden="true">
+            <span class="rel2">Ma responsable directe à la Banque de France</span>
+            <blockquote><p>« Lors de son stage au sein de la Banque de France, El Mokhtar a démontré sa compréhension des enjeux numériques, sa capacité à analyser les besoins ainsi que proposer et mettre en œuvre des solutions pertinentes. […] La singularité de son parcours lui a apporté sa curiosité, sa polyvalence et sa proactivité. »</p><p>« Sa créativité, sa maturité et son esprit d'équipe ont fait de El Mokhtar un atout précieux pour notre équipe ! »</p></blockquote>
+            <div class="sig"><img src="img/t-marie.jpg" alt="Photo de Marie Bitschené"><div><b>Marie Bitschené</b><small>Product Manager · avril 2025</small></div><a class="btn" href="https://www.linkedin.com/in/mariebitschene" target="_blank" rel="noopener">Voir son profil LinkedIn</a></div>
+          </div>
+          <div class="panel" role="tabpanel" id="v-3" aria-labelledby="tab-3" aria-hidden="true">
+            <span class="rel2">Mon enseignante en Design Thinking et méthodes UX/UI</span>
+            <blockquote><p>« Très attentif aux détails, c'est un professionnel studieux qui a de belles années devant lui. J'ai été très impressionnée par la qualité de ses travaux en UX/UI. Je recommande donc grandement El Mokhtar. »</p></blockquote>
+            <div class="sig"><img src="img/t-marina.jpg" alt="Photo de Marina Ferreira Duarte"><div><b>Marina Ferreira Duarte</b><small>Coach Design Thinking &amp; Product Designer · avril 2025</small></div><a class="btn" href="https://www.linkedin.com/in/marina-fd" target="_blank" rel="noopener">Voir son profil LinkedIn</a></div>
+          </div>
+          </div>
+          <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <p class="also" style="margin-top:14px">Recommandations complètes sur <a href="https://www.linkedin.com/in/elmokhtar-berrada/details/recommendations/" target="_blank" rel="noopener" style="color:var(--teal);font-weight:600">mon profil LinkedIn</a>.</p>
+    </div>
+  </section>
+
+  <!-- FORMATION -->
+  <section class="block" id="formation">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Formation</span><h2>Double compétence produit et projet</h2></div>
+        <p>Une école d'ingénieurs à Dakar pour le socle informatique et la gestion de projet digital, puis deux programmes en alternance à Paris, tous deux certifiés RNCP niveau 7.</p>
+      </div>
+      <div class="edu">
+        <article class="card school now rv">
+          <span class="yr">2026 – 2027 · Paris · en cours</span>
+          <h3>MSc Management de Projet</h3>
+          <div class="sn"><a href="https://neoma-bs.fr" target="_blank" rel="noopener">NEOMA Business School</a></div>
+          <span class="rncp">RNCP 7 · Manager en projets internationaux</span>
+          <p>Pilotage de projets complexes et internationaux, approche Waterfall (PMI, PRINCE2) et Agile (Scrum), gestion des risques, des coûts et des ressources, management interculturel.</p>
+        </article>
+        <article class="card school rv">
+          <span class="yr">2024 – 2026 · Paris · alternance</span>
+          <h3>MBA Expert en Stratégie Digitale</h3>
+          <div class="sn"><a href="https://www.mba-esg.com" target="_blank" rel="noopener">MBA ESG</a></div>
+          <span class="rncp">RNCP 7 · Manager de l'Innovation Numérique</span>
+          <p>Stratégie digitale et innovation, intégration de l'IA, CRM et données client, product management. Première année validée avec mention Bien.</p>
+          <div class="grades" aria-label="Quelques résultats de première année">
+            <div>Webdesign UI/UX · Figma<b>19,5/20</b></div>
+            <div>Algorithmique avec Python<b>18,7/20</b></div>
+            <div>IoT, Chatbot &amp; IA<b>17,5/20</b></div>
+          </div>
+        </article>
+        <article class="card school rv">
+          <span class="yr">2020 – 2023 · Dakar</span>
+          <h3>Licence Informatique Appliquée à la Gestion des Entreprises</h3>
+          <div class="sn"><a href="https://www.groupeism.sn" target="_blank" rel="noopener">Groupe ISM</a> · École d'ingénieurs</div>
+          <span class="rncp">Bac+3 · option Gestion de Projet Digital</span>
+          <p>Groupe pionnier de l'enseignement supérieur en Afrique de l'Ouest, membre du réseau Galileo Global Education. Projet de fin d'études Baykat, Top 10 du hackathon GEW 2022, chef du pôle communication de l'ISM Club IT.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="block" id="certifications">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Certifications</span><h2>Certifié et vérifiable</h2></div>
+        <p>Cliquez sur une miniature pour afficher le certificat en grand, ou sur un lien pour le vérifier auprès de l'organisme.</p>
+      </div>
+      <div class="certs">
+        <div class="card cert key rv"><button class="th" type="button" data-img="img/c-pspo.jpg" data-cap="Professional Scrum Product Owner I · Scrum.org · 25 avril 2026" aria-label="Agrandir le certificat Professional Scrum Product Owner I"><img src="img/c-pspo.jpg" alt="" loading="lazy"></button><span class="ct"><b>Professional Scrum Product Owner I</b><small>Scrum.org · avril 2026</small><span class="vf"><a href="https://scrum.org/certificates/1315226" target="_blank" rel="noopener">Scrum.org <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a href="https://www.credly.com/badges/ede62ec0-d1aa-4aaa-98c6-04b83ef79f39/public_url" target="_blank" rel="noopener">Credly <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></span></span></div>
+        <div class="card cert rv"><button class="th" type="button" data-img="img/c-sfc.jpg" data-cap="Scrum Fundamentals Certified · SCRUMstudy · 30 janvier 2025" aria-label="Agrandir le certificat Scrum Fundamentals Certified"><img src="img/c-sfc.jpg" alt="" loading="lazy"></button><span class="ct"><b>Scrum Fundamentals Certified</b><small>SCRUMstudy · janvier 2025</small><span class="vf"><span class="nolink">Certificat ci-contre</span></span></span></div>
+        <div class="card cert rv"><button class="th" type="button" data-img="img/c-passport.jpg" data-cap="Project Advanced Passport · Société Générale × Coorpacademy · 30 septembre 2025" aria-label="Agrandir le certificat Project Advanced Passport"><img src="img/c-passport.jpg" alt="" loading="lazy"></button><span class="ct"><b>Project Advanced Passport</b><small>Société Générale · septembre 2025</small><span class="vf"><span class="nolink">Certificat ci-contre</span></span></span></div>
+        <div class="card cert rv"><button class="th" type="button" data-img="img/c-handi.jpg" data-cap="Label Handimanagement · Companieros × MBA ESG · 23 juillet 2026" aria-label="Agrandir le certificat Label Handimanagement"><img src="img/c-handi.jpg" alt="" loading="lazy"></button><span class="ct"><b>Label Handimanagement</b><small>Companieros × MBA ESG · juillet 2026</small><span class="vf"><span class="nolink">Certificat ci-contre</span></span></span></div>
+        <div class="card cert rv"><button class="th" type="button" data-img="img/c-ga.jpg" data-cap="Certification Google Analytics · Google · décembre 2025" aria-label="Agrandir le certificat Google Analytics"><img src="img/c-ga.jpg" alt="" loading="lazy"></button><span class="ct"><b>Google Analytics</b><small>Google · décembre 2025</small><span class="vf"><a href="https://skillshop.credential.net/a56c94ac-31a1-4987-8ab4-f5d9a0a9a92f#acc.ia8F5eMr" target="_blank" rel="noopener">Vérifier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></span></span></div>
+        <div class="card cert rv"><button class="th" type="button" data-img="img/c-gads.jpg" data-cap="Certification Google Ads sur le Réseau de Recherche · Google · novembre 2025" aria-label="Agrandir le certificat Google Ads Search"><img src="img/c-gads.jpg" alt="" loading="lazy"></button><span class="ct"><b>Google Ads Search</b><small>Google · novembre 2025</small><span class="vf"><a href="https://skillshop.credential.net/b02a2168-d444-4a71-8c26-9c2f2db38956#acc.kMcCqrNf" target="_blank" rel="noopener">Vérifier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></span></span></div>
+      </div>
+      <div class="more-certs rv">
+        <span class="lbl">Aussi</span>
+        <a href="https://www.etsglobal.org/fr/en/digital-score-report/E430595A59037F8EA04AFA1673F43F11EB4D30E62DAF3528D4C0657716FF9C7AQjlQRnF3WndpU1dsM0Vqc2hSQk1zSEZIK0pCaHhyOU5NTXBrSThmOGJEMVBHQmEr" target="_blank" rel="noopener"><b>TOEIC 905/990</b><small>ETS · avril 2026</small><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="https://www.credly.com/badges/d1a62d89-7d0a-42f5-9951-c7e7215e118a/public_url" target="_blank" rel="noopener"><b>Product Management Basics</b><small>Pendo · 2025</small><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="https://www.linkedin.com/learning/certificates/dffedca4a00d6897c17f49f10fbc3d81ccae065b851adaeef1704003a8ce9f99" target="_blank" rel="noopener"><b>L'IA pour les leaders et les managers</b><small>LinkedIn Learning · janv. 2026</small><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <span class="static"><b>BCBS 239</b><small>Qualité des données de risque · Société Générale</small></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCES + ENGAGEMENTS -->
+  <section class="block" id="competences">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="eyebrow">Compétences</span><h2>Ma boîte à outils</h2></div>
+        <p>Les méthodes et outils que j'utilise en situation réelle, regroupés par usage.</p>
+      </div>
+      <div class="skills">
+        <div class="card sk rv"><h3><i></i>Produit &amp; Agile</h3><div class="chips"><span>Backlog Build &amp; Run</span><span>User Stories</span><span>Critères d'acceptation</span><span>Priorisation</span><span>Recette / UAT</span><span>Scrum</span><span>Kanban</span><span>KPIs &amp; OKRs</span><span>Ateliers de cadrage</span></div></div>
+        <div class="card sk rv"><h3><i style="background:var(--sun)"></i>IA, data &amp; automatisation</h3><div class="chips"><span>Power Automate</span><span>Power Query</span><span>Power BI</span><span>Excel avancé</span><span>SQL</span><span>Python</span><span>IA générative</span><span>Prompt engineering</span></div></div>
+        <div class="card sk rv"><h3><i style="background:var(--ink-2)"></i>Design &amp; UX</h3><div class="chips"><span>Figma</span><span>UX/UI</span><span>Design Thinking</span><span>Personas</span><span>Prototypage</span><span>Accessibilité web</span></div></div>
+        <div class="card sk rv"><h3><i></i>Outils de pilotage</h3><div class="chips"><span>Jira</span><span>Confluence</span><span>PEGA</span><span>SharePoint</span><span>MS Project</span><span>Miro</span><span>Trello</span><span>Asana</span></div></div>
+        <div class="card sk rv"><h3><i style="background:var(--sun)"></i>Tech</h3><div class="chips"><span>HTML / CSS</span><span>PHP</span><span>MySQL</span><span>Git</span><span>API REST</span></div></div>
+        <div class="card sk rv"><h3><i style="background:var(--ink-2)"></i>Création</h3><div class="chips"><span>Premiere Pro</span><span>After Effects</span><span>Photoshop</span><span>Canva</span><span>Photo &amp; vidéo</span></div></div>
+      </div>
+
+      <div class="head rv" style="margin-top:72px">
+        <div><span class="eyebrow">Engagements</span><h2>En dehors du backlog</h2></div>
+        <p>Volontariat international, réseau interne des jeunes talents, accompagnement d'enfants : des engagements menés en parallèle de mes études et de mon travail.</p>
+      </div>
+      <div class="eng">
+        <div class="gallery rv">
+          <figure data-img="img/way-team.jpg" data-cap="L'équipe WAY Engage, réseau des collaborateurs de moins de 32 ans de Société Générale"><img src="img/way-team.jpg" alt="Équipe WAY Engage de Société Générale en t-shirts" loading="lazy"><figcaption>WAY Engage · Société Générale</figcaption></figure>
+          <figure data-img="img/sg-dei.jpg" data-cap="Soirée des Employee Resource Groups organisée par l'équipe Diversité, Équité &amp; Inclusion de Société Générale"><img src="img/sg-dei.jpg" alt="Soirée Diversité, Équité et Inclusion de Société Générale" loading="lazy"><figcaption>Soirée DE&amp;I · Société Générale</figcaption></figure>
+          <div class="card en"><span class="yr">Langues</span><ul style="list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px;font-size:.93rem"><li style="display:flex;justify-content:space-between;gap:8px">Français <span style="color:var(--muted)">maternelle</span></li><li style="display:flex;justify-content:space-between;gap:8px">Anglais <span style="color:var(--muted)">TOEIC 905/990</span></li><li style="display:flex;justify-content:space-between;gap:8px">Arabe marocain <span style="color:var(--muted)">conversation</span></li><li style="display:flex;justify-content:space-between;gap:8px">Wolof <span style="color:var(--muted)">conversation</span></li></ul></div>
+        </div>
+        <div class="eng-list">
+          <div class="card en rv"><span class="yr">Août – nov. 2024 · 20 h / semaine</span><h3>Volontaire des Nations Unies · PNUD</h3><p>Volontaire en ligne pendant 12 semaines auprès du PNUD pour l'Afrique de l'Ouest et du Centre : campagne régionale <b>#IAMSAHEL</b>, gestion des réseaux sociaux et sensibilisation aux Objectifs de Développement Durable. Certificat d'appréciation signé par Toily Kurbanov, coordonnateur exécutif des Volontaires des Nations Unies.</p><button class="see-cert" type="button" data-img="img/c-pnud.jpg" data-cap="Certificat d'appréciation · Volontaires des Nations Unies · PNUD · 12 décembre 2024"><img src="img/c-pnud.jpg" alt="" loading="lazy"><span>Voir le certificat</span></button></div>
+          <div class="card en rv"><span class="yr">Oct. 2025 – sept. 2026</span><h3>WAY Engager · Société Générale</h3><p>Membre actif de l'Employee Resource Group des collaborateurs de moins de 32 ans : co-organisation d'ateliers, de sessions de networking et d'événements avec d'autres ERG du Groupe.</p></div>
+          <div class="card en rv"><span class="yr">2023 – 2025 · Dakar</span><h3>Bénévole · A&amp;C Values and Spirit</h3><p>Accompagnement d'enfants.</p></div>
+          <div class="card en rv"><span class="yr">Centres d'intérêt</span><p style="margin-top:8px">Cinéma · Photographie · Football · Basketball · Voyages</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="wrap">
+    <section class="contact" id="contact">
+      <div>
+        <span class="eyebrow" style="color:var(--sun)">Contact</span>
+        <h2 style="margin-top:14px">Échangeons sur votre produit.</h2>
+        <p>Product, IA, transformation digitale : je réponds rapidement par e-mail ou sur LinkedIn.</p>
+      </div>
+      <div class="chan">
+        <div class="row"><div class="t"><small>E-mail</small><b id="mail">elmokhtarberrada@gmail.com</b></div><button type="button" data-copy="mail">Copier</button></div>
+        <div class="row"><div class="t"><small>Téléphone</small><b id="tel">+33 7 83 73 17 92</b></div><button type="button" data-copy="tel">Copier</button></div>
+        <div class="row"><div class="t"><small>LinkedIn</small><b>linkedin.com/in/elmokhtar-berrada</b></div><a class="go" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener">Ouvrir</a></div>
+      </div>
+    </section>
+    <footer><span>© 2026 El Mokhtar Berrada · Site conçu et développé avec Claude</span><span>Casablanca · Tanger · Dakar · Paris</span></footer>
+  </div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-k">
+  <div class="dlg">
+    <div class="dlg-top"><span class="mono" id="dlg-k"></span><button class="x" type="button" data-close aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="dlg-body" id="dlg-body"></div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var root=document.documentElement;
+
+  /* ---------- scroll: one rAF-throttled handler ---------- */
+  var bar=document.getElementById('progress'), top=document.getElementById('top');
+  var xp=document.querySelector('.xp'), fill=document.querySelector('.xp-fill');
+  var rels=[].slice.call(document.querySelectorAll('.rel'));
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var max=root.scrollHeight-root.clientHeight, y=root.scrollTop||document.body.scrollTop||0;
+    bar.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+    top.classList.toggle('scrolled', y>8);
+    if(xp && fill){
+      var r=xp.getBoundingClientRect(), vh=innerHeight, mid=vh*0.6;
+      var p=Math.max(0,Math.min(1,(mid-r.top)/Math.max(1,r.height)));
+      fill.style.transform='scaleY('+p+')';
+      rels.forEach(function(el){ el.classList.toggle('lit', el.getBoundingClientRect().top+30 < mid); });
+    }
+  }
+  function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(frame); } }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+
+  /* ---------- active nav link (never scrolls the page) ---------- */
+  var nav=document.querySelector('nav.links');
+  var links=[].slice.call(nav.querySelectorAll('a'));
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  function setActive(id){
+    if(id==='certifications') id='formation';
+    var a=map[id]; if(!a || a.classList.contains('active')) return;
+    links.forEach(function(l){l.classList.remove('active')});
+    a.classList.add('active');
+    if(nav.scrollWidth>nav.clientWidth){
+      var left=a.offsetLeft - (nav.clientWidth-a.offsetWidth)/2;
+      nav.scrollTo({left:Math.max(0,left),behavior:reduce?'auto':'smooth'});
+    }
+  }
+  if('IntersectionObserver' in window){
+    var navObs=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting) setActive(e.target.id); });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    ['profil','parcours','projets','ia','temoignages','formation','certifications','competences','contact'].forEach(function(id){var el=document.getElementById(id); if(el) navObs.observe(el)});
+  }
+
+  /* ---------- reveal on scroll (only what starts below the fold) ---------- */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  // stagger siblings
+  rv.forEach(function(el){
+    var sib=[].slice.call(el.parentNode.children).filter(function(c){return c.classList.contains('rv')});
+    var k=sib.indexOf(el); if(k>0) el.style.setProperty('--d',Math.min(k,6)*70+'ms');
+  });
+  document.querySelectorAll('.chips, .caps').forEach(function(g){
+    [].slice.call(g.children).forEach(function(c,k){c.style.setProperty('--i',k)});
+  });
+  function settle(el){ setTimeout(function(){ el.classList.remove('rv'); el.style.removeProperty('--d'); },1300); }
+  if(!reduce && 'IntersectionObserver' in window){
+    var vh=innerHeight;
+    var obs=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('pre'); obs.unobserve(e.target); settle(e.target);} });
+    },{rootMargin:'0px 0px -6% 0px',threshold:0.01});
+    rv.forEach(function(el){
+      if(el.getBoundingClientRect().top>vh*0.92){ el.classList.add('pre'); obs.observe(el); }
+      else { el.classList.remove('rv'); }
+    });
+  } else {
+    rv.forEach(function(el){ el.classList.remove('rv'); });
+  }
+
+  /* ---------- counters ---------- */
+  var nums=[].slice.call(document.querySelectorAll('.num[data-to]'));
+  function countUp(el){
+    var to=+el.dataset.to, t0=null, dur=1400;
+    function step(t){ if(!t0) t0=t; var p=Math.min(1,(t-t0)/dur); var e=1-Math.pow(1-p,3); el.textContent=Math.round(to*e); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  if(!reduce && 'IntersectionObserver' in window){
+    var cObs=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); cObs.unobserve(e.target);} });
+    },{threshold:0.6});
+    nums.forEach(function(n){ cObs.observe(n); });
+  }
+
+  /* ---------- hero name letters ---------- */
+  var h1=document.querySelector('.hero h1');
+  if(h1 && !reduce){
+    h1.setAttribute('aria-label',h1.textContent.replace(/\s+/g,' ').trim());
+    var n=0;
+    (function walk(node){
+      [].slice.call(node.childNodes).forEach(function(c){
+        if(c.nodeType===3){
+          var frag=document.createDocumentFragment();
+          c.textContent.split('').forEach(function(ch){
+            if(ch===' '){ frag.appendChild(document.createTextNode(' ')); return; }
+            var sp=document.createElement('span'); sp.className='ch'; sp.setAttribute('aria-hidden','true'); sp.style.setProperty('--i',n++); sp.textContent=ch; frag.appendChild(sp);
+          });
+          c.parentNode.replaceChild(frag,c);
+        } else if(c.nodeType===1 && c.tagName!=='BR'){ walk(c); }
+      });
+    })(h1);
+  }
+
+  /* ---------- rotating words ---------- */
+  var rot=document.getElementById('rot');
+  if(rot && !reduce){
+    var w=[].slice.call(rot.children), wi=0;
+    setInterval(function(){ w[wi].classList.remove('on'); wi=(wi+1)%w.length; w[wi].classList.add('on'); },2600);
+  }
+
+  /* ---------- pointer effects (desktop only) ---------- */
+  if(finePointer && !reduce){
+    document.addEventListener('pointermove',function(e){
+      var c=e.target.closest && e.target.closest('.card');
+      if(c){ var r=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px'); }
+    },{passive:true});
+    document.querySelectorAll('.proj').forEach(function(p){
+      p.addEventListener('pointermove',function(e){
+        var r=p.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        p.classList.add('tilt');
+        p.style.transform='perspective(1000px) rotateX('+(-y*5)+'deg) rotateY('+(x*6)+'deg) translateY(-4px)';
+      });
+      p.addEventListener('pointerleave',function(){ p.classList.remove('tilt'); p.style.transform=''; });
+    });
+    var photo=document.querySelector('.portrait .photo'), port=document.querySelector('.portrait');
+    if(photo && port){
+      port.addEventListener('pointermove',function(e){
+        var r=port.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        photo.style.setProperty('--ry',(x*8)+'deg'); photo.style.setProperty('--rx',(-y*8)+'deg');
+      });
+      port.addEventListener('pointerleave',function(){ photo.style.setProperty('--ry','0deg'); photo.style.setProperty('--rx','0deg'); });
+    }
+  }
+
+  /* ---------- accordions ---------- */
+  document.querySelectorAll('.toggle').forEach(function(b){
+    b.addEventListener('click',function(){
+      var m=document.getElementById(b.getAttribute('aria-controls'));
+      var open=b.getAttribute('aria-expanded')==='true';
+      b.setAttribute('aria-expanded',String(!open));
+      m.classList.toggle('open',!open);
+      b.firstChild.textContent = open ? 'Tout le détail ' : 'Réduire ';
+    });
+  });
+
+  /* ---------- dialog (projects + images) ---------- */
+  var dlg=document.getElementById('dlg'), body=document.getElementById('dlg-body'), k=document.getElementById('dlg-k');
+  function openDlg(kicker,html,isImg){
+    k.textContent=kicker; body.innerHTML=html; dlg.classList.toggle('lb',!!isImg);
+    body.scrollTop=0;
+    if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+  }
+  dlg.addEventListener('click',function(e){ if(e.target===dlg || e.target.closest('[data-close]')) dlg.close(); });
+  document.querySelectorAll('.proj').forEach(function(c){
+    c.addEventListener('click',function(){
+      var src=document.getElementById(c.dataset.p);
+      openDlg(src.dataset.k, src.innerHTML, false);
+    });
+  });
+  document.querySelectorAll('[data-img]').forEach(function(c){
+    c.addEventListener('click',function(){
+      var cap=c.dataset.cap||'';
+      openDlg(cap,'<img src="'+c.dataset.img+'" alt="'+cap.replace(/"/g,'&quot;')+'">',true);
+    });
+  });
+
+  /* ---------- testimonials (fixed height, no layout jump) ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('.who [role=tab]'));
+  var panels=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'))});
+  var dotsWrap=document.querySelector('.dots'), dots=[].slice.call(dotsWrap.children);
+  var cur=0, timer=null, DUR=9000, voices=document.querySelector('.voices'), inView=false;
+  function show(n,focus){
+    cur=(n+tabs.length)%tabs.length;
+    tabs.forEach(function(t,j){ var on=j===cur; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; panels[j].classList.toggle('show',on); panels[j].setAttribute('aria-hidden',String(!on)); dots[j].classList.remove('on'); });
+    void dotsWrap.offsetWidth; dots[cur].classList.add('on');
+    if(focus) tabs[cur].focus();
+  }
+  function stop(){ if(timer){clearInterval(timer); timer=null;} dotsWrap.classList.add('paused'); }
+  function start(){ if(reduce || !inView) return; if(timer) clearInterval(timer); dotsWrap.classList.remove('paused'); show(cur); timer=setInterval(function(){show(cur+1)},DUR); }
+  dotsWrap.style.setProperty('--dur',DUR+'ms');
+  tabs.forEach(function(t,j){
+    t.addEventListener('click',function(){ show(j); stop(); });
+    t.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();show(cur+1,true);stop();}
+      if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();show(cur-1,true);stop();}
+    });
+  });
+  voices.addEventListener('mouseenter',stop); voices.addEventListener('mouseleave',start);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){ inView=e.isIntersecting; if(inView) start(); else stop(); }); },{threshold:0.3}).observe(voices);
+  }
+  stop();
+
+  /* ---------- copy buttons ---------- */
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.copy), txt=el.textContent.trim();
+      function done(){ b.textContent='Copié'; b.classList.add('ok'); setTimeout(function(){b.textContent='Copier'; b.classList.remove('ok')},1800); }
+      function fallback(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Sélectionné'; setTimeout(function(){b.textContent='Copier'},1800); }
+      try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(e){ fallback(); }
+    });
+  });
+})();
+</script>
