@@ -892,7 +892,7 @@ html.qopen{overflow:hidden}
 .demo-b{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--sun);background:var(--sun-soft);padding:4px 10px;border-radius:999px}
 .demo-b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 0 var(--sun);animation:dpulse 2s infinite}
 @keyframes dpulse{70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.proj .vis img.bk{object-position:center}
+.proj .vis img.bk,.proj .vis img.jb{object-position:center}
 .proj .vis .demo-b{position:absolute;left:12px;top:12px;z-index:2;background:#0C1413;color:#E6AE48;border:1px solid #3A3220;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .proj .vis .demo-b::before{background:#E6AE48}
 @media (prefers-reduced-motion:reduce){.demo-b::before{animation:none}}
@@ -1197,7 +1197,7 @@ html.qopen{overflow:hidden}
         </button>
 
         <button class="card proj rv" data-p="p-jubox">
-          <div class="vis"><div class="typo jubox"><b>JUBOX</b><i>educational games for kids</i></div></div>
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Interactive demo</span><!--/ENH8:b--><img src="../img/jubox-app.jpg" alt="Playable JUBOX: game home screen and the Anima game" loading="lazy" decoding="async" class="jb"></div>
           <div class="pb">
             <span class="ctx2">Global Entrepreneurship Week · Nov. 2022</span>
             <h3>JUBOX</h3>
@@ -1262,7 +1262,7 @@ html.qopen{overflow:hidden}
         </div>
         <div id="p-jubox" data-k="Hackathon · Global Entrepreneurship Week 2022">
           <h3>JUBOX</h3>
-          <div class="meta"><span class="award">Top 10 out of 100+ projects</span><span class="tag">November 2022</span></div>
+          <div class="meta"><span class="award">Top 10 out of 100+ projects</span><span class="tag">November 2022</span></div><!--ENH8:cta--><div class="demo-cta"><p>The hackathon XD mockups made playable in 2026 (in French): six games with sound and voice (Anima, Yaram, Zik, Math Kid, Docteur Kid, Savoir-vivre), stickers and a parents' area.</p><a class="btn" href="../jubox-demo/" target="_blank" rel="noopener">Play JUBOX ↗</a></div><!--/ENH8:cta-->
           <p>A game-based learning platform for children, built during a hackathon in the second year of my Bachelor's. I led the project and pitched it to the jury.</p>
           <h4>My role</h4>
           <p>Project management, mockups and prototypes for two games: <b>Anima</b> (recognizing animal sounds) and <b>Yaram</b> (learning the parts of the body; “yaram” means “body” in Wolof).</p>

@@ -892,7 +892,7 @@ html.qopen{overflow:hidden}
 .demo-b{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--sun);background:var(--sun-soft);padding:4px 10px;border-radius:999px}
 .demo-b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 0 var(--sun);animation:dpulse 2s infinite}
 @keyframes dpulse{70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.proj .vis img.bk{object-position:center}
+.proj .vis img.bk,.proj .vis img.jb{object-position:center}
 .proj .vis .demo-b{position:absolute;left:12px;top:12px;z-index:2;background:#0C1413;color:#E6AE48;border:1px solid #3A3220;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .proj .vis .demo-b::before{background:#E6AE48}
 @media (prefers-reduced-motion:reduce){.demo-b::before{animation:none}}
@@ -1197,7 +1197,7 @@ html.qopen{overflow:hidden}
         </button>
 
         <button class="card proj rv" data-p="p-jubox">
-          <div class="vis"><div class="typo jubox"><b>JUBOX</b><i>jeux éducatifs pour enfants</i></div></div>
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Démo interactive</span><!--/ENH8:b--><img src="img/jubox-app.jpg" alt="JUBOX rendu jouable : accueil des jeux et jeu Anima" loading="lazy" decoding="async" class="jb"></div>
           <div class="pb">
             <span class="ctx2">Global Entrepreneurship Week · nov. 2022</span>
             <h3>JUBOX</h3>
@@ -1262,7 +1262,7 @@ html.qopen{overflow:hidden}
         </div>
         <div id="p-jubox" data-k="Hackathon · Global Entrepreneurship Week 2022">
           <h3>JUBOX</h3>
-          <div class="meta"><span class="award">Top 10 sur 100+ projets</span><span class="tag">Novembre 2022</span></div>
+          <div class="meta"><span class="award">Top 10 sur 100+ projets</span><span class="tag">Novembre 2022</span></div><!--ENH8:cta--><div class="demo-cta"><p>Les maquettes XD du hackathon rendues jouables en 2026 : six jeux avec sons et voix (Anima, Yaram, Zik, Math Kid, Docteur Kid, Savoir-vivre), autocollants et espace parents.</p><a class="btn" href="jubox-demo/" target="_blank" rel="noopener">Jouer à JUBOX ↗</a></div><!--/ENH8:cta-->
           <p>Plateforme d'apprentissage ludique pour enfants, développée en hackathon pendant ma deuxième année de Licence. J'ai piloté le projet et pitché devant le jury.</p>
           <h4>Mon rôle</h4>
           <p>Gestion de projet, maquettes et prototypes de deux jeux : <b>Anima</b> (reconnaître les bruits d'animaux) et <b>Yaram</b> (apprendre les parties du corps, « yaram » signifie « corps » en wolof).</p>

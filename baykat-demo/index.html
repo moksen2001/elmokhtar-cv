@@ -271,7 +271,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
 /* ===== Success ===== */
 .ok{min-height:100%;display:flex;flex-direction:column;padding:34px 22px 26px;text-align:center}
-.ok-ic{width:112px;height:112px;margin:18px auto 8px}
+.ok-ic{width:112px;height:112px;margin:18px auto 8px;overflow:visible}
 .ok-ic .c1{fill:var(--y);transform-origin:56px 56px;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
 .ok-ic .ring{fill:none;stroke:var(--y);stroke-width:3;opacity:.5;transform-origin:56px 56px;animation:ring 1.1s .25s ease-out both}
 .ok-ic .ck{fill:none;stroke:var(--b);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .45s .35s ease-out forwards}
@@ -415,6 +415,199 @@ blockquote.idq{margin:18px 20px 0;padding:0 0 0 16px;border-left:4px solid var(-
 .try{margin:16px 0 0;padding-top:14px;border-top:1px solid #EADFC8;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:#5E4B36}
 .try button{flex:none;border:1.5px solid var(--b);background:transparent;color:var(--b);border-radius:99px;padding:7px 13px;font-weight:600;font-size:13px}
 
+/* ===== Vivant : scenes animees ===== */
+.cnt{font-variant-numeric:tabular-nums}
+.bar i{transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.art .sw,.hero .sw,.st-media .sw{transform-box:fill-box;transform-origin:50% 100%;animation:sway 3.8s ease-in-out infinite alternate}
+.art .sw.top,.hero .sw.top,.st-media .sw.top{transform-origin:50% 0;animation-duration:4.6s}
+@keyframes sway{from{transform:rotate(-2.4deg)}to{transform:rotate(2.4deg)}}
+.art .halo,.hero .halo,.st-media .halo{transform-box:fill-box;transform-origin:center;animation:halo 4.5s ease-in-out infinite}
+@keyframes halo{0%,100%{transform:scale(.82);opacity:.18}50%{transform:scale(1.18);opacity:.34}}
+.art .sun,.hero .sun,.st-media .sun{animation:rise 9s ease-in-out infinite alternate}
+@keyframes rise{from{transform:translateY(5px)}to{transform:translateY(-3px)}}
+.art .cl,.hero .cl,.st-media .cl{animation:drift 46s linear -14s infinite}
+.art .cl.c2,.hero .cl.c2,.st-media .cl.c2{animation:drift2 64s linear -26s infinite}
+@keyframes drift{from{transform:translateX(-170px)}to{transform:translateX(260px)}}
+@keyframes drift2{from{transform:translateX(-262px)}to{transform:translateX(124px)}}
+.bird{opacity:0}
+.hero .bird,.st-media .bird{animation:fly 15s linear 1.5s infinite}
+@keyframes fly{0%{opacity:1;transform:translate(-40px,46px)}42%{opacity:1;transform:translate(350px,6px)}42.1%,100%{opacity:0;transform:translate(350px,6px)}}
+.bird .wing{transform-box:fill-box;transform-origin:center;animation:flap .32s ease-in-out infinite alternate}
+@keyframes flap{to{transform:scaleY(-.5)}}
+
+/* Stories */
+.stories{display:flex;gap:12px;list-style:none;margin:8px 0 0;padding:4px 20px 2px;overflow-x:auto;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.sto{display:flex;flex-direction:column;align-items:center;gap:5px;width:70px;padding:0;border:0;background:none;border-radius:14px;transition:transform .12s}
+.sto .ring{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,#F2BB16,#E4572E,#2A7148,#F2BB16);transition:background .3s}
+.sto.seen .ring{background:#D5C9AE}
+.sto .ring>span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;border:3px solid var(--cream);color:#FFF3D6;font-weight:700;font-size:16px}
+.sto .sn{font-size:12px;line-height:1.2;color:var(--ink2);text-align:center}
+.sto .sn b{display:block;color:var(--ink);font-weight:600}
+
+/* Ticker */
+.ticker{display:flex;align-items:center;gap:10px;margin:14px 20px 0;padding:10px 10px 10px 12px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.tk-win{position:relative;flex:1;min-width:0;height:40px;overflow:hidden}
+.tk-item{position:absolute;inset:0;display:flex;align-items:center;gap:10px;margin:0}
+.tk-item.in{animation:tkIn .5s cubic-bezier(.2,.8,.2,1) both}
+.tk-item.out{animation:tkOut .4s ease-in both}
+@keyframes tkIn{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
+@keyframes tkOut{to{transform:translateY(-90%);opacity:0}}
+.tk-av{position:relative;flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:#fff;font-weight:700;font-size:13px}
+.tk-av.live::after{content:"";position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;background:#2FA35E;border:2px solid #fff;animation:livep 1.6s ease-out infinite}
+@keyframes livep{0%{box-shadow:0 0 0 0 rgba(47,163,94,.6)}100%{box-shadow:0 0 0 7px rgba(47,163,94,0)}}
+.tk-txt{min-width:0;display:flex;flex-direction:column;font-size:13px;line-height:1.35}
+.tk-txt span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tk-txt .l2{font-size:12px;color:var(--mut)}
+.tk-txt .l2 .now{color:#1F7A45;font-weight:600}
+.tk-txt>span:first-child{font-size:12.5px}
+.tk-btn{width:36px;height:36px}
+.tk-btn svg{width:16px;height:16px}
+
+/* Cartes : squelette, entree, pulsation */
+.sk{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.sk-art{height:124px}
+.sk-b{padding:14px 15px 16px;display:grid;gap:10px}
+.sk-b i{display:block;height:12px;border-radius:99px}
+.sk-art,.sk-b i{background:linear-gradient(90deg,#F1E8D6 30%,#FBF6EA 50%,#F1E8D6 70%);background-size:300% 100%;animation:shim 1.2s linear infinite}
+@keyframes shim{from{background-position:100% 0}to{background-position:0 0}}
+.cards.stagger .ccard{animation:cardIn .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*90ms)}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.ccard.bump{animation:bump 1.3s ease-out}
+@keyframes bump{0%{box-shadow:0 0 0 0 rgba(242,187,22,.85)}100%{box-shadow:0 0 0 14px rgba(242,187,22,0)}}
+.ccard.bump .inv-dd{animation:flash 1.3s ease-out}
+@keyframes flash{0%,40%{color:var(--green);transform:scale(1.18)}100%{transform:none}}
+.inv-dd{display:inline-block;transform-origin:left center}
+
+/* Micro-interactions */
+.chip,.icon-btn,.opt,.menu button,.conv,.tabbar button,.nf-item{transition:transform .12s,background-color .2s}
+.chip:active,.icon-btn:active,.sto:active,.tabbar button:active,.nf-item:active{transform:scale(.94)}
+.opt:active,.menu button:active,.conv:active{transform:scale(.985)}
+.toast{transition:transform .38s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+.icon-btn .badge{position:absolute;top:-3px;right:-3px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#C8421B;color:#fff;font-size:11.5px;font-weight:700;display:grid;place-items:center;border:2px solid var(--cream);animation:pop .45s .6s cubic-bezier(.3,1.6,.5,1) both}
+.icon-btn .badge.gone{animation:popOutB .25s ease-in forwards}
+@keyframes popOutB{to{transform:scale(0);opacity:0}}
+.bell-ring svg{transform-origin:50% 10%;animation:ring2 1s ease-in-out 1.2s 1}
+@keyframes ring2{0%,100%{transform:none}15%{transform:rotate(14deg)}30%{transform:rotate(-12deg)}45%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}75%{transform:rotate(2deg)}}
+
+/* Detail : meteo + investisseurs */
+.hero .wx{top:auto;bottom:12px;left:12px;gap:6px}
+.wx svg{width:18px;height:18px;overflow:visible}
+.wx .rays{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}
+.wx .wcl{animation:bob 3s ease-in-out infinite alternate}
+.wx .drop{animation:rain 1s linear infinite}
+.wx .drop:nth-of-type(2){animation-delay:-.5s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{to{transform:translateX(1.5px)}}
+@keyframes rain{from{transform:translateY(-2px);opacity:1}to{transform:translateY(4px);opacity:0}}
+.invrow{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13px;color:var(--mut)}
+.invrow b{color:var(--ink);font-weight:600}
+.stack{display:flex;flex:none;padding-left:8px}
+.stack i{display:grid;place-items:center;width:30px;height:30px;margin-left:-8px;border-radius:50%;border:2px solid #fff;font-style:normal;font-size:11px;font-weight:700;color:#fff;animation:pop .4s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(.25s + var(--i)*70ms)}
+
+/* Suivi : croissance + graphique */
+.grow{padding:14px 10px 16px}
+.grow-top{display:flex;gap:12px;align-items:center;padding:0 6px}
+.plant{flex:none;width:96px;height:96px;border-radius:18px;background:linear-gradient(#FFF8E1,#FCEBB5)}
+.grow-top b{display:block;font-size:16px;font-weight:600}
+.grow-top p{margin:2px 0 0;font-size:13px;color:var(--ink2)}
+.plant .stem{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1s .2s ease-out forwards}
+.plant .lf,.plant .fl,.plant .fr{transform-box:fill-box;animation:pop .45s cubic-bezier(.3,1.6,.5,1) both;animation-delay:var(--d,.6s)}
+.plant .lf.l{transform-origin:100% 100%}.plant .lf.r{transform-origin:0 100%}
+.plant .fl,.plant .fr{transform-origin:center}
+.plant .sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 3.4s 1.6s ease-in-out infinite alternate}
+.plant .seed{transform-box:fill-box;transform-origin:center;animation:seedb 2.4s ease-in-out infinite}
+@keyframes seedb{50%{transform:translateY(-2px) rotate(-6deg)}}
+.gsteps{position:relative;display:grid;grid-template-columns:repeat(5,1fr);list-style:none;margin:16px 0 0;padding:0}
+.gsteps::before,.gsteps::after{content:"";position:absolute;top:12px;left:10%;height:3px;border-radius:3px}
+.gsteps::before{width:80%;background:#E9DEC6}
+.gsteps::after{width:calc(80% * var(--p,0));background:var(--b);transform-origin:left;animation:growx 1.1s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes growx{from{transform:scaleX(0)}}
+.gsteps li{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;letter-spacing:-.02em;color:var(--mut);text-align:center;white-space:nowrap}
+.gsteps .gd{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#fff;border:2px solid #CDBF9F}
+.gsteps .gd svg{width:14px;height:14px}
+.gsteps .done .gd{background:var(--b);border-color:var(--b);color:#FFF3D6}
+.gsteps .now .gd{background:var(--y);border-color:var(--b);color:var(--ink);animation:pulse 2s infinite}
+.gsteps .now,.gsteps .done{color:var(--ink)}
+.gsteps .now{font-weight:600}
+.chart{margin:0}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .band{opacity:0;animation:fadeBand .8s .5s ease-out forwards}
+@keyframes fadeBand{to{opacity:1}}
+.chart .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.3s .2s ease-out forwards}
+.chart .proj{opacity:0;animation:fadeBand .6s 1.3s ease-out forwards}
+.chart .dotp{transform-box:fill-box;transform-origin:center;animation:pop .45s 1.3s cubic-bezier(.3,1.6,.5,1) both}
+.chart text{font-family:"Lexend",system-ui,sans-serif;font-size:10.5px;fill:var(--mut)}
+.chart text.k{fill:var(--ink);font-weight:600}
+.clg{display:flex;flex-wrap:wrap;gap:6px 14px;margin:8px 0 0;font-size:12px;color:var(--mut)}
+.clg i{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.clg b{color:var(--ink);font-weight:600}
+
+/* Story viewer */
+.story{position:absolute;inset:0;z-index:26;display:flex;flex-direction:column;padding:calc(var(--sb) + 6px) 0 calc(10px + env(safe-area-inset-bottom));background:#140E08;color:#FFF6E3;animation:stIn .28s cubic-bezier(.2,.8,.2,1) both;touch-action:none;user-select:none;-webkit-user-select:none}
+.story[hidden]{display:none}
+.story.closing{animation:stOut .22s ease-in both}
+@keyframes stIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes stOut{to{opacity:0;transform:translateY(40px) scale(.96)}}
+.app[data-bar="d"] .statusbar{background:#140E08;color:#FFF6E3}
+.st-bars{display:flex;gap:4px;padding:4px 12px 0}
+.st-bars span{flex:1;height:3px;border-radius:3px;background:rgba(255,246,227,.3);overflow:hidden}
+.st-bars i{display:block;height:100%;width:0;background:#FFF6E3}
+.st-bars .done i{width:100%}
+.st-bars .cur i{animation:stfill var(--d,5s) linear forwards}
+.story.paused .st-bars .cur i{animation-play-state:paused}
+.story.rm .st-bars .cur i{animation:none;width:100%}
+@keyframes stfill{from{width:0}to{width:100%}}
+.st-head{position:relative;z-index:3;display:flex;align-items:center;gap:10px;padding:10px 10px 8px 14px}
+.st-head .av{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-weight:700;font-size:13px;color:#FFF3D6;border:2px solid var(--y)}
+.st-head .who{flex:1;min-width:0;line-height:1.25}
+.st-head .who b{display:block;font-size:14.5px;font-weight:600}
+.st-head .who small{font-size:12px;color:#E4D5B8}
+.st-btn{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,246,227,.12);color:#FFF6E3}
+.st-btn svg{width:20px;height:20px}
+.st-btn:focus-visible,.st-tap:focus-visible{outline:3px solid var(--y);outline-offset:-3px}
+.st-stage{position:relative;flex:1;min-height:0;margin:0 10px;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:22px 20px 26px;transition:background .4s}
+.st-media{border-radius:20px;overflow:hidden;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);background:#FCEBB5}
+.st-media svg{display:block;width:100%;height:100%;animation:kb 5.5s ease-out both}
+.st-media.w{aspect-ratio:16/10}
+.st-media.sq{aspect-ratio:1/1;max-height:46%;align-self:center;width:auto;height:46%}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
+.st-cap{animation:fadeIn .45s .1s both}
+.st-cap .tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;background:var(--y);color:var(--ink);font-size:12px;font-weight:600}
+.st-cap h2{margin:10px 0 4px;font-size:21px;line-height:1.25;font-weight:600;color:#fff}
+.st-cap h2 svg{display:inline-block;width:22px;height:22px;vertical-align:-4px;margin-left:4px}
+.st-cap p{margin:0;font-size:13.5px;color:#F3E6CB}
+.st-tap{position:absolute;top:0;bottom:0;z-index:2;border:0;background:transparent;padding:0;cursor:pointer}
+.st-tap.prev{left:0;width:34%}.st-tap.next{right:0;width:66%}
+.st-foot{margin:10px 16px 0;font-size:12px;color:#CDBB98;text-align:center}
+
+/* Feuille de notifications */
+.sheet-wrap{position:absolute;inset:0;z-index:32;display:flex;flex-direction:column;justify-content:flex-end}
+.sheet-wrap[hidden]{display:none}
+.scrim{position:absolute;inset:0;border:0;padding:0;background:rgba(20,14,8,.45);animation:fadeIn2 .25s both;cursor:default}
+@keyframes fadeIn2{from{opacity:0}}
+.sheet{position:relative;max-height:80%;overflow-y:auto;background:var(--cream);border-radius:26px 26px 0 0;padding:8px 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.25);animation:sheetUp .36s cubic-bezier(.2,.9,.25,1) both}
+.sheet-wrap.closing .sheet{animation:sheetDown .22s ease-in both}
+.sheet-wrap.closing .scrim{animation:fadeOut .22s both}
+@keyframes sheetUp{from{transform:translateY(100%)}}
+@keyframes sheetDown{to{transform:translateY(100%)}}
+.sheet .grab{width:40px;height:5px;border-radius:5px;background:#D5C9AE;margin:4px auto 8px}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.sheet-h h2{margin:0;font-size:18px;font-weight:600}
+.nf{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.nf-item{display:flex;gap:12px;align-items:flex-start;width:100%;padding:12px;border:1px solid var(--line);border-radius:16px;background:#fff;text-align:left}
+.nf-item .ni{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;font-weight:700;font-size:13px;color:#FFF3D6}
+.nf-item .ni svg{width:20px;height:20px}
+.nf-item .tx{flex:1;min-width:0;font-size:13.5px;color:var(--ink2);line-height:1.4}
+.nf-item .tx b{color:var(--ink);font-weight:600}
+.nf-item time{display:block;margin-top:3px;font-size:12px;color:var(--mut)}
+.nf-item .ud{flex:none;width:9px;height:9px;margin-top:6px;border-radius:50%;background:#C8421B}
+.nf-item.read .ud{visibility:hidden}
+.nf-item.new{animation:fadeIn .4s both;animation-delay:calc(.12s + var(--i)*60ms)}
+
+/* Confettis */
+.confetti{position:absolute;inset:0;z-index:45;pointer-events:none;width:100%;height:100%}
+
 @media (max-width:1180px){.stage{gap:32px}.panel{width:380px}}
 @media (max-width:899px){
   .stage{flex-direction:column;gap:28px;padding:28px 16px 40px}
@@ -442,6 +635,8 @@ blockquote.idq{margin:18px 20px 0;padding:0 0 0 16px;border-left:4px solid var(-
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .ok-ic .ck{stroke-dashoffset:0}
+  .sw,.halo,.sun,.cl,.bird,.wing,.rays,.wcl,.drop,.sk-art,.sk-b i,.tk-av.live::after,.sto .ring,.st-media svg,.plant .sway,.plant .seed,.bell-ring svg{animation:none!important}
+  .plant .stem,.chart .ln{stroke-dashoffset:0}
 }
 </style>
 </head>
@@ -501,6 +696,11 @@ blockquote.idq{margin:18px 20px 0;padding:0 0 0 16px;border-left:4px solid var(-
         <button type="button" data-tab="don"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg></span>Don</button>
         <button type="button" data-tab="profil"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.4-3.9 4.4-6 8-6s6.6 2.1 8 6"/></svg></span>Profil</button>
       </nav>
+      <div class="story" id="story" role="dialog" aria-modal="true" aria-labelledby="st-name" hidden></div>
+      <div class="sheet-wrap" id="notif" hidden>
+        <button class="scrim" type="button" data-act="nfclose" tabindex="-1" aria-label="Fermer les notifications"></button>
+        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="nf-h"><div class="grab" aria-hidden="true"></div><div class="sheet-h"><h2 id="nf-h">Notifications</h2><button class="icon-btn" type="button" data-act="nfclose" aria-label="Fermer les notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><ul class="nf" id="nf-list"></ul><p class="note" style="margin:12px 2px 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.2"/></svg><span>Notifications fictives, rédigées pour ce prototype.</span></p></div>
+      </div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   </div>
@@ -522,6 +722,7 @@ blockquote.idq{margin:18px 20px 0;padding:0 0 0 16px;border-left:4px solid var(-
         <li><b>Contraste corrigé</b>&#8239;: brun foncé au lieu du blanc ou du gris sur jaune (WCAG&nbsp;AA), libellés et focus visibles.</li>
         <li><b>Urgence honnête</b>&#8239;: % financé, montant levé et jours restants, sans faux compte à rebours.</li>
         <li><b>Confiance de la diaspora</b>&#8239;: fil daté de l’agronome, étape en cours et prochain versement estimé.</li>
+        <li><b>Interface vivante</b>&#8239;: suivi en direct, stories de l’agronome, croissance de la culture animée — pour que l’investisseur <em>voie</em> son argent travailler.</li>
       </ol>
       <div class="try"><span>Parcours conseillé&#8239;: campagne → Investir → Suivi → Don → Profil</span><button type="button" data-restart>Recommencer</button></div>
     </div>
@@ -559,8 +760,14 @@ const I={
  info:sv('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.2"/>'),
  arrow:sv('<path d="M5 12h14M13 6l6 6-6 6"/>'),
  card:sv('<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/>'),
- out:sv('<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 16l-4-4 4-4M6 12h10"/>')
+ out:sv('<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 16l-4-4 4-4M6 12h10"/>'),
+ pause:sv('<path d="M9 5v14M15 5v14"/>'),
+ play:sv('<path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/>'),
+ x:sv('<path d="M6 6l12 12M18 6 6 18"/>'),
+ leaf:sv('<path d="M12 21V11"/><path d="M12 13c0-4.5 3-7 7.5-7 0 4.5-3 7-7.5 7zM12 15.5c0-3.5-2.2-5.5-6-5.5 0 3.5 2.2 5.5 6 5.5z"/>')
 };
+const OKI='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2FA35E"/><path d="M7 12.5l3.3 3.3L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ini=nm=>nm.split(' ').map(w=>w[0]).join('');
 
 /* ---------- Illustrations (SVG, no photos) ---------- */
 const SC={
@@ -571,19 +778,20 @@ const SC={
  pasteque:['#FDEFC8','#9DB86A','#D2B07A','#B89060']
 };
 function onion(x,y,s,c){return `<g transform="translate(${x} ${y}) scale(${s})"><g fill="none" stroke="#4E8A34" stroke-width="5" stroke-linecap="round"><path d="M42 50C40 30 34 16 24 4"/><path d="M46 50C50 30 58 18 68 10"/><path d="M44 50C44 34 46 20 44 4"/></g><path d="M44 46C16 58 14 98 44 106 74 98 72 58 44 46Z" fill="${c}"/><path d="M33 64C27 76 27 90 34 99" stroke="#E3A1C0" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".8"/><path d="M44 106l-5 7M44 106v8M44 106l5 7" stroke="#EADCBD" stroke-width="2.2" stroke-linecap="round"/></g>`}
-function rice(x,y){let g='';for(let i=0;i<7;i++){const x0=8+i*14,tx=x0+16+(i%2)*6,ty=16+(i%3)*8;g+=`<path d="M${x0} 118Q${x0+4} 64 ${tx} ${ty}" stroke="#5E9A3C" stroke-width="3.2" fill="none" stroke-linecap="round"/>`;for(let j=0;j<5;j++){const cx=tx+2-j*1.2+(j%2?5:-4),cy=ty+4+j*7;g+=`<ellipse cx="${cx}" cy="${cy}" rx="2.6" ry="5.4" transform="rotate(${j%2?30:-30} ${cx} ${cy})" fill="#E3B93E"/>`}}return `<g transform="translate(${x} ${y})">${g}</g>`}
+function rice(x,y){let g='';for(let i=0;i<7;i++){const x0=8+i*14,tx=x0+16+(i%2)*6,ty=16+(i%3)*8;g+=`<g class="sw" style="animation-delay:-${(i*.55).toFixed(2)}s"><path d="M${x0} 118Q${x0+4} 64 ${tx} ${ty}" stroke="#5E9A3C" stroke-width="3.2" fill="none" stroke-linecap="round"/>`;for(let j=0;j<5;j++){const cx=tx+2-j*1.2+(j%2?5:-4),cy=ty+4+j*7;g+=`<ellipse cx="${cx}" cy="${cy}" rx="2.6" ry="5.4" transform="rotate(${j%2?30:-30} ${cx} ${cy})" fill="#E3B93E"/>`}g+='</g>'}return `<g transform="translate(${x} ${y})">${g}</g>`}
 function nut(x,y,r,s=1){return `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M0-27C14-27 16-12 10-4 6 2 16 10 12 22 8 35-8 35-12 22-16 10-6 2-10-4-16-12-14-27 0-27Z" fill="#DDB070" stroke="#A8783E" stroke-width="3"/><path d="M-7-16h13M-8-8l13 2M-8 13h14M-8 22l14-1" stroke="#BC8D50" stroke-width="2" stroke-linecap="round"/></g>`}
 function mango(x,y,s){return `<g transform="translate(${x} ${y}) scale(${s})"><path d="M56 16C66 4 86 2 98 8 88 20 70 22 56 16Z" fill="#3F7A2E"/><path d="M56 16 53 30" stroke="#5A3A1A" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="50" cy="68" rx="31" ry="40" transform="rotate(-22 50 68)" fill="#F4A21C"/><ellipse cx="38" cy="54" rx="16" ry="23" transform="rotate(-22 38 54)" fill="#E4572E" opacity=".5"/><ellipse cx="66" cy="90" rx="15" ry="16" fill="#A4C64A" opacity=".6"/><ellipse cx="34" cy="48" rx="4" ry="9" transform="rotate(-22 34 48)" fill="#fff" opacity=".4"/></g>`}
 function glyph(k){
- if(k==='oignon')return onion(236,44,.72,'#B24F81')+onion(186,30,1,'#9B3668');
+ if(k==='oignon')return `<g class="sw" style="animation-delay:-1.9s">${onion(236,44,.72,'#B24F81')}</g><g class="sw">${onion(186,30,1,'#9B3668')}</g>`;
  if(k==='riz')return rice(190,26);
- if(k==='arachide')return `<g fill="#4E8A34"><ellipse cx="206" cy="66" rx="14" ry="8" transform="rotate(-30 206 66)"/><ellipse cx="232" cy="56" rx="14" ry="8" transform="rotate(20 232 56)"/><ellipse cx="282" cy="62" rx="14" ry="8" transform="rotate(-20 282 62)"/></g>`+nut(222,104,-24)+nut(262,96,18,1.1)+nut(292,122,-60,.8);
- if(k==='mangue')return mango(236,40,.72)+mango(180,30,1);
+ if(k==='arachide')return `<g fill="#4E8A34" class="sw"><ellipse cx="206" cy="66" rx="14" ry="8" transform="rotate(-30 206 66)"/><ellipse cx="232" cy="56" rx="14" ry="8" transform="rotate(20 232 56)"/><ellipse cx="282" cy="62" rx="14" ry="8" transform="rotate(-20 282 62)"/></g>`+nut(222,104,-24)+nut(262,96,18,1.1)+nut(292,122,-60,.8);
+ if(k==='mangue')return `<g class="sw top" style="animation-delay:-2.2s">${mango(236,40,.72)}</g><g class="sw top">${mango(180,30,1)}</g>`;
  if(k==='pasteque')return `<circle cx="248" cy="96" r="44" fill="#2F7D3A"/><g stroke="#1E5A28" stroke-width="6" fill="none"><path d="M248 52c-14 26-14 62 0 88"/><path d="M226 58c-10 22-8 58 6 80"/><path d="M270 58c10 22 8 58-6 80"/></g><path d="M178 108h64a32 32 0 0 1-64 0z" fill="#E5484D" stroke="#3D8B43" stroke-width="6"/><g fill="#2B1D0E"><circle cx="198" cy="118" r="2.4"/><circle cx="212" cy="124" r="2.4"/><circle cx="224" cy="116" r="2.4"/></g>`;
  return '';
 }
+const CLOUD='<ellipse cx="0" cy="0" rx="21" ry="7.5"/><circle cx="-7" cy="-4" r="8.5"/><circle cx="6" cy="-6" r="10.5"/>';
 function art(k){const [sky,hill,gr,row]=SC[k];let rows='';for(let i=-5;i<=5;i++)rows+=`<path d="M${150+i*10} 104L${150+i*60} 170" stroke="${row}" stroke-width="3"/>`;
- return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect width="320" height="160" fill="${sky}"/><circle cx="62" cy="44" r="22" fill="#F2BB16" opacity=".85"/><path d="M0 90Q80 60 160 82T320 72V160H0Z" fill="${hill}"/><path d="M0 104Q160 92 320 104V160H0Z" fill="${gr}"/>${rows}${glyph(k)}</svg>`}
+ return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect width="320" height="160" fill="${sky}"/><g class="sun"><circle class="halo" cx="62" cy="44" r="31" fill="#F2BB16" opacity=".22"/><circle cx="62" cy="44" r="22" fill="#F2BB16" opacity=".85"/></g><g transform="translate(122 36)" fill="#fff" opacity=".82"><g class="cl">${CLOUD}</g></g><g transform="translate(228 30)" fill="#fff" opacity=".7"><g class="cl c2"><g transform="scale(.7)">${CLOUD}</g></g></g><g class="bird"><g class="wing"><path d="M0 0q4.5-4.5 9 0q4.5-4.5 9 0" stroke="#5A3A1A" stroke-width="1.8" fill="none" stroke-linecap="round"/></g></g><path d="M0 90Q80 60 160 82T320 72V160H0Z" fill="${hill}"/><path d="M0 104Q160 92 320 104V160H0Z" fill="${gr}"/>${rows}${glyph(k)}</svg>`}
 function tile(k){const T={
  pousses:`<rect width="80" height="80" fill="#FCEBB5"/><rect y="54" width="80" height="26" fill="#B7834A"/>${[18,40,62].map(x=>`<path d="M${x} 56V36" stroke="#4E8A34" stroke-width="3" stroke-linecap="round"/><ellipse cx="${x-7}" cy="38" rx="8" ry="4.5" transform="rotate(-25 ${x-7} 38)" fill="#6FA544"/><ellipse cx="${x+7}" cy="32" rx="8" ry="4.5" transform="rotate(25 ${x+7} 32)" fill="#6FA544"/>`).join('')}`,
  pluie:`<rect width="80" height="80" fill="#D6E9F0"/><rect y="62" width="80" height="18" fill="#9CC46A"/><g fill="#fff"><circle cx="30" cy="28" r="12"/><circle cx="46" cy="24" r="14"/><circle cx="58" cy="32" r="9"/><rect x="22" y="30" width="42" height="11" rx="5.5"/></g><g stroke="#3F86AE" stroke-width="3" stroke-linecap="round"><path d="M28 48l-3 7M40 48l-3 7M52 48l-3 7M34 58l-2 4M46 58l-2 4"/></g>`,
@@ -635,6 +843,43 @@ const C={
    {d:'18 avr. 2026',t:'Récolte&#8239;: 142 tonnes',x:'Un rendement supérieur de 6&#8239;% à la prévision de l’agronome.',sc:'ok'}]}
 };
 const OPEN=['oignon','riz','arachide','mangue'];
+Object.assign(C.arachide,{stage:3,week:10,elapsed:.5,gtxt:'Les fleurs ont laissé place aux gousses, qui se forment sous terre. Récolte prévue en oct.–nov. 2026.'});
+Object.assign(C.pasteque,{stage:5,elapsed:1,gtxt:'Récolte terminée&#8239;: 142 tonnes, 6&#8239;% au-dessus de la prévision de l’agronome.'});
+/* Météo fictive : lieu, °C, ciel, icône */
+const WX={oignon:['Potou',29,'ensoleillé','sun'],riz:['Podor',37,'ensoleillé','sun'],arachide:['Kaolack',31,'averses','rain'],mangue:['Ziguinchor',30,'nuageux','cloud'],pasteque:['Notto',33,'ensoleillé','sun']};
+const AVC=['#5A3A1A','#2A7148','#B0451F','#1E5A7A'];
+const INI=['AF','MS','KD','IB','ND','OC','MB','SD','AT','CG'];
+/* Stories fictives des agronomes */
+const BG={brun:['#6B4418','#2E1D0C'],eau:['#1E4B55','#10272D'],vert:['#2A5A33','#132B18'],ocre:['#7A4A12','#3B2410']};
+const STO=[
+ {cid:'oignon',ag:'Awa Diop',sh:'Awa',zone:'Niayes',ago:'il y a 2 h',col:'#8A5A1E',slides:[
+  {m:'oignon',tag:'Préparation',t:'Parcelles de Potou prêtes pour la pépinière',x:'8&nbsp;ha nivelés avec les 14 producteurs du GIE, lundi à 6&nbsp;h&nbsp;40.',bg:'brun'},
+  {m:'goutte',tag:'Forage',t:'Eau du forage analysée&#8239;: salinité correcte',x:'Débit mesuré&#8239;: 18&nbsp;m³/h, suffisant pour le goutte-à-goutte.',ok:1,bg:'eau'},
+  {m:'graines',tag:'Semences',t:'Semences de Violet de Galmi réceptionnées',x:'Stockées au frais jusqu’au semis en pépinière, en octobre.',bg:'ocre'}]},
+ {cid:'arachide',ag:'Moussa Ndiaye',sh:'Moussa',zone:'Kaolack',ago:'il y a 5 h',col:'#2A7148',slides:[
+  {m:'pluie',tag:'Semaine 8',t:'412&nbsp;mm de pluie cumulés depuis juillet',x:'Une saison régulière, sans arrêt précoce des pluies.',bg:'eau'},
+  {m:'fleurs',tag:'Semaine 10',t:'Floraison terminée sur les 12&nbsp;ha',x:'Les gousses se forment maintenant sous terre.',ok:1,bg:'vert'},
+  {m:'arachide',tag:'Cette semaine',t:'Désherbage manuel lancé lundi',x:'9 producteurs mobilisés, fin prévue samedi.',bg:'brun'},
+  {m:'sacs',tag:'Récolte',t:'Sacs et bâches commandés pour octobre',x:'Battage mécanique réservé auprès de la coopérative.',bg:'ocre'}]},
+ {cid:'riz',ag:'Ousmane Sall',sh:'Ousmane',zone:'Podor',ago:'hier',col:'#1E5A7A',slides:[
+  {m:'riz',tag:'Préparation',t:'Parcelles attribuées aux 22 producteurs',x:'20&nbsp;ha aménagés le long du fleuve, à Podor.',bg:'eau'},
+  {m:'goutte',tag:'Irrigation',t:'Motopompes révisées avant janvier',x:'Deux pompes testées en conditions réelles, sans panne.',ok:1,bg:'vert'},
+  {m:'graines',tag:'Semences',t:'Semences certifiées réservées',x:'Variété à cycle court, adaptée à la contre-saison chaude.',bg:'ocre'}]},
+ {cid:'mangue',ag:'Fatou Badji',sh:'Fatou',zone:'Casamance',ago:'il y a 2 j',col:'#B0451F',slides:[
+  {m:'mangue',tag:'Inventaire',t:'1&#8239;240 manguiers recensés sur 15&nbsp;ha',x:'Vergers de mangues Kent autour de Ziguinchor.',ok:1,bg:'vert'},
+  {m:'fleurs',tag:'Observation',t:'Premiers bourgeons sur la parcelle nord',x:'Bon signe pour la floraison de janvier.',bg:'brun'},
+  {m:'cloture',tag:'Entretien',t:'Clôture réparée contre la divagation du bétail',x:'Les vergers sont protégés jusqu’à la taille de novembre.',bg:'ocre'}]}
+];
+/* Notifications fictives */
+const NF=[
+ {ic:'MN',col:'#2A7148',t:'<b>Moussa Ndiaye</b> a publié une mise à jour&#8239;: floraison terminée à Kaolack.',d:'il y a 2 h',go:()=>{S.sel='arachide';tab('suivi')}},
+ {ic:'%',col:'#8A5A1E',t:'<b>Oignons · Niayes</b> est financée à 68&#8239;%. Plus que 12 jours pour participer.',d:'hier',go:()=>{S.cid='oignon';go('detail')}},
+ {ic:'AD',col:'#5A3A1A',t:'<b>Awa Diop</b> a publié une story depuis Potou.',d:'hier',go:()=>openStory(0)},
+ {ic:'W',col:'#1E5A7A',t:'<b>Versement reçu</b>&#8239;: 109&#8239;000&nbsp;FCFA pour Pastèques · Thiès.',d:'12 juin',go:()=>{S.sel='pasteque';tab('suivi')}}
+];
+/* Fil en direct fictif */
+const TKN=[['Aïssatou','Thiès'],['Mamadou','Paris'],['Fatou','Milan'],['Ibrahima','Montréal'],['Khady','Dakar'],['Cheikh','Madrid'],['Ndèye','Saint-Louis'],['Babacar','Turin'],['Mariama','Ziguinchor'],['Omar','Bruxelles'],['Coumba','Lyon'],['Alioune','Touba'],['Seynabou','New York'],['Pape','Rufisque']];
+const TKA=[25000,10000,50000,15000,100000,20000,75000];
 const FILTERS=['Toutes','Céréales','Maraîchage','Fruits','Oléagineux'];
 const DONS=[
  {t:'Kit goutte-à-goutte pour Aïssatou Faye',who:'Aïssatou',p:'Maraîchère, 0,5&nbsp;ha · Mboro, Thiès',goal:450000,got:312000,sc:'goutte',thanks:'son kit goutte-à-goutte',photo:'du kit installé'},
@@ -643,7 +888,7 @@ const DONS=[
 ];
 
 /* ---------- State ---------- */
-const S={guest:false,inv:[{id:'arachide',amount:150000,date:'2 juin 2026'},{id:'pasteque',amount:100000,date:'8 janv. 2026'}],filter:'Toutes',cid:'oignon',amount:50000,pay:'wave',ack:false,sel:'arachide',dp:0,damt:5000,dother:false,dpay:'wave',dons:1,last:null,lastDon:null};
+const S={guest:false,inv:[{id:'arachide',amount:150000,date:'2 juin 2026'},{id:'pasteque',amount:100000,date:'8 janv. 2026'}],filter:'Toutes',cid:'oignon',amount:50000,pay:'wave',ack:false,sel:'arachide',dp:0,damt:5000,dother:false,dpay:'wave',dons:1,last:null,lastDon:null,loaded:false,seen:{},nfRead:false};
 const pct=c=>Math.min(100,Math.round(c.raised/c.goal*100));
 const est=(a,c)=>[Math.round(a*(1+c.roi[0]/100)/100)*100,Math.round(a*(1+c.roi[1]/100)/100)*100];
 const invOf=id=>S.inv.find(x=>x.id===id);
@@ -651,7 +896,9 @@ const PAY={wave:'Wave',om:'Orange Money',cb:'Carte bancaire'};
 
 /* ---------- Components ---------- */
 const topbar=t=>`<div class="topbar"><button class="icon-btn" type="button" data-back aria-label="Retour">${I.back}</button><h1>${t}</h1></div>`;
-const bar=v=>`<div class="bar" role="progressbar" aria-valuenow="${v}" aria-valuemin="0" aria-valuemax="100" aria-label="Financement"><i style="width:${v}%"></i></div>`;
+const bar=(v,from)=>`<div class="bar" role="progressbar" aria-valuenow="${v}" aria-valuemin="0" aria-valuemax="100" aria-label="Financement"><i style="width:${v}%" data-w="${v}"${from!=null?` data-from="${from}"`:''}></i></div>`;
+const FMT={n,F,M};
+const cnt=(v,f='n',k='')=>`<span class="cnt" data-v="${v}" data-f="${f}"${k?` data-k="${k}"`:''}>${FMT[f](v)}</span>`;
 const status=c=>c.cur>=c.steps.length?['Terminée','p-g']:c.cur>=0?['Financée · en culture','p-b']:[`Plus que ${c.days}${NB}jours`,'p-y'];
 function timeline(c,withFund){
  const it=c.steps.map((s,i)=>({t:s[0],d:s[1],st:i<c.cur?'done':i===c.cur?'now':'next'}));
@@ -659,34 +906,49 @@ function timeline(c,withFund){
  const lab={done:'terminé',now:'étape en cours',next:'à venir'};
  return `<ol class="tl">${it.map(x=>`<li class="${x.st}"${x.st==='now'?' aria-current="step"':''}><span class="dot" aria-hidden="true"></span><div><b>${x.t}</b><small>${x.d}<span class="vh"> (${lab[x.st]})</span></small>${x.st==='now'?'<em class="now-tag" aria-hidden="true">En cours</em>':''}</div></li>`).join('')}</ol>`;
 }
-function card(id){const c=C[id],p=pct(c),[st,cl]=status(c);
- return `<article class="ccard" data-go="detail" data-id="${id}">
+function card(id,i=0){const c=C[id],p=pct(c),[st,cl]=status(c);
+ return `<article class="ccard" data-go="detail" data-id="${id}" style="--i:${i}">
  <div class="art">${art(id)}<span class="pill p-w pl">${c.cat}</span><span class="pill ${cl} pr">${st}</span></div>
  <div class="cbody"><h3><button class="stretch" type="button" data-go="detail" data-id="${id}">${c.crop} · ${c.zone}</button></h3>
  <p class="meta">${I.pin}${c.place} · ${c.agro.name}</p>
- ${bar(p)}<p class="fund"><b>${pc(p)} financé</b><span>${M(c.raised)} sur ${M(c.goal)}${NB}FCFA</span></p>
- <dl class="stats"><div><dt>Rendement estimé</dt><dd class="g">${c.roi[0]}–${pc(c.roi[1])}</dd></div><div><dt>Durée</dt><dd>${c.months}${NB}mois</dd></div><div><dt>Investisseurs</dt><dd>${c.investors}</dd></div></dl></div></article>`}
+ ${bar(p)}<p class="fund"><b>${cnt(p,'n','p')}${NN}% financé</b><span>${cnt(c.raised,'M','r')} sur ${M(c.goal)}${NB}FCFA</span></p>
+ <dl class="stats"><div><dt>Rendement estimé</dt><dd class="g">${c.roi[0]}–${pc(c.roi[1])}</dd></div><div><dt>Durée</dt><dd>${c.months}${NB}mois</dd></div><div><dt>Investisseurs</dt><dd><span class="inv-dd">${cnt(c.investors,'n','i')}</span></dd></div></dl></div></article>`}
 function portfolio(){
  let tot=0,lo=0,hi=0;S.inv.forEach(v=>{const c=C[v.id];tot+=v.amount;if(c.paid){lo+=c.paid-v.amount;hi+=c.paid-v.amount}else{const e=est(v.amount,c);lo+=e[0]-v.amount;hi+=e[1]-v.amount}});
- return `<section class="pf" aria-label="Mon portefeuille"><p class="k">Total investi</p><p class="big">${F(tot)}</p>
+ return `<section class="pf" aria-label="Mon portefeuille"><p class="k">Total investi</p><p class="big">${cnt(tot,'F')}</p>
  <div class="row"><div><span class="k">Gains estimés</span><b>+${n(lo)} à ${F(hi)}</b></div><div><span class="k">Campagnes</span><b class="w">${S.inv.length}</b></div></div>
  <button class="go" type="button" data-tab="suivi">Voir le suivi ${I.arrow}</button></section>`}
 
 /* ---------- Screens ---------- */
 const R={};
-R.home=()=>`<header class="hhead"><div class="hello"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg><div><p class="eyebrow">Dimanche 27 septembre</p><h1>${S.guest?'Bienvenue sur Baykat':'Bonjour Mohamed'}</h1></div></div><button class="icon-btn" type="button" data-act="toast" data-msg="Nouvelle mise à jour&#8239;: floraison terminée à Kaolack." aria-label="Notifications, 1 nouvelle">${I.bell}<span class="pip"></span></button></header>
+R.home=()=>`<header class="hhead"><div class="hello"><svg class="mark" aria-hidden="true"><use href="#mark"/></svg><div><p class="eyebrow">Dimanche 27 septembre</p><h1>${S.guest?'Bienvenue sur Baykat':'Bonjour Mohamed'}</h1></div></div><button class="icon-btn${S.nfRead?'':' bell-ring'}" id="bell" type="button" data-act="notif" aria-haspopup="dialog" aria-label="Notifications${S.nfRead?'':`, ${NF.length} nouvelles`}">${I.bell}${S.nfRead?'':`<span class="badge" aria-hidden="true">${NF.length}</span>`}</button></header>
+ ${stories()}
  ${S.guest?`<section class="pf" aria-label="Compte"><p class="k">Mode découverte</p><p class="big" style="font-size:21px">Investissez dès 10${NN}000${NB}FCFA</p><p class="k" style="margin-bottom:0">Créez un compte avec votre numéro pour investir et suivre vos campagnes.</p><button class="go" type="button" data-act="logout">Créer un compte ${I.arrow}</button></section>`:portfolio()}
+ ${ticker()}
  <div class="sec-head"><h2>Campagnes</h2><span class="muted">${OPEN.filter(i=>C[i].cur<0).length} ouvertes au financement</span></div>
  <div class="chips" role="group" aria-label="Filtrer par culture">${FILTERS.map(f=>`<button class="chip" type="button" data-act="filter" data-f="${f}" aria-pressed="${S.filter===f}">${f}</button>`).join('')}</div>
- <div class="cards" id="cards">${cards()}</div>`;
+ <div class="cards" id="cards"${S.loaded?'':' aria-busy="true"'}>${S.loaded?cards():skel()}</div>`;
 function cards(){const l=OPEN.filter(i=>S.filter==='Toutes'||C[i].cat===S.filter);return l.length?l.map(card).join(''):`<p class="muted empty">Aucune campagne dans cette catégorie pour le moment.</p>`}
+const skel=()=>`<p class="vh">Chargement des campagnes…</p>`+[70,55,62].map(w=>`<div class="sk" aria-hidden="true"><div class="sk-art"></div><div class="sk-b"><i style="width:${w}%"></i><i style="width:${w-22}%"></i><i style="width:100%;height:8px"></i><i style="width:88%"></i></div></div>`).join('');
+const stories=()=>`<ul class="stories" aria-label="Stories des agronomes (contenu fictif)">${STO.map((x,i)=>`<li><button class="sto${S.seen[i]?' seen':''}" type="button" data-act="story" data-s="${i}" aria-label="${stoLabel(i)}"><span class="ring"><span style="background:${x.col}">${ini(x.ag)}</span></span><span class="sn"><b>${x.sh}</b>${x.zone}</span></button></li>`).join('')}</ul>`;
+const stoLabel=i=>`Story de ${STO[i].ag}, ${C[STO[i].cid].crop} · ${STO[i].zone}${S.seen[i]?', déjà vue':', nouvelle'}`;
+function tkData(k){const [nm,city]=TKN[(k*5)%TKN.length],ids=OPEN.filter(i=>C[i].cur<0),id=ids[k%ids.length],amt=TKA[k%TKA.length],c=C[id];
+ const live=k%3===2&&c.raised+amt<=c.goal-10000;return {nm,city,id,amt,live,col:AVC[k%AVC.length],ago:live?'à l’instant':`il y a ${2+(k*7)%11}${NB}min`}}
+const tkItem=(d,cls='')=>`<p class="tk-item ${cls}"><span class="tk-av${d.live?' live':''}" style="background:${d.col}" aria-hidden="true">${d.nm[0]}</span><span class="tk-txt"><span><b>${d.nm}</b> a investi <b>${F(d.amt)}</b></span><span class="l2">${d.city} → ${C[d.id].crop} · <span class="${d.live?'now':''}">${d.ago}</span></span></span><span class="vh"> dans ${C[d.id].crop} · ${C[d.id].zone}</span></p>`;
+const ticker=()=>`<section class="ticker" aria-label="Activité récente des investisseurs (fictive)"><div class="tk-win" id="tk-win">${tkItem(tkData(TK.k))}</div><button class="icon-btn tk-btn" type="button" data-act="tkpause" aria-label="${TK.paused?'Relancer le fil en direct':'Mettre en pause le fil en direct'}">${TK.paused?I.play:I.pause}</button></section>`;
 
+function wxIcon(t){const sun=`<g class="rays" stroke="#C98A00" stroke-width="2" stroke-linecap="round"><path d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7"/></g><circle cx="12" cy="12" r="5" fill="#F2BB16"/>`;
+ if(t==='sun')return `<svg viewBox="0 0 24 24" aria-hidden="true">${sun}</svg>`;
+ const cloud=`<g class="wcl"><path d="M6.5 20a4 4 0 0 1 .3-8 5 5 0 0 1 9.6 1.3A3.4 3.4 0 0 1 16.6 20z" fill="#fff" stroke="#8A7A63" stroke-width="1.5"/></g>`;
+ return `<svg viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(6 -4) scale(.72)">${sun}</g>${cloud}${t==='rain'?'<g stroke="#3F86AE" stroke-width="1.8" stroke-linecap="round"><path class="drop" d="M9 21.5v1.8"/><path class="drop" d="M13.5 21.5v1.8"/></g>':''}</svg>`}
+const wxChip=id=>{const w=WX[id];return w?`<span class="pill p-w wx">${wxIcon(w[3])}${w[0]} · ${w[1]}° · ${w[2]}<span class="vh"> (météo fictive)</span></span>`:''};
 R.detail=()=>{const id=S.cid,c=C[id],p=pct(c),[st,cl]=status(c),mine=invOf(id),funded=c.cur>=0;
  return `${topbar('Détail de la campagne')}
- <div class="hero">${art(id)}<span class="pill p-w" style="left:12px">${c.cat}</span><span class="pill ${cl}" style="right:12px">${st}</span></div>
+ <div class="hero">${art(id)}<span class="pill p-w" style="left:12px">${c.cat}</span><span class="pill ${cl}" style="right:12px">${st}</span>${wxChip(id)}</div>
  <div class="d-title"><h2>${c.crop} · ${c.zone}</h2><p class="meta" style="margin-bottom:0">${I.pin}${c.place}</p></div>
- <div class="box fundbox"><div class="top"><b>${pc(p)} financé</b><span class="muted">${c.investors} investisseurs</span></div>${bar(p)}
- <div class="under"><span><b style="color:var(--ink);font-weight:600">${F(c.raised)}</b> collectés sur ${F(c.goal)}</span></div></div>
+ <div class="box fundbox"><div class="top"><b>${cnt(p)}${NN}% financé</b><span class="muted">objectif ${M(c.goal)}${NB}FCFA</span></div>${bar(p)}
+ <div class="under"><span><b style="color:var(--ink);font-weight:600">${cnt(c.raised,'F')}</b> collectés sur ${F(c.goal)}</span></div>
+ <div class="invrow"><span class="stack" aria-hidden="true">${[0,1,2,3].map(k=>`<i style="--i:${k};background:${AVC[k]}">${INI[(k+OPEN.indexOf(id)*2+10)%INI.length][0]}</i>`).join('')}</span><span aria-hidden="true" style="line-height:1.35"><b>+${cnt(c.investors-4)} investisseurs</b><br>de Dakar à Montréal</span><span class="vh">${c.investors} investisseurs au total</span></div></div>
  <div class="facts">
   <div class="fact"><small>Rendement estimé</small><b class="g">${c.roi[0]} à ${pc(c.roi[1])}</b><span>sur la durée de la campagne</span></div>
   <div class="fact"><small>Durée</small><b>${c.months}${NB}mois</b><span>début ${c.start}</span></div>
@@ -747,6 +1009,55 @@ R.ok=()=>{const l=S.last,c=C[l.id];
  <p class="demo-note">Démo&#8239;: aucun paiement réel n’a été effectué.</p>
  <div class="acts"><button class="btn btn-primary" type="button" data-act="follow" data-id="${l.id}">Suivre ma campagne</button><button class="btn btn-ghost" type="button" data-tab="home">Retour à l’accueil</button></div></div>`};
 
+/* ---------- Croissance & valeur estimée ---------- */
+const GS=['Semis','Levée','Croissance','Floraison','Récolte'];
+function plant(st){
+ let o=`<svg class="plant" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="96" cy="22" r="9" fill="#F2BB16" opacity=".75"/><rect y="94" width="120" height="26" fill="#B7834A"/><path d="M0 94h120" stroke="#8E6232" stroke-width="3"/><g fill="#9C6B38" opacity=".6"><circle cx="20" cy="106" r="2"/><circle cx="92" cy="110" r="2.4"/><circle cx="44" cy="114" r="1.6"/></g>`;
+ if(st<0)return o+`<ellipse class="seed" cx="60" cy="102" rx="8" ry="5.5" fill="#E3B93E" stroke="#9A6B00" stroke-width="2"/></svg>`;
+ const top=st===0?84:st===1?72:st===2?46:30,mid=(94+top)/2;
+ const ys=st===0?[]:st===1?[76]:st===2?[80,62,50]:[82,66,50,38];
+ let g=`<path class="stem" pathLength="1" d="M60 95C57 ${mid} 63 ${mid} 60 ${top}" stroke="#3F7A2E" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+ ys.forEach((y,i)=>{const d=(.45+i*.16).toFixed(2),w=st===1?8:12-i;
+  g+=`<g class="lf l" style="--d:${d}s"><ellipse cx="${60-w}" cy="${y}" rx="${w}" ry="${w*.42}" transform="rotate(-24 ${60-w} ${y})" fill="#6FA544"/></g><g class="lf r" style="--d:${(+d+.08).toFixed(2)}s"><ellipse cx="${60+w}" cy="${y-4}" rx="${w}" ry="${w*.42}" transform="rotate(24 ${60+w} ${y-4})" fill="#5E9A3C"/></g>`});
+ if(st===0)g+=`<g class="lf r" style="--d:.7s"><ellipse cx="66" cy="84" rx="6" ry="3" transform="rotate(-30 66 84)" fill="#6FA544"/></g>`;
+ if(st>=3)[[60,top-2],[44,56],[77,44]].forEach(([x,y],i)=>{g+=`<g class="fl" style="--d:${(1.1+i*.14).toFixed(2)}s"><circle cx="${x}" cy="${y}" r="5.5" fill="#F2BB16"/><circle cx="${x}" cy="${y}" r="2" fill="#5A3A1A"/></g>`});
+ if(st>=4)[[48,72],[72,62]].forEach(([x,y],i)=>{g+=`<g class="fr" style="--d:${(1.5+i*.15).toFixed(2)}s"><circle cx="${x}" cy="${y}" r="6" fill="#E4572E"/></g>`});
+ o+=`<g class="sway">${g}</g>`;
+ if(st>=5)o+=`<g class="fr" style="--d:1.8s"><circle cx="100" cy="100" r="11" fill="#2A7148"/><path d="M95 100l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+ return o+'</svg>'}
+function growth(c){const st=c.stage==null?-1:c.stage,cur=Math.min(st,4),lab={done:'terminé',now:'stade actuel',next:'à venir'};
+ const title=st<0?'Avant le semis':st>=5?'Culture récoltée':GS[st];
+ const txt=c.gtxt||`La graine attend son heure&#8239;: semis prévu en ${c.start}. Chaque stade s’affichera ici, du semis à la récolte.`;
+ return `<div class="sec-head"><h2>Croissance de la culture</h2><span class="muted">${c.week?`semaine ${c.week}`:st>=5?'terminée':'à venir'}</span></div>
+ <div class="box grow" style="margin:0 20px"><div class="grow-top">${plant(st)}<div><b>${title}</b><p>${txt}</p></div></div>
+ <ol class="gsteps" aria-label="Stades de la culture" style="--p:${st<0?0:cur/4}">${GS.map((g,i)=>{const k=st>=5||i<st?'done':i===st?'now':'next';return `<li class="${k}"${k==='now'?' aria-current="step"':''}><span class="gd" aria-hidden="true">${k==='done'?I.check:k==='now'?I.leaf:i+1}</span>${g}<span class="vh"> (${lab[k]})</span></li>`}).join('')}</ol></div>`}
+function valueChart(v,c){
+ const a=v.amount,[elo,ehi]=est(a,c),done=!!c.paid,el=done?1:(c.elapsed||0),fin=done?c.paid:(elo+ehi)/2;
+ const x0=4,x1=316,yT=22,yB=110,top=Math.max(ehi,fin),sp=(top-a)||1,ymin=a-sp*.3,ymax=top+sp*.1;
+ const X=t=>(x0+(x1-x0)*t).toFixed(1),Y=val=>(yB-(val-ymin)/(ymax-ymin)*(yB-yT)).toFixed(1),f=t=>Math.pow(t,1.35);
+ const N=24,ts=[...Array(N+1)].map((_,i)=>i/N),mid=t=>a+(fin-a)*f(t);
+ const up=ts.map(t=>`${X(t)},${Y(a+(ehi-a)*f(t))}`),dn=ts.slice().reverse().map(t=>`${X(t)},${Y(a+(elo-a)*f(t))}`);
+ const line=tt=>tt.map((t,i)=>`${i?'L':'M'}${X(t)},${Y(mid(t))}`).join('');
+ const past=ts.filter(t=>t<=el);if(past[past.length-1]!==el)past.push(el);
+ const futr=[el,...ts.filter(t=>t>el)];
+ const start=v.date.replace(/^\d+\s/,''),tl=el<.15?'start':el>.85?'end':'middle';
+ const aria=done?`Valeur de votre contribution : ${F(a)} investis, ${F(fin)} versés en ${c.steps[5][1]}.`:`Valeur estimée de votre contribution : ${F(a)} investis, entre ${F(elo)} et ${F(ehi)} en ${c.pay}. Estimation indicative, non garantie.`;
+ return `<div class="sec-head"><h2>Valeur de ma contribution</h2><span class="muted">${done?'versée':'estimée'}</span></div>
+ <div class="box" style="margin:0 20px"><figure class="chart" role="img" aria-label="${aria}"><svg viewBox="0 0 320 142" aria-hidden="true" focusable="false">
+  <path d="M${x0} ${Y(a)}H${x1}" stroke="#EADFC8" stroke-width="1" stroke-dasharray="3 3"/>
+  <path d="M${x0} 122H${x1}" stroke="#D9CCB0" stroke-width="1"/>
+  <text x="${x0}" y="${+Y(a)+14}">${n(a)} investis</text>
+  <path class="band" d="M${up.join('L')}L${dn.join('L')}Z" fill="#F2BB16" fill-opacity=".32" stroke="#DDA000" stroke-opacity=".55" stroke-width="1"/>
+  ${done?'':`<path class="proj" d="${line(futr)}" stroke="#5A3A1A" stroke-width="1.6" stroke-dasharray="4 4" fill="none" opacity=".75"/>`}
+  <path class="ln" pathLength="1" d="${line(past)}" stroke="#5A3A1A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  ${done?'':`<path d="M${X(el)} ${yT-6}V122" stroke="#8A7A63" stroke-width="1" stroke-dasharray="2 3"/><text class="k" x="${X(el)}" y="${yT-10}" text-anchor="${tl}">Aujourd’hui</text>`}
+  <text class="k" x="${x1}" y="${+Y(done?fin:ehi)-8}" text-anchor="end">${done?`Versé : ${n(fin)}`:`jusqu’à ${n(ehi)}`}</text>
+  <g class="dotp"><circle cx="${X(el)}" cy="${Y(mid(el))}" r="6.5" fill="#fff"/><circle cx="${X(el)}" cy="${Y(mid(el))}" r="4.5" fill="#F2BB16" stroke="#5A3A1A" stroke-width="2"/></g>
+  <text x="${x0}" y="137">${start}</text><text x="${x1}" y="137" text-anchor="end">${done?c.steps[5][1]:c.pay}</text>
+ </svg></figure>
+ <p class="clg" aria-hidden="true"><span><i style="background:rgba(242,187,22,.45);border:1px solid #DDA000"></i>${done?'Fourchette annoncée':'Fourchette estimée'} <b>${n(elo)} – ${F(ehi)}</b></span><span><i style="height:3px;background:var(--b)"></i>${done?'Valeur réelle':'Valeur médiane'}</span></p>
+ ${done?'':`<p class="warn" style="margin-top:10px">${I.alert}<span><b>Estimation indicative, non garantie.</b> La valeur réelle dépend de la récolte et des prix de vente.</span></p>`}</div>`}
+
 R.suivi=()=>{
  if(S.guest)return `<div class="ph"><h1>Suivi</h1></div><div class="empty"><p class="prose">Connectez-vous pour suivre vos campagnes étape par étape, avec les nouvelles de l’agronome.</p><br><button class="btn btn-primary" type="button" data-act="logout">Se connecter</button></div>`;
  if(!invOf(S.sel))S.sel=S.inv[0].id;
@@ -757,6 +1068,8 @@ R.suivi=()=>{
  <div class="box" style="margin:14px 20px 0"><div class="sv-head"><span class="t">${art(S.sel)}</span><div><h2>${c.crop} · ${c.zone}</h2><p>Investi le ${v.date} · ${F(v.amount)}</p><span class="pill ${cl}">${st}</span></div></div>
  ${done?`<div class="payout paid"><small>Versé le ${c.steps[5][1]}</small><b>${F(c.paid)}</b><small>soit +${F(c.paid-v.amount)} (+${pc(Math.round((c.paid/v.amount-1)*100))})</small></div>`
   :`<div class="payout"><small>Prochain versement estimé · ${c.pay}</small><b>${n(lo)} – ${F(hi)}</b><small>Estimation indicative, non garantie</small></div>`}</div>
+ ${growth(c)}
+ ${valueChart(v,c)}
  <div class="sec-head"><h2>Où en est la campagne&#8239;?</h2></div>
  <div class="box" style="margin:0 20px">${timeline(c,true)}</div>
  <div class="sec-head"><h2>Nouvelles du terrain</h2><span class="muted">${news.length} mise${news.length>1?'s':''} à jour</span></div>
@@ -782,7 +1095,7 @@ function updDon(){const b=$('#don-btn');if(!b)return;const ok=S.damt>=500;b.disa
 R.donok=()=>{const x=S.lastDon,d=DONS[x.dp];
  return `<div class="ok"><svg class="ok-ic" viewBox="0 0 112 112" aria-hidden="true"><circle class="ring" cx="56" cy="56" r="50"/><circle class="c1" cx="56" cy="56" r="44"/><path class="hrt" d="M56 80S33 66 33 49a11.5 11.5 0 0 1 23-4 11.5 11.5 0 0 1 23 4c0 17-23 31-23 31z"/></svg>
  <h1>Jërëjëf&#8239;!</h1><p class="lead">Votre don de ${F(x.amount)} finance ${d.thanks}. Vous recevrez une photo ${d.photo}.</p>
- <div class="box" style="margin-top:22px;text-align:left"><p class="prose" style="margin:0 0 8px"><b>${d.t}</b></p>${bar(Math.round(d.got/d.goal*100))}<p class="muted" style="margin:8px 0 0">${F(d.got)} sur ${F(d.goal)} collectés</p></div>
+ <div class="box" style="margin-top:22px;text-align:left"><p class="prose" style="margin:0 0 8px"><b>${d.t}</b></p>${bar(Math.round(d.got/d.goal*100),x.from)}<p class="muted" style="margin:8px 0 0">${F(d.got)} sur ${F(d.goal)} collectés</p></div>
  <p class="demo-note">Démo&#8239;: aucun paiement réel n’a été effectué.</p>
  <div class="acts"><button class="btn btn-primary" type="button" data-tab="don">Terminer</button></div></div>`};
 
@@ -843,6 +1156,7 @@ function show(id,mode){
  next.hidden=false;next.inert=false;next.scrollTop=mode==='pop'?(scrollMem[next.id]||0):0;
  cur=next;
  const h=next.querySelector('h1');if(h){h.tabIndex=-1;h.focus({preventScroll:true})}
+ enter(id,next,prev===next?'none':mode);
  if(prev===next)return;
  prev.inert=true;
  const cls=['in-push','out-push','in-pop','out-pop','in-tab','out-tab'];
@@ -854,6 +1168,107 @@ function show(id,mode){
 const go=id=>{stack.push(id);show(id,'push')};
 const back=()=>{if(stack.length>1){stack.pop();show(stack[stack.length-1],'pop')}};
 const tab=id=>{const from=stack[stack.length-1];stack.length=0;stack.push(id);show(id,TABS.includes(from)||from==='login'?'tab':'pop')};
+/* ---------- Vivant : chiffres, barres, squelette, fil en direct ---------- */
+const TK={k:0,timer:null,paused:RM.matches};
+let skT=null;
+function countTo(el,from,to,delay=0){const f=FMT[el.dataset.f]||n;el.dataset.v=to;cancelAnimationFrame(el._r);clearTimeout(el._t);
+ if(RM.matches){el.textContent=f(to);return}
+ el.textContent=f(from);
+ el._t=setTimeout(()=>{const t0=performance.now(),D=1000;const st=now=>{const t=Math.min(1,(now-t0)/D),e=1-Math.pow(1-t,3);el.textContent=f(from+(to-from)*e);if(t<1)el._r=requestAnimationFrame(st)};el._r=requestAnimationFrame(st)},delay)}
+function animateIn(root,delay=0){if(!root||RM.matches)return;
+ $$('.bar i[data-w]',root).forEach((b,k)=>{b.style.transition='none';b.style.width=(b.dataset.from||0)+'%';void b.offsetWidth;b.style.transition='';setTimeout(()=>{b.style.width=b.dataset.w+'%'},delay+k*60)});
+ $$('.cnt',root).forEach(el=>countTo(el,0,+el.dataset.v,delay))}
+function stagger(el){if(RM.matches)return;el.classList.add('stagger');setTimeout(()=>el.classList.remove('stagger'),1200)}
+function enter(id,el,mode){const d=mode==='push'||mode==='pop'?220:90;
+ animateIn(el,d);
+ if(id==='home'){if(!S.loaded){clearTimeout(skT);skT=setTimeout(()=>{S.loaded=true;const c=$('#cards');if(!c||!c.hasAttribute('aria-busy'))return;c.removeAttribute('aria-busy');c.innerHTML=cards();stagger(c);animateIn(c,120)},RM.matches?0:650)}startTicker()}
+ else stopTicker();
+ if(id==='ok'||id==='donok')setTimeout(()=>confetti(el),RM.matches?0:mode==='none'?0:300);
+}
+function startTicker(){stopTicker();TK.timer=setInterval(tick,4000)}
+function stopTicker(){clearInterval(TK.timer);TK.timer=null}
+function tick(){const w=$('#tk-win');if(!w||TK.paused||document.hidden||SV.open||!$('#notif').hidden||cur.id!=='s-home')return;
+ TK.k++;const d=tkData(TK.k),old=w.firstElementChild;
+ if(RM.matches){w.innerHTML=tkItem(d)}else{w.insertAdjacentHTML('beforeend',tkItem(d,'in'));if(old){old.classList.add('out');setTimeout(()=>old.remove(),420)}}
+ if(d.live)setTimeout(()=>bump(d.id,d.amt),RM.matches?0:350)}
+function bump(id,amt){const c=C[id],p0=pct(c),r0=c.raised,i0=c.investors;c.raised+=amt;c.investors++;
+ const card=$(`#cards .ccard[data-id="${id}"]`);if(!card)return;const p1=pct(c);
+ const b=card.querySelector('.bar'),bi=b.querySelector('i');b.setAttribute('aria-valuenow',p1);bi.dataset.w=p1;bi.style.width=p1+'%';
+ const q=k=>card.querySelector(`.cnt[data-k="${k}"]`);
+ countTo(q('p'),p0,p1);countTo(q('r'),r0,c.raised);countTo(q('i'),i0,c.investors);
+ card.classList.remove('bump');void card.offsetWidth;card.classList.add('bump');setTimeout(()=>card.classList.remove('bump'),1400)}
+
+/* ---------- Confettis ---------- */
+function confetti(scr){if(RM.matches||!scr||scr.hidden)return;
+ const cv=document.createElement('canvas');cv.className='confetti';cv.setAttribute('aria-hidden','true');app.appendChild(cv);
+ const r=app.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=r.width,H=r.height;cv.width=W*dpr;cv.height=H*dpr;
+ const x=cv.getContext('2d');x.scale(dpr,dpr);
+ const ic=scr.querySelector('.ok-ic'),ir=ic?ic.getBoundingClientRect():null,ox=ir?ir.left-r.left+ir.width/2:W/2,oy=ir?ir.top-r.top+ir.height/2:H*.25;
+ const cols=['#F2BB16','#5A3A1A','#2A7148','#E4572E','#F7D56A','#1E5A7A'];
+ const P=Array.from({length:130},(_,i)=>{const a=-Math.PI/2+(Math.random()-.5)*2.2,sp=5+Math.random()*9;return{x:ox,y:oy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,w:5+Math.random()*5,h:8+Math.random()*6,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[i%cols.length],o:i%3===0}});
+ const t0=performance.now();let last=t0;
+ const f=now=>{const t=now-t0,k=Math.min(3,(now-last)/16.7);last=now;x.clearRect(0,0,W,H);x.globalAlpha=Math.max(0,1-Math.max(0,t-1000)/600);
+  P.forEach(p=>{p.vy+=.3*k;p.vx*=Math.pow(.985,k);p.vy*=Math.pow(.985,k);p.x+=p.vx*k;p.y+=p.vy*k;p.r+=p.vr*k;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;
+   if(p.o){x.beginPath();x.arc(0,0,p.w/2,0,7);x.fill()}else x.fillRect(-p.w/2,-p.h/2,p.w,p.h*Math.abs(Math.cos(p.r*1.6))+1);x.restore()});
+  if(t<1600)requestAnimationFrame(f);else cv.remove()};
+ requestAnimationFrame(f)}
+
+/* ---------- Modales (story, notifications) ---------- */
+const FOC='button:not([disabled]):not([tabindex="-1"]),[href],input,select,textarea';
+function inertBg(){const l=[...app.querySelectorAll(':scope>.screen,:scope>.tabbar')].filter(e=>!e.hidden&&!e.inert);l.forEach(e=>e.inert=true);return l}
+function trap(e,root){if(e.key!=='Tab')return;const f=$$(FOC,root).filter(el=>el.offsetParent!==null);if(!f.length)return;const a=f[0],z=f[f.length-1];
+ if(!root.contains(document.activeElement)){e.preventDefault();a.focus()}else if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+
+/* Story viewer */
+const SV={el:$('#story'),open:false,i:0,j:0,paused:false,held:false,sup:false,bg:[],opener:null,bar:'c',hold:null,p:null};
+function markSeen(i){S.seen[i]=true;$$(`.sto[data-s="${i}"]`).forEach(b=>{b.classList.add('seen');b.setAttribute('aria-label',stoLabel(i))})}
+function openStory(i,opener){if(SV.open)return;SV.open=true;SV.i=i;SV.j=0;SV.paused=false;SV.opener=opener||null;SV.bg=inertBg();
+ SV.bar=app.dataset.bar;app.dataset.bar='d';SV.el.classList.remove('closing');SV.el.classList.toggle('rm',RM.matches);SV.el.hidden=false;renderStory('close')}
+function renderStory(focusKey){const s=STO[SV.i],sl=s.slides[SV.j],c=C[s.cid],wide=!!SC[sl.m],bg=BG[sl.bg];markSeen(SV.i);
+ const k=focusKey||(SV.el.contains(document.activeElement)&&document.activeElement.dataset.sa);
+ SV.el.innerHTML=`<div class="st-bars" aria-hidden="true">${s.slides.map((_,q)=>`<span class="${q<SV.j?'done':q===SV.j?'cur':''}"><i></i></span>`).join('')}</div>
+ <div class="st-head"><span class="av" style="background:${s.col}" aria-hidden="true">${ini(s.ag)}</span><div class="who"><b id="st-name">${s.ag}</b><small>${c.crop} · ${s.zone} · ${s.ago}</small></div>
+ <button class="st-btn" type="button" data-sa="pause" aria-label="${SV.paused?'Reprendre la story':'Mettre la story en pause'}">${SV.paused?I.play:I.pause}</button><button class="st-btn" type="button" data-sa="close" aria-label="Fermer la story">${I.x}</button></div>
+ <div class="st-stage" style="background:linear-gradient(165deg,${bg[0]},${bg[1]})">
+  <div class="st-media ${wide?'w':'sq'}" aria-hidden="true">${wide?art(sl.m):tile(sl.m)}</div>
+  <div class="st-cap"><span class="tag">${sl.tag}</span><h2>${sl.t}${sl.ok?OKI:''}</h2><p>${sl.x}</p><span class="vh">Diapositive ${SV.j+1} sur ${s.slides.length}.</span></div>
+  <button class="st-tap prev" type="button" data-sa="prev" aria-label="Diapositive précédente"></button><button class="st-tap next" type="button" data-sa="next" aria-label="Diapositive suivante"></button>
+ </div>
+ <div class="st-foot">Contenu fictif · touchez à droite pour avancer</div>`;
+ SV.el.classList.toggle('paused',SV.paused);
+ const fb=k&&SV.el.querySelector(`[data-sa="${k}"]`);if(fb)fb.focus({preventScroll:true})}
+function stNext(){const s=STO[SV.i];if(SV.j<s.slides.length-1)SV.j++;else if(SV.i<STO.length-1){SV.i++;SV.j=0}else return closeStory();renderStory()}
+function stPrev(){if(SV.j>0)SV.j--;else if(SV.i>0){SV.i--;SV.j=0}renderStory()}
+function stJump(d){const i=SV.i+d;if(i<0)return renderStory();if(i>=STO.length)return closeStory();SV.i=i;SV.j=0;renderStory()}
+function closeStory(){if(!SV.open)return;SV.open=false;clearTimeout(SV.hold);app.dataset.bar=SV.bar;SV.bg.forEach(e=>e.inert=false);
+ const i=SV.i,end=()=>{SV.el.hidden=true;SV.el.innerHTML='';SV.el.classList.remove('closing')};
+ if(RM.matches)end();else{SV.el.classList.add('closing');setTimeout(end,220)}
+ const o=(SV.opener&&SV.opener.isConnected&&SV.opener)||$(`.sto[data-s="${i}"]`)||$('#bell');if(o)o.focus({preventScroll:true})}
+SV.el.addEventListener('animationend',e=>{if(SV.open&&!RM.matches&&!SV.paused&&e.target.matches('.st-bars .cur i'))stNext()});
+SV.el.addEventListener('click',e=>{const b=e.target.closest('[data-sa]');if(!b)return;if(SV.sup&&b.classList.contains('st-tap'))return;
+ const a=b.dataset.sa;if(a==='close')return closeStory();if(a==='next')return stNext();if(a==='prev')return stPrev();
+ if(a==='pause'){SV.paused=!SV.paused;SV.el.classList.toggle('paused',SV.paused);b.setAttribute('aria-label',SV.paused?'Reprendre la story':'Mettre la story en pause');b.innerHTML=SV.paused?I.play:I.pause}});
+SV.el.addEventListener('pointerdown',e=>{if(!e.target.closest('.st-stage'))return;SV.p={x:e.clientX,y:e.clientY};SV.held=false;clearTimeout(SV.hold);
+ SV.hold=setTimeout(()=>{SV.held=true;SV.el.classList.add('paused')},280)});
+const stUp=e=>{clearTimeout(SV.hold);if(!SV.p)return;const dx=e.clientX-SV.p.x,dy=e.clientY-SV.p.y;SV.p=null;let used=false;
+ if(SV.held){SV.held=false;if(!SV.paused)SV.el.classList.remove('paused');used=true}
+ if(dy>70&&Math.abs(dy)>Math.abs(dx)){closeStory();used=true}else if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){stJump(dx<0?1:-1);used=true}
+ if(used){SV.sup=true;setTimeout(()=>{SV.sup=false},60)}};
+SV.el.addEventListener('pointerup',stUp);SV.el.addEventListener('pointercancel',stUp);
+
+/* Notifications */
+const NS=$('#notif');let nsBack=null;
+function openSheet(){if(!NS.hidden)return;const unread=!S.nfRead;
+ $('#nf-list').innerHTML=NF.map((x,i)=>`<li><button class="nf-item new${unread?'':' read'}" style="--i:${i}" type="button" data-act="nf" data-n="${i}"><span class="ni" style="background:${x.col}" aria-hidden="true">${x.ic}</span><span class="tx">${x.t}<time>${x.d}</time></span><span class="ud" aria-hidden="true"></span>${unread?'<span class="vh">(non lue)</span>':''}</button></li>`).join('');
+ S.nfRead=true;const bell=$('#bell');if(bell){bell.setAttribute('aria-label','Notifications');bell.classList.remove('bell-ring');const bd=bell.querySelector('.badge');if(bd){bd.classList.add('gone');setTimeout(()=>bd.remove(),260)}}
+ nsBack=inertBg();NS.classList.remove('closing');NS.hidden=false;$('.nf-item',NS).focus({preventScroll:true})}
+function closeSheet(then){if(NS.hidden)return;nsBack.forEach(e=>e.inert=false);
+ const end=()=>{NS.hidden=true;NS.classList.remove('closing');$$('.nf-item',NS).forEach(b=>b.classList.add('read'));if(then)then();else{const b=$('#bell');if(b)b.focus({preventScroll:true})}};
+ if(RM.matches)end();else{NS.classList.add('closing');setTimeout(end,220)}}
+document.addEventListener('keydown',e=>{
+ if(SV.open){if(e.key==='Escape'){e.preventDefault();return closeStory()}if(e.key==='ArrowRight')return stNext();if(e.key==='ArrowLeft')return stPrev();return trap(e,SV.el)}
+ if(!NS.hidden){if(e.key==='Escape'){e.preventDefault();return closeSheet()}return trap(e,NS)}});
+
 let tt;function toast(m){toastEl.innerHTML=m;toastEl.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('on'),2600)}
 
 /* ---------- Events ---------- */
@@ -872,7 +1287,12 @@ function act(a,t){
  case 'guest':S.guest=true;return tab('home');
  case 'logout':stack.length=0;stack.push('login');return show('login','tab');
  case 'toast':return toast(t.dataset.msg);
- case 'filter':S.filter=t.dataset.f;$$('#s-home .chips .chip').forEach(b=>b.setAttribute('aria-pressed',b===t));$('#cards').innerHTML=cards();return;
+ case 'filter':{S.filter=t.dataset.f;S.loaded=true;clearTimeout(skT);$$('#s-home .chips .chip').forEach(b=>b.setAttribute('aria-pressed',b===t));const c=$('#cards');c.removeAttribute('aria-busy');c.innerHTML=cards();stagger(c);animateIn(c,80);return}
+ case 'story':return openStory(+t.dataset.s,t);
+ case 'notif':return openSheet();
+ case 'nfclose':return closeSheet();
+ case 'nf':{const g=NF[+t.dataset.n].go;return closeSheet(g)}
+ case 'tkpause':TK.paused=!TK.paused;t.setAttribute('aria-label',TK.paused?'Relancer le fil en direct':'Mettre en pause le fil en direct');t.innerHTML=TK.paused?I.play:I.pause;if(!TK.paused){tick();startTicker()}return;
  case 'invest':if(S.guest){toast('Connectez-vous pour investir (démo).');return setTimeout(()=>act('logout'),700)}S.ack=false;S.amount=50000;return go('invest');
  case 'amt':S.amount=Math.min(Math.max(S.amount+ +t.dataset.d,+$('#amt-range').min),+$('#amt-range').max);return updInvest();
  case 'set':S.amount=Math.min(+t.dataset.v,+$('#amt-range').max);return updInvest();
@@ -883,7 +1303,7 @@ function act(a,t){
   S.last={id:S.cid,amount:a,pay:S.pay,ref,lo,hi};S.sel=S.cid;stack.length=0;stack.push('ok');return show('ok','push')}
  case 'follow':S.sel=t.dataset.id;return tab('suivi');
  case 'sel':S.sel=t.dataset.id;{const sc=$('#s-suivi').scrollTop;$('#s-suivi').innerHTML=R.suivi();$('#s-suivi').scrollTop=Math.min(sc,90);$(`#s-suivi .chip[data-id="${S.sel}"]`).focus()}return;
- case 'donate':{if(S.damt<500)return;const d=DONS[S.dp];d.got=Math.min(d.goal,d.got+S.damt);S.dons++;S.lastDon={dp:S.dp,amount:S.damt};stack.push('donok');return show('donok','push')}
+ case 'donate':{if(S.damt<500)return;const d=DONS[S.dp],from=Math.round(d.got/d.goal*100);d.got=Math.min(d.goal,d.got+S.damt);S.dons++;S.lastDon={dp:S.dp,amount:S.damt,from};stack.push('donok');return show('donok','push')}
  case 'send':{const m=$('#c-msg');if(!m.value.trim()){m.focus();return toast('Écrivez un message avant d’envoyer.')}m.value='';return toast('Message envoyé. Réponse sous 24&nbsp;h (démo).')}
  }
 }
