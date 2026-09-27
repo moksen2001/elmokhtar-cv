@@ -98,7 +98,7 @@ CSS = r"""
 .case-h .c{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .case-h h3{font-size:1.15rem;line-height:1.25}
 .case-h .now{align-self:flex-start;font-family:var(--mono);font-size:.7rem;padding:4px 9px;border-radius:999px;background:var(--sun-soft);color:var(--sun)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.csteps{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
 .stp{padding:24px 22px;position:relative}
 .stp+.stp{border-left:1px dashed var(--line)}
 .stp .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--mono);font-size:.78rem;margin-bottom:10px;background:var(--surface);position:relative;z-index:1;transition:background .4s,color .4s}
@@ -107,14 +107,14 @@ CSS = r"""
 .stp p b{display:inline}
 .stp p{margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.55}
 .stp:last-child p{color:var(--ink)}
-.steps::before{content:"";position:absolute;left:36px;right:36px;top:38px;height:2px;background:linear-gradient(90deg,var(--teal),var(--sun));transform-origin:left;transform:scaleX(0);transition:transform 1.4s cubic-bezier(.3,.7,.2,1) .2s;opacity:.55}
-.case.go .steps::before{transform:scaleX(1)}
+.csteps::before{content:"";position:absolute;left:36px;right:36px;top:38px;height:2px;background:linear-gradient(90deg,var(--teal),var(--sun));transform-origin:left;transform:scaleX(0);transition:transform 1.4s cubic-bezier(.3,.7,.2,1) .2s;opacity:.55}
+.case.go .csteps::before{transform:scaleX(1)}
 .case .stp{opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
 .case.go .stp{opacity:1;transform:none}
 .case.go .stp:nth-child(2){transition-delay:.35s}.case.go .stp:nth-child(3){transition-delay:.7s}
 .case.go .stp:last-child .n{background:var(--sun);color:#1b1405}
 @media (max-width:900px){.case{grid-template-columns:1fr}.case-h{border-right:0;border-bottom:1px solid var(--line)}}
-@media (max-width:700px){.steps{grid-template-columns:1fr}.stp+.stp{border-left:0;border-top:1px dashed var(--line)}.steps::before{display:none}.stp{display:grid;grid-template-columns:28px 1fr;column-gap:14px}.stp .n{grid-row:span 2;margin:0}.stp .l{margin-top:4px}}
+@media (max-width:700px){.csteps{grid-template-columns:1fr}.stp+.stp{border-left:0;border-top:1px dashed var(--line)}.csteps::before{display:none}.stp{display:grid;grid-template-columns:28px 1fr;column-gap:14px}.stp .n{grid-row:span 2;margin:0}.stp .l{margin-top:4px}}
 /* ==== ENH6: map ==== */
 :root{--sv:#5B6BD6;--so:#D0613F}
 :root[data-theme="dark"]{--sv:#8E9BF2;--so:#F08A68}
@@ -189,7 +189,7 @@ def cases(t,pre):
     for org,logo,ctx,title,p,a,r,now in t['cases']:
         steps=''.join('<div class="stp"><span class="n">%d</span><span class="l">%s</span><p>%s</p></div>'%(i+1,t['lbl'][i],x) for i,x in enumerate((p,a,r)))
         out+=('<article class="card case rv"><div class="case-h"><span class="lg" data-logo="'+org+'"><img src="%simg/logos/%s" alt="%s" loading="lazy"></span><span class="c">%s</span><h3>%s</h3>%s</div>'
-              '<div class="steps">%s</div></article>')%(pre,logo,org,ctx,title,('<span class="now">%s</span>'%t['now']) if now else '',steps)
+              '<div class="csteps">%s</div></article>')%(pre,logo,org,ctx,title,('<span class="now">%s</span>'%t['now']) if now else '',steps)
     return ('<!--ENH6:cases--><section class="block" id="cas"><div class="wrap"><div class="head rv"><div><span class="eyebrow">%s</span><h2>%s</h2></div><p>%s</p></div>'
             '<div class="cases">%s</div></div></section><!--/ENH6:cases-->')%(t['cases_eb'],t['cases_h'],t['cases_p'],out)
 
