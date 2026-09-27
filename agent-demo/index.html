@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Démo · Agent IA Lettres de Crédit</title>
+<meta name="description" content="Démo simulée de l'agent IA conçu au hackathon GBIS « AI for Clients » : lecture d'une Lettre de Crédit fictive, contrôles et brouillon de message.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#0C1413;--surface:#131F1E;--s2:#1A2927;--ink:#E5ECE9;--ink2:#C0CCC8;--muted:#8D9D98;--line:#253734;--teal:#46B99D;--teal-soft:#153029;--sun:#E6AE48;--sun-soft:#2D2413;--red:#F08A68;--red-soft:#34201A;--ok:#6BD39A;
+--display:"Bricolage Grotesque",system-ui,sans-serif;--body:"Instrument Sans",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--teal)}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:10px 20px;background:#07100F;border-bottom:1px solid var(--line);font-size:.86rem}
+.bar a{font-weight:600;text-decoration:none;color:var(--sun)}
+.bar .tag{font-family:var(--mono);font-size:.72rem;padding:3px 8px;border-radius:6px;background:var(--sun-soft);color:var(--sun)}
+.bar .sp{flex:1}
+.bar .lang{display:flex;gap:4px}.bar .lang a{color:var(--muted);padding:2px 6px;border-radius:6px}.bar .lang a[aria-current]{background:var(--teal);color:#06201A}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 20px 40px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 24px;margin-bottom:18px}
+.head h1{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3vw,2.3rem);letter-spacing:-.02em;margin:0;line-height:1.1}
+.head p{margin:6px 0 0;color:var(--ink2);max-width:62ch}
+.head .meta{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+/* document */
+.doc{position:sticky;top:14px;overflow:hidden}
+.doc-h{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+.doc-h b{color:var(--ink);font-weight:600}
+.doc-h .pill{margin-left:auto;font-family:var(--mono);font-size:.68rem;padding:3px 8px;border-radius:6px;background:var(--s2);color:var(--muted)}
+.paper{margin:14px;padding:18px 20px;border-radius:10px;background:#F4F1E8;color:#23201A;font-family:var(--mono);font-size:.74rem;line-height:1.65;max-height:calc(100vh - 170px);overflow:auto;position:relative}
+.paper h2{font-family:var(--mono);font-size:.8rem;margin:0 0 8px;letter-spacing:.06em}
+.paper .row{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:2px 4px;border-radius:5px;transition:background .4s,box-shadow .4s}
+.paper .row .k{color:#7B7466}
+.paper .row.hl{background:#FFE9A8;box-shadow:inset 3px 0 0 #D29A12}
+.paper .row.bad{background:#FFD6C8;box-shadow:inset 3px 0 0 #D0613F}
+.paper .sep{border-top:1px dashed #C9C1AE;margin:10px 0}
+.paper .pres h2{color:#5B6BD6}
+.stamp{position:absolute;right:14px;top:14px;font-family:var(--mono);font-size:.62rem;color:#A0342A;border:1.5px solid #A0342A;padding:2px 6px;border-radius:4px;transform:rotate(6deg);opacity:.75}
+/* chat */
+.chat{display:flex;flex-direction:column;min-height:640px}
+.chat-h{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.av{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--teal),#2E7F6B);color:#06201A;font-weight:800;font-family:var(--display)}
+.chat-h b{display:block}
+.chat-h small{color:var(--muted);font-size:.8rem}
+.chat-h .st{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.chat-h .st i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.log{flex:1;padding:18px;display:flex;flex-direction:column;gap:14px;overflow:auto;max-height:calc(100vh - 250px);min-height:420px;scroll-behavior:smooth}
+.msg{max-width:92%;animation:in .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.msg.me{align-self:flex-end;background:var(--teal);color:#06201A;padding:10px 14px;border-radius:14px 14px 4px 14px;font-weight:500}
+.msg.ai{align-self:flex-start;width:92%}
+.bub{background:var(--s2);border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:12px 14px}
+.bub p{margin:0 0 6px}.bub p:last-child{margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.step{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;font-size:.92rem}
+.step .ic{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.step.run .ic{border-color:var(--teal);border-top-color:transparent;animation:spin .8s linear infinite}
+.step.done .ic{border-color:var(--teal);background:var(--teal)}
+.step.done .ic::after{content:"";width:6px;height:10px;border:solid #06201A;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.step.warn .ic{border-color:var(--red);background:var(--red)}
+.step.warn .ic::after{content:"!";color:#2A0F07;font-weight:800;font-size:.72rem}
+.step small{display:block;color:var(--muted);font-size:.8rem}
+.step .t{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding-top:2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+table.kv{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px}
+table.kv td{padding:6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.kv td:first-child{color:var(--muted);width:44%;padding-right:10px}
+table.kv tr:last-child td{border-bottom:0}
+.chk{display:grid;gap:8px;margin-top:4px}
+.ck{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);font-size:.9rem}
+.ck .b{font-family:var(--mono);font-size:.68rem;padding:3px 7px;border-radius:6px;height:fit-content;white-space:nowrap}
+.ck.ok .b{background:var(--teal-soft);color:var(--teal)}
+.ck.ko{border-color:color-mix(in srgb,var(--red) 55%,var(--line));background:var(--red-soft)}
+.ck.ko .b{background:var(--red);color:#2A0F07}
+.ck.info .b{background:var(--sun-soft);color:var(--sun)}
+.ck small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.hitl{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--sun-soft);color:var(--sun);font-size:.86rem;display:flex;gap:8px}
+.draft{margin-top:6px;padding:12px 14px;border-radius:10px;background:#0E1817;border:1px dashed var(--line);font-size:.88rem;white-space:pre-wrap;font-family:var(--body)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{all:unset;box-sizing:border-box;cursor:pointer;padding:8px 12px;border-radius:9px;border:1px solid var(--line);font-size:.85rem;font-weight:600;color:var(--ink)}
+.btn:hover{border-color:var(--teal);color:var(--teal)}
+.btn.p{background:var(--teal);border-color:var(--teal);color:#06201A}
+.btn:focus-visible{outline:2px solid var(--sun)}
+.typing{display:inline-flex;gap:4px;padding:12px 14px;background:var(--s2);border:1px solid var(--line);border-radius:14px 14px 14px 4px;align-self:flex-start}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.25;transform:translateY(-2px)}}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px}
+.sugg button{all:unset;box-sizing:border-box;cursor:pointer;padding:8px 12px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;color:var(--ink2);background:var(--bg)}
+.sugg button:hover,.sugg button:focus-visible{border-color:var(--teal);color:var(--ink)}
+.sugg button[disabled]{opacity:.4;cursor:default}
+.inp{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
+.inp input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:var(--ink);font:inherit}
+.inp input:focus{outline:none;border-color:var(--teal)}
+.inp button{all:unset;cursor:pointer;padding:0 16px;border-radius:10px;background:var(--teal);color:#06201A;font-weight:700}
+.inp button[disabled]{opacity:.5;cursor:default}
+.foot{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.foot div{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-size:.88rem;color:var(--ink2)}
+.foot b{display:block;color:var(--ink);margin-bottom:3px;font-size:.92rem}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.chat{order:-1}.doc{position:static}.paper{max-height:300px}.log{max-height:none;min-height:360px}.foot{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a id="back" href="../#projets">← <span data-t="back"></span></a>
+  <span class="tag" data-t="tag"></span>
+  <span data-t="bar"></span>
+  <span class="sp"></span>
+  <span class="lang"><a href="?lang=fr" data-l="fr">FR</a><a href="?lang=en" data-l="en">EN</a></span>
+</div>
+<main class="wrap">
+  <div class="head">
+    <div><h1 data-t="h1"></h1><p data-t="lead"></p></div>
+    <span class="meta" data-t="meta"></span>
+  </div>
+  <div class="grid">
+    <section class="card doc" aria-labelledby="dt">
+      <div class="doc-h"><b id="dt" data-t="docT"></b><span class="pill">MT700 · PDF</span></div>
+      <div class="paper" id="paper">
+        <span class="stamp" data-t="stamp"></span>
+        <h2>ISSUE OF A DOCUMENTARY CREDIT</h2>
+        <div class="row" data-f="n"><span class="k">:20:</span><span>DOC. CREDIT NO. LC-DEMO-2025-0417</span></div>
+        <div class="row" data-f="d"><span class="k">:31C:</span><span>DATE OF ISSUE 250910</span></div>
+        <div class="row" data-f="exp"><span class="k">:31D:</span><span>EXPIRY 251215 PLACE GENEVA</span></div>
+        <div class="row" data-f="app"><span class="k">:50:</span><span>APPLICANT: HELVETIA GRAIN TRADING SA (FICTITIOUS), GENEVA</span></div>
+        <div class="row" data-f="ben"><span class="k">:59:</span><span>BENEFICIARY: ATLANTIC AGRO EXPORT LTD (FICTITIOUS), ABIDJAN</span></div>
+        <div class="row" data-f="amt"><span class="k">:32B:</span><span>USD 1,250,000.00</span></div>
+        <div class="row" data-f="tol"><span class="k">:39A:</span><span>TOLERANCE 05/05</span></div>
+        <div class="row" data-f="av"><span class="k">:41A:</span><span>AVAILABLE WITH ISSUING BANK BY PAYMENT</span></div>
+        <div class="row" data-f="ship"><span class="k">:44C:</span><span>LATEST DATE OF SHIPMENT 251120</span></div>
+        <div class="row" data-f="port"><span class="k">:44E/F:</span><span>SAN PEDRO, CÔTE D'IVOIRE → ANTWERP, BELGIUM</span></div>
+        <div class="row" data-f="goods"><span class="k">:45A:</span><span>2,500 MT RAW COCOA BEANS, CIF ANTWERP INCOTERMS 2020</span></div>
+        <div class="row" data-f="docs"><span class="k">:46A:</span><span>SIGNED COMMERCIAL INVOICE IN 3 ORIGINALS / FULL SET CLEAN ON BOARD B/L / INSURANCE CERTIFICATE 110 PCT CIF VALUE / CERTIFICATE OF ORIGIN / PHYTOSANITARY CERTIFICATE</span></div>
+        <div class="row" data-f="per"><span class="k">:48:</span><span>PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE</span></div>
+        <div class="row" data-f="ucp"><span class="k">:40E:</span><span>UCP LATEST VERSION (UCP 600)</span></div>
+        <div class="sep"></div>
+        <div class="pres">
+          <h2 data-t="presT"></h2>
+          <div class="row" data-f="p-inv"><span class="k">INV</span><span>COMMERCIAL INVOICE · USD 1,318,750.00 · 2,510 MT · 3 ORIGINALS</span></div>
+          <div class="row" data-f="p-bl"><span class="k">B/L</span><span>ON BOARD 251118 · SAN PEDRO → ANTWERP · CLEAN · 3/3</span></div>
+          <div class="row" data-f="p-ins"><span class="k">INS</span><span>INSURANCE CERT. · USD 1,450,625.00</span></div>
+          <div class="row" data-f="p-coo"><span class="k">COO</span><span>CERTIFICATE OF ORIGIN · CÔTE D'IVOIRE</span></div>
+          <div class="row" data-f="p-phy"><span class="k">PHY</span><span data-t="phyMissing"></span></div>
+          <div class="row" data-f="p-date"><span class="k">DATE</span><span>DOCUMENTS PRESENTED 251205</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card chat" aria-label="Agent">
+      <div class="chat-h"><span class="av">LC</span><div><b data-t="agent"></b><small data-t="agentSub"></small></div><span class="st"><i></i><span data-t="online"></span></span></div>
+      <div class="log" id="log" aria-live="polite"></div>
+      <div class="sugg" id="sugg"></div>
+      <form class="inp" id="form"><input id="q" autocomplete="off" aria-label="Question"><button id="send" type="submit" data-t="send"></button></form>
+    </section>
+  </div>
+  <div class="foot">
+    <div><b data-t="f1t"></b><span data-t="f1"></span></div>
+    <div><b data-t="f2t"></b><span data-t="f2"></span></div>
+    <div><b data-t="f3t"></b><span data-t="f3"></span></div>
+  </div>
+</main>
+<script>
+(function(){
+var L=/[?&]lang=en/.test(location.search)||(!/[?&]lang=fr/.test(location.search)&&/\/en\//.test(document.referrer))?'en':'fr';
+document.documentElement.lang=L;
+var T={fr:{
+ back:"Retour au CV",tag:"DÉMO SIMULÉE",bar:"Données entièrement fictives · aucune donnée ni aucun système de Société Générale",
+ h1:"Agent IA · Lettres de Crédit",lead:"Reconstitution du parcours imaginé au hackathon GBIS « AI for Clients » (finaliste parmi 80+ équipes) : l'agent lit une Lettre de Crédit, contrôle la présentation documentaire et prépare le travail, l'opérateur Back Office garde la décision.",
+ meta:"Société Générale CIB · oct. – nov. 2025",docT:"Lettre de Crédit fictive",stamp:"SPECIMEN",presT:"DOCUMENTS PRESENTED",phyMissing:"PHYTOSANITARY CERTIFICATE · NOT PRESENTED",
+ agent:"Agent LC",agentSub:"Orchestré via Power Automate · démo",online:"Prêt",send:"Envoyer",ph:"Posez une question sur la Lettre de Crédit…",
+ s:["Résume cette Lettre de Crédit","Contrôle la présentation documentaire","Prépare le message de réserves"],
+ hello:"Bonjour, j'ai reçu la Lettre de Crédit LC-DEMO-2025-0417 et la présentation documentaire associée. Que voulez-vous faire ?",
+ st:{read:"Lecture du document",readS:"OCR et découpage des champs MT700",extract:"Extraction des données clés",extractS:"Montants, dates, parties, documents exigés",check:"Contrôles selon l'UCP 600",checkS:"Dates, montants, documents, tolérances",draft:"Rédaction du brouillon",draftS:"Ton client, références, réserves",hitl:"Transmission à l'opérateur",hitlS:"Validation humaine obligatoire"},
+ sumIntro:"Voici l'essentiel de la Lettre de Crédit :",
+ kv:[["Référence","LC-DEMO-2025-0417"],["Donneur d'ordre","Helvetia Grain Trading SA, Genève"],["Bénéficiaire","Atlantic Agro Export Ltd, Abidjan"],["Montant","1 250 000 USD (tolérance ±5 %)"],["Marchandise","2 500 t de fèves de cacao, CIF Anvers"],["Expédition au plus tard","20 nov. 2025"],["Validité","15 déc. 2025, Genève"],["Délai de présentation","21 jours après l'expédition"],["Documents exigés","5 : facture, connaissement, assurance, origine, phytosanitaire"]],
+ sumEnd:"Tous les champs sont repris avec leur source dans le document (surlignés à gauche).",
+ chkIntro:"J'ai comparé les documents présentés aux conditions de la Lettre de Crédit :",
+ checks:[["ok","Date d'expédition","Connaissement à bord le 18 nov., avant la limite du 20 nov."],["ok","Délai de présentation","Présentation le 5 déc. : 17 jours après l'expédition (≤ 21) et avant la validité du 15 déc."],["ok","Quantité","2 510 t pour 2 500 t, dans la tolérance de ±5 %."],["ko","Montant de la facture","1 318 750 USD, soit +5,5 % : au-delà de la tolérance de +5 % (maximum 1 312 500 USD)."],["ok","Assurance","1 450 625 USD = 110 % de la valeur CIF facturée (1 318 750 USD)."],["ko","Document manquant","Le certificat phytosanitaire exigé en 46A n'a pas été présenté."]],
+ chkEnd:"2 réserves détectées. Je ne décide pas du paiement : je prépare le dossier pour l'opérateur.",
+ hitl:"Décision finale réservée à l'opérateur Back Office. Chaque réserve renvoie à la clause et au document source.",
+ drIntro:"Voici un brouillon de message de réserves, à relire avant envoi :",
+ draft:"Objet : LC-DEMO-2025-0417 · Présentation du 5 décembre 2025 · Réserves\n\nMadame, Monsieur,\n\nNous accusons réception de la présentation documentaire relative au crédit cité en objet. Après examen, nous relevons les réserves suivantes :\n\n1. Montant facturé de 1 318 750 USD, supérieur au montant maximum autorisé de 1 312 500 USD (tolérance de 5 % prévue en 39A).\n2. Certificat phytosanitaire exigé en 46A non présenté.\n\nNous restons à votre disposition pour toute présentation corrigée dans le délai de validité du crédit.\n\nCordialement,",
+ drEnd:"Le brouillon n'est jamais envoyé automatiquement.",act:["Valider (démo)","Modifier (démo)"],validated:"Brouillon validé par l'opérateur. Dans le vrai flux, il partirait ensuite via l'outil de messagerie habituel.",
+ fallback:"Dans cette démo, je sais résumer la Lettre de Crédit, contrôler la présentation et préparer le message de réserves. Choisissez une des suggestions ci-dessous.",
+ f1t:"Ce que j'ai apporté",f1:"Cadrage du cas d'usage et priorisation des tâches à automatiser selon leur valeur et leur risque, entre logique métier Trade Finance et faisabilité technique.",
+ f2t:"Le principe",f2:"L'IA accélère la lecture et le contrôle de documents non structurés, sans baisser le niveau de contrôle d'un process réglementé.",
+ f3t:"À propos de cette démo",f3:"Reconstitution pédagogique : document, entreprises et montants inventés. Les règles citées (UCP 600) sont publiques."
+},en:{
+ back:"Back to CV",tag:"SIMULATED DEMO",bar:"Fully fictional data · no Société Générale data or systems",
+ h1:"AI agent · Letters of Credit",lead:"A reconstruction of the flow designed at the GBIS “AI for Clients” hackathon (finalist among 80+ teams): the agent reads a Letter of Credit, checks the document presentation and prepares the work, while the Back Office operator keeps the decision.",
+ meta:"Société Générale CIB · Oct. – Nov. 2025",docT:"Fictional Letter of Credit",stamp:"SPECIMEN",presT:"DOCUMENTS PRESENTED",phyMissing:"PHYTOSANITARY CERTIFICATE · NOT PRESENTED",
+ agent:"LC Agent",agentSub:"Orchestrated with Power Automate · demo",online:"Ready",send:"Send",ph:"Ask something about the Letter of Credit…",
+ s:["Summarise this Letter of Credit","Check the document presentation","Draft the discrepancy notice"],
+ hello:"Hello, I have received Letter of Credit LC-DEMO-2025-0417 and the related document presentation. What would you like to do?",
+ st:{read:"Reading the document",readS:"OCR and MT700 field parsing",extract:"Extracting key data",extractS:"Amounts, dates, parties, required documents",check:"Checks under UCP 600",checkS:"Dates, amounts, documents, tolerances",draft:"Drafting",draftS:"Client tone, references, discrepancies",hitl:"Handing over to the operator",hitlS:"Human validation required"},
+ sumIntro:"Here is what matters in this Letter of Credit:",
+ kv:[["Reference","LC-DEMO-2025-0417"],["Applicant","Helvetia Grain Trading SA, Geneva"],["Beneficiary","Atlantic Agro Export Ltd, Abidjan"],["Amount","USD 1,250,000 (±5% tolerance)"],["Goods","2,500 MT raw cocoa beans, CIF Antwerp"],["Latest shipment","20 Nov 2025"],["Expiry","15 Dec 2025, Geneva"],["Presentation period","21 days after shipment"],["Required documents","5: invoice, bill of lading, insurance, origin, phytosanitary"]],
+ sumEnd:"Every field is traced back to its source in the document (highlighted on the left).",
+ chkIntro:"I compared the presented documents with the credit terms:",
+ checks:[["ok","Shipment date","B/L on board 18 Nov, before the 20 Nov deadline."],["ok","Presentation period","Presented 5 Dec: 17 days after shipment (≤ 21) and before the 15 Dec expiry."],["ok","Quantity","2,510 MT for 2,500 MT, within the ±5% tolerance."],["ko","Invoice amount","USD 1,318,750, i.e. +5.5%: above the +5% tolerance (maximum USD 1,312,500)."],["ok","Insurance","USD 1,450,625 = 110% of the invoiced CIF value (USD 1,318,750)."],["ko","Missing document","The phytosanitary certificate required in 46A was not presented."]],
+ chkEnd:"2 discrepancies found. I do not decide on payment: I prepare the file for the operator.",
+ hitl:"Final decision stays with the Back Office operator. Each discrepancy links to its clause and source document.",
+ drIntro:"Here is a draft discrepancy notice, to be reviewed before sending:",
+ draft:"Subject: LC-DEMO-2025-0417 · Presentation of 5 December 2025 · Discrepancies\n\nDear Sir or Madam,\n\nWe acknowledge receipt of the documents presented under the above credit. Upon examination, we note the following discrepancies:\n\n1. Invoiced amount of USD 1,318,750 exceeds the maximum allowed amount of USD 1,312,500 (5% tolerance under 39A).\n2. Phytosanitary certificate required under 46A not presented.\n\nWe remain available for a corrected presentation within the validity of the credit.\n\nKind regards,",
+ drEnd:"The draft is never sent automatically.",act:["Approve (demo)","Edit (demo)"],validated:"Draft approved by the operator. In the real flow it would then go out through the usual messaging tool.",
+ fallback:"In this demo I can summarise the Letter of Credit, check the presentation and draft the discrepancy notice. Pick one of the suggestions below.",
+ f1t:"What I brought",f1:"Scoping the use case and prioritising which tasks to automate by value and risk, bridging Trade Finance business logic and technical feasibility.",
+ f2t:"The principle",f2:"AI speeds up reading and checking unstructured documents without lowering the level of control a regulated process requires.",
+ f3t:"About this demo",f3:"An educational reconstruction: document, companies and amounts are invented. The rules quoted (UCP 600) are public."
+}}[L];
+document.querySelectorAll('[data-t]').forEach(function(e){ var v=T[e.dataset.t]; if(typeof v==='string') e.textContent=v; });
+document.title=T.h1; document.querySelector('.lang a[data-l="'+L+'"]').setAttribute('aria-current','true');
+document.getElementById('back').href=L==='en'?'../en/#projets':'../#projets';
+var q=document.getElementById('q'); q.placeholder=T.ph;
+var log=document.getElementById('log'), sugg=document.getElementById('sugg'), send=document.getElementById('send'), paper=document.getElementById('paper');
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, busy=false;
+var wait=function(ms){ return new Promise(function(r){ setTimeout(r, reduce?Math.min(ms,60):ms); }); };
+function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+function esc(s){ return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]}); }
+function down(){ log.scrollTop=log.scrollHeight; }
+function hl(fields,cls){ paper.querySelectorAll('.row').forEach(function(r){ r.classList.remove('hl','bad'); });
+  (fields||[]).forEach(function(f){ var r=paper.querySelector('[data-f="'+f[0]+'"]'); if(r){ r.classList.add(f[1]||'hl'); } });
+  var first=paper.querySelector('.row.bad, .row.hl'); if(first && matchMedia('(min-width:901px)').matches){ paper.scrollTo({top:Math.max(0,first.offsetTop-60),behavior:reduce?'auto':'smooth'}); } }
+function aiMsg(){ var m=el('div','msg ai'); log.appendChild(m); down(); return m; }
+async function typing(ms){ var t=el('div','typing','<i></i><i></i><i></i>'); log.appendChild(t); down(); await wait(ms); t.remove(); }
+async function runSteps(m,keys){
+  var ul=el('ol','steps'); var b=el('div','bub'); b.appendChild(ul); m.appendChild(b); var t0=0;
+  for(var i=0;i<keys.length;i++){ var k=keys[i]; var li=el('li','step run','<span class="ic" aria-hidden="true"></span><div>'+T.st[k]+'<small>'+T.st[k+'S']+'</small></div><span class="t"></span>'); ul.appendChild(li); down();
+    var d=600+Math.random()*500; await wait(d); t0+=d; li.className='step done'; li.querySelector('.t').textContent=(t0/1000).toFixed(1)+' s'; }
+}
+async function summary(){
+  var m=aiMsg(); await runSteps(m,['read','extract']);
+  hl([['n'],['app'],['ben'],['amt'],['tol'],['goods'],['ship'],['exp'],['per'],['docs']]);
+  var b=el('div','bub'); b.innerHTML='<p>'+T.sumIntro+'</p><table class="kv">'+T.kv.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</table><p style="margin-top:8px;color:var(--muted);font-size:.84rem">'+T.sumEnd+'</p>';
+  await typing(500); m.appendChild(b); down();
+}
+async function check(){
+  var m=aiMsg(); await runSteps(m,['read','extract','check']);
+  var b=el('div','bub'); b.innerHTML='<p>'+T.chkIntro+'</p><div class="chk"></div>'; m.appendChild(b); var box=b.querySelector('.chk');
+  var map=[['ship','p-bl'],['per','p-date'],['goods','p-inv'],['tol','p-inv'],['docs','p-ins'],['docs','p-phy']];
+  for(var i=0;i<T.checks.length;i++){ var c=T.checks[i]; var ok=c[0]==='ok';
+    hl([[map[i][0], ok?'hl':'bad'],[map[i][1], ok?'hl':'bad']]);
+    box.appendChild(el('div','ck '+c[0],'<span class="b">'+(ok?'OK':(L==='en'?'DISCREPANCY':'RÉSERVE'))+'</span><div>'+c[1]+'<small>'+c[2]+'</small></div>')); down(); await wait(650); }
+  hl([['tol','bad'],['p-inv','bad'],['docs','bad'],['p-phy','bad']]);
+  b.appendChild(el('p',null,'<b>'+T.chkEnd+'</b>')); b.appendChild(el('div','hitl','<span aria-hidden="true">👤</span><span>'+T.hitl+'</span>')); down();
+  var run=m.querySelector('.steps'); var li=el('li','step done','<span class="ic" aria-hidden="true"></span><div>'+T.st.hitl+'<small>'+T.st.hitlS+'</small></div><span class="t"></span>'); run.appendChild(li);
+}
+async function draft(){
+  var m=aiMsg(); await runSteps(m,['check','draft']);
+  hl([['n'],['tol','bad'],['docs','bad'],['p-inv','bad'],['p-phy','bad']]);
+  var b=el('div','bub'); b.innerHTML='<p>'+T.drIntro+'</p><div class="draft"></div><p style="margin-top:8px;color:var(--muted);font-size:.84rem">'+T.drEnd+'</p><div class="acts"><button class="btn p" type="button">'+T.act[0]+'</button><button class="btn" type="button">'+T.act[1]+'</button></div>';
+  m.appendChild(b); var d=b.querySelector('.draft'); var txt=T.draft;
+  if(reduce){ d.textContent=txt; } else { for(var i=0;i<txt.length;i+=4){ d.textContent=txt.slice(0,i+4); if(i%40===0) down(); await wait(8); } }
+  down();
+  var acts=b.querySelectorAll('.acts .btn');
+  acts[0].addEventListener('click',function(){ acts.forEach(function(x){x.disabled=true;x.style.opacity=.5}); b.appendChild(el('div','hitl','<span aria-hidden="true">✓</span><span>'+T.validated+'</span>')); down(); });
+  acts[1].addEventListener('click',function(){ d.contentEditable='true'; d.focus(); });
+}
+async function ask(text,kind){
+  if(busy) return; busy=true; setBusy(true);
+  log.appendChild(el('div','msg me',esc(text))); down();
+  await typing(650);
+  try{
+    if(kind===0) await summary(); else if(kind===1) await check(); else if(kind===2) await draft();
+    else { var m=aiMsg(); m.appendChild(el('div','bub','<p>'+T.fallback+'</p>')); }
+  }finally{ busy=false; setBusy(false); down(); }
+}
+function setBusy(v){ send.disabled=v; sugg.querySelectorAll('button').forEach(function(b){b.disabled=v}); }
+function classify(s){ s=s.toLowerCase();
+  if(/(réserve|reserve|message|mail|brouillon|draft|notice|discrepancy notice|rédig|redig)/.test(s)) return 2;
+  if(/(contr[oô]l|check|vérif|verif|conform|discrepanc|anomal|erreur|présentation|presentation)/.test(s)) return 1;
+  if(/(résum|resum|summar|synth|lis|read|extrai|extract|montant|amount|date|bénéfici|benefic|lettre|letter|lc)/.test(s)) return 0;
+  return -1; }
+T.s.forEach(function(label,i){ var b=el('button',null,label); b.type='button'; b.addEventListener('click',function(){ ask(label,i); }); sugg.appendChild(b); });
+document.getElementById('form').addEventListener('submit',function(e){ e.preventDefault(); var v=q.value.trim(); if(!v) return; q.value=''; ask(v,classify(v)); });
+(async function(){ await wait(400); var m=aiMsg(); m.appendChild(el('div','bub','<p>'+T.hello+'</p>')); })();
+})();
+</script>
+</body>
+</html>

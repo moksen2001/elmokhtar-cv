@@ -880,6 +880,16 @@ html.qopen{overflow:hidden}
   .rel .ring{left:-30px;top:-27px}
 }
 /* ==== ENH7-END ==== */
+/* ==== ENH8-START ==== */
+/* ==== ENH8: demo badges ==== */
+.demo-b{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--sun);background:var(--sun-soft);padding:4px 10px;border-radius:999px}
+.demo-b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 0 var(--sun);animation:dpulse 2s infinite}
+@keyframes dpulse{70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.proj .vis img.bk{object-position:center}
+.proj .vis .demo-b{position:absolute;left:12px;top:12px;z-index:2;background:#0C1413;color:#E6AE48;border:1px solid #3A3220;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.proj .vis .demo-b::before{background:#E6AE48}
+@media (prefers-reduced-motion:reduce){.demo-b::before{animation:none}}
+/* ==== ENH8-END ==== */
 </style>
 </head>
 <body>
@@ -1122,7 +1132,7 @@ html.qopen{overflow:hidden}
       </div>
       <div class="projects">
         <button class="card proj big rv" data-p="p-agent">
-          <div class="vis">
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Démo interactive</span><!--/ENH8:b-->
             <div class="flow" aria-hidden="true">
               <div class="n">Lettre de crédit<small>document non structuré</small></div>
               <svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1150,7 +1160,7 @@ html.qopen{overflow:hidden}
         </button>
 
         <button class="card proj rv" data-p="p-focal">
-          <div class="vis"><img src="img/focal-site.jpg" alt="Page d'accueil du prototype Focal-Shift : location et revente de matériel photo et vidéo" loading="lazy" decoding="async" class="shot"></div>
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Démo interactive</span><!--/ENH8:b--><img src="img/focal-site.jpg" alt="Page d'accueil du prototype Focal-Shift : location et revente de matériel photo et vidéo" loading="lazy" decoding="async" class="shot"></div>
           <div class="pb">
             <span class="ctx2">MBA ESG · challenge de fin d'études · sept. 2026</span>
             <h3>Focal-Shift</h3>
@@ -1170,7 +1180,7 @@ html.qopen{overflow:hidden}
         </button>
 
         <button class="card proj rv" data-p="p-baykat">
-          <div class="vis"><div class="typo baykat"><b>Baykat</b><i>financement participatif agricole · Sénégal</i></div></div>
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Démo interactive</span><!--/ENH8:b--><img src="img/baykat-app.jpg" alt="Nouvelle version de l'application Baykat : connexion et accueil" loading="lazy" decoding="async" class="bk"></div>
           <div class="pb">
             <span class="ctx2">Groupe ISM · projet de fin d'études · 2023</span>
             <h3>Baykat</h3>
@@ -1194,7 +1204,7 @@ html.qopen{overflow:hidden}
       <div hidden>
         <div id="p-agent" data-k="Société Générale CIB · Hackathon GBIS « AI for Clients »">
           <h3>Agent IA pour le Back Office Trade Finance</h3>
-          <div class="meta"><span class="award">Finaliste parmi 80+ équipes</span><span class="tag">Équipe de 5</span><span class="tag">Oct. – nov. 2025</span></div>
+          <div class="meta"><span class="award">Finaliste parmi 80+ équipes</span><span class="tag">Équipe de 5</span><span class="tag">Oct. – nov. 2025</span></div><!--ENH8:cta--><div class="demo-cta"><p>Démo simulée : l'agent lit une Lettre de Crédit fictive, contrôle la présentation selon l'UCP 600 et prépare le message de réserves. Données entièrement fictives.</p><a class="btn" href="agent-demo/" target="_blank" rel="noopener">Tester l'agent ↗</a></div><!--/ENH8:cta-->
           <p>Hackathon mondial de Société Générale dédié à l'usage de l'IA au service des clients et des équipes internes. Notre équipe a conçu un agent IA qui automatise des tâches Back Office sur les <b>Lettres de Crédit</b>, orchestré via Power Automate. L'objectif : réduire le temps de traitement manuel de documents non structurés sans baisser le niveau de contrôle exigé sur un process réglementé.</p>
           <h4>Mon rôle</h4>
           <p>Structuration fonctionnelle du besoin : cadrage du cas d'usage, priorisation des tâches à automatiser selon leur valeur et leur risque, articulation entre la logique métier Trade Finance et la faisabilité technique.</p>
@@ -1236,7 +1246,7 @@ html.qopen{overflow:hidden}
         </div>
         <div id="p-baykat" data-k="Groupe ISM · Projet de fin d'études · Licence">
           <h3>Baykat</h3>
-          <div class="meta"><span class="tag">Janv. – sept. 2023</span><span class="tag">Livrable de 98 pages</span></div>
+          <div class="meta"><span class="tag">Janv. – sept. 2023</span><span class="tag">Livrable de 98 pages</span></div><!--ENH8:cta--><div class="demo-cta"><p>Le prototype XD de 2023 repensé en 2026 : connexion par téléphone, campagnes, simulateur d'investissement, suivi par l'agronome, dons. Données fictives.</p><a class="btn" href="baykat-demo/" target="_blank" rel="noopener">Tester le prototype ↗</a></div><!--/ENH8:cta-->
           <p>Plateforme d'investissement participatif dans l'agriculture sénégalaise. Elle met en relation des agriculteurs qui cherchent un financement avec des investisseurs locaux et de la diaspora qui veulent soutenir une campagne agricole avec un retour sur investissement.</p>
           <h4>Mon rôle</h4>
           <p>Pilotage du projet de bout en bout : étude de marché, business model, benchmark, analyse des risques, personas, définition des fonctionnalités clés, UX/UI, stratégie de lancement, structure de coûts et perspectives d'expansion en Afrique. Prototype d'application mobile : investissement, suivi de projet, dons, messagerie, vente directe.</p>

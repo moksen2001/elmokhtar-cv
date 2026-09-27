@@ -1,0 +1,51 @@
+# Links to the AI-agent and Baykat demos: card visuals, "interactive demo" badges, panel call-to-actions.
+# Idempotent; run after enhance7.py.
+import re
+
+T = {
+ 'fr': dict(badge="Démo interactive",
+   agent_note="Démo simulée : l'agent lit une Lettre de Crédit fictive, contrôle la présentation selon l'UCP 600 et prépare le message de réserves. Données entièrement fictives.",
+   agent_btn="Tester l'agent",
+   bk_note="Le prototype XD de 2023 repensé en 2026 : connexion par téléphone, campagnes, simulateur d'investissement, suivi par l'agronome, dons. Données fictives.",
+   bk_btn="Tester le prototype", bk_alt="Nouvelle version de l'application Baykat : connexion et accueil"),
+ 'en': dict(badge="Interactive demo",
+   agent_note="Simulated demo: the agent reads a fictional Letter of Credit, checks the presentation under UCP 600 and drafts the discrepancy notice. Fully fictional data.",
+   agent_btn="Try the agent",
+   bk_note="The 2023 XD prototype redesigned in 2026 (in French): phone sign-in, campaigns, investment simulator, agronomist updates, donations. Fictional data.",
+   bk_btn="Try the prototype", bk_alt="Redesigned Baykat app: sign-in and home screens"),
+}
+CSS = r"""
+/* ==== ENH8: demo badges ==== */
+.demo-b{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--sun);background:var(--sun-soft);padding:4px 10px;border-radius:999px}
+.demo-b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 0 var(--sun);animation:dpulse 2s infinite}
+@keyframes dpulse{70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.proj .vis img.bk{object-position:center}
+.proj .vis .demo-b{position:absolute;left:12px;top:12px;z-index:2;background:#0C1413;color:#E6AE48;border:1px solid #3A3220;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.proj .vis .demo-b::before{background:#E6AE48}
+@media (prefers-reduced-motion:reduce){.demo-b::before{animation:none}}
+"""
+
+def cta(note,href,btn):
+    return '<!--ENH8:cta--><div class="demo-cta"><p>%s</p><a class="btn" href="%s" target="_blank" rel="noopener">%s ↗</a></div><!--/ENH8:cta-->'%(note,href,btn)
+
+def run(path,lang):
+    t=T[lang]; pre='../' if lang=='en' else ''
+    s=open(path,encoding='utf-8').read()
+    s=re.sub(r'/\* ==== ENH8-START ==== \*/.*?/\* ==== ENH8-END ==== \*/\n?','',s,flags=re.S)
+    s=re.sub(r'<!--ENH8:(\w+)-->.*?<!--/ENH8:\1-->','',s,flags=re.S)
+    s=s.replace('</style>','/* ==== ENH8-START ==== */'+CSS+'/* ==== ENH8-END ==== */\n</style>',1)
+    # Baykat card visual: typographic tile -> real screens of the redesigned app
+    s=re.sub(r'(<button class="card proj[^"]*" data-p="p-baykat">\s*<div class="vis">)(?:<div class="typo baykat">.*?</div>|<img [^>]*class="bk"[^>]*>)',
+             lambda m:m.group(1)+'<img src="%simg/baykat-app.jpg" alt="%s" loading="lazy" decoding="async" class="bk">'%(pre,t['bk_alt']),s,count=1,flags=re.S)
+    # badges on cards that have a demo
+    for pid in ('p-agent','p-focal','p-baykat'):
+        i=s.index('data-p="%s"'%pid); j=s.index('<div class="vis">',i)+len('<div class="vis">')
+        s=s[:j]+'<!--ENH8:b--><span class="demo-b">%s</span><!--/ENH8:b-->'%t['badge']+s[j:]
+    # panel call-to-actions (after the first meta line of each panel)
+    for pid,note,href,btn in (('p-agent',t['agent_note'],pre+'agent-demo/'+('?lang=en' if lang=='en' else ''),t['agent_btn']),
+                              ('p-baykat',t['bk_note'],pre+'baykat-demo/',t['bk_btn'])):
+        i=s.index('<div id="%s"'%pid); mi=s.index('<div class="meta">',i); me=s.index('</div>',mi)+6
+        s=s[:me]+cta(note,href,btn)+s[me:]
+    open(path,'w',encoding='utf-8').write(s); print('ok',path)
+
+run('index.html','fr'); run('en/index.html','en')
