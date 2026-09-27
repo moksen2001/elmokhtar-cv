@@ -6,9 +6,18 @@
   /* ---------- Menu mobile ---------- */
   var toggle = document.querySelector('.menu-toggle');
   var nav = document.getElementById('nav-principale');
+  var header = document.querySelector('.site-header');
+  var majPositionNav = function () {
+    // Place le panneau juste sous l'en-tête réel (qui inclut le bandeau de démo au-dessus),
+    // plutôt qu'une valeur fixe qui ne tenait pas compte de ce bandeau.
+    if (header) document.documentElement.style.setProperty('--nav-top', header.getBoundingClientRect().bottom + 'px');
+  };
+  majPositionNav();
+  window.addEventListener('resize', majPositionNav);
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
       var ouvert = toggle.getAttribute('aria-expanded') === 'true';
+      majPositionNav();
       toggle.setAttribute('aria-expanded', String(!ouvert));
       nav.classList.toggle('ouvert', !ouvert);
       document.body.classList.toggle('menu-ouvert', !ouvert);
