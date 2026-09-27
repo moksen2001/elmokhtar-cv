@@ -97,11 +97,6 @@ JS = r"""
     if(!/PNUD|UNDP/.test(h.textContent)||h.parentNode.querySelector('.elg')) return;
     var s=document.createElement('span'); s.className='elg'; s.setAttribute('aria-hidden','true'); var im=new Image(); im.src=L['PNUD']; im.alt=''; s.appendChild(im); h.parentNode.insertBefore(s,h.parentNode.firstChild);
   });
-  /* quick read: small logo before each organisation */
-  document.querySelectorAll('.qv-path li b').forEach(function(b){
-    var src=L[b.textContent.trim()]; if(!src||b.previousElementSibling&&b.previousElementSibling.className==='qlg') return;
-    var s=document.createElement('span'); s.className='qlg'; s.dataset.logo=b.textContent.trim(); var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); b.parentNode.insertBefore(s,b);
-  });
 })();
 """
 

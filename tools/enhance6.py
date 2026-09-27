@@ -25,10 +25,10 @@ T = {
     "En cours depuis septembre 2026 : je suis l'adoption avec les équipes change management.", True)],
   now="En cours",
   map_eb="International", map_h="Là où j'ai travaillé",
-  map_p="Né au Maroc, formé au Sénégal, basé à Paris, et des projets menés avec des équipes sur trois continents.",
-  leg=[("life","Vie et études"),("sg","Société Générale CIB"),("sv","Servier · FederateS")],
+  map_p="Né au Maroc, formé au Sénégal, basé à Paris, avec des projets menés en Afrique de l'Ouest, en Europe, en Amérique du Nord et en Asie.",
+  leg=[("life","Vie et études"),("so","Socium"),("sg","Société Générale CIB"),("sv","Servier · FederateS")],
   places={'paris':("Paris","Base depuis 2024 · SG CIB, Banque de France, Servier (la majorité des utilisateurs FederateS)"),'casa':("Casablanca","Naissance"),'tanger':("Tanger","Enfance"),
-          'dakar':("Dakar","Collège, lycée, Groupe ISM, Socium"),'geneve':("Genève","Middle Office · SG CIB"),'ny':("New York","Back et Middle Office · SG CIB"),
+          'dakar':("Dakar","Collège, lycée, Groupe ISM, Socium"),'abidjan':("Abidjan","Projets Orange Côte d'Ivoire et CGEDS · Socium"),'cotonou':("Cotonou","Projets Moov Africa Bénin et Mazars Bénin · Socium"),'geneve':("Genève","Middle Office · SG CIB"),'ny':("New York","Back et Middle Office · SG CIB"),
           'hk':("Hong Kong","Reporting multi-régions · SG CIB"),'sg':("Singapour","Reporting multi-régions · SG CIB"),'inde':("Bangalore","Prompts Copilot adoptés par le Middle Office · SG CIB"),
           'dk':("Copenhague","Utilisateurs FederateS · Servier Danemark"),'us':("Boston","Utilisateurs FederateS · Servier États-Unis")},
   verify_h="Vérifiables en un clic", verify="Vérifier",
@@ -52,18 +52,18 @@ T = {
     "In progress since September 2026: I track adoption with the change management teams.", True)],
   now="In progress",
   map_eb="International", map_h="Where I have worked",
-  map_p="Born in Morocco, educated in Senegal, based in Paris, with projects run alongside teams on three continents.",
-  leg=[("life","Life and studies"),("sg","Société Générale CIB"),("sv","Servier · FederateS")],
+  map_p="Born in Morocco, educated in Senegal, based in Paris, with projects run across West Africa, Europe, North America and Asia.",
+  leg=[("life","Life and studies"),("so","Socium"),("sg","Société Générale CIB"),("sv","Servier · FederateS")],
   places={'paris':("Paris","Home base since 2024 · SG CIB, Banque de France, Servier (most FederateS users)"),'casa':("Casablanca","Born"),'tanger':("Tangier","Childhood"),
-          'dakar':("Dakar","School, Groupe ISM, Socium"),'geneve':("Geneva","Middle Office · SG CIB"),'ny':("New York","Back and Middle Office · SG CIB"),
+          'dakar':("Dakar","School, Groupe ISM, Socium"),'abidjan':("Abidjan","Orange Côte d'Ivoire and CGEDS projects · Socium"),'cotonou':("Cotonou","Moov Africa Benin and Mazars Benin projects · Socium"),'geneve':("Geneva","Middle Office · SG CIB"),'ny':("New York","Back and Middle Office · SG CIB"),
           'hk':("Hong Kong","Multi-region reporting · SG CIB"),'sg':("Singapore","Multi-region reporting · SG CIB"),'inde':("Bangalore","Copilot prompts adopted by the Middle Office · SG CIB"),
           'dk':("Copenhagen","FederateS users · Servier Denmark"),'us':("Boston","FederateS users · Servier US")},
   verify_h="Verifiable in one click", verify="Verify",
   vcf="Add to my contacts", vcf_s="Contact card", vcf_b="Save"),
 }
-GROUP={'paris':'life','casa':'life','tanger':'life','dakar':'life','geneve':'sg','ny':'sg','hk':'sg','sg':'sg','inde':'sg','dk':'sv','us':'sv'}
+GROUP={'paris':'life','casa':'life','tanger':'life','dakar':'life','geneve':'sg','ny':'sg','hk':'sg','sg':'sg','inde':'sg','dk':'sv','us':'sv','abidjan':'so','cotonou':'so'}
 # label offsets (dx, dy, anchor) so neighbours don't collide
-LAB={'paris':(-10,-10,'end'),'casa':(-10,4,'end'),'tanger':(-10,-6,'end'),'dakar':(-10,4,'end'),'geneve':(10,12,'start'),'ny':(10,16,'start'),
+LAB={'abidjan':(-9,14,'end'),'cotonou':(9,14,'start'),'paris':(-10,-10,'end'),'casa':(-10,4,'end'),'tanger':(-10,-6,'end'),'dakar':(-10,4,'end'),'geneve':(10,12,'start'),'ny':(10,16,'start'),
      'hk':(10,-6,'start'),'sg':(10,6,'start'),'inde':(-10,4,'end'),'dk':(10,-6,'start'),'us':(-10,-8,'end')}
 
 CREDS=[  # (icon key or None, issuer, credential, url)
@@ -116,15 +116,15 @@ CSS = r"""
 @media (max-width:900px){.case{grid-template-columns:1fr}.case-h{border-right:0;border-bottom:1px solid var(--line)}}
 @media (max-width:700px){.steps{grid-template-columns:1fr}.stp+.stp{border-left:0;border-top:1px dashed var(--line)}.steps::before{display:none}.stp{display:grid;grid-template-columns:28px 1fr;column-gap:14px}.stp .n{grid-row:span 2;margin:0}.stp .l{margin-top:4px}}
 /* ==== ENH6: map ==== */
-:root{--sv:#5B6BD6}
-:root[data-theme="dark"]{--sv:#8E9BF2}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sv:#8E9BF2}}
+:root{--sv:#5B6BD6;--so:#D0613F}
+:root[data-theme="dark"]{--sv:#8E9BF2;--so:#F08A68}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sv:#8E9BF2;--so:#F08A68}}
 .wmap{padding:18px 18px 14px;position:relative;overflow:hidden}
 .wmap svg{width:100%;height:auto;display:block}
 .wmap .land{fill:var(--surface-2);stroke:var(--surface);stroke-width:.5}
 .wmap .arc{fill:none;stroke-width:1.8;stroke-linecap:round;opacity:.9;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1),opacity .3s}
 .wmap.go .arc{stroke-dashoffset:0}
-.wmap .g-life{--c:var(--sun)}.wmap .g-sg{--c:var(--teal)}.wmap .g-sv{--c:var(--sv)}
+.wmap .g-life{--c:var(--sun)}.wmap .g-so{--c:var(--so)}.wmap .g-sg{--c:var(--teal)}.wmap .g-sv{--c:var(--sv)}
 .wmap .arc{stroke:var(--c)}
 .wmap .pt circle.d{fill:var(--c);stroke:var(--surface);stroke-width:2}
 .wmap .pt circle.p{fill:none;stroke:var(--c);stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center}
@@ -133,7 +133,7 @@ CSS = r"""
 .wmap .pt{opacity:0;transition:opacity .5s;transition-delay:calc(var(--k)*.12s + .6s);cursor:pointer}
 .wmap.go .pt{opacity:1}
 .wmap .pt text{font-family:var(--body);font-size:12.5px;font-weight:600;fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
-.wmap.dim .g-life:not(.hl),.wmap.dim .g-sg:not(.hl),.wmap.dim .g-sv:not(.hl){opacity:.15}
+.wmap.dim .g-life:not(.hl),.wmap.dim .g-so:not(.hl),.wmap.dim .g-sg:not(.hl),.wmap.dim .g-sv:not(.hl){opacity:.15}
 .wmap-leg{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .wmap-leg button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:.86rem;color:var(--ink-2)}
 .wmap-leg button:hover,.wmap-leg button:focus-visible,.wmap-leg button[aria-pressed="true"]{border-color:var(--c);color:var(--ink)}
@@ -177,7 +177,7 @@ JS = r"""
     pt.addEventListener('click',function(e){show(pt,e)}); pt.addEventListener('focus',function(e){show(pt,e)}); pt.addEventListener('blur',function(){tip.classList.remove('on')});
   });
   var btns=[].slice.call(m.querySelectorAll('.wmap-leg button'));
-  function hl(g){ m.classList.toggle('dim',!!g); m.querySelectorAll('.g-life,.g-sg,.g-sv').forEach(function(e){ e.classList.toggle('hl',!!g&&e.classList.contains('g-'+g)); }); btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.g===g)); }); }
+  function hl(g){ m.classList.toggle('dim',!!g); m.querySelectorAll('.g-life,.g-so,.g-sg,.g-sv').forEach(function(e){ e.classList.toggle('hl',!!g&&e.classList.contains('g-'+g)); }); btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.g===g)); }); }
   var cur=null;
   btns.forEach(function(b){ b.addEventListener('click',function(){ cur=cur===b.dataset.g?null:b.dataset.g; hl(cur); });
     if(matchMedia('(hover:hover)').matches){ b.addEventListener('pointerenter',function(){hl(b.dataset.g)}); b.addEventListener('pointerleave',function(){hl(cur)}); } });
@@ -195,8 +195,8 @@ def cases(t,pre):
 
 def wmap(t):
     W,H=MAP['W'],MAP['H']; pts=MAP['pts']; arcs=MAP['arcs']
-    major={'paris','dakar','ny','inde','dk','us','hk','sg','casa'}
-    order=['paris','casa','tanger','dakar','geneve','dk','ny','us','inde','hk','sg']
+    major={'paris','dakar','ny','inde','dk','us','hk','sg','casa','abidjan','cotonou'}
+    order=['paris','casa','tanger','dakar','abidjan','cotonou','geneve','dk','ny','us','inde','hk','sg']
     a=''.join('<path class="arc g-%s" d="%s"/>'%(GROUP[k],arcs[k]) for k in order if k!='paris')
     p=''
     for i,k in enumerate(order):
