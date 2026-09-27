@@ -11,26 +11,26 @@ T = {
   cases_p="Le même fil à chaque fois : comprendre le problème avec ceux qui le vivent, livrer quelque chose d'utilisable, mesurer ce qui a changé.",
   lbl=("Le problème","Ce que j'ai fait","Le résultat"),
   cases=[
-   ("Société Générale CIB","sgcib.png","Trade Finance · 2025 – 26","Un reporting manuel qui prenait du temps au Middle Office",
-    "Le rapprochement entre les données Komgo et AllTRA se faisait à la main à chaque reporting, avec un risque d'erreur et du temps perdu pour les équipes.",
-    "En Citizen Developer, j'ai cadré le besoin avec les utilisateurs, conçu un outil de reporting automatisé, puis accompagné sa prise en main.",
-    "<b>−30 %</b> de temps de traitement.", False),
+   ("Société Générale CIB","sgcib.png","Trade Finance · 2025 – 26","Des documents récurrents remplis à la main au Middle Office",
+    "Les équipes Middle Office remplissaient à la main des documents récurrents comme les <b>Notices of Assignment</b> : un travail long, répétitif et sensible aux erreurs de saisie.",
+    "J'ai conçu des prompts <b>Copilot</b> qui pré-remplissent ces documents à partir des informations du dossier, je les ai testés avec les utilisateurs puis diffusés aux équipes.",
+    "Des documents comme les Notices of Assignment remplis <b>beaucoup plus rapidement</b>, avec des prompts adoptés par le Middle Office de Paris, Genève et Bangalore.", False),
    ("Banque de France","bdf.png","DGSI · Case Management · 2025","Un portail interne à repenser avec ceux qui l'utilisent",
     "Le portail Case Management devait mieux répondre aux besoins des équipes qui s'en servent au quotidien.",
     "Analyse des besoins, ateliers participatifs pour co-construire le contenu, <b>10 écrans prototypés sur Figma</b>, puis suivi du développement dans une équipe Scrum de 14 personnes sur PEGA.",
     "Un portail repensé avec ses utilisateurs, et un formulaire Jira automatisé qui centralise les demandes et réduit les délais de création de tickets.", False),
-   ("Servier","servier.png","Digital Solutions R&amp;D · 2026 – 27","Un cockpit commun pour des équipes R&amp;D dans plusieurs pays",
-    "Les projets thérapeutiques du Groupe sont consolidés dans FederateS, utilisé par des équipes R&amp;D notamment au Danemark et aux États-Unis.",
+   ("Servier","servier.png","Digital Solutions R&amp;D · 2026 – 27","Un cockpit commun pour les équipes R&amp;D, de Paris à Boston",
+    "Les projets thérapeutiques du Groupe sont consolidés dans FederateS, utilisé en grande majorité par des équipes R&amp;D à Paris, et par quelques utilisateurs au Danemark et aux États-Unis.",
     "Ateliers de cadrage, User Stories et critères d'acceptation, priorisation du backlog Build &amp; Run avec la Global Digital Product Manager R&amp;D, recette fonctionnelle.",
     "En cours depuis septembre 2026 : je suis l'adoption avec les équipes change management.", True)],
   now="En cours",
   map_eb="International", map_h="Là où j'ai travaillé",
   map_p="Né au Maroc, formé au Sénégal, basé à Paris, et des projets menés avec des équipes sur trois continents.",
   leg=[("life","Vie et études"),("sg","Société Générale CIB"),("sv","Servier · FederateS")],
-  places={'paris':("Paris","Base depuis 2024 · SG CIB, Banque de France, Servier"),'casa':("Casablanca","Naissance"),'tanger':("Tanger","Enfance"),
+  places={'paris':("Paris","Base depuis 2024 · SG CIB, Banque de France, Servier (la majorité des utilisateurs FederateS)"),'casa':("Casablanca","Naissance"),'tanger':("Tanger","Enfance"),
           'dakar':("Dakar","Collège, lycée, Groupe ISM, Socium"),'geneve':("Genève","Middle Office · SG CIB"),'ny':("New York","Back et Middle Office · SG CIB"),
-          'hk':("Hong Kong","Reporting multi-régions · SG CIB"),'sg':("Singapour","Reporting multi-régions · SG CIB"),'inde':("Inde","Prompts Copilot adoptés · SG CIB"),
-          'dk':("Danemark","Utilisateurs FederateS · Servier"),'us':("États-Unis","Utilisateurs FederateS · Servier")},
+          'hk':("Hong Kong","Reporting multi-régions · SG CIB"),'sg':("Singapour","Reporting multi-régions · SG CIB"),'inde':("Bangalore","Prompts Copilot adoptés par le Middle Office · SG CIB"),
+          'dk':("Copenhague","Utilisateurs FederateS · Servier Danemark"),'us':("Boston","Utilisateurs FederateS · Servier États-Unis")},
   verify_h="Vérifiables en un clic", verify="Vérifier",
   vcf="Ajouter à mes contacts", vcf_s="Fiche contact", vcf_b="Enregistrer"),
  'en': dict(
@@ -38,26 +38,26 @@ T = {
   cases_p="The same thread every time: understand the problem with the people who live it, ship something usable, measure what changed.",
   lbl=("The problem","What I did","The result"),
   cases=[
-   ("Société Générale CIB","sgcib.png","Trade Finance · 2025 – 26","Manual reporting that ate into Middle Office time",
-    "Reconciling Komgo and AllTRA data was done by hand for every report, with a risk of errors and time lost for the teams.",
-    "As a Citizen Developer, I scoped the need with users, designed an automated reporting tool, then supported its rollout.",
-    "<b>−30%</b> processing time.", False),
+   ("Société Générale CIB","sgcib.png","Trade Finance · 2025 – 26","Recurring documents filled in by hand in the Middle Office",
+    "Middle Office teams filled in recurring documents such as <b>Notices of Assignment</b> by hand: slow, repetitive work prone to data-entry errors.",
+    "I designed <b>Copilot</b> prompts that pre-fill these documents from the deal information, tested them with users, then rolled them out to the teams.",
+    "Documents such as Notices of Assignment completed <b>much faster</b>, with prompts adopted by Middle Office teams in Paris, Geneva and Bangalore.", False),
    ("Banque de France","bdf.png","IT Dept · Case Management · 2025","An internal portal to rethink with the people who use it",
     "The Case Management portal needed to better match the needs of the teams who use it every day.",
     "Needs analysis, participatory workshops to co-build the content, <b>10 screens prototyped in Figma</b>, then development follow-up in a 14-person Scrum team on PEGA.",
     "A portal redesigned with its users, plus an automated Jira form that centralizes requests and shortens ticket creation.", False),
-   ("Servier","servier.png","Digital Solutions R&amp;D · 2026 – 27","One cockpit for R&amp;D teams across several countries",
-    "The Group's therapeutic projects are consolidated in FederateS, used by R&amp;D teams in countries including Denmark and the United States.",
+   ("Servier","servier.png","Digital Solutions R&amp;D · 2026 – 27","One cockpit for R&amp;D teams, from Paris to Boston",
+    "The Group's therapeutic projects are consolidated in FederateS, used mostly by R&amp;D teams in Paris, plus some users in Denmark and the United States.",
     "Scoping workshops, User Stories and acceptance criteria, Build &amp; Run backlog prioritization with the Global Digital Product Manager R&amp;D, functional testing.",
     "In progress since September 2026: I track adoption with the change management teams.", True)],
   now="In progress",
   map_eb="International", map_h="Where I have worked",
   map_p="Born in Morocco, educated in Senegal, based in Paris, with projects run alongside teams on three continents.",
   leg=[("life","Life and studies"),("sg","Société Générale CIB"),("sv","Servier · FederateS")],
-  places={'paris':("Paris","Home base since 2024 · SG CIB, Banque de France, Servier"),'casa':("Casablanca","Born"),'tanger':("Tangier","Childhood"),
+  places={'paris':("Paris","Home base since 2024 · SG CIB, Banque de France, Servier (most FederateS users)"),'casa':("Casablanca","Born"),'tanger':("Tangier","Childhood"),
           'dakar':("Dakar","School, Groupe ISM, Socium"),'geneve':("Geneva","Middle Office · SG CIB"),'ny':("New York","Back and Middle Office · SG CIB"),
-          'hk':("Hong Kong","Multi-region reporting · SG CIB"),'sg':("Singapore","Multi-region reporting · SG CIB"),'inde':("India","Copilot prompts adopted · SG CIB"),
-          'dk':("Denmark","FederateS users · Servier"),'us':("United States","FederateS users · Servier")},
+          'hk':("Hong Kong","Multi-region reporting · SG CIB"),'sg':("Singapore","Multi-region reporting · SG CIB"),'inde':("Bangalore","Copilot prompts adopted by the Middle Office · SG CIB"),
+          'dk':("Copenhagen","FederateS users · Servier Denmark"),'us':("Boston","FederateS users · Servier US")},
   verify_h="Verifiable in one click", verify="Verify",
   vcf="Add to my contacts", vcf_s="Contact card", vcf_b="Save"),
 }
@@ -188,7 +188,7 @@ def cases(t,pre):
     out=''
     for org,logo,ctx,title,p,a,r,now in t['cases']:
         steps=''.join('<div class="stp"><span class="n">%d</span><span class="l">%s</span><p>%s</p></div>'%(i+1,t['lbl'][i],x) for i,x in enumerate((p,a,r)))
-        out+=('<article class="card case rv"><div class="case-h"><span class="lg"><img src="%simg/logos/%s" alt="%s" loading="lazy"></span><span class="c">%s</span><h3>%s</h3>%s</div>'
+        out+=('<article class="card case rv"><div class="case-h"><span class="lg" data-logo="'+org+'"><img src="%simg/logos/%s" alt="%s" loading="lazy"></span><span class="c">%s</span><h3>%s</h3>%s</div>'
               '<div class="steps">%s</div></article>')%(pre,logo,org,ctx,title,('<span class="now">%s</span>'%t['now']) if now else '',steps)
     return ('<!--ENH6:cases--><section class="block" id="cas"><div class="wrap"><div class="head rv"><div><span class="eyebrow">%s</span><h2>%s</h2></div><p>%s</p></div>'
             '<div class="cases">%s</div></div></section><!--/ENH6:cases-->')%(t['cases_eb'],t['cases_h'],t['cases_p'],out)
@@ -233,7 +233,6 @@ def run(path,lang):
     # map right before Experience (after Profile)
     i=s.index('<section class="block" id="parcours">'); s=s[:i]+wmap(t)+s[i:]
     # verifiable strip at the top of Certifications
-    ci=s.index('id="certifications"'); ce=s.index('<div class="certs">',ci); s=s[:ce]+vstrip(t)+s[ce:]
     # vCard: contact row + quick read button
     c=s.index('<div class="chan">',s.index('id="contact"')); cend=s.index('</section>',c); last=s.rindex('</div>',c,cend)
     row='<!--ENH6:vrow--><div class="row"><div class="t"><small>%s</small><b>%s</b></div><a class="go" href="%scv/El_Mokhtar_Berrada.vcf" download>%s</a></div><!--/ENH6:vrow-->'%(t['vcf_s'],t['vcf'],pre,t['vcf_b'])

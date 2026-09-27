@@ -11,6 +11,7 @@ LOGOS = {  # organisation name as written in the .org line -> (file, monochrome 
   "MBA ESG": ("esg.png","esg.png"),
   "PNUD": ("undp.png","undp-line.png"),
   "UNDP": ("undp.png","undp-line.png"),
+  "Scrum.org": ("scrumorg.png","scrumorg.png"),
 }
 T = {
  'fr': dict(write="Écrire", subject="Prise de contact depuis votre CV interactif",
@@ -72,7 +73,7 @@ def run(path, lang):
              lambda m:'<div class="acts"><button type="button" data-copy="mail">%s</button><a class="go mail" href="%s" aria-label="%s">%s</a></div>'%(m.group(1),href,t['mail_aria'],t['write']),s)
     s=re.sub(r'href="mailto:%s[^"]*"'%re.escape(MAIL),'href="%s"'%href,s)
 
-    s=s.replace('</body>','<script id="enh5">'+JS.replace('__LOGOS__',json.dumps({k:pre+'img/logos/'+v[0] for k,v in LOGOS.items()},ensure_ascii=False))+'</script>\n</body>',1)
+    s=s.replace('</body>','<script id="enh5">'+JS.replace('__LOGOS__',json.dumps({k:pre+'img/logos/'+v[1] for k,v in LOGOS.items()},ensure_ascii=False))+'</script>\n</body>',1)
     open(path,'w',encoding='utf-8').write(s); print('ok',path)
 
 JS = r"""
@@ -82,13 +83,13 @@ JS = r"""
   document.querySelectorAll('.rel').forEach(function(r){
     var a=r.querySelector('.org a, .org b'), co=r.querySelector('.co'); if(!a||!co) return;
     var n=a.textContent.trim(), src=L[n]; if(!src) return;
-    co.textContent=''; co.classList.add('lg'); if(/ism\.png$/.test(src)) co.classList.add('sq');
+    co.textContent=''; co.classList.add('lg'); co.dataset.logo=n; if(/ism\.png$/.test(src)) co.classList.add('sq');
     var im=new Image(); im.src=src; im.alt=''; im.decoding='async'; co.appendChild(im); co.title=n;
   });
   /* education cards: school logo in the corner */
   document.querySelectorAll('.school').forEach(function(c){
     var a=c.querySelector('.sn a'); if(!a||c.querySelector('.slg')) return; var src=L[a.textContent.trim()]; if(!src) return;
-    var s=document.createElement('span'); s.className='slg'+(/ism\.png$/.test(src)?' sq':''); s.setAttribute('aria-hidden','true');
+    var s=document.createElement('span'); s.className='slg'; s.dataset.logo=a.textContent.trim(); s.setAttribute('aria-hidden','true');
     var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); c.appendChild(s);
   });
   /* UN volunteer card */
@@ -99,7 +100,7 @@ JS = r"""
   /* quick read: small logo before each organisation */
   document.querySelectorAll('.qv-path li b').forEach(function(b){
     var src=L[b.textContent.trim()]; if(!src||b.previousElementSibling&&b.previousElementSibling.className==='qlg') return;
-    var s=document.createElement('span'); s.className='qlg'; var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); b.parentNode.insertBefore(s,b);
+    var s=document.createElement('span'); s.className='qlg'; s.dataset.logo=b.textContent.trim(); var im=new Image(); im.src=src; im.alt=''; s.appendChild(im); b.parentNode.insertBefore(s,b);
   });
 })();
 """
