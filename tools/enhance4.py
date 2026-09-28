@@ -3,7 +3,7 @@ import re, json
 
 T = {
  'fr': dict(
-  btn="30 s", btn_aria="Lecture rapide : mon profil en 30 secondes", close="Fermer", full="Voir le site complet",
+  btn="Lecture rapide · 30 s", btn_aria="Lecture rapide : mon profil en 30 secondes", close="Fermer", full="Voir le site complet",
   kicker="Lecture rapide · 30 secondes", title="El Mokhtar Berrada",
   who="Proxy Product Owner chez <b>Servier</b> (R&amp;D, 2<sup>e</sup> groupe pharmaceutique français), en alternance jusqu'en septembre 2027. En MSc Management de Projet à NEOMA.",
   strengths_h="Ce que j'apporte",
@@ -21,7 +21,7 @@ T = {
   cv="Télécharger mon CV", cvfile="cv/CV_El_Mokhtar_Berrada_FR_clair.pdf", mail="M'écrire",
   demo="Tester la démo", demo_note="Version statique cliquable du prototype : accueil, catalogue, fiches produit et conseil."),
  'en': dict(
-  btn="30 s", btn_aria="Quick read: my profile in 30 seconds", close="Close", full="See the full site",
+  btn="Quick read · 30 s", btn_aria="Quick read: my profile in 30 seconds", close="Close", full="See the full site",
   kicker="Quick read · 30 seconds", title="El Mokhtar Berrada",
   who="Proxy Product Owner at <b>Servier</b> (R&amp;D, France's 2<sup>nd</sup>-largest pharmaceutical group), on a work-study contract until September 2027. MSc in Project Management at NEOMA.",
   strengths_h="What I bring",

@@ -173,9 +173,8 @@ def run(path,lang):
     # header tools: theme toggle + language switch
     m=re.search(r'<div class="lang-sw".*?</div>',s,flags=re.S); sw=m.group(0)
     s=s.replace(sw,'<div class="tools"><!--ENH2:tb--><button type="button" class="theme-btn" aria-label="%s">%s%s</button><!--/ENH2:tb-->%s</div>'%(t['theme_aria'],SUN,MOON,sw),1)
-    # hero: download menu after the existing CTA buttons
-    i=s.index('<div class="cta in d4">'); j=s.index('</div>',i)
-    s=s[:j]+dl_menu(t,pre,t['dl'])+s[j:]
+    # hero: download menu right after the primary CTA (before the quick-read button enhance4 adds, before LinkedIn/contact)
+    s=re.sub(r'(<a class="btn primary" href="#parcours">.*?</a>)',lambda m:m.group(1)+dl_menu(t,pre,t['dl']),s,count=1,flags=re.S)
     # hiring filter: right after the KPI strip inside the hero
     k=s.index('<div class="tldr rv">'); kend=s.index('<div class="marquee"',k)
     kclose=s.rindex('</div>',k,kend)  # closes .wrap of hero
