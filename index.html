@@ -25,7 +25,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#0C6A58">
+<meta name="theme-color" content="#0C1413">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -693,12 +693,10 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 /* ==== ENH3-END ==== */
 /* ==== ENH4-START ==== */
 /* ==== ENH4: quick read ==== */
-@media (min-width:861px){nav.links a{padding:8px 9px}.top .wrap{gap:14px}}
 @media (min-width:861px) and (max-width:1180px){.brand .full{display:none}}
-.quick-btn{all:unset;box-sizing:border-box;height:34px;padding:0 12px 0 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--sun) 55%,var(--line));display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--sun);transition:background .2s,color .2s}
-.quick-btn svg{width:15px;height:15px}
-.quick-btn:hover{background:var(--sun);color:#1b1405}
-.quick-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.quick-btn{border-color:color-mix(in srgb,var(--sun) 55%,var(--line));color:var(--sun);font-family:var(--mono);font-size:.85rem}
+.quick-btn:hover{background:var(--sun);border-color:var(--sun);color:#1b1405}
+.quick-btn:hover svg{transform:none}
 html.qopen{overflow:hidden}
 .qv{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,#000 55%,transparent);opacity:0;pointer-events:none;transition:opacity .3s}
 .qv.on{opacity:1;pointer-events:auto}
@@ -737,7 +735,6 @@ html.qopen{overflow:hidden}
   .qv-bar{margin:-22px -18px 16px;top:-22px}
   .qv-str,.qv-2{grid-template-columns:1fr}
   .qv-top h2{font-size:1.35rem}
-  .quick-btn span{display:none}.quick-btn{padding:0 9px}
 }
 @media (prefers-reduced-motion:reduce){.qv .st{opacity:1;transform:none;animation:none!important}.qv-p{transition:none}.qv.on .qv-bar i{animation:none;transform:scaleX(1)}}
 /* ==== ENH4: demo link ==== */
@@ -923,7 +920,7 @@ html.qopen{overflow:hidden}
       <a href="#competences">Compétences</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="tools"><!--ENH4:qb--><button type="button" class="quick-btn" aria-label="Lecture rapide : mon profil en 30 secondes" title="Lecture rapide : mon profil en 30 secondes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>30 s</span></button><!--/ENH4:qb--><!--ENH2:tb--><button type="button" class="theme-btn" aria-label="Changer de thème (clair / sombre)"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><!--/ENH2:tb--><div class="lang-sw" role="group" aria-label="Langue / Language"><a href="./" lang="fr" hreflang="fr" aria-current="page">FR</a><a href="en/" lang="en" hreflang="en">EN</a></div></div>
+    <div class="tools"><!--ENH2:tb--><button type="button" class="theme-btn" aria-label="Changer de thème (clair / sombre)"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><!--/ENH2:tb--><div class="lang-sw" role="group" aria-label="Langue / Language"><a href="./" lang="fr" hreflang="fr" aria-current="page">FR</a><a href="en/" lang="en" hreflang="en">EN</a></div></div>
   </div>
 </header>
 
@@ -941,7 +938,7 @@ html.qopen{overflow:hidden}
           <p class="hero-sub in d3">Marocain-sénégalais, né à Casablanca, grandi à Tanger et à Dakar, installé à Paris. Backlog, IA, automatisation et UX au service des équipes qui utilisent vraiment les outils.</p>
           <div class="cta in d4">
             <a class="btn primary" href="#parcours">Voir mon parcours
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a><!--ENH4:qb--><button type="button" class="btn quick-btn" aria-label="Lecture rapide : mon profil en 30 secondes" title="Lecture rapide : mon profil en 30 secondes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>30 s</span></button><!--/ENH4:qb-->
             <a class="btn" href="https://www.linkedin.com/in/elmokhtar-berrada/" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
               LinkedIn</a>
@@ -1016,7 +1013,7 @@ html.qopen{overflow:hidden}
           </blockquote>
         </div>
       </div>
-      <div class="card story rv"><span class="eyebrow">Mon histoire</span><p>Je suis né à Casablanca et j'ai grandi à Tanger jusqu'à mes 12 ans. J'ai ensuite vécu au Sénégal, où j'ai fait mon collège, mon lycée et mes études supérieures, puis je suis arrivé à Paris en 2024.</p><p>Père marocain, mère sénégalaise : passer d'une culture à l'autre est un réflexe depuis l'enfance. C'est le même exercice que je fais chaque jour entre équipes métier, tech et utilisateurs, et avec des collègues en Europe, en Asie et en Amérique.</p></div>
+      <div class="card story rv"><span class="eyebrow">Mon histoire</span><p>Je suis né à Casablanca. Jusqu'à mes 12 ans, j'ai grandi à Tanger, face au détroit de Gibraltar, avant de partir pour le Sénégal : Dakar, où j'ai fait mon collège, mon lycée et mes études supérieures, et où je suis vraiment devenu qui je suis. Paris est arrivée ensuite, en 2024.</p><p>Père marocain, mère sénégalaise : j'ai grandi entre deux pays, deux langues, deux façons de voir le monde, sans jamais avoir eu à choisir. Ce n'est pas un supplément d'âme sur un CV — c'est un réflexe que j'utilise chaque jour : traduire un besoin métier pour la tech, une contrainte réglementaire en user story claire, faire dialoguer des équipes à Paris, Genève, Bangalore ou Boston autour d'un même produit.</p></div>
     </div>
   </section>
 

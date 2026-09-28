@@ -42,12 +42,10 @@ T = {
 
 CSS = r"""
 /* ==== ENH4: quick read ==== */
-@media (min-width:861px){nav.links a{padding:8px 9px}.top .wrap{gap:14px}}
 @media (min-width:861px) and (max-width:1180px){.brand .full{display:none}}
-.quick-btn{all:unset;box-sizing:border-box;height:34px;padding:0 12px 0 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--sun) 55%,var(--line));display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--sun);transition:background .2s,color .2s}
-.quick-btn svg{width:15px;height:15px}
-.quick-btn:hover{background:var(--sun);color:#1b1405}
-.quick-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.quick-btn{border-color:color-mix(in srgb,var(--sun) 55%,var(--line));color:var(--sun);font-family:var(--mono);font-size:.85rem}
+.quick-btn:hover{background:var(--sun);border-color:var(--sun);color:#1b1405}
+.quick-btn:hover svg{transform:none}
 html.qopen{overflow:hidden}
 .qv{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,#000 55%,transparent);opacity:0;pointer-events:none;transition:opacity .3s}
 .qv.on{opacity:1;pointer-events:auto}
@@ -86,7 +84,6 @@ html.qopen{overflow:hidden}
   .qv-bar{margin:-22px -18px 16px;top:-22px}
   .qv-str,.qv-2{grid-template-columns:1fr}
   .qv-top h2{font-size:1.35rem}
-  .quick-btn span{display:none}.quick-btn{padding:0 9px}
 }
 @media (prefers-reduced-motion:reduce){.qv .st{opacity:1;transform:none;animation:none!important}.qv-p{transition:none}.qv.on .qv-bar i{animation:none;transform:scaleX(1)}}
 /* ==== ENH4: demo link ==== */
@@ -138,8 +135,9 @@ def run(path,lang):
     s=re.sub(r'<!--ENH4:(\w+)-->.*?<!--/ENH4:\1-->\n?','',s,flags=re.S)
     s=re.sub(r'\n?<script id="enh4">.*?</script>','',s,flags=re.S)
     s=s.replace('</style>','/* ==== ENH4-START ==== */'+CSS+'/* ==== ENH4-END ==== */\n</style>',1)
-    # header button, first in the tools group
-    s=s.replace('<div class="tools">','<div class="tools"><!--ENH4:qb--><button type="button" class="quick-btn" aria-label="%s" title="%s">%s<span>%s</span></button><!--/ENH4:qb-->'%(t['btn_aria'],t['btn_aria'],BOLT,t['btn']),1)
+    # hero CTA row, right after the primary "see my path" button, alongside LinkedIn / contact / CV
+    qb='<!--ENH4:qb--><button type="button" class="btn quick-btn" aria-label="%s" title="%s">%s<span>%s</span></button><!--/ENH4:qb-->'%(t['btn_aria'],t['btn_aria'],BOLT,t['btn'])
+    s=re.sub(r'(<a class="btn primary" href="#parcours">.*?</a>)',lambda m:m.group(1)+qb,s,count=1,flags=re.S)
     # overlay before </body>
     s=s.replace('</body>',overlay(t,pre)+'\n</body>',1)
     # Focal-Shift panel: demo call-to-action right after the meta line
