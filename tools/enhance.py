@@ -123,20 +123,17 @@ JS = r"""
     var rg=document.createElement('span'); rg.className='ring'; rg.setAttribute('aria-hidden','true'); var bd=r.querySelector('.body'); if(bd) bd.appendChild(rg);
     var s=document.createElement('span'); s.className='co'; s.textContent=m; s.setAttribute('aria-hidden','true'); w.appendChild(s);
   });
-  var xp=document.querySelector('.xp'), fill=document.querySelector('.xp-fill'), head=null;
-  if(xp&&fill&&!reduce){ head=document.createElement('div'); head.className='xp-head'; xp.appendChild(head); }
+  var xp=document.querySelector('.xp'), fill=document.querySelector('.xp-fill');
+  if(xp&&fill&&!reduce){ var head=document.createElement('div'); head.className='xp-head'; xp.appendChild(head); }
+  /* the head's per-frame position is driven by the page's single scroll handler (below in the base
+     script), which already computes the timeline progress — avoids a second rAF loop and a
+     getComputedStyle() call fighting over the same layout every scroll frame (source of jank). */
 
-  /* --- (8) project image parallax + head position, one rAF --- */
+  /* --- (8) project image parallax, its own rAF (independent of the timeline) --- */
   var imgs=[].slice.call(document.querySelectorAll('.proj .vis img'));
   var tick=false;
   function frame(){
     tick=false; var vh=innerHeight;
-    if(head){
-      var r=xp.getBoundingClientRect(), p=Math.max(0,Math.min(1,(vh*0.6-r.top)/Math.max(1,r.height)));
-      var fr=fill.getBoundingClientRect(), xr=xp.getBoundingClientRect();
-      head.style.transform='translateY('+(fr.bottom-xr.top-parseFloat(getComputedStyle(fill).top))+'px)';
-      head.classList.toggle('on',p>0.01&&p<0.995);
-    }
     if(!reduce) imgs.forEach(function(im){
       var b=im.parentNode.getBoundingClientRect(); if(b.bottom<0||b.top>vh) return;
       var c=(b.top+b.height/2-vh/2)/vh; im.style.setProperty('--py',(c*-22).toFixed(1)+'px');
