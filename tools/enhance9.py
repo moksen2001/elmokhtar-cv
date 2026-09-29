@@ -12,14 +12,14 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;
          "&family=Inter:wght@400;500;600&display=swap")
 
 DARK = """--bg:#000000;--surface:#1C1C1E;--surface-2:#2C2C2E;--ink:#F5F5F7;--ink-2:#D1D1D6;--muted:#98989D;
-  --line:#38383A;--teal:#0A84FF;--teal-2:#409CFF;--teal-soft:#0B2742;--sun:#F5F5F7;--sun-soft:#2C2C2E;
+  --line:#38383A;--teal:#1A6FE0;--teal-2:#3D86EA;--teal-soft:#0B2742;--sun:#F5F5F7;--sun-soft:#2C2C2E;
   --on-teal:#FFFFFF;--on-sun:#1D1D1F;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);"""
 
 CSS = """<style id="enh9">
 /* ==== ENH9: Apple grey & blue re-skin (backup of the old design: git branch backup-design-v1) ==== */
 :root{
   --bg:#F5F5F7;--surface:#FFFFFF;--surface-2:#EDEDF0;--ink:#1D1D1F;--ink-2:#424245;--muted:#6E6E73;--line:#E0E0E5;
-  --teal:#0066CC;--teal-2:#0055B3;--teal-soft:#E8F1FB;--sun:#1D1D1F;--sun-soft:#EDEDF0;--on-teal:#FFFFFF;--on-sun:#FFFFFF;
+  --teal:#0050A8;--teal-2:#003F87;--teal-soft:#E6EDF7;--sun:#1D1D1F;--sun-soft:#EDEDF0;--on-teal:#FFFFFF;--on-sun:#FFFFFF;
   --shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.07);
   --display:"Inter Tight","Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
