@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <script id="theme-init">try{var t=localStorage.getItem("emb-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0C1413">
+<meta name="theme-color" content="#F5F5F7">
 <meta property="og:title" content="El Mokhtar Berrada · Interactive CV">
 <meta property="og:description" content="Proxy Product Owner at Servier. Product, AI and automation, from Trade Finance to pharmaceutical R&amp;D.">
 <meta property="og:image" content="https://moksen2001.github.io/elmokhtar-cv/img/og-image-en.jpg">
@@ -25,10 +25,10 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
 <link rel="manifest" href="../site.webmanifest">
-<meta name="theme-color" content="#0C1413">
+<meta name="theme-color" content="#F5F5F7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
 :root{
   --bg:#F3F5F3; --surface:#FFFFFF; --surface-2:#E7EDEA; --ink:#12201F; --ink-2:#34463F; --muted:#5F706B;
@@ -420,7 +420,7 @@ dialog[open]{animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
 .row b{display:block;font-weight:600;overflow-wrap:anywhere;user-select:all}
 .row a.b{text-decoration:none}
 .row button,.row a.go{flex:none;font:600 .82rem var(--body);padding:8px 12px;border-radius:9px;border:0;background:var(--bg);color:var(--ink);cursor:pointer;text-decoration:none}
-.row button.ok{background:var(--sun);color:#1b1405}
+.row button.ok{background:var(--sun);color:var(--on-sun)}
 @media (max-width:860px){.contact{grid-template-columns:1fr}.row b{font-size:.9rem}}
 footer{padding-block:10px 40px;color:var(--muted);font-size:.86rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
@@ -613,7 +613,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 .fx-dim:hover{opacity:.8;filter:none}
 .fx-fit{position:relative;transition:opacity .5s,filter .5s,box-shadow .5s}
 .card.fx-fit,.rel.fx-fit .body{box-shadow:0 0 0 1.5px var(--sun),var(--shadow)}
-.fx-badge{position:absolute;top:10px;right:10px;z-index:3;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--sun);color:#1b1405;animation:pop .45s cubic-bezier(.3,1.7,.5,1)}
+.fx-badge{position:absolute;top:10px;right:10px;z-index:3;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--sun);color:var(--on-sun);animation:pop .45s cubic-bezier(.3,1.7,.5,1)}
 @keyframes pop{from{transform:scale(.3);opacity:0}}
 .hire-float{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140%);z-index:60;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.88rem;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.4,.5,1);max-width:calc(100vw - 32px)}
 .hire-float.on{transform:translate(-50%,0)}
@@ -695,7 +695,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 /* ==== ENH4: quick read ==== */
 @media (min-width:861px) and (max-width:1180px){.brand .full{display:none}}
 .quick-btn{border-color:color-mix(in srgb,var(--sun) 55%,var(--line));color:var(--sun);font-family:var(--mono);font-size:.85rem}
-.quick-btn:hover{background:var(--sun);border-color:var(--sun);color:#1b1405}
+.quick-btn:hover{background:var(--sun);border-color:var(--sun);color:var(--on-sun)}
 .quick-btn:hover svg{transform:none}
 html.qopen{overflow:hidden}
 .qv{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,#000 55%,transparent);opacity:0;pointer-events:none;transition:opacity .3s}
@@ -740,7 +740,7 @@ html.qopen{overflow:hidden}
 /* ==== ENH4: demo link ==== */
 .demo-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:14px 0 4px;padding:14px 16px;border-radius:14px;border:1px dashed color-mix(in srgb,var(--sun) 60%,var(--line));background:color-mix(in srgb,var(--sun) 7%,transparent)}
 .demo-cta p{margin:0;flex:1 1 240px;font-size:.88rem;color:var(--ink-2)}
-.demo-cta .btn{background:var(--sun);border-color:var(--sun);color:#1b1405}
+.demo-cta .btn{background:var(--sun);border-color:var(--sun);color:var(--on-sun)}
 /* ==== ENH4-END ==== */
 /* ==== ENH5-START ==== */
 /* ==== ENH5: logos ==== */
@@ -766,7 +766,7 @@ html.qopen{overflow:hidden}
 @media (max-width:560px){.slg{height:32px;top:14px;right:14px}.slg img{height:20px}.school .yr{padding-right:0;margin-top:44px}}
 /* ==== ENH5: mail ==== */
 .row .acts{display:flex;gap:6px;flex:none}
-.row a.go.mail{background:var(--sun);color:#1b1405}
+.row a.go.mail{background:var(--sun);color:var(--on-sun)}
 .row .dl>summary.go{display:inline-flex;align-items:center;gap:6px;font:600 .82rem var(--body);padding:8px 12px;border-radius:9px;background:var(--bg);color:var(--ink);cursor:pointer}
 .row .dl>summary.go svg{width:15px;height:15px}
 .row .dl-menu small{font-family:var(--body);text-transform:none;letter-spacing:0;opacity:1;font-size:.78rem}
@@ -780,7 +780,7 @@ html.qopen{overflow:hidden}
 .dl[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
 .hero .dl>summary.btn{border-color:color-mix(in srgb,var(--teal) 55%,var(--line))}
 .hero .dl>summary.btn:hover,.hero .dl>summary.btn:focus-visible{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);box-shadow:var(--shadow)}
-.row .dl>summary.go:hover,.row .dl>summary.go:focus-visible{background:var(--sun);color:#1b1405}
+.row .dl>summary.go:hover,.row .dl>summary.go:focus-visible{background:var(--sun);color:var(--on-sun)}
 .dl-menu a{cursor:pointer;position:relative;transition:background .2s,transform .2s}
 .dl-menu a:not(.other)::after{content:"↓";position:absolute;right:12px;top:50%;transform:translateY(-50%);opacity:0;color:var(--teal);font-weight:700;transition:opacity .2s,transform .2s}
 .dl-menu a:not(.other):hover::after{opacity:1;transform:translateY(-35%)}
@@ -808,7 +808,7 @@ html.qopen{overflow:hidden}
 .case .stp{opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
 .case.go .stp{opacity:1;transform:none}
 .case.go .stp:nth-child(2){transition-delay:.35s}.case.go .stp:nth-child(3){transition-delay:.7s}
-.case.go .stp:last-child .n{background:var(--sun);color:#1b1405}
+.case.go .stp:last-child .n{background:var(--sun);color:var(--on-sun)}
 @media (max-width:900px){.case{grid-template-columns:1fr}.case-h{border-right:0;border-bottom:1px solid var(--line)}}
 @media (max-width:700px){.csteps{grid-template-columns:1fr}.stp+.stp{border-left:0;border-top:1px dashed var(--line)}.csteps::before{display:none}.stp{display:grid;grid-template-columns:28px 1fr;column-gap:14px}.stp .n{grid-row:span 2;margin:0}.stp .l{margin-top:4px}}
 /* ==== ENH6: map ==== */
@@ -900,6 +900,56 @@ html.qopen{overflow:hidden}
 .proj .vis .demo-b::before{background:#E6AE48}
 @media (prefers-reduced-motion:reduce){.demo-b::before{animation:none}}
 /* ==== ENH8-END ==== */
+</style>
+<style id="enh9">
+/* ==== ENH9: Apple grey & blue re-skin (backup of the old design: git branch backup-design-v1) ==== */
+:root{
+  --bg:#F5F5F7;--surface:#FFFFFF;--surface-2:#EDEDF0;--ink:#1D1D1F;--ink-2:#424245;--muted:#6E6E73;--line:#E0E0E5;
+  --teal:#0066CC;--teal-2:#0055B3;--teal-soft:#E8F1FB;--sun:#1D1D1F;--sun-soft:#EDEDF0;--on-teal:#FFFFFF;--on-sun:#FFFFFF;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.07);
+  --display:"Inter Tight","Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000000;--surface:#1C1C1E;--surface-2:#2C2C2E;--ink:#F5F5F7;--ink-2:#D1D1D6;--muted:#98989D;
+  --line:#38383A;--teal:#0A84FF;--teal-2:#409CFF;--teal-soft:#0B2742;--sun:#F5F5F7;--sun-soft:#2C2C2E;
+  --on-teal:#FFFFFF;--on-sun:#1D1D1F;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);}}
+:root[data-theme="dark"]{--bg:#000000;--surface:#1C1C1E;--surface-2:#2C2C2E;--ink:#F5F5F7;--ink-2:#D1D1D6;--muted:#98989D;
+  --line:#38383A;--teal:#0A84FF;--teal-2:#409CFF;--teal-soft:#0B2742;--sun:#F5F5F7;--sun-soft:#2C2C2E;
+  --on-teal:#FFFFFF;--on-sun:#1D1D1F;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);}
+
+/* type: Inter / Inter Tight, tighter headings */
+body{letter-spacing:-.006em;font-feature-settings:"cv11"}
+h1,h2{letter-spacing:-.025em}
+h3,h4{letter-spacing:-.012em}
+.hero h1{font-weight:700;letter-spacing:-.035em}
+h2{font-weight:700}
+
+/* labels: sentence case instead of monospace capitals */
+.eyebrow,.fact dt,.caps .lbl,.proj .ctx2,.pill,.dlg-body h4,.more-certs .lbl,.row small,.fx-badge,.nt .org,
+.qv-top .k,.qv h3,.case-h .c,.stp .l,.vstrip h3{text-transform:none;letter-spacing:0;font-family:var(--body)}
+.eyebrow{font-size:.98rem;font-weight:600}
+.eyebrow::before{display:none}
+.fact dt,.proj .ctx2,.case-h .c,.stp .l,.more-certs .lbl,.caps .lbl,.nt .org,.qv-top .k{font-size:.8rem;font-weight:500}
+.dlg-body h4,.qv h3,.vstrip h3{font-size:.98rem;font-weight:600}
+.pill,.fx-badge{font-size:.72rem;font-weight:600}
+.row small{font-size:.74rem}
+
+/* surfaces: borderless white panels on grey, no cursor glow */
+.card{border-color:transparent}
+.card::after{display:none}
+
+/* buttons: pills, no shine sweep */
+.btn{border-radius:980px;font-weight:500}
+.btn.primary::before{display:none}
+.quick-btn{font-family:var(--body);font-size:.95rem}
+
+/* bits that had hard-coded green/amber */
+.proj .vis .demo-b{background:rgba(29,29,31,.8);color:#fff;border-color:rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.proj .vis .demo-b::before{background:#2997FF}
+dialog::backdrop{background:rgba(0,0,0,.4)}
+.gallery figcaption{background:rgba(29,29,31,.72)}
+.row a.go.mail,.row .dl>summary.go:hover,.row .dl>summary.go:focus-visible{background:var(--teal);color:#fff}
 </style>
 </head>
 <body>
@@ -1410,7 +1460,7 @@ html.qopen{overflow:hidden}
 
       
 
-      <!--ENH:cst--><div class="card cst rv" role="group" aria-label="Interactive map of skills and experience"><div class="cst-top"><div><span class="eyebrow">Skills × experience</span><h3>Where I have used them</h3></div><div><p>Hover or tap a skill to see which roles I applied it in, or tap a role to see its skills.</p><span class="cst-hint"><i></i>Auto demo · tap to explore</span></div></div><div class="cst-grid"><svg class="cst-svg" aria-hidden="true"></svg><div class="cst-col ex"><button type="button" class="cst-n" data-id="sv"><b>Servier</b><small>Pharma R&amp;D · 2026–27</small></button><button type="button" class="cst-n" data-id="sg"><b>Société Générale CIB</b><small>Trade Finance · 2025–26</small></button><button type="button" class="cst-n" data-id="bdf"><b>Banque de France</b><small>IT Dept · 2025</small></button><button type="button" class="cst-n" data-id="so"><b>Socium</b><small>HR tech startup · 2022–23</small></button><button type="button" class="cst-n" data-id="ism"><b>Groupe ISM</b><small>Soft Skills Academy · 2021–23</small></button><button type="button" class="cst-n" data-id="pr"><b>Academic projects</b><small>Focal-Shift · Yema</small></button></div><div class="cst-col sk"><button type="button" class="cst-n" data-x="sv sg bdf">Backlog &amp; User Stories</button><button type="button" class="cst-n" data-x="sv sg bdf">Scrum / Agile</button><button type="button" class="cst-n" data-x="sv sg bdf">Acceptance testing / UAT</button><button type="button" class="cst-n" data-x="sv bdf pr">Scoping workshops</button><button type="button" class="cst-n" data-x="sv sg">Adoption &amp; change management</button><button type="button" class="cst-n" data-x="sg pr">Copilot &amp; generative AI</button><button type="button" class="cst-n" data-x="sg">AI agent</button><button type="button" class="cst-n" data-x="sg">Power Automate</button><button type="button" class="cst-n" data-x="sg">Power Query / Excel</button><button type="button" class="cst-n" data-x="bdf">PEGA</button><button type="button" class="cst-n" data-x="sv bdf pr">Jira / Confluence</button><button type="button" class="cst-n" data-x="bdf pr">Figma &amp; UX/UI</button><button type="button" class="cst-n" data-x="pr">PHP / MySQL / API</button><button type="button" class="cst-n" data-x="so ism">Multimedia project management</button><button type="button" class="cst-n" data-x="so ism">Digital communication</button></div></div></div><!--/ENH:cst-->
+      <!--ENH:cst--><div class="card cst rv" role="group" aria-label="Interactive map of skills and experience"><div class="cst-top"><div><span class="eyebrow">Skills × experience</span><h3>Where I have used them</h3></div><div><p>Hover or tap a skill to see which roles I applied it in, or tap a role to see its skills.</p><span class="cst-hint"><i></i>Auto demo · tap to explore</span></div></div><div class="cst-grid"><svg class="cst-svg" aria-hidden="true"></svg><div class="cst-col ex"><button type="button" class="cst-n" data-id="sv"><b>Servier</b><small>Pharma R&amp;D · 2026–27</small></button><button type="button" class="cst-n" data-id="sg"><b>Société Générale CIB</b><small>Trade Finance · 2025–26</small></button><button type="button" class="cst-n" data-id="bdf"><b>Banque de France</b><small>IT Dept · 2025</small></button><button type="button" class="cst-n" data-id="so"><b>Socium</b><small>HR tech startup · 2022–23</small></button><button type="button" class="cst-n" data-id="ism"><b>Groupe ISM</b><small>Soft Skills Academy · 2021–23</small></button><button type="button" class="cst-n" data-id="pr"><b>Academic projects</b><small>Focal-Shift · Yema</small></button></div><div class="cst-col sk"><button type="button" class="cst-n" data-x="sv sg bdf">Backlog &amp; User Stories</button><button type="button" class="cst-n" data-x="sv sg bdf">Scrum / Agile</button><button type="button" class="cst-n" data-x="sv sg bdf">Acceptance testing / UAT</button><button type="button" class="cst-n" data-x="sv bdf pr">Scoping workshops</button><button type="button" class="cst-n" data-x="sv sg">Adoption &amp; change management</button><button type="button" class="cst-n" data-x="sg pr">Copilot &amp; generative AI</button><button type="button" class="cst-n" data-x="sg">AI agent</button><button type="button" class="cst-n" data-x="sg">Power Automate</button><button type="button" class="cst-n" data-x="sg">Power Query / Excel</button><button type="button" class="cst-n" data-x="bdf">PEGA</button><button type="button" class="cst-n" data-x="sv bdf pr">Jira / Confluence</button><button type="button" class="cst-n" data-x="bdf pr">Figma &amp; UX/UI</button><button type="button" class="cst-n" data-x="pr">PHP / MySQL / API</button><button type="button" class="cst-n" data-x="so ism">Multimedia project management</button><button type="button" class="cst-n" data-x="so ism">Digital communication</button></div></div></div><!--/ENH:cst--><!--cst-anchor-->
     </div>
   </section>
 

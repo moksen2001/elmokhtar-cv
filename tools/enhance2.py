@@ -166,7 +166,7 @@ def run(path,lang):
     s=re.sub(r'<!--ENH4:qb-->.*?<!--/ENH4:qb-->','',s,flags=re.S)
     s=re.sub(r'<div class="tools">(<div class="lang-sw".*?</div>)</div>',r'\1',s,flags=re.S)
     # dark by default (before first paint) + remembered choice
-    s=re.sub(r'<html lang="(\w+)"[^>]*>',r'<html lang="\1" data-theme="dark">',s,count=1)
+    s=re.sub(r'<html lang="(\w+)"[^>]*>',r'<html lang="\1" data-theme="light">',s,count=1)
     s=s.replace('<meta charset="utf-8">','<meta charset="utf-8">\n<script id="theme-init">try{var t=localStorage.getItem("emb-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>',1)
     s=re.sub(r'<meta name="theme-color" content="[^"]*">','<meta name="theme-color" content="#0C1413">',s)
     s=s.replace('</style>','/* ==== ENH2-START ==== */'+CSS+'/* ==== ENH2-END ==== */\n</style>',1)

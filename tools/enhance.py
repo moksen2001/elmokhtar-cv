@@ -231,8 +231,8 @@ def run(path,lang):
     s=re.sub(r'<!--ENH:cst-->.*?<!--/ENH:cst-->\s*','',s,flags=re.S)
     s=re.sub(r'\n?<script id="enh">.*?</script>\n?','\n',s,flags=re.S)
     s=s.replace('</style>','/* ==== ENH-START ==== */'+CSS+'/* ==== ENH-END ==== */\n</style>',1)
-    # constellation goes right after the skills grid, before the Engagements head
-    anchor='<div class="head rv" style="margin-top:72px">'
+    # constellation goes right after the skills grid (stable marker kept in the raw HTML)
+    anchor='<!--cst-anchor-->'
     assert s.count(anchor)==1, path
     s=s.replace(anchor, html_block(lang)+anchor,1)
     s=s.replace('</body>','<script id="enh">'+JS+'</script>\n</body>',1)
