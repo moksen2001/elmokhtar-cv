@@ -17,109 +17,341 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:#0C1413;--surface:#131F1E;--s2:#1A2927;--ink:#E5ECE9;--ink2:#C0CCC8;--muted:#8D9D98;--line:#253734;--teal:#46B99D;--teal-soft:#153029;--sun:#E6AE48;--sun-soft:#2D2413;--red:#F08A68;--red-soft:#34201A;--ok:#6BD39A;
+:root{--bg:#0C1413;--surface:#131F1E;--s2:#1A2927;--ink:#E5ECE9;--ink2:#C0CCC8;--muted:#8D9D98;--line:#253734;--teal:#46B99D;--teal-soft:#153029;--sun:#E6AE48;--sun-soft:#2D2413;--red:#F08A68;--red-soft:#34201A;--ok:#6BD39A;--blue:#8CB8F0;--blue-soft:#172536;--vio:#B9A3F0;--vio-soft:#241E38;
 --display:"Bricolage Grotesque",system-ui,sans-serif;--body:"Instrument Sans",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
 a{color:var(--teal)}
-button{font:inherit}
+button,input,textarea{font:inherit}
 :focus-visible{outline:2px solid var(--sun);outline-offset:2px}
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:10px 20px;background:#07100F;border-bottom:1px solid var(--line);font-size:.86rem}
+[hidden]{display:none!important}
+.bar{position:sticky;top:0;z-index:40;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:9px 20px;background:#07100F;border-bottom:1px solid var(--line);font-size:.84rem}
 .bar a{font-weight:600;text-decoration:none;color:var(--sun)}
-.bar .tag{font-family:var(--mono);font-size:.72rem;padding:3px 8px;border-radius:6px;background:var(--sun-soft);color:var(--sun)}
+.bar .tag{font-family:var(--mono);font-size:.72rem;padding:3px 8px;border-radius:6px;background:var(--sun);color:#2A1D05;font-weight:500}
 .bar .sp{flex:1}
+.bar .dis{color:var(--ink2)}
 .bar .lang{display:flex;gap:4px}.bar .lang a{color:var(--muted);padding:2px 6px;border-radius:6px}.bar .lang a[aria-current]{background:var(--teal);color:#06201A}
 .wrap{max-width:1240px;margin:0 auto;padding:22px 20px 40px}
-.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 24px;margin-bottom:18px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 24px;margin-bottom:14px}
 .head h1{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3vw,2.3rem);letter-spacing:-.02em;margin:0;line-height:1.1}
-.head p{margin:6px 0 0;color:var(--ink2);max-width:62ch}
+.head p{margin:6px 0 0;color:var(--ink2);max-width:70ch}
 .head .meta{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start}
+.disc{display:flex;gap:10px;align-items:flex-start;margin:0 0 18px;padding:10px 14px;border-radius:12px;border:1px solid color-mix(in srgb,var(--sun) 45%,var(--line));background:var(--sun-soft);color:#F2D39A;font-size:.86rem}
+.disc b{color:var(--sun)}
+.ico{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.72rem;background:var(--sun);color:#2A1D05;margin-top:1px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px}
-/* document */
-.doc{position:sticky;top:14px;overflow:hidden}
-.doc-h{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:.85rem;color:var(--muted)}
-.doc-h b{color:var(--ink);font-weight:600}
-.doc-h .pill{margin-left:auto;font-family:var(--mono);font-size:.68rem;padding:3px 8px;border-radius:6px;background:var(--s2);color:var(--muted)}
-.paper{margin:14px;padding:18px 20px;border-radius:10px;background:#F4F1E8;color:#23201A;font-family:var(--mono);font-size:.74rem;line-height:1.65;max-height:calc(100vh - 170px);overflow:auto;position:relative}
-.paper h2{font-family:var(--mono);font-size:.8rem;margin:0 0 8px;letter-spacing:.06em}
-.paper .row{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:2px 4px;border-radius:5px;transition:background .4s,box-shadow .4s}
+.btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:9px;border:1px solid var(--line);font-size:.85rem;font-weight:600;color:var(--ink);line-height:1.25}
+.btn:hover{border-color:var(--teal);color:var(--teal)}
+.btn.p{background:var(--teal);border-color:var(--teal);color:#06201A}
+.btn.p:hover{filter:brightness(1.08);color:#06201A}
+.btn.sm{padding:5px 10px;font-size:.8rem;border-radius:8px}
+.btn.warn:hover{border-color:var(--red);color:var(--red)}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.45;cursor:not-allowed;filter:none}
+.btn:focus-visible{outline:2px solid var(--sun)}
+.mut{color:var(--muted);font-size:.84rem}
+/* ---------- queue ---------- */
+.guide{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 14px;font-size:.84rem;color:var(--ink2)}
+.guide b{color:var(--ink);margin-right:4px}
+.guide span{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--line)}
+.guide i{font-style:normal;font-family:var(--mono);font-size:.7rem;color:var(--sun)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.kpi{padding:14px 16px}
+.kpi .l{font-size:.8rem;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-weight:800;font-size:1.75rem;letter-spacing:-.02em;line-height:1.15;margin-top:2px}
+.kpi .s{font-size:.78rem;color:var(--muted);margin-top:2px}
+.kpi .meter{height:5px;border-radius:9px;background:var(--s2);margin-top:8px;overflow:hidden}
+.kpi .meter i{display:block;height:100%;background:var(--red);border-radius:9px}
+.qtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{all:unset;box-sizing:border-box;cursor:pointer;padding:5px 11px;border-radius:999px;border:1px solid var(--line);font-size:.8rem;color:var(--ink2);display:inline-flex;gap:6px;align-items:center}
+.chip:hover{border-color:var(--teal);color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:#06201A;font-weight:600}
+.chip .n{font-family:var(--mono);font-size:.7rem;opacity:.75}
+.search{display:flex;gap:8px;align-items:center}
+.search input{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:7px 11px;color:var(--ink);width:230px;max-width:100%}
+.search input:focus{outline:none;border-color:var(--teal)}
+.qhead,.qrow{display:grid;grid-template-columns:1.35fr 2fr 1fr .85fr 1fr 1.25fr 18px;gap:12px;align-items:center;padding:11px 16px}
+.qhead{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--line)}
+.qrow{border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.88rem;transition:background .2s}
+.qrow:last-child{border-bottom:0;border-radius:0 0 18px 18px}
+a.qrow:hover{background:var(--s2)}
+.qrow.bg{cursor:pointer;color:var(--ink2)}
+.qrow.bg:hover{background:color-mix(in srgb,var(--s2) 50%,transparent)}
+.qrow .ref{font-family:var(--mono);font-size:.8rem;display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.scn{font-family:var(--mono);font-size:.62rem;padding:2px 6px;border-radius:5px;background:var(--sun);color:#2A1D05;font-weight:500;white-space:nowrap}
+.bgt{font-family:var(--mono);font-size:.62rem;padding:2px 6px;border-radius:5px;background:var(--s2);color:var(--muted)}
+.par small{display:block;color:var(--muted);font-size:.8rem}
+.amt{font-family:var(--mono);font-size:.8rem}
+.dl small{display:block;font-size:.76rem;color:var(--muted)}
+.dl .hot{color:var(--red)}
+.go{color:var(--muted)}
+.empty-q{padding:26px 16px;text-align:center;color:var(--muted)}
+.qfoot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:10px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-new{background:var(--blue-soft);color:var(--blue)}
+.s-run{background:var(--s2);color:var(--ink2)}
+.s-run::before{background:none;border:2px solid var(--teal);border-top-color:transparent;width:6px;height:6px;animation:spin .8s linear infinite}
+.s-anom{background:var(--red-soft);color:var(--red)}
+.s-ready{background:var(--sun-soft);color:var(--sun)}
+.s-client{background:var(--vio-soft);color:var(--vio)}
+.s-done{background:var(--teal-soft);color:var(--teal)}
+/* ---------- case ---------- */
+.case-h{padding:16px 18px;margin-bottom:14px}
+.case-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.case-top h2{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.01em;margin:0;line-height:1.2}
+.case-top .sp{flex:1}
+.case-meta{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;font-size:.86rem;color:var(--ink2)}
+.case-meta b{color:var(--ink);font-weight:600}
+.case-meta .hot{color:var(--red)}
+.stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:14px 0 0;list-style:none;padding:0}
+.stepper li{font-size:.76rem;color:var(--muted);padding-top:7px;border-top:3px solid var(--line);line-height:1.3}
+.stepper li.done{border-color:var(--teal);color:var(--ink2)}
+.stepper li.cur{border-color:var(--sun);color:var(--ink);font-weight:600}
+.cgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:start}
+.doc{position:sticky;top:58px;overflow:hidden}
+.doc summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:.85rem;color:var(--muted);cursor:pointer}
+.doc summary::-webkit-details-marker{display:none}
+.doc summary b{color:var(--ink);font-weight:600}
+.doc summary .pl{margin-left:auto;font-family:var(--mono);font-size:.68rem;padding:3px 8px;border-radius:6px;background:var(--s2);color:var(--muted)}
+.doc summary .car{transition:transform .2s;color:var(--muted)}
+.doc details:not([open]) summary{border-bottom:0}
+.doc details[open] summary .car{transform:rotate(90deg)}
+.paper{margin:14px;padding:18px 20px;border-radius:10px;background:#F4F1E8;color:#23201A;font-family:var(--mono);font-size:.72rem;line-height:1.6;max-height:calc(100vh - 200px);overflow:auto;position:relative}
+.paper h2{font-family:var(--mono);font-size:.78rem;margin:0 0 8px;letter-spacing:.05em;padding-right:80px}
+.paper .row{display:grid;grid-template-columns:58px 1fr;gap:8px;padding:2px 4px;border-radius:5px;transition:background .4s,box-shadow .4s}
 .paper .row .k{color:#7B7466}
 .paper .row.hl{background:#FFE9A8;box-shadow:inset 3px 0 0 #D29A12}
 .paper .row.bad{background:#FFD6C8;box-shadow:inset 3px 0 0 #D0613F}
+.paper .row.flash{animation:flash 1s}
+@keyframes flash{30%{box-shadow:inset 3px 0 0 #D0613F,0 0 0 3px #D29A12}}
 .paper .sep{border-top:1px dashed #C9C1AE;margin:10px 0}
-.paper .pres h2{color:#5B6BD6}
-.stamp{position:absolute;right:14px;top:14px;font-family:var(--mono);font-size:.62rem;color:#A0342A;border:1.5px solid #A0342A;padding:2px 6px;border-radius:4px;transform:rotate(6deg);opacity:.75}
-/* chat */
-.chat{display:flex;flex-direction:column;min-height:640px}
-.chat-h{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
-.av{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--teal),#2E7F6B);color:#06201A;font-weight:800;font-family:var(--display)}
-.chat-h b{display:block}
-.chat-h small{color:var(--muted);font-size:.8rem}
-.chat-h .st{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
-.chat-h .st i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
-.log{flex:1;padding:18px;display:flex;flex-direction:column;gap:14px;overflow:auto;max-height:calc(100vh - 250px);min-height:420px;scroll-behavior:smooth}
-.msg{max-width:92%;animation:in .35s cubic-bezier(.2,.8,.2,1)}
-@keyframes in{from{opacity:0;transform:translateY(8px)}}
-.msg.me{align-self:flex-end;background:var(--teal);color:#06201A;padding:10px 14px;border-radius:14px 14px 4px 14px;font-weight:500}
-.msg.ai{align-self:flex-start;width:92%}
+.paper .pres h2{color:#4D5CC4;padding-right:0}
+.stamp{position:absolute;right:14px;top:14px;font-family:var(--mono);font-size:.6rem;color:#A0342A;border:1.5px solid #A0342A;padding:2px 6px;border-radius:4px;transform:rotate(6deg);opacity:.75}
+.work{min-width:0}
+.tabs{display:flex;gap:2px;padding:4px 8px 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{all:unset;cursor:pointer;padding:11px 11px 10px;font-size:.87rem;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected=true]{color:var(--ink);border-color:var(--teal)}
+.tab .n{font-family:var(--mono);font-size:.66rem;padding:1px 6px;border-radius:999px;background:var(--s2);color:var(--ink2)}
+.tab .n.hot{background:var(--red);color:#2A0F07}
+.tab:focus-visible{outline:2px solid var(--sun);outline-offset:-2px}
+.panel{padding:16px 18px}
+.panel h3{font-family:var(--display);font-size:1.1rem;margin:0 0 6px}
+.empty{padding:6px 2px}
+.empty p{color:var(--ink2);margin:0 0 12px}
+.plan{margin:0 0 16px;padding:0;list-style:none;display:grid;gap:8px;counter-reset:p}
+.plan li{counter-increment:p;display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:.9rem}
+.plan li::before{content:counter(p);width:22px;height:22px;border-radius:50%;background:var(--s2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:.7rem;color:var(--ink2)}
+.plan small{display:block;color:var(--muted);font-size:.8rem}
 .bub{background:var(--s2);border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:12px 14px}
 .bub p{margin:0 0 6px}.bub p:last-child{margin:0}
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:9px}
 .step{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;font-size:.92rem}
 .step .ic{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
 .step.run .ic{border-color:var(--teal);border-top-color:transparent;animation:spin .8s linear infinite}
 .step.done .ic{border-color:var(--teal);background:var(--teal)}
 .step.done .ic::after{content:"";width:6px;height:10px;border:solid #06201A;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
-.step.warn .ic{border-color:var(--red);background:var(--red)}
-.step.warn .ic::after{content:"!";color:#2A0F07;font-weight:800;font-size:.72rem}
 .step small{display:block;color:var(--muted);font-size:.8rem}
 .step .t{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding-top:2px}
 @keyframes spin{to{transform:rotate(360deg)}}
-table.kv{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px}
-table.kv td{padding:6px 0;border-bottom:1px solid var(--line);vertical-align:top}
-table.kv td:first-child{color:var(--muted);width:44%;padding-right:10px}
-table.kv tr:last-child td{border-bottom:0}
-.chk{display:grid;gap:8px;margin-top:4px}
-.ck{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);font-size:.9rem}
-.ck .b{font-family:var(--mono);font-size:.68rem;padding:3px 7px;border-radius:6px;height:fit-content;white-space:nowrap}
-.ck.ok .b{background:var(--teal-soft);color:var(--teal)}
-.ck.ko{border-color:color-mix(in srgb,var(--red) 55%,var(--line));background:var(--red-soft)}
-.ck.ko .b{background:var(--red);color:#2A0F07}
-.ck.info .b{background:var(--sun-soft);color:var(--sun)}
-.ck small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
-.hitl{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--sun-soft);color:var(--sun);font-size:.86rem;display:flex;gap:8px}
-.draft{margin-top:6px;padding:12px 14px;border-radius:10px;background:#0E1817;border:1px dashed var(--line);font-size:.88rem;white-space:pre-wrap;font-family:var(--body)}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.btn{all:unset;box-sizing:border-box;cursor:pointer;padding:8px 12px;border-radius:9px;border:1px solid var(--line);font-size:.85rem;font-weight:600;color:var(--ink)}
-.btn:hover{border-color:var(--teal);color:var(--teal)}
-.btn.p{background:var(--teal);border-color:var(--teal);color:#06201A}
-.btn:focus-visible{outline:2px solid var(--sun)}
+.sumbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.sumbar div{padding:9px 11px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:.76rem;color:var(--muted)}
+.sumbar b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--ink);line-height:1.1}
+.sumbar .k b{color:var(--red)}.sumbar .c b{color:var(--sun)}.sumbar .o b{color:var(--teal)}
+.prog{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:12px;font-size:.84rem;color:var(--ink2)}
+.prog .track{flex:1;min-width:120px;height:6px;border-radius:9px;background:var(--s2);overflow:hidden}
+.prog .track i{display:block;height:100%;background:var(--teal);transition:width .4s}
+.flist{display:grid;gap:10px}
+.f{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px;background:var(--bg);transition:border-color .2s}
+.f.ko{border-color:color-mix(in srgb,var(--red) 55%,var(--line));background:var(--red-soft)}
+.f.check{border-color:color-mix(in srgb,var(--sun) 50%,var(--line));background:var(--sun-soft)}
+.f.okd{opacity:.92}
+.f-top{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.f-top h4{margin:0;font-size:.95rem;flex:1;min-width:150px;line-height:1.35}
+.f-top h4 .num{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-right:6px}
+.bdg{font-family:var(--mono);font-size:.64rem;padding:3px 7px;border-radius:6px;white-space:nowrap;letter-spacing:.02em}
+.b-ok{background:var(--teal-soft);color:var(--teal)}
+.b-ko{background:var(--red);color:#2A0F07}
+.b-check{background:var(--sun);color:#2A1D05}
+.opt{font-size:.74rem;font-weight:600;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.opt.a{background:var(--teal-soft);color:var(--teal)}
+.opt.o{background:var(--vio-soft);color:var(--vio)}
+.f p{margin:0;font-size:.88rem;color:var(--ink2)}
+.rule{font-size:.8rem;color:var(--muted)}
+.rule b{font-family:var(--mono);font-size:.66rem;font-weight:500;color:var(--ink2);margin-right:4px;letter-spacing:.04em}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.src{all:unset;cursor:pointer;font-family:var(--mono);font-size:.66rem;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--ink2);background:var(--surface)}
+.src:hover,.src:focus-visible{border-color:var(--sun);color:var(--sun)}
+.dec{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:2px}
+.coms{display:grid;gap:4px}
+.com{font-size:.82rem;color:var(--ink2);border-left:2px solid var(--vio);padding:1px 0 1px 8px}
+.com span{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-right:6px}
+.ed{display:grid;gap:6px}
+.ed label{font-size:.8rem;color:var(--ink2)}
+textarea{width:100%;min-height:62px;resize:vertical;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 10px;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--teal)}
+.ed .err{color:var(--red);font-size:.78rem}
+.bulk{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.valbox{margin-top:14px;padding:14px;border-radius:12px;border:1px dashed var(--line);display:grid;gap:10px}
+.valbox p{margin:0;font-size:.88rem;color:var(--ink2)}
+.valbox .rec{color:var(--ink)}
+.state{padding:12px 14px;border-radius:12px;font-size:.88rem;display:grid;gap:8px}
+.state.cl{background:var(--vio-soft);color:#D8CCF7}
+.state.dn{background:var(--teal-soft);color:#BDEBDD}
+.state b{color:var(--ink)}
+.hitl{display:flex;gap:8px;padding:10px 12px;border-radius:10px;background:var(--sun-soft);color:#F2D39A;font-size:.85rem;margin-top:12px}
+table.ext{width:100%;border-collapse:collapse;font-size:.84rem}
+table.ext th{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--line)}
+table.ext td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.ext tr{cursor:pointer}
+table.ext tbody tr:hover td{background:color-mix(in srgb,var(--s2) 60%,transparent)}
+table.ext td.tg{font-family:var(--mono);font-size:.72rem;color:var(--muted);white-space:nowrap}
+table.ext td.lb{color:var(--ink2);width:30%}
+.conf{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;white-space:nowrap}
+.conf .m{width:44px;height:5px;border-radius:9px;background:var(--s2);overflow:hidden}
+.conf .m i{display:block;height:100%;background:var(--teal)}
+.conf.lo{color:var(--sun)}.conf.lo .m i{background:var(--sun)}
+.flag{font-family:var(--mono);font-size:.6rem;color:#2A1D05;background:var(--sun);padding:1px 5px;border-radius:4px;margin-left:4px}
+.exth{margin:18px 0 6px;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.exsum{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--ink2);margin-bottom:10px}
+.exsum b{color:var(--ink)}
+/* chat */
+.chat{display:flex;flex-direction:column;margin:-16px -18px}
+.chat-h{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}
+.av{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--teal),#2E7F6B);color:#06201A;font-weight:800;font-family:var(--display);font-size:.85rem}
+.chat-h b{display:block;font-size:.92rem}
+.chat-h small{color:var(--muted);font-size:.78rem}
+.chat-h .st{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.chat-h .st i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.log{padding:16px 18px;display:flex;flex-direction:column;gap:12px;overflow:auto;height:min(520px,calc(100vh - 380px));min-height:340px;scroll-behavior:smooth}
+.msg{max-width:92%}
+.msg.new{animation:in .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.msg.me{align-self:flex-end;background:var(--teal);color:#06201A;padding:9px 13px;border-radius:14px 14px 4px 14px;font-weight:500;font-size:.92rem}
+.msg.ai{align-self:flex-start}
+.msg.ai .bub{font-size:.92rem}
 .typing{display:inline-flex;gap:4px;padding:12px 14px;background:var(--s2);border:1px solid var(--line);border-radius:14px 14px 14px 4px;align-self:flex-start}
 .typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bl 1s infinite}
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
 @keyframes bl{50%{opacity:.25;transform:translateY(-2px)}}
-.sugg{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px}
-.sugg button{all:unset;box-sizing:border-box;cursor:pointer;padding:8px 12px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;color:var(--ink2);background:var(--bg)}
+table.kv{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:4px}
+table.kv td{padding:5px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.kv td:first-child{color:var(--muted);width:42%;padding-right:10px}
+table.kv tr:last-child td{border-bottom:0}
+.sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
+.sugg button{all:unset;box-sizing:border-box;cursor:pointer;padding:6px 11px;border-radius:999px;border:1px solid var(--line);font-size:.8rem;color:var(--ink2);background:var(--bg)}
 .sugg button:hover,.sugg button:focus-visible{border-color:var(--teal);color:var(--ink)}
-.sugg button[disabled]{opacity:.4;cursor:default}
+.sugg button.used{opacity:.55}
+.sugg button[disabled]{opacity:.35;cursor:default}
 .inp{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
-.inp input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:var(--ink);font:inherit}
+.inp input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink)}
 .inp input:focus{outline:none;border-color:var(--teal)}
 .inp button{all:unset;cursor:pointer;padding:0 16px;border-radius:10px;background:var(--teal);color:#06201A;font-weight:700}
 .inp button[disabled]{opacity:.5;cursor:default}
+/* journal */
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{display:grid;grid-template-columns:86px 104px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.86rem;align-items:start}
+.tl li:last-child{border-bottom:0}
+.tl time{font-family:var(--mono);font-size:.72rem;color:var(--muted);padding-top:2px}
+.who{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:6px;justify-self:start;white-space:nowrap}
+.w-agent{background:var(--teal-soft);color:var(--teal)}
+.w-op{background:var(--vio-soft);color:var(--vio)}
+.w-sys{background:var(--s2);color:var(--ink2)}
+.w-client{background:var(--blue-soft);color:var(--blue)}
+.tl .tx{color:var(--ink2)}
+.tl .tx b{color:var(--ink);font-weight:600}
+.phead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+/* report sheet */
+.sheet{position:relative;overflow:hidden;background:#F4F1E8;color:#23201A;border-radius:10px;padding:22px 22px 18px;font-size:.84rem;line-height:1.5}
+.sheet .wm{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-family:var(--display);font-weight:800;font-size:3.1rem;color:rgba(160,52,42,.07);transform:rotate(-18deg);white-space:nowrap}
+.sh-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:2px solid #23201A;padding-bottom:10px;margin-bottom:12px;position:relative}
+.sh-k{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:#7B7466}
+.sheet h3{font-family:var(--display);font-size:1.25rem;margin:2px 0 0;color:#23201A}
+.sh-st{font-family:var(--mono);font-size:.66rem;padding:3px 8px;border:1.5px solid currentColor;border-radius:4px;white-space:nowrap}
+.sh-st.dr{color:#A0342A}.sh-st.ok{color:#1F6E57}
+.sheet h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;margin:16px 0 6px;color:#5B5448;position:relative}
+.sheet table{width:100%;border-collapse:collapse;position:relative}
+.sheet td,.sheet th{padding:5px 6px 5px 0;border-bottom:1px solid #DCD4C1;vertical-align:top;text-align:left}
+.sheet th{font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:#7B7466;font-weight:600}
+.sh-kv td:first-child{color:#7B7466;width:36%}
+.r-ok{color:#1F6E57;font-weight:600}.r-ko{color:#A0342A;font-weight:600}.r-ck{color:#9A6A0B;font-weight:600}
+.sheet .cm{display:block;font-size:.76rem;color:#6B6456;font-style:italic}
+.sh-draft{position:relative;white-space:pre-wrap;font-family:var(--mono);font-size:.74rem;background:#FFFDF6;border:1px dashed #C9C1AE;border-radius:8px;padding:12px 14px;margin:0;color:#23201A}
+.sh-draft[contenteditable=true]{outline:2px solid #D29A12;background:#fff}
+.sh-note{position:relative;margin:10px 0 0;padding:8px 10px;border-radius:8px;background:#E4EFE9;color:#1F4D3F;font-size:.8rem}
+.sh-foot{position:relative;margin:14px 0 0;font-size:.7rem;color:#7B7466;border-top:1px solid #DCD4C1;padding-top:8px}
+.racts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+/* dialog + toast */
+dialog{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:0;width:min(580px,calc(100% - 24px));max-height:calc(100vh - 40px)}
+dialog::backdrop{background:rgba(3,8,7,.72)}
+.dlg-b{padding:18px 20px;display:grid;gap:12px;overflow:auto}
+.dlg-b h3{font-family:var(--display);font-size:1.25rem;margin:0}
+.dlg-b p{margin:0;font-size:.88rem;color:var(--ink2)}
+.dlg-b ul{margin:0;padding-left:18px;font-size:.86rem;color:var(--ink2)}
+.opts{display:grid;gap:8px}
+.opts label{display:grid;grid-template-columns:18px 1fr;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:.88rem}
+.opts label:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
+.opts input{margin:3px 0 0;accent-color:var(--teal)}
+.opts small{display:block;color:var(--muted);font-size:.78rem}
+.opts .rc{font-family:var(--mono);font-size:.62rem;background:var(--sun);color:#2A1D05;padding:1px 5px;border-radius:4px;margin-left:6px}
+.attest{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:.86rem;color:var(--ink2);cursor:pointer}
+.attest input{margin:3px 0 0;accent-color:var(--teal)}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;border-top:1px solid var(--line)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:60;background:var(--ink);color:#0C1413;padding:10px 16px;border-radius:10px;font-size:.88rem;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:opacity .25s,transform .25s;pointer-events:none;max-width:calc(100% - 32px)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
 .foot{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .foot div{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-size:.88rem;color:var(--ink2)}
 .foot b{display:block;color:var(--ink);margin-bottom:3px;font-size:.92rem}
-@media (max-width:900px){.grid{grid-template-columns:1fr}.chat{order:-1}.doc{position:static}.paper{max-height:300px}.log{max-height:none;min-height:360px}.foot{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+#print{display:none}
+@media (max-width:1080px){.qhead,.qrow{grid-template-columns:1.3fr 1.9fr 1fr 1fr 1.25fr 18px}.c-kind{display:none}}
+@media (max-width:900px){
+ .cgrid{grid-template-columns:1fr}.doc{position:static}.paper{max-height:340px}
+ .foot{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .log{height:auto;max-height:none;min-height:340px}
+}
+@media (max-width:680px){
+ .wrap{padding:16px 16px 32px}
+ .bar{padding:8px 16px;gap:4px 10px}
+ .bar .dis{order:9;flex-basis:100%;font-size:.76rem;color:var(--muted)}
+ .qhead{display:none}
+ .qrow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"ref st" "par par" "amt dl";gap:6px 10px;padding:13px 14px}
+ .qrow .c-ref{grid-area:ref}.qrow .c-st{grid-area:st;justify-self:end}.qrow .c-par{grid-area:par}.qrow .c-amt{grid-area:amt}.qrow .c-dl{grid-area:dl;justify-self:end;text-align:right}.qrow .c-go{display:none}
+ .qrow .ref{flex-direction:row;flex-wrap:wrap;align-items:center}
+ .search,.search input{width:100%}
+ .kpi{padding:12px 13px}.kpi .v{font-size:1.45rem}
+ .sumbar{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .panel{padding:14px}.chat{margin:-14px}
+ .case-h{padding:14px}
+ .case-top h2{font-size:1.2rem}
+ .stepper li{font-size:.66rem}
+ .tl li{grid-template-columns:1fr auto;grid-template-areas:"who time" "tx tx";gap:4px 8px}
+ .tl time{grid-area:time;text-align:right}.tl .who{grid-area:who}.tl .tx{grid-area:tx}
+ table.ext td.lb{width:auto}
+ .ext .hide-s{display:none}
+ .sheet{padding:16px 14px}
+ .sheet .wm{font-size:2rem}
+ .sheet .hide-s{display:none}
+ .paper{margin:10px;padding:14px}
+ .guide span{font-size:.78rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+@media print{
+ body.printing > *:not(#print){display:none!important}
+ body.printing #print{display:block}
+ html,body{background:#fff!important}
+ #print .sheet{border-radius:0;padding:0;font-size:10.5pt}
+ #print .sh-draft{white-space:pre-wrap}
+}
 </style>
 </head>
 <body>
 <div class="bar">
   <a id="back" href="../#projets">← <span data-t="back"></span></a>
   <span class="tag" data-t="tag"></span>
-  <span data-t="bar"></span>
+  <span class="dis" data-t="bar"></span>
   <span class="sp"></span>
   <span class="lang"><a href="?lang=fr" data-l="fr">FR</a><a href="?lang=en" data-l="en">EN</a></span>
 </div>
@@ -128,167 +360,642 @@ table.kv tr:last-child td{border-bottom:0}
     <div><h1 data-t="h1"></h1><p data-t="lead"></p></div>
     <span class="meta" data-t="meta"></span>
   </div>
-  <div class="grid">
-    <section class="card doc" aria-labelledby="dt">
-      <div class="doc-h"><b id="dt" data-t="docT"></b><span class="pill">MT700 · PDF</span></div>
-      <div class="paper" id="paper">
-        <span class="stamp" data-t="stamp"></span>
-        <h2>ISSUE OF A DOCUMENTARY CREDIT</h2>
-        <div class="row" data-f="n"><span class="k">:20:</span><span>DOC. CREDIT NO. LC-DEMO-2025-0417</span></div>
-        <div class="row" data-f="d"><span class="k">:31C:</span><span>DATE OF ISSUE 250910</span></div>
-        <div class="row" data-f="exp"><span class="k">:31D:</span><span>EXPIRY 251215 PLACE GENEVA</span></div>
-        <div class="row" data-f="app"><span class="k">:50:</span><span>APPLICANT: HELVETIA GRAIN TRADING SA (FICTITIOUS), GENEVA</span></div>
-        <div class="row" data-f="ben"><span class="k">:59:</span><span>BENEFICIARY: ATLANTIC AGRO EXPORT LTD (FICTITIOUS), ABIDJAN</span></div>
-        <div class="row" data-f="amt"><span class="k">:32B:</span><span>USD 1,250,000.00</span></div>
-        <div class="row" data-f="tol"><span class="k">:39A:</span><span>TOLERANCE 05/05</span></div>
-        <div class="row" data-f="av"><span class="k">:41A:</span><span>AVAILABLE WITH ISSUING BANK BY PAYMENT</span></div>
-        <div class="row" data-f="ship"><span class="k">:44C:</span><span>LATEST DATE OF SHIPMENT 251120</span></div>
-        <div class="row" data-f="port"><span class="k">:44E/F:</span><span>SAN PEDRO, CÔTE D'IVOIRE → ANTWERP, BELGIUM</span></div>
-        <div class="row" data-f="goods"><span class="k">:45A:</span><span>2,500 MT RAW COCOA BEANS, CIF ANTWERP INCOTERMS 2020</span></div>
-        <div class="row" data-f="docs"><span class="k">:46A:</span><span>SIGNED COMMERCIAL INVOICE IN 3 ORIGINALS / FULL SET CLEAN ON BOARD B/L / INSURANCE CERTIFICATE 110 PCT CIF VALUE / CERTIFICATE OF ORIGIN / PHYTOSANITARY CERTIFICATE</span></div>
-        <div class="row" data-f="per"><span class="k">:48:</span><span>PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE</span></div>
-        <div class="row" data-f="ucp"><span class="k">:40E:</span><span>UCP LATEST VERSION (UCP 600)</span></div>
-        <div class="sep"></div>
-        <div class="pres">
-          <h2 data-t="presT"></h2>
-          <div class="row" data-f="p-inv"><span class="k">INV</span><span>COMMERCIAL INVOICE · USD 1,318,750.00 · 2,510 MT · 3 ORIGINALS</span></div>
-          <div class="row" data-f="p-bl"><span class="k">B/L</span><span>ON BOARD 251118 · SAN PEDRO → ANTWERP · CLEAN · 3/3</span></div>
-          <div class="row" data-f="p-ins"><span class="k">INS</span><span>INSURANCE CERT. · USD 1,450,625.00</span></div>
-          <div class="row" data-f="p-coo"><span class="k">COO</span><span>CERTIFICATE OF ORIGIN · CÔTE D'IVOIRE</span></div>
-          <div class="row" data-f="p-phy"><span class="k">PHY</span><span data-t="phyMissing"></span></div>
-          <div class="row" data-f="p-date"><span class="k">DATE</span><span>DOCUMENTS PRESENTED 251205</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card chat" aria-label="Agent">
-      <div class="chat-h"><span class="av">LC</span><div><b data-t="agent"></b><small data-t="agentSub"></small></div><span class="st"><i></i><span data-t="online"></span></span></div>
-      <div class="log" id="log" aria-live="polite"></div>
-      <div class="sugg" id="sugg"></div>
-      <form class="inp" id="form"><input id="q" autocomplete="off" aria-label="Question"><button id="send" type="submit" data-t="send"></button></form>
-    </section>
-  </div>
+  <p class="disc" role="note"><span class="ico" aria-hidden="true">!</span><span id="disc"></span></p>
+  <section id="vQueue" aria-labelledby="qT"></section>
+  <section id="vCase" hidden></section>
   <div class="foot">
     <div><b data-t="f1t"></b><span data-t="f1"></span></div>
     <div><b data-t="f2t"></b><span data-t="f2"></span></div>
     <div><b data-t="f3t"></b><span data-t="f3"></span></div>
   </div>
 </main>
+<dialog id="dlg" aria-labelledby="dlgT"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="print"></div>
 <script>
 (function(){
-var L=/[?&]lang=en/.test(location.search)||(!/[?&]lang=fr/.test(location.search)&&/\/en\//.test(document.referrer))?'en':'fr';
+'use strict';
+const L=/[?&]lang=en/.test(location.search)||(!/[?&]lang=fr/.test(location.search)&&/\/en\//.test(document.referrer))?'en':'fr';
+const EN=L==='en';
+const x=(fr,en)=>EN?en:fr;
+const CL=EN?':':' :';
+const QT=v=>EN?'“'+v+'”':'« '+v+' »';
 document.documentElement.lang=L;
-var T={fr:{
- back:"Retour au CV",tag:"DÉMO SIMULÉE",bar:"Données entièrement fictives · aucune donnée ni aucun système de Société Générale",
- h1:"Agent IA · Lettres de Crédit",lead:"Reconstitution du parcours imaginé au hackathon GBIS « AI for Clients » (finaliste parmi 80+ équipes) : l'agent lit une Lettre de Crédit, contrôle la présentation documentaire et prépare le travail, l'opérateur Back Office garde la décision.",
- meta:"Société Générale CIB · oct. – nov. 2025",docT:"Lettre de Crédit fictive",stamp:"SPECIMEN",presT:"DOCUMENTS PRESENTED",phyMissing:"PHYTOSANITARY CERTIFICATE · NOT PRESENTED",
- agent:"Agent LC",agentSub:"Orchestré via Power Automate · démo",online:"Prêt",send:"Envoyer",ph:"Posez une question sur la Lettre de Crédit…",
- s:["Résume cette Lettre de Crédit","Contrôle la présentation documentaire","Prépare le message de réserves"],
- hello:"Bonjour, j'ai reçu la Lettre de Crédit LC-DEMO-2025-0417 et la présentation documentaire associée. Que voulez-vous faire ?",
- st:{read:"Lecture du document",readS:"OCR et découpage des champs MT700",extract:"Extraction des données clés",extractS:"Montants, dates, parties, documents exigés",check:"Contrôles selon l'UCP 600",checkS:"Dates, montants, documents, tolérances",draft:"Rédaction du brouillon",draftS:"Ton client, références, réserves",hitl:"Transmission à l'opérateur",hitlS:"Validation humaine obligatoire"},
- sumIntro:"Voici l'essentiel de la Lettre de Crédit :",
- kv:[["Référence","LC-DEMO-2025-0417"],["Donneur d'ordre","Helvetia Grain Trading SA, Genève"],["Bénéficiaire","Atlantic Agro Export Ltd, Abidjan"],["Montant","1 250 000 USD (tolérance ±5 %)"],["Marchandise","2 500 t de fèves de cacao, CIF Anvers"],["Expédition au plus tard","20 nov. 2025"],["Validité","15 déc. 2025, Genève"],["Délai de présentation","21 jours après l'expédition"],["Documents exigés","5 : facture, connaissement, assurance, origine, phytosanitaire"]],
- sumEnd:"Tous les champs sont repris avec leur source dans le document (surlignés à gauche).",
- chkIntro:"J'ai comparé les documents présentés aux conditions de la Lettre de Crédit :",
- checks:[["ok","Date d'expédition","Connaissement à bord le 18 nov., avant la limite du 20 nov."],["ok","Délai de présentation","Présentation le 5 déc. : 17 jours après l'expédition (≤ 21) et avant la validité du 15 déc."],["ok","Quantité","2 510 t pour 2 500 t, dans la tolérance de ±5 %."],["ko","Montant de la facture","1 318 750 USD, soit +5,5 % : au-delà de la tolérance de +5 % (maximum 1 312 500 USD)."],["ok","Assurance","1 450 625 USD = 110 % de la valeur CIF facturée (1 318 750 USD)."],["ko","Document manquant","Le certificat phytosanitaire exigé en 46A n'a pas été présenté."]],
- chkEnd:"2 réserves détectées. Je ne décide pas du paiement : je prépare le dossier pour l'opérateur.",
- hitl:"Décision finale réservée à l'opérateur Back Office. Chaque réserve renvoie à la clause et au document source.",
- drIntro:"Voici un brouillon de message de réserves, à relire avant envoi :",
- draft:"Objet : LC-DEMO-2025-0417 · Présentation du 5 décembre 2025 · Réserves\n\nMadame, Monsieur,\n\nNous accusons réception de la présentation documentaire relative au crédit cité en objet. Après examen, nous relevons les réserves suivantes :\n\n1. Montant facturé de 1 318 750 USD, supérieur au montant maximum autorisé de 1 312 500 USD (tolérance de 5 % prévue en 39A).\n2. Certificat phytosanitaire exigé en 46A non présenté.\n\nNous restons à votre disposition pour toute présentation corrigée dans le délai de validité du crédit.\n\nCordialement,",
- drEnd:"Le brouillon n'est jamais envoyé automatiquement.",act:["Valider (démo)","Modifier (démo)"],validated:"Brouillon validé par l'opérateur. Dans le vrai flux, il partirait ensuite via l'outil de messagerie habituel.",
- fallback:"Dans cette démo, je sais résumer la Lettre de Crédit, contrôler la présentation et préparer le message de réserves. Choisissez une des suggestions ci-dessous.",
- f1t:"Ce que j'ai apporté",f1:"Cadrage du cas d'usage et priorisation des tâches à automatiser selon leur valeur et leur risque, entre logique métier Trade Finance et faisabilité technique.",
- f2t:"Le principe",f2:"L'IA accélère la lecture et le contrôle de documents non structurés, sans baisser le niveau de contrôle d'un process réglementé.",
- f3t:"À propos de cette démo",f3:"Reconstitution pédagogique : document, entreprises et montants inventés. Les règles citées (UCP 600) sont publiques."
-},en:{
- back:"Back to CV",tag:"SIMULATED DEMO",bar:"Fully fictional data · no Société Générale data or systems",
- h1:"AI agent · Letters of Credit",lead:"A reconstruction of the flow designed at the GBIS “AI for Clients” hackathon (finalist among 80+ teams): the agent reads a Letter of Credit, checks the document presentation and prepares the work, while the Back Office operator keeps the decision.",
- meta:"Société Générale CIB · Oct. – Nov. 2025",docT:"Fictional Letter of Credit",stamp:"SPECIMEN",presT:"DOCUMENTS PRESENTED",phyMissing:"PHYTOSANITARY CERTIFICATE · NOT PRESENTED",
- agent:"LC Agent",agentSub:"Orchestrated with Power Automate · demo",online:"Ready",send:"Send",ph:"Ask something about the Letter of Credit…",
- s:["Summarise this Letter of Credit","Check the document presentation","Draft the discrepancy notice"],
- hello:"Hello, I have received Letter of Credit LC-DEMO-2025-0417 and the related document presentation. What would you like to do?",
- st:{read:"Reading the document",readS:"OCR and MT700 field parsing",extract:"Extracting key data",extractS:"Amounts, dates, parties, required documents",check:"Checks under UCP 600",checkS:"Dates, amounts, documents, tolerances",draft:"Drafting",draftS:"Client tone, references, discrepancies",hitl:"Handing over to the operator",hitlS:"Human validation required"},
- sumIntro:"Here is what matters in this Letter of Credit:",
- kv:[["Reference","LC-DEMO-2025-0417"],["Applicant","Helvetia Grain Trading SA, Geneva"],["Beneficiary","Atlantic Agro Export Ltd, Abidjan"],["Amount","USD 1,250,000 (±5% tolerance)"],["Goods","2,500 MT raw cocoa beans, CIF Antwerp"],["Latest shipment","20 Nov 2025"],["Expiry","15 Dec 2025, Geneva"],["Presentation period","21 days after shipment"],["Required documents","5: invoice, bill of lading, insurance, origin, phytosanitary"]],
- sumEnd:"Every field is traced back to its source in the document (highlighted on the left).",
- chkIntro:"I compared the presented documents with the credit terms:",
- checks:[["ok","Shipment date","B/L on board 18 Nov, before the 20 Nov deadline."],["ok","Presentation period","Presented 5 Dec: 17 days after shipment (≤ 21) and before the 15 Dec expiry."],["ok","Quantity","2,510 MT for 2,500 MT, within the ±5% tolerance."],["ko","Invoice amount","USD 1,318,750, i.e. +5.5%: above the +5% tolerance (maximum USD 1,312,500)."],["ok","Insurance","USD 1,450,625 = 110% of the invoiced CIF value (USD 1,318,750)."],["ko","Missing document","The phytosanitary certificate required in 46A was not presented."]],
- chkEnd:"2 discrepancies found. I do not decide on payment: I prepare the file for the operator.",
- hitl:"Final decision stays with the Back Office operator. Each discrepancy links to its clause and source document.",
- drIntro:"Here is a draft discrepancy notice, to be reviewed before sending:",
- draft:"Subject: LC-DEMO-2025-0417 · Presentation of 5 December 2025 · Discrepancies\n\nDear Sir or Madam,\n\nWe acknowledge receipt of the documents presented under the above credit. Upon examination, we note the following discrepancies:\n\n1. Invoiced amount of USD 1,318,750 exceeds the maximum allowed amount of USD 1,312,500 (5% tolerance under 39A).\n2. Phytosanitary certificate required under 46A not presented.\n\nWe remain available for a corrected presentation within the validity of the credit.\n\nKind regards,",
- drEnd:"The draft is never sent automatically.",act:["Approve (demo)","Edit (demo)"],validated:"Draft approved by the operator. In the real flow it would then go out through the usual messaging tool.",
- fallback:"In this demo I can summarise the Letter of Credit, check the presentation and draft the discrepancy notice. Pick one of the suggestions below.",
- f1t:"What I brought",f1:"Scoping the use case and prioritising which tasks to automate by value and risk, bridging Trade Finance business logic and technical feasibility.",
- f2t:"The principle",f2:"AI speeds up reading and checking unstructured documents without lowering the level of control a regulated process requires.",
- f3t:"About this demo",f3:"An educational reconstruction: document, companies and amounts are invented. The rules quoted (UCP 600) are public."
-}}[L];
-document.querySelectorAll('[data-t]').forEach(function(e){ var v=T[e.dataset.t]; if(typeof v==='string') e.textContent=v; });
-document.title=T.h1; document.querySelector('.lang a[data-l="'+L+'"]').setAttribute('aria-current','true');
-document.getElementById('back').href=L==='en'?'../en/#projets':'../#projets';
-var q=document.getElementById('q'); q.placeholder=T.ph;
-var log=document.getElementById('log'), sugg=document.getElementById('sugg'), send=document.getElementById('send'), paper=document.getElementById('paper');
-var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, busy=false;
-var wait=function(ms){ return new Promise(function(r){ setTimeout(r, reduce?Math.min(ms,60):ms); }); };
-function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
-function esc(s){ return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]}); }
-function down(){ log.scrollTop=log.scrollHeight; }
-function hl(fields,cls){ paper.querySelectorAll('.row').forEach(function(r){ r.classList.remove('hl','bad'); });
-  (fields||[]).forEach(function(f){ var r=paper.querySelector('[data-f="'+f[0]+'"]'); if(r){ r.classList.add(f[1]||'hl'); } });
-  var first=paper.querySelector('.row.bad, .row.hl'); if(first && matchMedia('(min-width:901px)').matches){ paper.scrollTo({top:Math.max(0,first.offsetTop-60),behavior:reduce?'auto':'smooth'}); } }
-function aiMsg(){ var m=el('div','msg ai'); log.appendChild(m); down(); return m; }
-async function typing(ms){ var t=el('div','typing','<i></i><i></i><i></i>'); log.appendChild(t); down(); await wait(ms); t.remove(); }
-async function runSteps(m,keys){
-  var ul=el('ol','steps'); var b=el('div','bub'); b.appendChild(ul); m.appendChild(b); var t0=0;
-  for(var i=0;i<keys.length;i++){ var k=keys[i]; var li=el('li','step run','<span class="ic" aria-hidden="true"></span><div>'+T.st[k]+'<small>'+T.st[k+'S']+'</small></div><span class="t"></span>'); ul.appendChild(li); down();
-    var d=600+Math.random()*500; await wait(d); t0+=d; li.className='step done'; li.querySelector('.t').textContent=(t0/1000).toFixed(1)+' s'; }
+const LOC=EN?'en-GB':'fr-FR';
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const D=iso=>{const p=iso.split('-');return new Date(+p[0],p[1]-1,+p[2]);};
+const fd=iso=>new Intl.DateTimeFormat(LOC,{day:'numeric',month:'short',year:'numeric'}).format(D(iso));
+const fdw=iso=>new Intl.DateTimeFormat(LOC,{weekday:'long',day:'numeric',month:'short'}).format(D(iso));
+const num=(n,d)=>new Intl.NumberFormat(LOC,{minimumFractionDigits:d||0,maximumFractionDigits:d||0}).format(n);
+const fm=(n,c,d)=>EN?c+' '+num(n,d):num(n,d)+' '+c;
+const qty=(n,u)=>num(n)+' '+u;
+const TODAY='2025-12-08';
+function bdays(a,b){const d=D(a),e=D(b);let n=0;if(e<=d)return 0;while(d<e){d.setDate(d.getDate()+1);const w=d.getDay();if(w&&w<6)n++;}return n;}
+let clock=new Date(2025,11,8,9,4);
+const pad=n=>String(n).padStart(2,'0');
+function stamp(m){clock=new Date(clock.getTime()+(m==null?1:m)*60000);return pad(clock.getDate())+'/'+pad(clock.getMonth()+1)+' '+pad(clock.getHours())+':'+pad(clock.getMinutes());}
+const fmtMin=m=>{const h=Math.floor(m/60),r=m%60;return EN?(h?h+'h ':'')+pad(r)+'m':(h?h+' h ':'')+pad(r)+(h?'':' min');};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait=ms=>new Promise(r=>setTimeout(r,reduce?Math.min(ms,40):ms));
+const isDesk=()=>matchMedia('(min-width:901px)').matches;
+
+/* ---------- static texts ---------- */
+const T={
+ back:x("Retour au CV","Back to CV"),tag:x("DÉMO SIMULÉE","SIMULATED DEMO"),
+ bar:x("Données entièrement fictives · aucune donnée ni aucun système de Société Générale","Fully fictional data · no Société Générale data or systems"),
+ h1:x("Agent IA · Lettres de Crédit","AI agent · Letters of Credit"),
+ lead:x("Reconstitution du parcours imaginé au hackathon GBIS « AI for Clients » (finaliste parmi 80+ équipes) : l'agent lit la Lettre de Crédit (MT700) et les documents présentés, exécute les contrôles et prépare le travail. L'opérateur Back Office revoit chaque point et garde la décision finale.","A reconstruction of the flow designed at the GBIS “AI for Clients” hackathon (finalist among 80+ teams): the agent reads the Letter of Credit (MT700) and the presented documents, runs the checks and prepares the work. The Back Office operator reviews every point and keeps the final decision."),
+ meta:x("Société Générale CIB · oct. – nov. 2025","Société Générale CIB · Oct. – Nov. 2025"),
+ disc:x("<b>Démo simulée, à but illustratif.</b> Ce n'est ni l'outil officiel ni l'outil final de Société Générale : dossiers, sociétés, montants et références sont inventés, les réponses de l'agent sont scriptées (aucun appel à une IA) et rien n'est envoyé.","<b>Simulated demo, for illustration only.</b> This is neither Société Générale's official tool nor a final one: files, companies, amounts and references are invented, the agent's answers are scripted (no AI calls) and nothing is ever sent."),
+ f1t:x("Ce que j'ai apporté","What I brought"),f1:x("Cadrage du cas d'usage et priorisation des tâches à automatiser selon leur valeur et leur risque, entre logique métier Trade Finance et faisabilité technique.","Scoping the use case and prioritising which tasks to automate by value and risk, bridging Trade Finance business logic and technical feasibility."),
+ f2t:x("Le principe","The principle"),f2:x("L'IA accélère la lecture et le contrôle de documents non structurés, sans baisser le niveau de contrôle d'un process réglementé : chaque constat est sourcé, revu et tracé.","AI speeds up reading and checking unstructured documents without lowering the level of control a regulated process requires: every finding is sourced, reviewed and logged."),
+ f3t:x("À propos de cette démo","About this demo"),f3:x("Reconstitution pédagogique : documents, entreprises, montants et indicateurs inventés. Les règles citées (UCP 600) sont publiques ; jours fériés non pris en compte dans les délais.","An educational reconstruction: documents, companies, amounts and metrics are invented. The rules quoted (UCP 600) are public; bank holidays are ignored in deadlines.")
+};
+document.querySelectorAll('[data-t]').forEach(e=>{const v=T[e.dataset.t];if(typeof v==='string')e.textContent=v;});
+$('#disc').innerHTML=T.disc;
+document.title=T.h1;
+$('.lang a[data-l="'+L+'"]').setAttribute('aria-current','true');
+$('#back').href=EN?'../en/#projets':'../#projets';
+document.querySelectorAll('.lang a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();location.href='?lang='+a.dataset.l+location.hash;}));
+
+const STL={new:x('Nouveau','New'),run:x("En cours d'analyse",'Analysing'),anom:x('Anomalies détectées','Discrepancies found'),ready:x('Prêt à valider','Ready to validate'),client:x('En attente client','Awaiting client'),done:x('Validé','Validated')};
+const ORDER=['new','run','anom','ready','client','done'];
+const pill=s=>`<span class="pill s-${s}">${STL[s]}</span>`;
+const VB={ok:x('CONFORME','COMPLIANT'),ko:x('RÉSERVE','DISCREPANCY'),check:x('À CONFIRMER','TO CONFIRM')};
+const AG={ok:x('Confirmer','Confirm'),ko:x('Retenir la réserve','Keep discrepancy'),check:x('Confirmer la lecture','Confirm reading')};
+const OV={ok:x('Signaler une réserve','Raise a discrepancy'),ko:x('Écarter','Dismiss'),check:x('Infirmer','Reject reading')};
+const WHO={agent:x('Agent LC','LC agent'),op:x('Opérateur BO','BO operator'),sys:x('Système','System'),client:x('Client (simulé)','Client (simulated)')};
+
+/* ---------- scenario data (all fictional) ---------- */
+function R(k,f,raw,c,lf,le,vf,ve){return{k,f,raw,c,lab:x(lf,le),val:x(vf,ve==null?vf:ve)};}
+const MT='ISSUE OF A DOCUMENTARY CREDIT · MT700';
+const fict=x(' (fictif)',' (fictitious)');
+
+const SA={id:'A',n:1,ref:'LC-DEMO-2025-0417',type:'pres',ccy:'USD',amt:1250000,
+ app:'Helvetia Grain Trading SA',appC:x('Genève','Geneva'),ben:'Atlantic Agro Export Ltd',benC:'Abidjan',
+ goods:x('Fèves de cacao','Cocoa beans'),recv:'2025-12-05',dl:'2025-12-12',man:55,ag:14,
+ label:x('Scénario 1 · Réserves','Scenario 1 · Discrepancies'),rec:'refuse',
+ init:[['05/12 16:42','sys',x('Présentation reçue de la banque présentatrice (fictive) : 5 documents + lettre de remise','Presentation received from the (fictitious) presenting bank: 5 documents + cover letter')],['08/12 08:30','sys',x('Dossier affecté à la file Import LC · priorité normale','File assigned to the Import LC queue · normal priority')]],
+ paper:[{h:MT,rows:[
+  R(':40A:','form','FORM OF DOC. CREDIT: IRREVOCABLE',99,'Forme','Form','Irrévocable','Irrevocable'),
+  R(':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0417',99,'Référence','Reference','LC-DEMO-2025-0417'),
+  R(':31C:','d','DATE OF ISSUE 250910',99,"Date d'émission",'Date of issue',fd('2025-09-10')),
+  R(':40E:','ucp','APPLICABLE RULES: UCP LATEST VERSION',98,'Règles applicables','Applicable rules','UCP 600'),
+  R(':31D:','exp','EXPIRY 251215 PLACE GENEVA',98,'Validité','Expiry',fd('2025-12-15')+x(', Genève',', Geneva')),
+  R(':50:','app','APPLICANT: HELVETIA GRAIN TRADING SA (FICTITIOUS), GENEVA',97,"Donneur d'ordre",'Applicant','Helvetia Grain Trading SA'+fict),
+  R(':59:','ben','BENEFICIARY: ATLANTIC AGRO EXPORT LTD (FICTITIOUS), ABIDJAN',96,'Bénéficiaire','Beneficiary','Atlantic Agro Export Ltd'+fict),
+  R(':32B:','amt','CURRENCY/AMOUNT: USD 1,250,000.00',99,'Montant','Amount',fm(1250000,'USD',2)),
+  R(':39A:','tol','PCT CREDIT AMOUNT TOLERANCE: 05/05',97,'Tolérance','Tolerance','± 5 %'),
+  R(':41A:','av','AVAILABLE WITH ISSUING BANK BY PAYMENT',95,'Réalisation','Available by','Paiement à vue, banque émettrice','Sight payment, issuing bank'),
+  R(':43P:','pship','PARTIAL SHIPMENTS: NOT ALLOWED',96,'Expéditions partielles','Partial shipments','Interdites','Not allowed'),
+  R(':44E/F:','port',"SAN PEDRO, CÔTE D'IVOIRE → ANTWERP, BELGIUM",95,'Ports','Ports','San Pedro → Anvers','San Pedro → Antwerp'),
+  R(':44C:','ship','LATEST DATE OF SHIPMENT 251120',99,'Expédition au plus tard','Latest shipment',fd('2025-11-20')),
+  R(':45A:','goods','2,500 MT RAW COCOA BEANS, CIF ANTWERP INCOTERMS 2020',94,'Marchandise','Goods','2 500 t de fèves de cacao, CIF Anvers','2,500 MT raw cocoa beans, CIF Antwerp'),
+  R(':46A:','docs','+SIGNED COMMERCIAL INVOICE IN 3 ORIGINALS +FULL SET CLEAN ON BOARD B/L +INSURANCE CERTIFICATE 110 PCT CIF VALUE +CERTIFICATE OF ORIGIN +PHYTOSANITARY CERTIFICATE',91,'Documents exigés','Documents required','5 : facture, B/L, assurance, origine, phytosanitaire','5: invoice, B/L, insurance, origin, phytosanitary'),
+  R(':47A:','add','ALL DOCUMENTS MUST INDICATE THE CREDIT NUMBER',93,'Conditions additionnelles','Additional conditions','N° de crédit sur chaque document','Credit number on every document'),
+  R(':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY',97,'Délai de présentation','Presentation period','21 jours après expédition','21 days after shipment')]},
+ {h:'DOCUMENTS PRESENTED · 05.12.2025',rows:[
+  R('INV','p-inv','COMMERCIAL INVOICE · USD 1,318,750.00 · 2,510 MT RAW COCOA BEANS · 3 ORIGINALS',98,'Facture commerciale','Commercial invoice',fm(1318750,'USD',2)+' · '+qty(2510,x('t','MT'))),
+  R('B/L','p-bl','BILL OF LADING · SHIPPED ON BOARD 251118 · SAN PEDRO → ANTWERP · CLEAN · 3/3 · 2,510 MT',93,'Connaissement (B/L)','Bill of lading',x('À bord le ','On board ')+fd('2025-11-18')+x(', net, 3/3',', clean, 3/3')),
+  R('INS','p-ins','INSURANCE CERTIFICATE · USD 1,450,625.00 · CIF VALUE + 10 PCT',97,"Certificat d'assurance",'Insurance certificate',fm(1450625,'USD',2)),
+  R('COO','p-coo',"CERTIFICATE OF ORIGIN · CÔTE D'IVOIRE",96,"Certificat d'origine",'Certificate of origin',"Côte d'Ivoire"),
+  R('PHY','p-phy','PHYTOSANITARY CERTIFICATE · NOT PRESENTED',99,'Certificat phytosanitaire','Phytosanitary certificate','Non présenté','Not presented'),
+  R('PRES','p-date','DOCUMENTS PRESENTED 251205 · CREDIT NO. QUOTED ON 4/4',99,'Présentation','Presentation',fd('2025-12-05')+x(' · n° de crédit sur 4/4',' · credit no. on 4/4'))]}],
+ checks:[
+  {id:'ship',v:'ok',t:x("Date d'expédition",'Shipment date'),d:x("Mention à bord du B/L : 18 nov. 2025, avant la limite du 20 nov. 2025.",'On-board notation: 18 Nov 2025, before the 20 Nov 2025 deadline.'),rule:x("44C vs date de la mention à bord, réputée date d'expédition (UCP 600, art. 20(a)(ii))",'44C vs on-board notation date, deemed the shipment date (UCP 600, art. 20(a)(ii))'),src:['ship','p-bl']},
+  {id:'per',v:'ok',t:x('Délai de présentation','Presentation period'),d:x("Présentation le 5 déc. : 17 jours après l'expédition (≤ 21) et avant la validité du 15 déc.",'Presented 5 Dec: 17 days after shipment (≤ 21) and before the 15 Dec expiry.'),rule:x('48 + 31D (UCP 600, art. 14(c))','48 + 31D (UCP 600, art. 14(c))'),src:['per','exp','p-date']},
+  {id:'qty',v:'ok',t:x('Quantité','Quantity'),d:x('2 510 t facturées et embarquées pour 2 500 t prévues (+0,4 %), dans la tolérance de ± 5 %.','2,510 MT invoiced and shipped for 2,500 MT (+0.4%), within the ±5% tolerance.'),rule:'45A + 39A',src:['goods','tol','p-inv','p-bl']},
+  {id:'amt',v:'ko',t:x('Montant présenté','Amount claimed'),d:x('1 318 750 USD, soit +5,5 % : au-delà du maximum autorisé de 1 312 500 USD (écart de 6 250 USD).','USD 1,318,750, i.e. +5.5%: above the maximum allowed of USD 1,312,500 (USD 6,250 over).'),rule:x("32B + tolérance 39A. L'UCP 600 (art. 18(b)) permet d'accepter une facture excédentaire si le paiement reste limité au montant autorisé : décision opérateur.",'32B + 39A tolerance. UCP 600 (art. 18(b)) allows accepting an invoice in excess if payment stays within the amount permitted: operator decision.'),src:['amt','tol','p-inv'],
+   notice:x('Montant facturé et présenté de 1 318 750 USD, supérieur au montant maximum autorisé de 1 312 500 USD (32B + tolérance de 5 % en 39A).','Invoiced and claimed amount of USD 1,318,750 exceeds the maximum allowed amount of USD 1,312,500 (32B + 5% tolerance under 39A).')},
+  {id:'ins',v:'ok',t:x("Couverture d'assurance",'Insurance cover'),d:x('1 450 625 USD = 110 % de la valeur CIF facturée (1 318 750 USD).','USD 1,450,625 = 110% of the invoiced CIF value (USD 1,318,750).'),rule:x('46A : 110 % de la valeur CIF','46A: 110% of CIF value'),src:['docs','p-ins']},
+  {id:'cons',v:'ok',t:x('Cohérence entre documents','Consistency across documents'),d:x("Marchandise, quantité, ports et n° de crédit concordent entre facture, B/L et certificat d'origine.",'Goods, quantity, ports and credit number match across invoice, B/L and certificate of origin.'),rule:x('Pas de données contradictoires (UCP 600, art. 14(d))','No conflicting data (UCP 600, art. 14(d))'),src:['p-inv','p-bl','p-coo']},
+  {id:'phy',v:'ko',t:x('Document manquant','Missing document'),d:x("Le certificat phytosanitaire exigé en 46A n'a pas été présenté.",'The phytosanitary certificate required under 46A was not presented.'),rule:x('46A : 5 documents exigés, 4 présentés','46A: 5 documents required, 4 presented'),src:['docs','p-phy'],
+   notice:x('Certificat phytosanitaire exigé en 46A non présenté.','Phytosanitary certificate required under 46A not presented.')},
+  {id:'ref',v:'ok',t:x('Numéro de crédit','Credit number'),d:x('Le n° LC-DEMO-2025-0417 figure sur les 4 documents présentés.','LC-DEMO-2025-0417 appears on all 4 presented documents.'),rule:'47A',src:['add','p-date']}],
+ comply:x("Le paiement sera effectué dans la limite du montant autorisé de 1 312 500 USD (UCP 600, art. 18(b)), selon vos instructions de règlement.","Payment will be made within the permitted amount of USD 1,312,500 (UCP 600, art. 18(b)), as per your settlement instructions."),
+ hello:x("Bonjour. Présentation reçue le 5 déc. au titre de LC-DEMO-2025-0417 (Helvetia Grain Trading, fictif). Échéance d'examen : 12 déc. Lancez l'analyse depuis l'onglet Contrôles, ou posez-moi une question.","Hello. Presentation received on 5 Dec under LC-DEMO-2025-0417 (Helvetia Grain Trading, fictitious). Examination deadline: 12 Dec. Run the analysis from the Checks tab, or ask me a question.")};
+
+const SB={id:'B',n:2,ref:'LC-DEMO-2025-0452',type:'pres',ccy:'EUR',amt:486000,
+ app:'Rhodania Industrie SAS',appC:'Lyon',ben:'Ege Valve Components AS',benC:'Izmir',
+ goods:x('Vannes industrielles','Industrial valves'),recv:'2025-12-03',dl:'2025-12-10',man:45,ag:10,
+ label:x('Scénario 2 · Conforme','Scenario 2 · Compliant'),rec:'comply',
+ init:[['03/12 11:08','sys',x('Présentation reçue de la banque présentatrice (fictive) : 5 documents','Presentation received from the (fictitious) presenting bank: 5 documents')],['08/12 08:31','sys',x('Dossier affecté à la file Import LC · priorité normale','File assigned to the Import LC queue · normal priority')]],
+ paper:[{h:MT,rows:[
+  R(':40A:','form','FORM OF DOC. CREDIT: IRREVOCABLE',99,'Forme','Form','Irrévocable','Irrevocable'),
+  R(':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0452',99,'Référence','Reference','LC-DEMO-2025-0452'),
+  R(':31C:','d','DATE OF ISSUE 250926',99,"Date d'émission",'Date of issue',fd('2025-09-26')),
+  R(':40E:','ucp','APPLICABLE RULES: UCP LATEST VERSION',98,'Règles applicables','Applicable rules','UCP 600'),
+  R(':31D:','exp','EXPIRY 251231 PLACE PARIS',98,'Validité','Expiry',fd('2025-12-31')+', Paris'),
+  R(':50:','app','APPLICANT: RHODANIA INDUSTRIE SAS (FICTITIOUS), LYON',97,"Donneur d'ordre",'Applicant','Rhodania Industrie SAS'+fict),
+  R(':59:','ben','BENEFICIARY: EGE VALVE COMPONENTS AS (FICTITIOUS), IZMIR',95,'Bénéficiaire','Beneficiary','Ege Valve Components AS'+fict),
+  R(':32B:','amt','CURRENCY/AMOUNT: EUR 486,000.00',99,'Montant','Amount',fm(486000,'EUR',2)),
+  R(':41A:','av','AVAILABLE WITH ISSUING BANK BY DEF PAYMENT',96,'Réalisation','Available by','Paiement différé, banque émettrice','Deferred payment, issuing bank'),
+  R(':42P:','def','DEFERRED PAYMENT DETAILS: 60 DAYS AFTER B/L DATE',94,'Échéance','Maturity','60 jours date de B/L','60 days after B/L date'),
+  R(':43P:','pship','PARTIAL SHIPMENTS: NOT ALLOWED',96,'Expéditions partielles','Partial shipments','Interdites','Not allowed'),
+  R(':44E/F:','port','IZMIR, TÜRKİYE → FOS-SUR-MER, FRANCE',95,'Ports','Ports','Izmir → Fos-sur-Mer'),
+  R(':44C:','ship','LATEST DATE OF SHIPMENT 251130',99,'Expédition au plus tard','Latest shipment',fd('2025-11-30')),
+  R(':45A:','goods','1,800 UNITS INDUSTRIAL BALL VALVES DN150 AT EUR 270.00 PER UNIT, CIF FOS-SUR-MER INCOTERMS 2020',93,'Marchandise','Goods','1 800 vannes DN150 à 270 EUR, CIF Fos-sur-Mer','1,800 DN150 valves at EUR 270, CIF Fos-sur-Mer'),
+  R(':46A:','docs','+COMMERCIAL INVOICE IN 2 ORIGINALS +FULL SET CLEAN ON BOARD B/L +INSURANCE CERTIFICATE 110 PCT CIF VALUE +PACKING LIST +CERTIFICATE OF ORIGIN',92,'Documents exigés','Documents required','5 : facture, B/L, assurance, colisage, origine','5: invoice, B/L, insurance, packing list, origin'),
+  R(':47A:','add','ALL DOCUMENTS MUST INDICATE THE CREDIT NUMBER',93,'Conditions additionnelles','Additional conditions','N° de crédit sur chaque document','Credit number on every document'),
+  R(':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY',97,'Délai de présentation','Presentation period','21 jours après expédition','21 days after shipment')]},
+ {h:'DOCUMENTS PRESENTED · 03.12.2025',rows:[
+  R('INV','p-inv','COMMERCIAL INVOICE · EUR 486,000.00 · 1,800 UNITS BALL VALVES DN150 · 2 ORIGINALS',98,'Facture commerciale','Commercial invoice',fm(486000,'EUR',2)+' · '+qty(1800,x('unités','units'))),
+  R('B/L','p-bl','BILL OF LADING · SHIPPED ON BOARD 24.11.2025 (HANDWRITTEN STAMP) · IZMIR → FOS-SUR-MER · CLEAN · 3/3',72,'Connaissement (B/L)','Bill of lading',x('À bord le ','On board ')+fd('2025-11-24')+x(' (tampon manuscrit)',' (handwritten stamp)')),
+  R('INS','p-ins','INSURANCE CERTIFICATE · EUR 534,600.00 · CIF VALUE + 10 PCT',97,"Certificat d'assurance",'Insurance certificate',fm(534600,'EUR',2)),
+  R('PKL','p-pkl','PACKING LIST · 1,800 UNITS · 60 PALLETS',96,'Liste de colisage','Packing list',qty(1800,x('unités','units'))+' · 60 '+x('palettes','pallets')),
+  R('COO','p-coo','CERTIFICATE OF ORIGIN · TÜRKİYE',96,"Certificat d'origine",'Certificate of origin','Türkiye'),
+  R('PRES','p-date','DOCUMENTS PRESENTED 251203 · CREDIT NO. QUOTED ON 5/5',99,'Présentation','Presentation',fd('2025-12-03')+x(' · n° de crédit sur 5/5',' · credit no. on 5/5'))]}],
+ checks:[
+  {id:'bl',v:'check',t:x('Date de mise à bord : lecture incertaine','On-board date: uncertain reading'),d:x("Tampon manuscrit lu « 24.11.2025 » avec 72 % de confiance. Merci de confirmer visuellement sur le B/L avant de s'appuyer sur cette date.",'Handwritten stamp read as “24.11.2025” with 72% confidence. Please confirm it visually on the B/L before relying on this date.'),rule:x("Seuil de confiance de l'agent : 85 % ; en dessous, confirmation humaine obligatoire",'Agent confidence threshold: 85%; below it, human confirmation is mandatory'),src:['p-bl'],notice:x("Date de mise à bord du connaissement illisible ou non confirmée.","On-board date on the bill of lading illegible or not confirmed.")},
+  {id:'ship',v:'ok',t:x("Date d'expédition",'Shipment date'),d:x('Mise à bord le 24 nov. 2025, avant la limite du 30 nov. 2025.','Shipped on board 24 Nov 2025, before the 30 Nov 2025 deadline.'),rule:x('44C vs mention à bord (UCP 600, art. 20(a)(ii))','44C vs on-board notation (UCP 600, art. 20(a)(ii))'),src:['ship','p-bl']},
+  {id:'per',v:'ok',t:x('Délai de présentation','Presentation period'),d:x("Présentation le 3 déc. : 9 jours après l'expédition (≤ 21) et avant la validité du 31 déc.",'Presented 3 Dec: 9 days after shipment (≤ 21) and before the 31 Dec expiry.'),rule:x('48 + 31D (UCP 600, art. 14(c))','48 + 31D (UCP 600, art. 14(c))'),src:['per','exp','p-date']},
+  {id:'amt',v:'ok',t:x('Montant','Amount'),d:x('486 000 EUR = 1 800 × 270 EUR, égal au montant du crédit.','EUR 486,000 = 1,800 × EUR 270, equal to the credit amount.'),rule:'32B + 45A',src:['amt','goods','p-inv']},
+  {id:'desc',v:'ok',t:x('Description de la marchandise','Description of goods'),d:x('La désignation de la facture correspond à celle du crédit (vannes à bille DN150).','The invoice description matches the credit (DN150 ball valves).'),rule:x('UCP 600, art. 18(c)','UCP 600, art. 18(c)'),src:['goods','p-inv']},
+  {id:'ins',v:'ok',t:x("Couverture d'assurance",'Insurance cover'),d:x('534 600 EUR = 110 % de 486 000 EUR.','EUR 534,600 = 110% of EUR 486,000.'),rule:x('46A : 110 % de la valeur CIF','46A: 110% of CIF value'),src:['docs','p-ins']},
+  {id:'docs',v:'ok',t:x('Documents exigés','Required documents'),d:x('5 documents exigés, 5 présentés, n° de crédit sur chacun.','5 documents required, 5 presented, credit number on each.'),rule:'46A + 47A',src:['docs','add','p-date']},
+  {id:'cons',v:'ok',t:x('Cohérence entre documents','Consistency across documents'),d:x('Quantité (1 800) et ports concordants entre facture, liste de colisage et B/L.','Quantity (1,800) and ports match across invoice, packing list and B/L.'),rule:x('UCP 600, art. 14(d)','UCP 600, art. 14(d)'),src:['p-inv','p-pkl','p-bl']}],
+ comply:x("Conformément aux termes du crédit (paiement différé à 60 jours date de B/L), nous nous engageons à payer 486 000 EUR à l'échéance du 23 janvier 2026.","In accordance with the credit terms (deferred payment at 60 days after B/L date), we undertake to pay EUR 486,000 at maturity on 23 January 2026."),
+ hello:x("Bonjour. Présentation reçue le 3 déc. au titre de LC-DEMO-2025-0452 (Rhodania Industrie, fictif). Crédit à paiement différé, échéance d'examen le 10 déc. Lancez l'analyse quand vous voulez.","Hello. Presentation received on 3 Dec under LC-DEMO-2025-0452 (Rhodania Industrie, fictitious). Deferred payment credit, examination deadline 10 Dec. Run the analysis whenever you are ready.")};
+
+const SC3={id:'C',n:3,ref:'LC-DEMO-2025-0488',type:'pres',ccy:'USD',amt:612000,
+ app:'Maison Duvernay Cafés SA',appC:'Le Havre',ben:'Rift Valley Coffee Exporters Ltd',benC:'Nairobi',
+ goods:x('Café vert arabica','Green arabica coffee'),recv:'2025-12-02',dl:'2025-12-09',man:50,ag:13,
+ label:x('Scénario 3 · Question client','Scenario 3 · Ask the client'),rec:'waiver',
+ init:[['02/12 15:20','sys',x('Présentation reçue de la banque présentatrice (fictive) : 5 documents','Presentation received from the (fictitious) presenting bank: 5 documents')],['08/12 08:32','sys',x('Dossier affecté à la file Import LC · échéance proche','File assigned to the Import LC queue · deadline close')]],
+ paper:[{h:MT,rows:[
+  R(':40A:','form','FORM OF DOC. CREDIT: IRREVOCABLE',99,'Forme','Form','Irrévocable','Irrevocable'),
+  R(':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0488',99,'Référence','Reference','LC-DEMO-2025-0488'),
+  R(':31C:','d','DATE OF ISSUE 250918',99,"Date d'émission",'Date of issue',fd('2025-09-18')),
+  R(':40E:','ucp','APPLICABLE RULES: UCP LATEST VERSION',98,'Règles applicables','Applicable rules','UCP 600'),
+  R(':31D:','exp','EXPIRY 251220 PLACE PARIS',98,'Validité','Expiry',fd('2025-12-20')+', Paris'),
+  R(':50:','app','APPLICANT: MAISON DUVERNAY CAFES SA (FICTITIOUS), LE HAVRE',97,"Donneur d'ordre",'Applicant','Maison Duvernay Cafés SA'+fict),
+  R(':59:','ben','BENEFICIARY: RIFT VALLEY COFFEE EXPORTERS LTD (FICTITIOUS), NAIROBI',95,'Bénéficiaire','Beneficiary','Rift Valley Coffee Exporters Ltd'+fict),
+  R(':32B:','amt','CURRENCY/AMOUNT: USD 612,000.00',99,'Montant','Amount',fm(612000,'USD',2)),
+  R(':41A:','av','AVAILABLE WITH ISSUING BANK BY PAYMENT',95,'Réalisation','Available by','Paiement à vue, banque émettrice','Sight payment, issuing bank'),
+  R(':43P:','pship','PARTIAL SHIPMENTS: NOT ALLOWED',96,'Expéditions partielles','Partial shipments','Interdites','Not allowed'),
+  R(':44E/F:','port','MOMBASA, KENYA → LE HAVRE, FRANCE',96,'Ports','Ports','Mombasa → Le Havre'),
+  R(':44C:','ship','LATEST DATE OF SHIPMENT 251115',99,'Expédition au plus tard','Latest shipment',fd('2025-11-15')),
+  R(':45A:','goods','1,200 BAGS OF 60 KG KENYAN ARABICA GREEN COFFEE GRADE AA, CFR LE HAVRE INCOTERMS 2020',93,'Marchandise','Goods','1 200 sacs de 60 kg, arabica AA, CFR Le Havre','1,200 bags of 60 kg, arabica AA, CFR Le Havre'),
+  R(':46A:','docs','+COMMERCIAL INVOICE IN 3 ORIGINALS +FULL SET CLEAN ON BOARD B/L +CERTIFICATE OF ORIGIN +QUALITY CERTIFICATE ISSUED BY AN INDEPENDENT INSPECTION COMPANY +PACKING LIST',91,'Documents exigés','Documents required','5 : facture, B/L, origine, qualité, colisage','5: invoice, B/L, origin, quality, packing list'),
+  R(':47A:','add','ALL DOCUMENTS MUST INDICATE THE CREDIT NUMBER',93,'Conditions additionnelles','Additional conditions','N° de crédit sur chaque document','Credit number on every document'),
+  R(':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY',97,'Délai de présentation','Presentation period','21 jours après expédition','21 days after shipment')]},
+ {h:'DOCUMENTS PRESENTED · 02.12.2025',rows:[
+  R('INV','p-inv','COMMERCIAL INVOICE · USD 612,000.00 · 1,200 BAGS ARABICA GRADE AA · 3 ORIGINALS',98,'Facture commerciale','Commercial invoice',fm(612000,'USD',2)+' · '+qty(1200,x('sacs','bags'))),
+  R('B/L','p-bl','BILL OF LADING · SHIPPED ON BOARD 251118 · MOMBASA → LE HAVRE · CLEAN · 3/3 · 1,180 BAGS',95,'Connaissement (B/L)','Bill of lading',x('À bord le ','On board ')+fd('2025-11-18')+' · '+qty(1180,x('sacs','bags'))),
+  R('COO','p-coo','CERTIFICATE OF ORIGIN · KENYA',97,"Certificat d'origine",'Certificate of origin','Kenya'),
+  R('QUA','p-qua','QUALITY CERTIFICATE · GRADE AA · 1,200 BAGS',94,'Certificat de qualité','Quality certificate','AA · '+qty(1200,x('sacs','bags'))),
+  R('PKL','p-pkl','PACKING LIST · 1,200 BAGS × 60 KG',96,'Liste de colisage','Packing list',qty(1200,x('sacs','bags'))+' × 60 kg'),
+  R('PRES','p-date','DOCUMENTS PRESENTED 251202 · CREDIT NO. QUOTED ON 5/5',99,'Présentation','Presentation',fd('2025-12-02')+x(' · n° de crédit sur 5/5',' · credit no. on 5/5'))]}],
+ checks:[
+  {id:'ship',v:'ko',t:x('Expédition tardive','Late shipment'),d:x('Mise à bord le 18 nov. 2025, après la date limite du 15 nov. 2025 (3 jours de retard). Non corrigeable par une nouvelle présentation.','Shipped on board 18 Nov 2025, after the 15 Nov 2025 deadline (3 days late). Cannot be cured by a new presentation.'),rule:x('44C vs mention à bord (UCP 600, art. 20(a)(ii))','44C vs on-board notation (UCP 600, art. 20(a)(ii))'),src:['ship','p-bl'],
+   notice:x("Expédition tardive : mention à bord du connaissement datée du 18 novembre 2025, postérieure à la date limite d'expédition du 15 novembre 2025 (44C).",'Late shipment: on-board notation dated 18 November 2025, after the latest shipment date of 15 November 2025 (44C).')},
+  {id:'qty',v:'ko',t:x('Écart facture / B/L','Invoice / B/L mismatch'),d:x('Le B/L atteste 1 180 sacs à bord ; la facture, la liste de colisage et le certificat de qualité en déclarent 1 200.','The B/L shows 1,180 bags on board; the invoice, packing list and quality certificate state 1,200.'),rule:x('Données contradictoires (UCP 600, art. 14(d)) ; expéditions partielles interdites (43P)','Conflicting data (UCP 600, art. 14(d)); partial shipments not allowed (43P)'),src:['pship','p-inv','p-bl','p-pkl'],
+   notice:x('Données contradictoires : le connaissement mentionne 1 180 sacs, alors que la facture commerciale et la liste de colisage mentionnent 1 200 sacs.','Conflicting data: the bill of lading shows 1,180 bags whereas the commercial invoice and packing list show 1,200 bags.')},
+  {id:'per',v:'ok',t:x('Délai de présentation','Presentation period'),d:x("Présentation le 2 déc. : 14 jours après l'expédition (≤ 21) et avant la validité du 20 déc.",'Presented 2 Dec: 14 days after shipment (≤ 21) and before the 20 Dec expiry.'),rule:x('48 + 31D (UCP 600, art. 14(c))','48 + 31D (UCP 600, art. 14(c))'),src:['per','exp','p-date']},
+  {id:'amt',v:'ok',t:x('Montant','Amount'),d:x('612 000 USD, égal au montant du crédit.','USD 612,000, equal to the credit amount.'),rule:'32B',src:['amt','p-inv']},
+  {id:'desc',v:'ok',t:x('Description de la marchandise','Description of goods'),d:x('Arabica vert du Kenya, grade AA : conforme au 45A.','Kenyan green arabica, grade AA: matches 45A.'),rule:x('UCP 600, art. 18(c)','UCP 600, art. 18(c)'),src:['goods','p-inv','p-qua']},
+  {id:'docs',v:'ok',t:x('Documents exigés','Required documents'),d:x('5 documents exigés, 5 présentés, n° de crédit sur chacun.','5 documents required, 5 presented, credit number on each.'),rule:'46A + 47A',src:['docs','add','p-date']},
+  {id:'port',v:'ok',t:x('Ports et Incoterm','Ports and Incoterm'),d:x('Mombasa → Le Havre en CFR : aucune assurance exigée du vendeur, cohérent avec 46A.','Mombasa → Le Havre on CFR terms: no insurance required from the seller, consistent with 46A.'),rule:'44E/F + 45A',src:['port','goods','p-bl']}],
+ comply:x("Les réserves ayant été levées par le donneur d'ordre, le paiement de 612 000 USD sera effectué selon vos instructions de règlement.","The applicant having waived the discrepancies, payment of USD 612,000 will be made as per your settlement instructions."),
+ hello:x("Bonjour. Présentation reçue le 2 déc. au titre de LC-DEMO-2025-0488 (Maison Duvernay Cafés, fictif). Attention, l'échéance d'examen est demain, 9 déc.","Hello. Presentation received on 2 Dec under LC-DEMO-2025-0488 (Maison Duvernay Cafés, fictitious). Note: the examination deadline is tomorrow, 9 Dec.")};
+
+const SD={id:'D',n:4,ref:'LC-DEMO-2025-0509',type:'amd',ccy:'USD',amt:840000,
+ app:'Lumière Solaire Distribution SARL',appC:'Marseille',ben:'Eastshore PV Modules Co. Ltd',benC:'Ningbo',
+ goods:x('Modules photovoltaïques','PV modules'),recv:'2025-12-08',dl:'2025-12-10',man:40,ag:9,
+ label:x('Scénario 4 · Amendement','Scenario 4 · Amendment'),rec:'ask',
+ init:[['08/12 08:12','client',x("Demande d'amendement n° 1 reçue du donneur d'ordre (formulaire signé)",'Amendment request no. 1 received from the applicant (signed form)')],['08/12 08:33','sys',x('Dossier affecté à la file Import LC · amendements','File assigned to the Import LC queue · amendments')]],
+ paper:[{h:'DOCUMENTARY CREDIT IN FORCE · MT700',rows:[
+  R(':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0509',99,'Référence','Reference','LC-DEMO-2025-0509'),
+  R(':31C:','d','DATE OF ISSUE 251020',99,"Date d'émission",'Date of issue',fd('2025-10-20')),
+  R(':31D:','exp','EXPIRY 260110 PLACE PARIS',98,'Validité','Expiry',fd('2026-01-10')+', Paris'),
+  R(':50:','app','APPLICANT: LUMIERE SOLAIRE DISTRIBUTION SARL (FICTITIOUS), MARSEILLE',97,"Donneur d'ordre",'Applicant','Lumière Solaire Distribution SARL'+fict),
+  R(':59:','ben','BENEFICIARY: EASTSHORE PV MODULES CO. LTD (FICTITIOUS), NINGBO',95,'Bénéficiaire','Beneficiary','Eastshore PV Modules Co. Ltd'+fict),
+  R(':32B:','amt','CURRENCY/AMOUNT: USD 840,000.00',99,'Montant','Amount',fm(840000,'USD',2)),
+  R(':44E/F:','port','NINGBO, CHINA → MARSEILLE-FOS, FRANCE',96,'Ports','Ports','Ningbo → Marseille-Fos'),
+  R(':44C:','ship','LATEST DATE OF SHIPMENT 251210',99,'Expédition au plus tard','Latest shipment',fd('2025-12-10')),
+  R(':45A:','goods','14,000 PHOTOVOLTAIC MODULES 450 W AT USD 60.00 PER UNIT, FOB NINGBO INCOTERMS 2020',94,'Marchandise','Goods','14 000 modules 450 W à 60 USD, FOB Ningbo','14,000 modules 450 W at USD 60, FOB Ningbo'),
+  R(':46A:','docs','+COMMERCIAL INVOICE +FULL SET CLEAN ON BOARD B/L +PACKING LIST +CERTIFICATE OF ORIGIN',93,'Documents exigés','Documents required','4 : facture, B/L, colisage, origine','4: invoice, B/L, packing list, origin'),
+  R(':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY',97,'Délai de présentation','Presentation period','21 jours après expédition','21 days after shipment')]},
+ {h:'AMENDMENT REQUEST NO. 1 · APPLICANT · 08.12.2025',rows:[
+  R('REQ','a-req','REQUESTED BY APPLICANT · SIGNED FORM · SIGNATURE CHECKED AGAINST SPECIMEN (SIMULATED)',96,'Demandeur','Requested by',x("Donneur d'ordre, formulaire signé","Applicant, signed form")),
+  R('A-44C','a-ship','LATEST DATE OF SHIPMENT: 251210 → 251231',97,'Nouvelle date d’expédition','New latest shipment',fd('2025-12-31')),
+  R('A-32B','a-amt','INCREASE BY USD 67,200.00 → NEW AMOUNT USD 907,200.00',98,'Augmentation','Increase','+ '+fm(67200,'USD',2)+' → '+fm(907200,'USD',2)),
+  R('A-45A','a-goods','15,120 MODULES AT USD 60.00 PER UNIT (INSTEAD OF 14,000)',95,'Nouvelle quantité','New quantity',qty(15120,x('modules','modules'))+x(' à 60 USD',' at USD 60')),
+  R('A-46A','a-docs','ADD: INSURANCE CERTIFICATE 110 PCT CIF VALUE',93,'Document ajouté','Document added',x("Certificat d'assurance 110 %",'Insurance certificate 110%')),
+  R('A-31D','a-exp','EXPIRY: UNCHANGED (260110)',88,'Validité','Expiry',x('Inchangée (','Unchanged (')+fd('2026-01-10')+')')]}],
+ checks:[
+  {id:'req',v:'ok',t:x('Demande recevable','Request admissible'),d:x("Émise par le donneur d'ordre, crédit en vigueur, amendement n° 1, signature conforme au spécimen (contrôle simulé).",'Issued by the applicant, credit in force, amendment no. 1, signature matches specimen (simulated check).'),rule:x("Contrôle d'éligibilité (hypothèse de démo)",'Eligibility check (demo assumption)'),src:['app','a-req']},
+  {id:'price',v:'ok',t:x('Cohérence montant / quantité','Amount / quantity consistency'),d:x('15 120 × 60 USD = 907 200 USD ; augmentation de 67 200 USD (+8 %), prix unitaire inchangé.','15,120 × USD 60 = USD 907,200; increase of USD 67,200 (+8%), unit price unchanged.'),rule:'32B + 45A',src:['amt','goods','a-amt','a-goods']},
+  {id:'limit',v:'check',t:x('Impact sur la limite du client','Impact on the client limit'),d:x("L'augmentation de 67 200 USD consomme de la limite. L'agent n'a pas accès aux limites de crédit : vérification manuelle requise.",'The USD 67,200 increase uses limit. The agent has no access to credit limits: manual check required.'),rule:x("Hors périmètre de l'agent : à confirmer par l'opérateur",'Outside the agent’s scope: to be confirmed by the operator'),src:['a-amt'],
+   notice:x("L'augmentation de 67 200 USD nécessite un accord préalable sur la limite : nous revenons vers vous dès qu'il sera obtenu.",'The USD 67,200 increase requires prior limit approval: we will revert once obtained.')},
+  {id:'window',v:'ko',t:x('Fenêtre de présentation réduite','Presentation window cut short'),d:x('Expédition possible jusqu’au 31 déc. mais validité inchangée au 10 janv. : le bénéficiaire n’aurait que 10 jours pour présenter, au lieu des 21 prévus en 48.','Shipment allowed until 31 Dec but expiry unchanged at 10 Jan: the beneficiary would only have 10 days to present instead of the 21 set in 48.'),rule:x('31D vs 44C + 48 (UCP 600, art. 14(c) : présentation au plus tard à la validité)','31D vs 44C + 48 (UCP 600, art. 14(c): presentation no later than expiry)'),src:['exp','per','a-ship','a-exp'],
+   notice:x('Souhaitez-vous prolonger la validité du crédit au 21 janvier 2026, afin de préserver le délai de présentation de 21 jours ?','Would you like to extend the expiry to 21 January 2026, to preserve the 21-day presentation period?')},
+  {id:'inco',v:'ko',t:x('Incoterm incohérent avec le document ajouté','Incoterm inconsistent with the added document'),d:x("En FOB, l'assurance du transport principal est à la charge de l'acheteur. Exiger un certificat d'assurance du vendeur suppose de passer en CIF (ou de retirer cette exigence).",'Under FOB, main-carriage insurance is the buyer’s responsibility. Requiring an insurance certificate from the seller implies switching to CIF (or dropping the requirement).'),rule:x('45A (FOB, Incoterms 2020) vs ajout en 46A','45A (FOB, Incoterms 2020) vs 46A addition'),src:['goods','a-docs'],
+   notice:x("Confirmez-vous le passage de l'Incoterm FOB Ningbo à CIF Marseille-Fos ? À défaut, nous proposons de retirer l'exigence du certificat d'assurance.",'Do you confirm switching the Incoterm from FOB Ningbo to CIF Marseille-Fos? Otherwise, we suggest dropping the insurance certificate requirement.')},
+  {id:'ben',v:'ok',t:x('Accord du bénéficiaire','Beneficiary consent'),d:x("L'amendement ne liera le bénéficiaire qu'après son acceptation, à suivre après émission.",'The amendment only binds the beneficiary once accepted, to be tracked after issuance.'),rule:x('UCP 600, art. 10','UCP 600, art. 10'),src:['ben']}],
+ hello:x("Bonjour. Demande d'amendement n° 1 reçue ce matin pour LC-DEMO-2025-0509 (Lumière Solaire Distribution, fictif) : prolongation de l'expédition et augmentation de montant. Je peux vérifier sa cohérence avant émission.","Hello. Amendment request no. 1 received this morning for LC-DEMO-2025-0509 (Lumière Solaire Distribution, fictitious): shipment extension and amount increase. I can check its consistency before issuance.")};
+
+const SCS=[SA,SB,SC3,SD];
+const BG=[
+ {ref:'LC-DEMO-2025-0389',app:'Nordhavn Feed Imports A/S',ben:'Pampas Soja SA',ccy:'USD',amt:2140000,type:'pres',dl:'2025-12-05',s:'done',disc:false,man:50,ag:12},
+ {ref:'LC-DEMO-2025-0395',app:'Castellane Vins SAS',ben:'Valle Central Barricas Ltda',ccy:'EUR',amt:312500,type:'pres',dl:'2025-12-08',s:'done',disc:true,man:60,ag:15},
+ {ref:'LC-DEMO-2025-0461',app:'Oberland Maschinen GmbH',ben:'Kanto Precision Tools KK',ccy:'EUR',amt:1075000,type:'pres',dl:'2025-12-11',s:'run',disc:false,man:55,ag:13},
+ {ref:'LC-DEMO-2025-0470',app:'Iberia Fruta SL',ben:'Cape Orchards Export (Pty) Ltd',ccy:'USD',amt:268900,type:'pres',dl:'2025-12-10',s:'anom',disc:true,man:45,ag:11},
+ {ref:'LC-DEMO-2025-0476',app:'Atlas Textiles SARL',ben:'Anhui Cotton Mills Co. Ltd',ccy:'USD',amt:154300,type:'pres',dl:'2025-12-11',s:'ready',disc:false,man:40,ag:10},
+ {ref:'LC-DEMO-2025-0493',app:'Baltica Timber OÜ',ben:'Laurentides Bois Inc.',ccy:'EUR',amt:690000,type:'amd',dl:'2025-12-12',s:'new',disc:false,man:35,ag:8}];
+
+/* ---------- state ---------- */
+const S={filter:'all',q:'',cur:null,tab:'checks',busy:false,edit:null,docOpen:null};
+function initState(){
+ clock=new Date(2025,11,8,9,4);
+ SCS.forEach(sc=>{sc.st={status:'new',analysed:false,dec:{},com:{},audit:sc.init.map(a=>({t:a[0],who:a[1],txt:a[2]})),chat:[],asked:{},outcome:null,reply:false,drafts:{},valAt:null,valCom:''};});
 }
-async function summary(){
-  var m=aiMsg(); await runSteps(m,['read','extract']);
-  hl([['n'],['app'],['ben'],['amt'],['tol'],['goods'],['ship'],['exp'],['per'],['docs']]);
-  var b=el('div','bub'); b.innerHTML='<p>'+T.sumIntro+'</p><table class="kv">'+T.kv.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</table><p style="margin-top:8px;color:var(--muted);font-size:.84rem">'+T.sumEnd+'</p>';
-  await typing(500); m.appendChild(b); down();
+initState();
+const allRows=sc=>sc.paper.reduce((a,s)=>a.concat(s.rows),[]);
+const rowBy=(sc,f)=>allRows(sc).find(r=>r.f===f);
+const agentKo=sc=>sc.checks.filter(c=>c.v==='ko').length;
+const agentCk=sc=>sc.checks.filter(c=>c.v==='check').length;
+function fin(sc,c){const d=sc.st.dec[c.id];if(!d)return null;if(c.v==='ko')return d==='agree'?'ko':'ok';return d==='agree'?'ok':'ko';}
+const retained=sc=>sc.checks.filter(c=>fin(sc,c)==='ko');
+const proj=sc=>sc.checks.filter(c=>(fin(sc,c)||(c.v==='ko'?'ko':'ok'))==='ko');
+const pending=sc=>sc.checks.filter(c=>!sc.st.dec[c.id]);
+const locked=sc=>sc.st.status==='client'||sc.st.status==='done';
+function audit(sc,who,txt,m){sc.st.audit.push({t:stamp(m==null?1:m),who,txt});}
+function hasDisc(sc){if(!sc.st.analysed)return false;return pending(sc).length?agentKo(sc)>0:retained(sc).length>0;}
+function recompute(sc){if(locked(sc)||!sc.st.analysed)return;const prev=sc.st.status;sc.st.status=!pending(sc).length?'ready':(agentKo(sc)?'anom':'ready');if(prev!==sc.st.status)audit(sc,'sys',x('Statut : ','Status: ')+'<b>'+STL[sc.st.status]+'</b>',0);}
+
+/* ---------- outcomes & drafts ---------- */
+const OUT={
+ refuse:{to:'done',lab:x('Notifier le refus au présentateur','Send a refusal notice to the presenter'),desc:x("UCP 600, art. 16(c)–(d) : notification unique listant toutes les réserves, au plus tard à la clôture du 5e jour ouvré. Documents conservés dans l'attente d'instructions.",'UCP 600, art. 16(c)–(d): a single notice listing every discrepancy, no later than the close of the 5th banking day. Documents held pending instructions.'),res:x('Refus notifié · documents conservés','Refusal notified · documents held'),dl:x('Avis de refus (réserves)','Refusal notice (discrepancies)')},
+ waiver:{to:'client',lab:x("Solliciter la levée des réserves auprès du donneur d'ordre",'Ask the applicant to waive the discrepancies'),desc:x("UCP 600, art. 16(b) : démarche à la seule appréciation de la banque, qui ne prolonge pas le délai d'examen.",'UCP 600, art. 16(b): at the bank’s sole judgement, and it does not extend the examination period.'),res:x("Levée des réserves demandée au donneur d'ordre",'Waiver requested from the applicant'),dl:x('Demande de levée de réserves','Waiver request')},
+ comply:{to:'done',lab:x('Déclarer la présentation conforme','Declare the presentation compliant'),desc:x("Aucune réserve retenue : la banque honore selon les termes du crédit.",'No discrepancy kept: the bank honours under the credit terms.'),res:x('Présentation conforme','Compliant presentation'),dl:x('Avis de conformité','Notice of compliance')},
+ ask:{to:'client',lab:x("Envoyer les questions au client avant d'émettre le MT707",'Send the questions to the client before issuing the MT707'),desc:x("Les points retenus sont posés au donneur d'ordre ; le MT707 est préparé mais pas émis.",'The kept points are put to the applicant; the MT707 is prepared but not issued.'),res:x('Questions envoyées au client','Questions sent to the client'),dl:x('Questions au client','Questions to the client')},
+ issue:{to:'done',lab:x('Préparer le MT707 tel que demandé','Prepare the MT707 as requested'),desc:x("Amendement préparé pour émission ; il ne liera le bénéficiaire qu'après acceptation (UCP 600, art. 10).",'Amendment prepared for issuance; binding on the beneficiary only once accepted (UCP 600, art. 10).'),res:x('MT707 prêt à émettre (hors démo)','MT707 ready for issuance (outside the demo)'),dl:x('Brouillon MT707','MT707 draft')}};
+function outcomes(sc){const r=proj(sc).length;
+ if(sc.type==='amd')return r?['ask','issue']:['issue'];
+ return r?['refuse','waiver']:['comply'];}
+function recOut(sc){const o=outcomes(sc);return o.includes(sc.rec)?sc.rec:o[0];}
+function curOut(sc){return sc.st.outcome||recOut(sc);}
+function noticeOf(sc,c){if(c.notice&&c.v!=='ok')return c.notice;const cm=(sc.st.com[c.id]||[]).map(m=>m.txt).join(' ');return x("Réserve relevée par l'opérateur · ",'Discrepancy raised by the operator · ')+c.t+(cm?' : '+cm:'');}
+function list(sc){return proj(sc).map((c,i)=>(i+1)+'. '+noticeOf(sc,c)).join('\n');}
+function buildDraft(sc,oid){
+ const pd=fd(sc.recv),sig=x('Back Office Trade Finance · démo simulée','Trade Finance Back Office · simulated demo');
+ if(oid==='refuse')return x(`À : Banque présentatrice (fictive)\nObjet : ${sc.ref} · Présentation du ${pd} · Avis de refus\n\nMadame, Monsieur,\n\nNous accusons réception des documents présentés le ${pd} au titre du crédit documentaire cité en objet. Après examen, nous refusons d'honorer la présentation en raison des réserves suivantes :\n\n${list(sc)}\n\nNous conservons les documents à votre disposition dans l'attente de vos instructions.${sc.id==='A'&&retained(sc).some(c=>c.id==='phy')?"\n\nPour rappel, toute présentation complémentaire doit intervenir au plus tard le 9 décembre 2025 (21 jours après l'expédition, champ 48).":''}\n\nCordialement,\n${sig}`,
+  `To: Presenting bank (fictitious)\nSubject: ${sc.ref} · Presentation of ${pd} · Refusal notice\n\nDear Sir or Madam,\n\nWe acknowledge receipt of the documents presented on ${pd} under the above documentary credit. Upon examination, we refuse to honour the presentation owing to the following discrepancies:\n\n${list(sc)}\n\nWe are holding the documents pending your further instructions.${sc.id==='A'&&retained(sc).some(c=>c.id==='phy')?"\n\nPlease note that any further presentation must be made no later than 9 December 2025 (21 days after shipment, field 48).":''}\n\nKind regards,\n${sig}`);
+ if(oid==='waiver')return x(`À : ${sc.app} (donneur d'ordre, fictif)\nObjet : ${sc.ref} · Présentation du ${pd} · Demande de levée de réserves\n\nMadame, Monsieur,\n\nLes documents présentés le ${pd} au titre de votre crédit documentaire comportent les réserves suivantes :\n\n${list(sc)}\n\nPouvez-vous nous indiquer si vous acceptez de lever ces réserves ? Sans retour de votre part avant le ${fd(sc.dl)} à 12 h, nous serons tenus de notifier le refus à la banque présentatrice.\n\nCordialement,\n${sig}`,
+  `To: ${sc.app} (applicant, fictitious)\nSubject: ${sc.ref} · Presentation of ${pd} · Request for waiver\n\nDear Sir or Madam,\n\nThe documents presented on ${pd} under your documentary credit show the following discrepancies:\n\n${list(sc)}\n\nPlease let us know whether you agree to waive these discrepancies. Without your reply before ${fd(sc.dl)} at 12:00, we will have to send a refusal notice to the presenting bank.\n\nKind regards,\n${sig}`);
+ if(oid==='comply')return x(`À : Banque présentatrice (fictive)\nObjet : ${sc.ref} · Présentation du ${pd} · Documents conformes\n\nMadame, Monsieur,\n\nNous vous informons que les documents présentés le ${pd} au titre du crédit cité en objet ont été jugés conformes.\n${sc.comply}\n\nCordialement,\n${sig}`,
+  `To: Presenting bank (fictitious)\nSubject: ${sc.ref} · Presentation of ${pd} · Complying documents\n\nDear Sir or Madam,\n\nWe inform you that the documents presented on ${pd} under the above credit have been found compliant.\n${sc.comply}\n\nKind regards,\n${sig}`);
+ if(oid==='ask')return x(`À : ${sc.app} (donneur d'ordre, fictif)\nObjet : ${sc.ref} · Votre demande d'amendement n° 1 · Points à confirmer\n\nMadame, Monsieur,\n\nNous avons bien reçu votre demande d'amendement du 8 décembre 2025 (expédition prolongée au 31 décembre 2025, augmentation de 67 200 USD). Avant de l'émettre, merci de nous confirmer les points suivants :\n\n${list(sc)}\n\nDès réception de votre réponse, nous émettrons l'amendement, qui ne liera le bénéficiaire qu'après son acceptation.\n\nCordialement,\n${sig}`,
+  `To: ${sc.app} (applicant, fictitious)\nSubject: ${sc.ref} · Your amendment request no. 1 · Points to confirm\n\nDear Sir or Madam,\n\nWe have received your amendment request of 8 December 2025 (shipment extended to 31 December 2025, increase of USD 67,200). Before issuing it, please confirm the following:\n\n${list(sc)}\n\nOnce we receive your reply, we will issue the amendment, which will only bind the beneficiary once accepted.\n\nKind regards,\n${sig}`);
+ return mt707(sc,false);
 }
-async function check(){
-  var m=aiMsg(); await runSteps(m,['read','extract','check']);
-  var b=el('div','bub'); b.innerHTML='<p>'+T.chkIntro+'</p><div class="chk"></div>'; m.appendChild(b); var box=b.querySelector('.chk');
-  var map=[['ship','p-bl'],['per','p-date'],['goods','p-inv'],['tol','p-inv'],['docs','p-ins'],['docs','p-phy']];
-  for(var i=0;i<T.checks.length;i++){ var c=T.checks[i]; var ok=c[0]==='ok';
-    hl([[map[i][0], ok?'hl':'bad'],[map[i][1], ok?'hl':'bad']]);
-    box.appendChild(el('div','ck '+c[0],'<span class="b">'+(ok?'OK':(L==='en'?'DISCREPANCY':'RÉSERVE'))+'</span><div>'+c[1]+'<small>'+c[2]+'</small></div>')); down(); await wait(650); }
-  hl([['tol','bad'],['p-inv','bad'],['docs','bad'],['p-phy','bad']]);
-  b.appendChild(el('p',null,'<b>'+T.chkEnd+'</b>')); b.appendChild(el('div','hitl','<span aria-hidden="true">👤</span><span>'+T.hitl+'</span>')); down();
-  var run=m.querySelector('.steps'); var li=el('li','step done','<span class="ic" aria-hidden="true"></span><div>'+T.st.hitl+'<small>'+T.st.hitlS+'</small></div><span class="t"></span>'); run.appendChild(li);
+function mt707(sc,after){
+ const ret=id=>retained(sc).some(c=>c.id===id);
+ const ext=after&&ret('window');
+ const inco=after&&ret('inco')?'CIF MARSEILLE-FOS':'FOB NINGBO';
+ return ['MT707 · AMENDMENT TO A DOCUMENTARY CREDIT · '+x('BROUILLON INDICATIF','INDICATIVE DRAFT'),
+  ':20:  LC-DEMO-2025-0509',':26E: 1',':30:  251208',
+  ext?':31D: 260121 PARIS':null,
+  ':32B: USD 67,200.00  ('+x('augmentation','increase')+')',
+  ':44C: 251231',
+  ':45B: /REPALL/ 15,120 PHOTOVOLTAIC MODULES 450 W AT USD 60.00 PER UNIT, '+inco+' INCOTERMS 2020',
+  ':46B: /ADD/ INSURANCE CERTIFICATE 110 PCT CIF VALUE',
+  '',x("(Champs et codes simplifiés pour la démo. Émission via les outils habituels, hors démo.)","(Fields and codes simplified for the demo. Issued through the usual tools, outside the demo.)")].filter(l=>l!==null).join('\n');
 }
-async function draft(){
-  var m=aiMsg(); await runSteps(m,['check','draft']);
-  hl([['n'],['tol','bad'],['docs','bad'],['p-inv','bad'],['p-phy','bad']]);
-  var b=el('div','bub'); b.innerHTML='<p>'+T.drIntro+'</p><div class="draft"></div><p style="margin-top:8px;color:var(--muted);font-size:.84rem">'+T.drEnd+'</p><div class="acts"><button class="btn p" type="button">'+T.act[0]+'</button><button class="btn" type="button">'+T.act[1]+'</button></div>';
-  m.appendChild(b); var d=b.querySelector('.draft'); var txt=T.draft;
-  if(reduce){ d.textContent=txt; } else { for(var i=0;i<txt.length;i+=4){ d.textContent=txt.slice(0,i+4); if(i%40===0) down(); await wait(8); } }
-  down();
-  var acts=b.querySelectorAll('.acts .btn');
-  acts[0].addEventListener('click',function(){ acts.forEach(function(x){x.disabled=true;x.style.opacity=.5}); b.appendChild(el('div','hitl','<span aria-hidden="true">✓</span><span>'+T.validated+'</span>')); down(); });
-  acts[1].addEventListener('click',function(){ d.contentEditable='true'; d.focus(); });
+
+/* ---------- router ---------- */
+function route(){const h=decodeURIComponent(location.hash.slice(1));const sc=SCS.find(s=>s.ref===h);
+ if(sc){if(S.cur!==sc){S.cur=sc;S.tab='checks';S.edit=null;if(!sc.st.chat.length)sc.st.chat.push({me:false,html:'<p>'+sc.hello+'</p>'});}
+  $('#vQueue').hidden=true;$('#vCase').hidden=false;renderCase();window.scrollTo(0,0);}
+ else{S.cur=null;$('#vCase').hidden=true;$('#vQueue').hidden=false;renderQueue();}}
+window.addEventListener('hashchange',route);
+
+/* ---------- queue ---------- */
+function items(){return SCS.map(sc=>({ref:sc.ref,app:sc.app,ben:sc.ben,ccy:sc.ccy,amt:sc.amt,type:sc.type,dl:sc.dl,s:sc.st.status,disc:hasDisc(sc),man:sc.man,ag:sc.ag,sc})).concat(BG);}
+function renderQueue(){
+ const all=items();
+ const open=all.filter(i=>i.s!=='done');
+ const analysed=all.filter(i=>['anom','ready','client','done'].includes(i.s));
+ const rate=analysed.length?Math.round(100*analysed.filter(i=>i.disc).length/analysed.length):0;
+ const saved=analysed.reduce((a,i)=>a+(i.man-i.ag),0);
+ const hot=open.filter(i=>bdays(TODAY,i.dl)<=2).length;
+ const cnt={};ORDER.forEach(s=>cnt[s]=all.filter(i=>i.s===s).length);
+ const q=S.q.trim().toLowerCase();
+ const rows=all.filter(i=>(S.filter==='all'||i.s===S.filter)&&(!q||(i.ref+' '+i.app+' '+i.ben).toLowerCase().includes(q)))
+  .sort((a,b)=>(a.s==='done')-(b.s==='done')||(a.dl<b.dl?-1:a.dl>b.dl?1:0)||(!!b.sc-!!a.sc));
+ const kind=t=>t==='amd'?x('Amendement','Amendment'):x('Présentation','Presentation');
+ const dlc=i=>{if(i.s==='done')return `<span class="dl">${fd(i.dl)}<small>${x('traité','processed')}</small></span>`;const b=bdays(TODAY,i.dl);return `<span class="dl">${fd(i.dl)}<small class="${b<=1?'hot':''}">${b===0?x("aujourd'hui",'today'):x('J-'+b+' ouvré'+(b>1?'s':''),b+' banking day'+(b>1?'s':''))}</small></span>`;};
+ const row=i=>{const inner=`<span class="c-ref ref">${i.ref}${i.sc?`<span class="scn">${esc(i.sc.label)}</span>`:`<span class="bgt">${x('arrière-plan','background')}</span>`}</span>
+   <span class="c-par par">${esc(i.app)}<small>→ ${esc(i.ben)}</small></span><span class="c-amt amt">${fm(i.amt,i.ccy)}</span><span class="c-kind">${kind(i.type)}</span><span class="c-dl">${dlc(i)}</span><span class="c-st">${pill(i.s)}</span><span class="c-go go" aria-hidden="true">${i.sc?'›':''}</span>`;
+  return i.sc?`<a class="qrow" href="#${i.ref}" aria-label="${x('Ouvrir','Open')} ${i.ref}">${inner}</a>`:`<div class="qrow bg" data-act="bg" tabindex="0" role="button">${inner}</div>`;};
+ $('#vQueue').innerHTML=`
+ <div class="guide"><b>${x('Parcours conseillé','Suggested path')}</b><span><i>1</i>${x('Ouvrir un scénario','Open a scenario')}</span><span><i>2</i>${x("Lancer l'analyse",'Run the analysis')}</span><span><i>3</i>${x('Revoir chaque point','Review each point')}</span><span><i>4</i>${x('Valider','Validate')}</span><span><i>5</i>${x('Rapport et journal','Report and audit log')}</span></div>
+ <div class="kpis">
+  <div class="card kpi"><div class="l">${x('Dossiers à traiter','Files to process')}</div><div class="v">${open.length}</div><div class="s">${x('sur','out of')} ${all.length} ${x('dans la file','in the queue')}</div></div>
+  <div class="card kpi"><div class="l">${x('Échéances ≤ 2 jours ouvrés','Deadlines ≤ 2 banking days')}</div><div class="v">${hot}</div><div class="s">${x("Délai d'examen : 5 jours ouvrés max.",'Examination period: 5 banking days max.')}</div></div>
+  <div class="card kpi"><div class="l">${x("Taux d'anomalie",'Discrepancy rate')}</div><div class="v">${rate} %</div><div class="meter"><i style="width:${rate}%"></i></div><div class="s">${analysed.filter(i=>i.disc).length} / ${analysed.length} ${x('dossiers analysés','analysed files')}</div></div>
+  <div class="card kpi"><div class="l">${x('Temps de pré-contrôle gagné','Pre-check time saved')}</div><div class="v">${fmtMin(saved)}</div><div class="s">${x('vs contrôle 100 % manuel (hypothèse)','vs fully manual check (assumption)')}</div></div>
+ </div>
+ <div class="card">
+  <div class="qtools"><div class="chips" role="group" aria-label="${x('Filtrer par statut','Filter by status')}">
+   <button class="chip" data-act="filter" data-v="all" aria-pressed="${S.filter==='all'}">${x('Tous','All')}<span class="n">${all.length}</span></button>
+   ${ORDER.map(s=>`<button class="chip" data-act="filter" data-v="${s}" aria-pressed="${S.filter===s}">${STL[s]}<span class="n">${cnt[s]}</span></button>`).join('')}</div>
+   <label class="search"><input id="qs" type="search" placeholder="${x('Référence, société…','Reference, company…')}" value="${esc(S.q)}" aria-label="${x('Rechercher','Search')}"></label></div>
+  <div class="qhead" aria-hidden="true"><span>${x('Référence','Reference')}</span><span>${x("Donneur d'ordre → bénéficiaire (fictifs)",'Applicant → beneficiary (fictitious)')}</span><span>${x('Montant','Amount')}</span><span class="c-kind">${x('Type','Type')}</span><span>${x("Échéance d'examen",'Examination deadline')}</span><span>${x('Statut','Status')}</span><span></span></div>
+  <h2 id="qT" hidden>${x('File de travail','Work queue')}</h2>
+  ${rows.length?rows.map(row).join(''):`<div class="empty-q">${x('Aucun dossier pour ce filtre.','No file for this filter.')}</div>`}
+ </div>
+ <div class="qfoot"><span class="mut">${x('File Import LC · date du jour simulée : lundi 8 déc. 2025. Indicateurs calculés en direct sur les données fictives de la démo.','Import LC queue · simulated today: Monday 8 Dec 2025. Metrics computed live on the demo’s fictional data.')}</span><button class="btn sm" data-act="reset">${x('Réinitialiser la démo','Reset the demo')}</button></div>`;
+ const qs=$('#qs');qs.addEventListener('input',()=>{S.q=qs.value;const p=qs.selectionStart;renderQueue();const n=$('#qs');n.focus();try{n.setSelectionRange(p,p);}catch(e){}});
 }
-async function ask(text,kind){
-  if(busy) return; busy=true; setBusy(true);
-  log.appendChild(el('div','msg me',esc(text))); down();
-  await typing(650);
-  try{
-    if(kind===0) await summary(); else if(kind===1) await check(); else if(kind===2) await draft();
-    else { var m=aiMsg(); m.appendChild(el('div','bub','<p>'+T.fallback+'</p>')); }
-  }finally{ busy=false; setBusy(false); down(); }
+
+/* ---------- case ---------- */
+function stageOf(sc){const s=sc.st.status;if(s==='new')return 1;if(s==='run')return 1;if(s==='anom'||(s==='ready'&&pending(sc).length))return 2;if(s==='ready')return 3;if(s==='client')return 4;return 5;}
+function caseHead(sc){
+ const st=sc.st,b=bdays(TODAY,sc.dl);
+ const stg=stageOf(sc);
+ const stages=[x('Réception','Receipt'),x('Analyse agent','Agent analysis'),x('Revue opérateur','Operator review'),x('Validation','Validation'),st.status==='client'?x('Attente client','Awaiting client'):x('Clôture','Closure')];
+ const dlTxt=sc.type==='amd'?x('Délai cible de traitement : ','Target processing time: ')+'<b>'+fd(sc.dl)+'</b> '+x('(hypothèse de démo)','(demo assumption)'):x("Échéance d'examen : ",'Examination deadline: ')+'<b>'+fd(sc.dl)+'</b> '+x('(5 jours ouvrés après présentation, UCP 600 art. 14(b))','(5 banking days after presentation, UCP 600 art. 14(b))');
+ return ` <div class="card case-h">
+  <div class="case-top"><a class="btn sm" href="#">← ${x('File de travail','Work queue')}</a><h2>${sc.ref}</h2>${pill(st.status)}<span class="scn">${esc(sc.label)}</span><span class="sp"></span></div>
+  <div class="case-meta"><span>${esc(sc.app)} → ${esc(sc.ben)} <span class="mut">${x('(fictifs)','(fictitious)')}</span></span><span><b>${fm(sc.amt,sc.ccy,2)}</b> · ${esc(sc.goods)}</span><span>${dlTxt}${st.status!=='done'?` · <span class="${b<=1?'hot':''}">${b===0?x("aujourd'hui",'today'):x('J-'+b,b+' day'+(b>1?'s':'')+' left')}</span>`:''}</span></div>
+  <ol class="stepper" aria-label="${x('Étapes du dossier','File stages')}">${stages.map((l,i)=>`<li class="${i<stg?'done':''}${i===stg?' cur':''}"${i===stg?' aria-current="step"':''}>${l}</li>`).join('')}</ol>
+ </div>`;
 }
-function setBusy(v){ send.disabled=v; sugg.querySelectorAll('button').forEach(function(b){b.disabled=v}); }
-function classify(s){ s=s.toLowerCase();
-  if(/(réserve|reserve|message|mail|brouillon|draft|notice|discrepancy notice|rédig|redig)/.test(s)) return 2;
-  if(/(contr[oô]l|check|vérif|verif|conform|discrepanc|anomal|erreur|présentation|presentation)/.test(s)) return 1;
-  if(/(résum|resum|summar|synth|lis|read|extrai|extract|montant|amount|date|bénéfici|benefic|lettre|letter|lc)/.test(s)) return 0;
-  return -1; }
-T.s.forEach(function(label,i){ var b=el('button',null,label); b.type='button'; b.addEventListener('click',function(){ ask(label,i); }); sugg.appendChild(b); });
-document.getElementById('form').addEventListener('submit',function(e){ e.preventDefault(); var v=q.value.trim(); if(!v) return; q.value=''; ask(v,classify(v)); });
-(async function(){ await wait(400); var m=aiMsg(); m.appendChild(el('div','bub','<p>'+T.hello+'</p>')); })();
+function renderCase(){
+ const sc=S.cur;
+ if(S.docOpen===null)S.docOpen=isDesk();
+ $('#vCase').innerHTML=`
+ ${caseHead(sc)}
+ <div class="cgrid">
+  <section class="card doc" aria-label="${x('Documents du dossier','File documents')}"><details id="docd"${S.docOpen?' open':''}><summary><span class="car" aria-hidden="true">›</span><b>${sc.type==='amd'?x("Crédit en vigueur + demande d'amendement",'Credit in force + amendment request'):x('Lettre de Crédit + documents présentés','Letter of Credit + presented documents')}</b><span class="pl">${sc.type==='amd'?'MT700 · REQ':'MT700 · PDF'}</span></summary>
+   <div class="paper" id="paper"><span class="stamp">SPECIMEN</span>${sc.paper.map((s,i)=>`<div class="${i?'pres':''}">${i?'<div class="sep"></div>':''}<h2>${s.h}</h2>${s.rows.map(r=>`<div class="row" data-f="${r.f}"><span class="k">${r.k}</span><span>${esc(r.raw)}</span></div>`).join('')}</div>`).join('')}</div></details></section>
+  <section class="card work"><div class="tabs" role="tablist" id="tabs"></div><div class="panel" id="panel" role="tabpanel"></div></section>
+ </div>`;
+ $('#docd').addEventListener('toggle',e=>{S.docOpen=e.target.open;});
+ renderTabs();renderPanel();
+}
+function renderTabs(){
+ const sc=S.cur,st=sc.st,p=st.analysed?pending(sc).length:0;
+ const tabs=[['checks',x('Contrôles','Checks'),st.analysed&&!locked(sc)&&p?`<span class="n hot">${p}</span>`:''],['extract',x('Extraction','Extraction'),''],['chat',x("Demander à l'agent",'Ask the agent'),''],['report',x('Rapport','Report'),''],['audit',x('Journal','Audit log'),`<span class="n">${st.audit.length}</span>`]];
+ $('#tabs').innerHTML=tabs.map(t=>`<button class="tab" role="tab" id="tab-${t[0]}" aria-selected="${S.tab===t[0]}" data-act="tab" data-tab="${t[0]}"${S.busy?' aria-disabled="true"':''}>${t[1]}${t[2]}</button>`).join('');
+ $('#panel').setAttribute('aria-labelledby','tab-'+S.tab);
+}
+function renderPanel(){const sc=S.cur;const P={checks:pChecks,extract:pExtract,chat:pChat,report:pReport,audit:pAudit};$('#panel').innerHTML=P[S.tab](sc);if(S.tab==='chat')bindChat(sc);if(S.tab!=='checks'&&S.tab!=='extract')hl([]);}
+function refresh(){renderTabs();renderPanel();const h=$('#vCase .case-h');if(h)h.outerHTML=caseHead(S.cur);}
+
+/* highlight in document */
+function hl(fields,scroll){const paper=$('#paper');if(!paper)return;paper.querySelectorAll('.row').forEach(r=>r.classList.remove('hl','bad','flash'));
+ (fields||[]).forEach(f=>{const r=paper.querySelector('[data-f="'+f[0]+'"]');if(r)r.classList.add(f[1]||'hl');});
+ const first=paper.querySelector('.row.bad, .row.hl');if(!first)return;
+ if(isDesk()){paper.scrollTo({top:Math.max(0,first.offsetTop-60),behavior:reduce?'auto':'smooth'});}
+ else if(scroll){const d=$('#docd');if(d&&!d.open){d.open=true;S.docOpen=true;}setTimeout(()=>{first.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});first.classList.add('flash');},60);}}
+const srcHl=(sc,c)=>c.src.map(f=>[f,(fin(sc,c)||c.v)==='ko'?'bad':'hl']);
+
+/* ----- checks panel ----- */
+function planSteps(sc){const n=allRows(sc).length,pres=sc.paper[1].rows.length;
+ return sc.type==='amd'?[[x("Lecture du crédit et de la demande",'Reading the credit and the request'),x('MT700 en vigueur + formulaire client','MT700 in force + client form')],[x('Extraction des champs','Field extraction'),n+x(' champs, avec indice de confiance',' fields, with a confidence score')],[x('Contrôles de cohérence','Consistency checks'),sc.checks.length+x(' règles : dates, montants, Incoterm, limites',' rules: dates, amounts, Incoterm, limits')],[x('Préparation des brouillons','Drafting'),x('Questions client + MT707 indicatif','Client questions + indicative MT707')],[x("Transmission à l'opérateur",'Handover to the operator'),x('Validation humaine obligatoire','Human validation required')]]
+ :[[x('Lecture des documents','Reading the documents'),x('OCR et découpage MT700 + ','OCR, MT700 parsing + ')+pres+x(' pièces présentées',' presented items')],[x('Extraction des données','Data extraction'),n+x(' champs, avec indice de confiance',' fields, with a confidence score')],[x('Contrôles documentaires','Documentary checks'),sc.checks.length+x(' règles : dates, montants, documents, cohérence',' rules: dates, amounts, documents, consistency')],[x('Préparation du brouillon','Drafting'),x("Selon l'issue recommandée, jamais envoyé",'Based on the recommended outcome, never sent')],[x("Transmission à l'opérateur",'Handover to the operator'),x('Validation humaine obligatoire','Human validation required')]];}
+function pChecks(sc){
+ const st=sc.st;
+ if(!st.analysed)return `<div class="empty" id="runzone"><h3>${x('Dossier non analysé','Not analysed yet')}</h3><p>${sc.type==='amd'?x("L'agent va comparer la demande d'amendement au crédit en vigueur et préparer le travail. Il ne décide rien et n'émet rien.",'The agent will compare the amendment request with the credit in force and prepare the work. It decides nothing and issues nothing.'):x("L'agent va lire la Lettre de Crédit et les documents présentés, appliquer les contrôles et préparer le travail. Il ne décide rien et n'envoie rien.",'The agent will read the Letter of Credit and the presented documents, run the checks and prepare the work. It decides nothing and sends nothing.')}</p>
+  <ol class="plan">${planSteps(sc).map(s=>`<li><div>${s[0]}<small>${s[1]}</small></div></li>`).join('')}</ol>
+  <button class="btn p" data-act="run">${x("Lancer l'analyse de l'agent",'Run the agent analysis')}</button></div>`;
+ const ok=sc.checks.filter(c=>c.v==='ok').length,done=sc.checks.length-pending(sc).length,pct=Math.round(100*done/sc.checks.length);
+ const pOk=sc.checks.filter(c=>c.v==='ok'&&!st.dec[c.id]).length;
+ let h=`<div class="sumbar"><div><b>${sc.checks.length}</b>${x('contrôles','checks')}</div><div class="o"><b>${ok}</b>${x('conformes','compliant')}</div><div class="k"><b>${agentKo(sc)}</b>${sc.type==='amd'?x('points bloquants','blocking points'):x('réserves','discrepancies')}</div><div class="c"><b>${agentCk(sc)}</b>${x('à confirmer','to confirm')}</div></div>
+ <div class="prog"><span>${x('Revue opérateur','Operator review')}${CL} <b>${done}/${sc.checks.length}</b></span><span class="track"><i style="width:${pct}%"></i></span></div>`;
+ if(!locked(sc)&&pOk)h+=`<div class="bulk"><button class="btn sm" data-act="bulk">${x('Confirmer les contrôles conformes','Confirm the compliant checks')} (${pOk})</button><span class="mut">${x('Les réserves et points à confirmer se traitent un par un.','Discrepancies and points to confirm are handled one by one.')}</span></div>`;
+ h+=`<div class="flist">${sc.checks.map((c,i)=>fItem(sc,c,i)).join('')}</div>`;
+ h+=valZone(sc);
+ return h;
+}
+function fItem(sc,c,i){
+ const st=sc.st,d=st.dec[c.id],f=fin(sc,c),lk=locked(sc),ed=S.edit&&S.edit.id===c.id?S.edit.mode:null;
+ const cls=d?(f==='ko'?'ko':'okd'):(c.v==='ko'?'ko':c.v==='check'?'check':'');
+ const opTag=d?(d==='agree'?`<span class="opt a">${c.v==='ko'?x('Réserve retenue','Discrepancy kept'):x('Confirmé','Confirmed')}</span>`:`<span class="opt o">${c.v==='ko'?x('Écartée par l’opérateur','Dismissed by operator'):x('Réserve ajoutée par l’opérateur','Discrepancy raised by operator')}</span>`):'';
+ const coms=(st.com[c.id]||[]).map(m=>`<div class="com"><span>${m.t} · ${WHO.op}</span>${esc(m.txt)}</div>`).join('');
+ let acts='';
+ if(!lk&&!ed){acts=d?`<button class="btn sm" data-act="undo" data-id="${c.id}">${x('Annuler la décision','Undo decision')}</button>`:`<button class="btn sm ${c.v==='ok'?'':'p'}" data-act="agree" data-id="${c.id}">${AG[c.v]}</button><button class="btn sm warn" data-act="ov" data-id="${c.id}">${OV[c.v]}</button>`;
+  acts+=`<button class="btn sm" data-act="com" data-id="${c.id}">${x('Commenter','Comment')}</button>`;}
+ const editor=ed?`<div class="ed"><label for="ed-${c.id}">${ed==='ov'?x('Motif de la décision (obligatoire, tracé dans le journal)','Reason for the decision (required, logged)'):x('Commentaire (tracé dans le journal)','Comment (logged)')}</label><textarea id="ed-${c.id}"></textarea><span class="err" id="err-${c.id}" hidden>${x('Merci de saisir un motif.','Please enter a reason.')}</span><div class="dec"><button class="btn sm p" data-act="save" data-id="${c.id}">${ed==='ov'?OV[c.v]:x('Enregistrer','Save')}</button><button class="btn sm" data-act="cancel">${x('Annuler','Cancel')}</button></div></div>`:'';
+ return `<article class="f ${cls}" data-id="${c.id}"><div class="f-top"><span class="bdg b-${c.v}">${c.v==='ok'&&sc.type==='amd'&&c.id==='ben'?'INFO':c.v==='ko'&&sc.type==='amd'?x('BLOQUANT','BLOCKING'):VB[c.v]}</span><h4><span class="num">${pad(i+1)}</span>${c.t}</h4>${opTag}</div>
+ <p>${c.d}</p><div class="rule"><b>${x('RÈGLE','RULE')}</b>${c.rule}</div>
+ <div class="srcs"><span class="mut" style="font-size:.74rem">${x('Sources','Sources')}${CL}</span>${c.src.map(f=>{const r=rowBy(sc,f);return r?`<button class="src" data-act="src" data-id="${c.id}" data-f="${f}">${r.k.replace(/:/g,'')}</button>`:'';}).join('')}</div>
+ ${coms?`<div class="coms">${coms}</div>`:''}${acts?`<div class="dec">${acts}</div>`:''}${editor}</article>`;
+}
+function valZone(sc){
+ const st=sc.st;
+ if(st.status==='client'){return `<div class="state cl" style="margin-top:14px"><div><b>${x('En attente de la réponse du client.','Awaiting the client’s reply.')}</b> ${OUT[st.outcome].res}. ${sc.type==='pres'?x("Le délai d'examen court toujours : ",'The examination period is still running: ')+fd(sc.dl)+'.':''}</div><div><button class="btn sm p" data-act="reply">${x('Simuler la réponse du client','Simulate the client’s reply')}</button></div></div>`;}
+ if(st.status==='done'){return `<div class="state dn" style="margin-top:14px"><div><b>${x('Dossier validé','File validated')}</b> ${x('le','on')} ${st.valAt} ${x('par','by')} ${WHO.op}. ${x('Issue','Outcome')}${CL} ${resText(sc)}.</div><div><button class="btn sm" data-act="tab" data-tab="report">${x('Voir le rapport','See the report')}</button> <button class="btn sm" data-act="tab" data-tab="audit">${x('Voir le journal','See the audit log')}</button></div></div>`;}
+ const p=pending(sc).length,ro=recOut(sc);
+ return `<div class="valbox"><p class="rec"><b>${x("Recommandation de l'agent",'Agent recommendation')}${CL}</b> ${OUT[ro].lab}.</p><p>${p?x(`Encore <b>${p}</b> point${p>1?'s':''} à traiter avant la validation finale.`,`<b>${p}</b> point${p>1?'s':''} left to review before final validation.`):x('Tous les points sont revus. La décision finale vous appartient.','Every point is reviewed. The final decision is yours.')}</p>
+ <div><button class="btn p" data-act="validate"${p?' disabled':''}>${x('Valider le dossier…','Validate the file…')}</button></div></div>`;
+}
+function resText(sc){const st=sc.st;if(st.reply)return sc.type==='amd'?x("Réponse client reçue · MT707 prêt à émettre (hors démo)",'Client replied · MT707 ready for issuance (outside the demo)'):x("Réserves levées par le donneur d'ordre · paiement à initier (hors démo)",'Discrepancies waived by the applicant · payment to be initiated (outside the demo)');return st.outcome?OUT[st.outcome].res:'—';}
+
+/* run the agent */
+async function runAnalysis(sc){
+ if(S.busy||sc.st.analysed)return;S.busy=true;const st=sc.st;
+ st.status='run';audit(sc,'op',x("Analyse lancée",'Analysis started'),1);audit(sc,'sys',x('Statut : ','Status: ')+'<b>'+STL.run+'</b>',0);refresh();
+ const z=$('#runzone');const ul=document.createElement('ol');ul.className='steps';const bub=document.createElement('div');bub.className='bub';bub.appendChild(ul);
+ if(z){z.innerHTML='';z.appendChild(bub);}
+ const steps=planSteps(sc),rows=allRows(sc);let t0=0;
+ for(let i=0;i<steps.length;i++){const li=document.createElement('li');li.className='step run';li.innerHTML=`<span class="ic" aria-hidden="true"></span><div>${steps[i][0]}<small>${steps[i][1]}</small></div><span class="t"></span>`;ul.appendChild(li);
+  if(i===0&&S.cur===sc)hl(sc.paper[0].rows.map(r=>[r.f]));if(i===1&&S.cur===sc)hl(sc.paper[1].rows.map(r=>[r.f]));if(i===2&&S.cur===sc)hl(sc.checks.filter(c=>c.v!=='ok').reduce((a,c)=>a.concat(c.src.map(f=>[f,c.v==='ko'?'bad':'hl'])),[]));
+  const d=650+Math.random()*450;await wait(d);t0+=d;li.className='step done';li.querySelector('.t').textContent=(t0/1000).toFixed(1)+' s';}
+ await wait(300);
+ const avg=rows.reduce((a,r)=>a+r.c,0)/rows.length,lo=rows.filter(r=>r.c<85).length;
+ st.analysed=true;
+ audit(sc,'agent',x(`Extraction terminée : <b>${rows.length} champs</b>, confiance moyenne ${num(avg,1)} %, ${lo} sous le seuil de 85 %`,`Extraction complete: <b>${rows.length} fields</b>, average confidence ${num(avg,1)}%, ${lo} below the 85% threshold`),1);
+ audit(sc,'agent',x(`Contrôles exécutés : ${sc.checks.length} règles · <b>${agentKo(sc)} ${sc.type==='amd'?'point(s) bloquant(s)':'réserve(s)'}</b> · ${agentCk(sc)} point(s) à confirmer`,`Checks run: ${sc.checks.length} rules · <b>${agentKo(sc)} ${sc.type==='amd'?'blocking point(s)':'discrepancy(ies)'}</b> · ${agentCk(sc)} point(s) to confirm`),0);
+ audit(sc,'agent',x('Brouillon préparé : ','Draft prepared: ')+OUT[recOut(sc)].dl+x(' (non envoyé)',' (not sent)'),0);
+ st.status=agentKo(sc)?'anom':'ready';audit(sc,'sys',x('Statut : ','Status: ')+'<b>'+STL[st.status]+'</b>',0);
+ st.chat.push({me:false,html:`<p>${x('Analyse terminée','Analysis complete')}${CL} ${sc.checks.length} ${x('contrôles','checks')}, <b>${agentKo(sc)} ${sc.type==='amd'?x('point(s) bloquant(s)','blocking point(s)'):x('réserve(s)','discrepancy(ies)')}</b>, ${agentCk(sc)} ${x('à confirmer','to confirm')}. ${x("Le détail et les sources sont dans l'onglet Contrôles ; la décision vous revient.",'Details and sources are in the Checks tab; the decision is yours.')}</p>`});
+ S.busy=false;
+ if(S.cur===sc&&!$('#vCase').hidden){refresh();toast(x('Analyse terminée · ','Analysis complete · ')+STL[st.status]);}
+}
+
+/* ----- extraction ----- */
+function pExtract(sc){
+ if(!sc.st.analysed)return `<div class="empty"><h3>${x('Extraction non disponible','Extraction not available yet')}</h3><p>${x("Lancez l'analyse pour voir chaque champ extrait, sa source et son indice de confiance.",'Run the analysis to see each extracted field, its source and its confidence score.')}</p><button class="btn p" data-act="tab" data-tab="checks">${x('Aller aux contrôles','Go to checks')}</button></div>`;
+ const rows=allRows(sc),avg=rows.reduce((a,r)=>a+r.c,0)/rows.length,lo=rows.filter(r=>r.c<85);
+ const tb=(rs)=>`<table class="ext"><thead><tr><th>${x('Champ','Field')}</th><th class="hide-s">${x('Libellé','Label')}</th><th>${x('Valeur extraite','Extracted value')}</th><th>${x('Confiance','Confidence')}</th></tr></thead><tbody>${rs.map(r=>`<tr data-act="row" data-f="${r.f}" tabindex="0"><td class="tg">${r.k}</td><td class="lb hide-s">${r.lab}</td><td>${esc(r.val)}${r.c<85?`<span class="flag">${x('À VÉRIFIER','CHECK')}</span>`:''}</td><td><span class="conf${r.c<85?' lo':''}"><span class="m"><i style="width:${r.c}%"></i></span>${r.c} %</span></td></tr>`).join('')}</tbody></table>`;
+ return `<div class="exsum"><span><b>${rows.length}</b> ${x('champs extraits','fields extracted')}</span><span>${x('Confiance moyenne','Average confidence')} <b>${num(avg,1)} %</b></span><span><b>${lo.length}</b> ${x('sous le seuil de 85 %','below the 85% threshold')}</span></div>
+ <p class="mut" style="margin:0 0 6px">${x('Cliquez une ligne pour la retrouver dans le document. Indices de confiance simulés.','Click a row to find it in the document. Confidence scores are simulated.')}</p>
+ <div class="exth">${sc.type==='amd'?'MT700 · '+x('crédit en vigueur','credit in force'):'MT700 · '+x('Lettre de Crédit','Letter of Credit')}</div>${tb(sc.paper[0].rows)}
+ <div class="exth">${sc.type==='amd'?x("Demande d'amendement",'Amendment request'):x('Documents présentés','Presented documents')}</div>${tb(sc.paper[1].rows)}`;
+}
+
+/* ----- chat ----- */
+function decNote(sc,id){const c=sc.checks.find(k=>k.id===id);if(!c)return'';const d=sc.st.dec[id];if(!d)return `<p class="mut" style="margin-top:6px">${x('Décision opérateur : en attente.','Operator decision: pending.')}</p>`;return `<p class="mut" style="margin-top:6px">${x('Décision opérateur : ','Operator decision: ')}${fin(sc,c)==='ko'?x('réserve retenue.','discrepancy kept.'):x('point levé.','point cleared.')}</p>`;}
+const GEN={
+ sum:{q:x('Résume ce dossier','Summarise this file'),re:/(résum|resum|summar|synth|essentiel|overview|lettre|letter)/i,hl:sc=>sc.paper[0].rows.map(r=>[r.f]),a:sc=>`<p>${x("Voici l'essentiel",'Here is what matters')}${CL}</p><table class="kv">${sc.paper[0].rows.filter(r=>!['form','ucp','d'].includes(r.f)).map(r=>`<tr><td>${r.lab}</td><td>${esc(r.val)}</td></tr>`).join('')}</table>${sc.type==='amd'?`<p style="margin-top:8px">${x("Demande d'amendement : expédition au 31 déc., +67 200 USD (15 120 modules), ajout d'un certificat d'assurance, validité inchangée.",'Amendment request: shipment to 31 Dec, +USD 67,200 (15,120 modules), insurance certificate added, expiry unchanged.')}</p>`:''}<p class="mut" style="margin-top:8px">${x('Chaque champ est surligné à sa source dans le document.','Each field is highlighted at its source in the document.')}</p>`},
+ status:{q:x('Où en est le dossier ?','Where does this file stand?'),re:/(où en|ou en|statut|status|avancement|progress|reste|remaining|stand)/i,a:sc=>{const st=sc.st;if(!st.analysed)return `<p>${x("Statut : <b>Nouveau</b>. Je n'ai pas encore analysé ce dossier.","Status: <b>New</b>. I have not analysed this file yet.")}</p>`;const p=pending(sc).length;return `<p>${x('Statut','Status')}${CL} <b>${STL[st.status]}</b>. ${x('Revue opérateur','Operator review')}${CL} ${sc.checks.length-p}/${sc.checks.length}.</p><p>${locked(sc)?x('Issue : ','Outcome: ')+resText(sc)+'.':p?x(`Il reste ${p} point(s) à traiter avant validation.`,`${p} point(s) left before validation.`):x('Tout est revu : vous pouvez valider le dossier.','Everything is reviewed: you can validate the file.')}</p>`;}},
+ lim:{q:x("Qu'est-ce que tu ne fais pas ?","What don't you do?"),re:/(ne fais pas|limite de l.agent|tes limites|your limits|don.?t you|pas le droit|autonom|tout seul|on your own)/i,a:()=>`<p>${x("Je ne décide ni du paiement, ni du refus, ni de l'émission d'un amendement. Je n'envoie aucun message et je n'ai pas accès aux limites de crédit.","I do not decide on payment, refusal or issuing an amendment. I send no message and have no access to credit limits.")}</p><p>${x("Je lis, j'extrais, je contrôle et je prépare ; chaque constat est sourcé et chaque décision de l'opérateur est tracée dans le journal.","I read, extract, check and prepare; every finding is sourced and every operator decision is logged.")}</p>`}};
+const QA={
+ A:[{q:x('Pourquoi le montant est-il en réserve ?','Why is the amount a discrepancy?'),re:/(montant|amount|factur|invoice|toléran|toleran)/i,needs:1,hl:()=>[['amt','bad'],['tol','bad'],['p-inv','bad']],a:sc=>x(`<p>Le crédit est de <b>1 250 000 USD</b> avec une tolérance de ± 5 % (39A) : le maximum tirable est donc <b>1 312 500 USD</b>.</p><p>La facture et le montant réclamé s'élèvent à <b>1 318 750 USD</b>, soit 6 250 USD de trop.</p><p>L'UCP 600 (art. 18(b)) permet d'accepter une facture excédentaire si la banque ne paie pas au-delà du montant autorisé. Comme le montant réclamé dépasse lui-même le crédit, je laisse le point en réserve : c'est à vous de trancher.</p>`,`<p>The credit is <b>USD 1,250,000</b> with a ±5% tolerance (39A), so the maximum drawable is <b>USD 1,312,500</b>.</p><p>The invoice and the amount claimed are <b>USD 1,318,750</b>, i.e. USD 6,250 too much.</p><p>UCP 600 (art. 18(b)) allows accepting an invoice in excess if the bank does not pay more than permitted. Since the amount claimed itself exceeds the credit, I keep it as a discrepancy: your call.</p>`)+decNote(sc,'amt')},
+  {q:x('Jusqu’à quand le certificat phytosanitaire peut-il être présenté ?','Until when can the phytosanitary certificate be presented?'),re:/(phyto|manquant|missing|jusqu|until|corrig|cure)/i,needs:1,hl:()=>[['per','hl'],['ship','hl'],['p-bl','hl'],['p-phy','bad']],a:()=>x(`<p>Pas jusqu'au 15 déc. : le champ 48 impose une présentation dans les <b>21 jours suivant l'expédition</b>. Avec une mise à bord le 18 nov., une présentation complémentaire doit intervenir au plus tard le <b>9 déc. 2025</b>, et toujours avant la validité.</p><p>J'ai ajouté ce rappel dans le brouillon d'avis de refus.</p>`,`<p>Not until 15 Dec: field 48 requires presentation within <b>21 days after shipment</b>. With an on-board date of 18 Nov, a further presentation must be made by <b>9 Dec 2025</b> at the latest, and always before expiry.</p><p>I added this reminder to the draft refusal notice.</p>`)},
+  {q:x('Quel est notre délai pour répondre ?','What is our deadline to respond?'),re:/(délai|delai|deadline|quand|when|jours ouvr|banking day|notif|répondre|respond)/i,a:()=>x(`<p>Présentation reçue le <b>vendredi 5 déc.</b> La banque dispose au maximum de <b>5 jours ouvrés suivant le jour de présentation</b> pour se prononcer (UCP 600, art. 14(b)) : échéance le <b>vendredi 12 déc. 2025</b>.</p><p>Un éventuel refus doit être notifié en une seule fois, avec toutes les réserves, au plus tard à la clôture de ce 5e jour ouvré (art. 16(c) et 16(d)). Jours fériés non pris en compte dans la démo.</p>`,`<p>Presentation received on <b>Friday 5 Dec</b>. The bank has a maximum of <b>5 banking days following the day of presentation</b> (UCP 600, art. 14(b)): deadline <b>Friday 12 Dec 2025</b>.</p><p>Any refusal must be given in a single notice listing every discrepancy, no later than the close of that 5th banking day (art. 16(c) and 16(d)). Bank holidays ignored in the demo.</p>`)},
+  {q:x('Et si le donneur d’ordre accepte les réserves ?','What if the applicant waives the discrepancies?'),re:/(donneur|applicant|client|lev[ée]|waive|accept)/i,a:()=>x(`<p>La banque émettrice peut, à sa seule appréciation, solliciter le donneur d'ordre pour qu'il lève les réserves (UCP 600, art. 16(b)). Cette démarche <b>ne prolonge pas</b> le délai d'examen du 12 déc.</p><p>Je prépare ce message si vous choisissez « Solliciter la levée des réserves » à la validation.</p>`,`<p>The issuing bank may, in its sole judgement, approach the applicant for a waiver (UCP 600, art. 16(b)). This <b>does not extend</b> the 12 Dec examination deadline.</p><p>I will draft that message if you pick “Ask the applicant to waive” at validation.</p>`)}],
+ B:[{q:x('Pourquoi confirmer la date du B/L ?','Why confirm the B/L date?'),re:/(confirm|b\/l|connaissement|bill of lading|tampon|stamp|confiance|confidence|72)/i,needs:1,hl:()=>[['p-bl','hl'],['ship','hl']],a:sc=>x(`<p>La date de mise à bord figure sur un <b>tampon manuscrit</b>. Je l'ai lue « 24.11.2025 » avec <b>72 %</b> de confiance, sous le seuil de 85 % fixé pour ce type de champ.</p><p>Cette date conditionne trois contrôles : la date limite d'expédition, le délai de présentation et l'échéance du paiement différé. D'où la confirmation visuelle demandée.</p>`,`<p>The on-board date is a <b>handwritten stamp</b>. I read “24.11.2025” with <b>72%</b> confidence, below the 85% threshold for this kind of field.</p><p>That date drives three checks: latest shipment, presentation period and the deferred payment maturity. Hence the visual confirmation.</p>`)+decNote(sc,'bl')},
+  {q:x('Quelle est la date d’échéance du paiement ?','When is payment due?'),re:/(échéance|echeance|maturity|différé|deferred|60|payer|pay|due)/i,needs:1,hl:()=>[['av','hl'],['def','hl'],['p-bl','hl']],a:()=>x(`<p>Le crédit est réalisable par <b>paiement différé à 60 jours date de B/L</b> (42P). Avec une mise à bord le 24 nov. 2025, l'échéance tombe le <b>23 janv. 2026</b>.</p><p>Si la date du tampon devait être corrigée, l'échéance serait recalculée.</p>`,`<p>The credit is available by <b>deferred payment at 60 days after B/L date</b> (42P). With an on-board date of 24 Nov 2025, maturity is <b>23 Jan 2026</b>.</p><p>If the stamp date were corrected, maturity would be recalculated.</p>`)},
+  {q:x('Vérifie le calcul de l’assurance','Check the insurance calculation'),re:/(assurance|insurance|110)/i,needs:1,hl:()=>[['docs','hl'],['p-ins','hl']],a:()=>x(`<p>486 000 EUR × 110 % = <b>534 600 EUR</b> : c'est exactement le montant du certificat présenté. Couverture conforme à l'exigence de 46A.</p>`,`<p>EUR 486,000 × 110% = <b>EUR 534,600</b>: exactly the amount on the certificate. Cover complies with 46A.</p>`)},
+  {q:x('Que se passe-t-il quand je valide ?','What happens when I validate?'),re:/(valid|ensuite|next|après|after)/i,a:()=>x(`<p>Je prépare l'avis de conformité avec l'engagement de payer à l'échéance du 23 janv. 2026. Rien ne part automatiquement : dans un vrai flux, l'opérateur l'émettrait via les outils habituels. Ici, l'action est simplement tracée dans le journal.</p>`,`<p>I prepare the notice of compliance with the undertaking to pay at maturity on 23 Jan 2026. Nothing goes out automatically: in a real flow the operator would send it through the usual tools. Here, the action is simply logged.</p>`)}],
+ C:[{q:x('Le bénéficiaire peut-il corriger ces réserves ?','Can the beneficiary cure these discrepancies?'),re:/(corrig|correct|cure|nouvelle présentation|re-?present|bénéficiaire|beneficiary)/i,needs:1,a:()=>x(`<p>Difficilement. Une <b>expédition tardive</b> ne se corrige pas : la date de mise à bord est un fait. Pour l'écart de quantité (1 180 sacs sur le B/L contre 1 200 facturés), il faudrait des documents réémis et un montant réduit.</p><p>La voie pragmatique : demander au donneur d'ordre s'il accepte de lever les réserves.</p>`,`<p>Hardly. A <b>late shipment</b> cannot be cured: the on-board date is a fact. For the quantity gap (1,180 bags on the B/L vs 1,200 invoiced), documents would need reissuing with a reduced amount.</p><p>The pragmatic route: ask the applicant whether it will waive the discrepancies.</p>`)},
+  {q:x('Que demande-t-on exactement au client ?','What exactly do we ask the client?'),re:/(client|donneur|applicant|demande|ask|question|lev|waive)/i,a:()=>x(`<p>On demande à Maison Duvernay Cafés (fictif) s'il accepte de <b>lever les réserves</b> (UCP 600, art. 16(b)). La décision d'honorer reste celle de la banque.</p><p>Attention : cette démarche <b>ne prolonge pas</b> le délai d'examen. Sans réponse avant le <b>9 déc. 2025</b>, il faudra notifier le refus.</p>`,`<p>We ask Maison Duvernay Cafés (fictitious) whether it agrees to <b>waive the discrepancies</b> (UCP 600, art. 16(b)). The decision to honour remains the bank's.</p><p>Note: this <b>does not extend</b> the examination period. Without a reply before <b>9 Dec 2025</b>, a refusal notice must be sent.</p>`)},
+  {q:x('Et si le client refuse ?','What if the client says no?'),re:/(refus|refuse|reject|says no|pas d.accord)/i,a:()=>x(`<p>Il faudra envoyer un <b>avis de refus unique</b> au présentateur, listant toutes les réserves et indiquant ce que la banque fait des documents (par exemple : conservés dans l'attente d'instructions), au plus tard à la clôture du 5e jour ouvré (UCP 600, art. 16(c) et 16(d)).</p>`,`<p>A <b>single refusal notice</b> must go to the presenter, listing every discrepancy and stating what the bank does with the documents (e.g. holding them pending instructions), no later than the close of the 5th banking day (UCP 600, art. 16(c) and 16(d)).</p>`)},
+  {q:x('Pourquoi 20 sacs d’écart posent problème ?','Why do 20 missing bags matter?'),re:/(sacs|bags|écart|gap|quantit)/i,needs:1,hl:()=>[['pship','hl'],['p-inv','bad'],['p-bl','bad'],['p-pkl','bad']],a:()=>x(`<p>Deux raisons : les documents se contredisent (UCP 600, art. 14(d)), et les expéditions partielles sont interdites (43P). La facture réclame 1 200 sacs alors que le transporteur n'en atteste que 1 180 à bord.</p>`,`<p>Two reasons: the documents conflict (UCP 600, art. 14(d)), and partial shipments are not allowed (43P). The invoice claims 1,200 bags while the carrier only evidences 1,180 on board.</p>`)}],
+ D:[{q:x('Pourquoi prolonger la validité ?','Why extend the expiry?'),re:/(validit|expiry|prolong|extend|31d|janv|jan)/i,needs:1,hl:()=>[['exp','bad'],['per','hl'],['a-ship','hl'],['a-exp','bad']],a:sc=>x(`<p>Avec une expédition possible jusqu'au <b>31 déc.</b> et une validité inchangée au <b>10 janv.</b>, le bénéficiaire n'aurait que <b>10 jours</b> pour présenter, au lieu des 21 prévus en 48 : la présentation doit de toute façon intervenir avant la validité (UCP 600, art. 14(c)).</p><p>Prolonger au <b>21 janv. 2026</b> rétablit le délai. Le choix appartient au client, d'où la question.</p>`,`<p>With shipment allowed until <b>31 Dec</b> and expiry unchanged at <b>10 Jan</b>, the beneficiary would have only <b>10 days</b> to present instead of the 21 set in 48: presentation must happen before expiry anyway (UCP 600, art. 14(c)).</p><p>Extending to <b>21 Jan 2026</b> restores the period. It is the client's call, hence the question.</p>`)+decNote(sc,'window')},
+  {q:x('Peut-on émettre l’amendement tout de suite ?','Can we issue the amendment right away?'),re:/(émett|emett|issue|tout de suite|right away|now|mt707)/i,needs:1,a:()=>x(`<p>Techniquement oui, mais il créerait deux incohérences : un délai de présentation réduit et un certificat d'assurance exigé sous un Incoterm FOB. Mieux vaut poser les deux questions au client avant d'émettre le MT707.</p><p>Et même émis, l'amendement ne liera le bénéficiaire qu'après son acceptation (UCP 600, art. 10).</p>`,`<p>Technically yes, but it would create two inconsistencies: a shortened presentation period and an insurance certificate required under FOB. Better to ask the client both questions before issuing the MT707.</p><p>And once issued, the amendment only binds the beneficiary after acceptance (UCP 600, art. 10).</p>`)},
+  {q:x('Que change l’amendement pour le bénéficiaire ?','What does it change for the beneficiary?'),re:/(bénéficiaire|beneficiary|accept|art\.? ?10|partiel|partial)/i,a:()=>x(`<p>Un crédit irrévocable ne peut être modifié sans l'accord de la banque émettrice, de la banque confirmante s'il y en a une, et du <b>bénéficiaire</b> (UCP 600, art. 10(a)).</p><p>Le bénéficiaire accepte ou refuse l'amendement en bloc : une acceptation partielle vaut refus (art. 10(e)).</p>`,`<p>An irrevocable credit cannot be amended without the agreement of the issuing bank, the confirming bank if any, and the <b>beneficiary</b> (UCP 600, art. 10(a)).</p><p>The beneficiary accepts or rejects the amendment as a whole: partial acceptance counts as rejection (art. 10(e)).</p>`)},
+  {q:x('Faut-il vérifier la limite de crédit ?','Should the credit limit be checked?'),re:/(limite|limit|risque|risk|ligne|line|67)/i,needs:1,hl:()=>[['a-amt','hl']],a:sc=>x(`<p>Oui. L'augmentation de <b>67 200 USD</b> (+8 %) consomme de la limite du client. Je n'ai pas accès aux limites : c'est volontairement hors de mon périmètre. Le point reste « à confirmer » tant que vous ne l'avez pas vérifié.</p>`,`<p>Yes. The <b>USD 67,200</b> increase (+8%) uses the client's limit. I have no access to limits, deliberately. The point stays “to confirm” until you have checked it.</p>`)+decNote(sc,'limit')}]};
+function qaList(sc){return [GEN.sum].concat(QA[sc.id],[GEN.status,GEN.lim]);}
+function pChat(sc){
+ return `<div class="chat"><div class="chat-h"><span class="av">LC</span><div><b>${x('Agent LC','LC agent')}</b><small>${x('Orchestré via Power Automate dans le concept · ici réponses scriptées','Orchestrated with Power Automate in the concept · scripted answers here')}</small></div><span class="st"><i></i>${x('Prêt','Ready')}</span></div>
+ <div class="log" id="log" aria-live="polite">${sc.st.chat.map(m=>m.me?`<div class="msg me">${esc(m.html)}</div>`:`<div class="msg ai"><div class="bub">${m.html}</div></div>`).join('')}</div>
+ <div class="sugg" id="sugg">${qaList(sc).map((k,i)=>`<button type="button" data-act="ask" data-i="${i}" class="${sc.st.asked[i]?'used':''}"${S.busy?' disabled':''}>${k.q}</button>`).join('')}</div>
+ <form class="inp" id="form"><input id="q" autocomplete="off" aria-label="${x('Question','Question')}" placeholder="${x('Posez une question sur ce dossier…','Ask something about this file…')}"><button id="send" type="submit"${S.busy?' disabled':''}>${x('Envoyer','Send')}</button></form></div>`;
+}
+function bindChat(sc){const log=$('#log');log.scrollTop=log.scrollHeight;$('#form').addEventListener('submit',e=>{e.preventDefault();const v=$('#q').value.trim();if(!v)return;$('#q').value='';const list=qaList(sc);let i=list.findIndex(k=>k.re.test(v));ask(sc,v,i);});}
+async function ask(sc,text,i){
+ if(S.busy)return;S.busy=true;setChatBusy(true);
+ const list=qaList(sc),k=list[i];if(i>=0)sc.st.asked[i]=true;
+ sc.st.chat.push({me:true,html:text});addMsg(true,esc(text));
+ const log=$('#log');let ty=null;if(log){ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';log.appendChild(ty);log.scrollTop=log.scrollHeight;}
+ await wait(700);if(ty)ty.remove();
+ let html;
+ if(!k)html=`<p>${x("Dans cette démo, mes réponses sont scriptées. Je sais répondre aux questions proposées ci-dessous sur ce dossier : essayez l'une d'elles.",'In this demo my answers are scripted. I can answer the suggested questions below about this file: try one of them.')}</p>`;
+ else if(k.needs&&!sc.st.analysed)html=`<p>${x("Je n'ai pas encore analysé ce dossier. Lancez l'analyse depuis l'onglet Contrôles, puis reposez la question.",'I have not analysed this file yet. Run the analysis from the Checks tab, then ask again.')}</p><div class="dec" style="margin-top:8px"><button class="btn sm p" data-act="tab" data-tab="checks">${x('Aller aux contrôles','Go to checks')}</button></div>`;
+ else{html=k.a(sc);if(k.hl&&S.cur===sc)hl(k.hl(sc));}
+ sc.st.chat.push({me:false,html});addMsg(false,html);
+ S.busy=false;setChatBusy(false);
+ if(S.tab==='chat'){const s=$('#sugg');if(s&&i>=0){const b=s.querySelector('[data-i="'+i+'"]');if(b)b.classList.add('used');}}
+}
+function addMsg(me,html){const log=$('#log');if(!log||S.tab!=='chat')return;const m=document.createElement('div');m.className='msg new '+(me?'me':'ai');m.innerHTML=me?html:`<div class="bub">${html}</div>`;log.appendChild(m);log.scrollTop=log.scrollHeight;}
+function setChatBusy(v){document.querySelectorAll('#sugg button,#send').forEach(b=>b.disabled=v);document.querySelectorAll('#tabs .tab').forEach(t=>v?t.setAttribute('aria-disabled','true'):t.removeAttribute('aria-disabled'));}
+
+/* ----- report ----- */
+function reportHTML(sc){
+ const st=sc.st,oid=curOut(sc),val=st.status==='done'||st.status==='client';
+ const draft=st.drafts[oid]!=null?st.drafts[oid]:buildDraft(sc,oid);
+ const res=c=>{const f=fin(sc,c);return f?(f==='ko'?`<span class="r-ko">${sc.type==='amd'?x('Question client','Client question'):x('Réserve','Discrepancy')}</span>`:`<span class="r-ok">${x('OK','OK')}</span>`):`<span class="r-ck">${x('En attente','Pending')}</span>`;};
+ const ag=c=>c.v==='ok'?x('Conforme','Compliant'):c.v==='ko'?(sc.type==='amd'?x('Bloquant','Blocking'):x('Réserve','Discrepancy')):x('À confirmer','To confirm');
+ const op=c=>{const d=st.dec[c.id];return d?(d==='agree'?x('Confirmé','Confirmed'):x('Infirmé','Overridden')):'—';};
+ const kv=[[x('Référence','Reference'),sc.ref],[x("Donneur d'ordre",'Applicant'),sc.app+fict],[x('Bénéficiaire','Beneficiary'),sc.ben+fict],[x('Montant du crédit','Credit amount'),fm(sc.amt,sc.ccy,2)],[sc.type==='amd'?x('Demande reçue le','Request received'):x('Présentation du','Presented on'),fd(sc.recv)],[sc.type==='amd'?x('Délai cible','Target date'):x("Échéance d'examen",'Examination deadline'),fd(sc.dl)],[x('Statut','Status'),STL[st.status]],[x('Issue','Outcome'),val?resText(sc):x('Recommandée : ','Recommended: ')+OUT[oid].lab]];
+ let after='';
+ if(st.reply&&sc.type==='amd')after=`<h4>${x('MT707 mis à jour après réponse du client','MT707 updated after the client’s reply')}</h4><pre class="sh-draft">${esc(mt707(sc,true))}</pre>`;
+ if(st.reply&&sc.type==='pres')after=`<p class="sh-note">${x("Réponse du donneur d'ordre (simulée) : accord pour lever les réserves. Paiement à initier via les outils habituels (hors démo).",'Applicant’s reply (simulated): agrees to waive the discrepancies. Payment to be initiated through the usual tools (outside the demo).')}</p>`;
+ return `<div class="sheet" id="sheet"><div class="wm" aria-hidden="true">${x('DÉMO SIMULÉE','SIMULATED DEMO')}</div>
+ <div class="sh-top"><div><div class="sh-k">${sc.type==='amd'?x("RAPPORT DE CONTRÔLE · DEMANDE D'AMENDEMENT",'CHECK REPORT · AMENDMENT REQUEST'):x('RAPPORT DE CONTRÔLE DOCUMENTAIRE','DOCUMENTARY CHECK REPORT')}</div><h3>${sc.ref}</h3></div><span class="sh-st ${val?'ok':'dr'}">${val?x('VALIDÉ','VALIDATED')+' · '+st.valAt:x('BROUILLON · NON VALIDÉ','DRAFT · NOT VALIDATED')}</span></div>
+ <table class="sh-kv">${kv.map(r=>`<tr><td>${r[0]}</td><td>${esc(r[1])}</td></tr>`).join('')}</table>
+ <h4>${x('Checklist des contrôles','Checklist')}</h4>
+ <table><thead><tr><th>#</th><th>${x('Contrôle','Check')}</th><th class="hide-s">${x('Agent','Agent')}</th><th class="hide-s">${x('Opérateur','Operator')}</th><th>${x('Résultat','Result')}</th></tr></thead><tbody>${sc.checks.map((c,i)=>`<tr><td>${i+1}</td><td>${c.t}${(st.com[c.id]||[]).map(m=>`<span class="cm">${QT(esc(m.txt))}</span>`).join('')}</td><td class="hide-s">${ag(c)}</td><td class="hide-s">${op(c)}</td><td>${res(c)}</td></tr>`).join('')}</tbody></table>
+ <h4>${OUT[oid].dl} · ${val?x('version validée','validated version'):x('brouillon à relire','draft to review')}</h4>
+ <pre class="sh-draft" id="draft">${esc(draft)}</pre>${after}
+ <p class="sh-foot">${x("Généré par une démo simulée : données fictives, ce n'est pas un outil officiel de Société Générale. Aucun message n'est envoyé automatiquement.","Generated by a simulated demo: fictional data, not an official Société Générale tool. No message is ever sent automatically.")} ${val?x('Validé par ','Validated by ')+WHO.op+x(' (démo) le ',' (demo) on ')+st.valAt+(st.valCom?' · '+QT(esc(st.valCom)):''):''}</p></div>`;
+}
+function pReport(sc){
+ if(!sc.st.analysed)return `<div class="empty"><h3>${x('Rapport non disponible','Report not available yet')}</h3><p>${x("Le rapport (checklist + brouillon de message) est généré après l'analyse, puis mis à jour à chaque décision.",'The report (checklist + draft message) is generated after the analysis, then updated with every decision.')}</p><button class="btn p" data-act="tab" data-tab="checks">${x('Aller aux contrôles','Go to checks')}</button></div>`;
+ const lk=sc.st.status==='done';
+ return reportHTML(sc)+`<div class="racts"><button class="btn p" data-act="print">${x('Imprimer / exporter en PDF','Print / export to PDF')}</button><button class="btn" data-act="csv">${x('Télécharger la checklist (.csv)','Download the checklist (.csv)')}</button>${lk?'':`<button class="btn" data-act="edit" id="editBtn">${x('Modifier le brouillon','Edit the draft')}</button>`}<button class="btn" data-act="copy">${x('Copier le brouillon','Copy the draft')}</button></div>
+ <div class="hitl"><span class="ico" aria-hidden="true">i</span><span>${x("Le brouillon n'est jamais envoyé automatiquement. Les modifications de l'opérateur sont tracées dans le journal.",'The draft is never sent automatically. Operator edits are logged in the audit trail.')}</span></div>`;
+}
+
+/* ----- audit ----- */
+function pAudit(sc){
+ return `<div class="phead"><span class="mut">${x('Qui a fait quoi, et quand. Horodatage simulé, entrées non modifiables.','Who did what, and when. Simulated timestamps, read-only entries.')}</span><button class="btn sm" data-act="csvlog">${x('Exporter le journal (.csv)','Export the log (.csv)')}</button></div>
+ <ol class="tl">${sc.st.audit.map(a=>`<li><time>${a.t}</time><span class="who w-${a.who}">${WHO[a.who]}</span><span class="tx">${a.txt}</span></li>`).join('')}</ol>`;
+}
+
+/* ---------- validation dialog ---------- */
+function openValidate(sc){
+ const outs=outcomes(sc),ro=recOut(sc),r=retained(sc),dlg=$('#dlg');
+ dlg.innerHTML=`<div class="dlg-b"><h3 id="dlgT">${x('Validation finale','Final validation')} · ${sc.ref}</h3>
+ <p>${r.length?x(`${r.length} point(s) retenu(s) après votre revue :`,`${r.length} point(s) kept after your review:`):x('Aucune réserve retenue après votre revue.','No discrepancy kept after your review.')}</p>
+ ${r.length?`<ul>${r.map(c=>`<li>${c.t}</li>`).join('')}</ul>`:''}
+ <div class="opts" role="radiogroup" aria-label="${x('Issue','Outcome')}">${outs.map(o=>`<label><input type="radio" name="out" value="${o}"${o===ro?' checked':''}><span>${OUT[o].lab}${o===ro?`<span class="rc">${x('RECOMMANDÉ','RECOMMENDED')}</span>`:''}<small>${OUT[o].desc}</small></span></label>`).join('')}</div>
+ <label for="vc" class="mut">${x('Commentaire de validation (facultatif)','Validation comment (optional)')}</label><textarea id="vc"></textarea>
+ <label class="attest"><input type="checkbox" id="att"><span>${x("J'ai revu chaque point et je prends la décision finale. Aucun message ne partira sans action de ma part.",'I have reviewed every point and I take the final decision. No message will go out without my action.')}</span></label>
+ <span class="err mut" id="attErr" hidden style="color:var(--red)">${x('Cochez la case pour confirmer.','Tick the box to confirm.')}</span></div>
+ <div class="dlg-f"><button class="btn" data-act="dlg-cancel">${x('Annuler','Cancel')}</button><button class="btn p" data-act="dlg-ok">${x('Valider','Validate')}</button></div>`;
+ dlg.showModal();
+}
+function finalize(sc){
+ const dlg=$('#dlg');if(!$('#att').checked){$('#attErr').hidden=false;return;}
+ const oid=(dlg.querySelector('input[name=out]:checked')||{}).value||recOut(sc),com=$('#vc').value.trim();dlg.close();
+ const st=sc.st;st.outcome=oid;st.valCom=com;st.status=OUT[oid].to;
+ audit(sc,'op',x('<b>Validation finale</b> · issue : ','<b>Final validation</b> · outcome: ')+OUT[oid].lab+(com?' · '+QT(esc(com)):''),2);st.valAt=st.audit[st.audit.length-1].t;
+ audit(sc,'agent',OUT[oid].dl+x(' figé dans le rapport · envoi via les outils habituels (hors démo), aucun envoi automatique',' locked in the report · sent through the usual tools (outside the demo), never automatically'),0);
+ audit(sc,'sys',x('Statut : ','Status: ')+'<b>'+STL[st.status]+'</b>',0);
+ S.tab='report';refresh();toast(x('Dossier validé · ','File validated · ')+OUT[oid].res);
+}
+function clientReply(sc){
+ const st=sc.st;st.reply=true;st.status='done';
+ if(sc.type==='amd'){const t=[];if(retained(sc).some(c=>c.id==='window'))t.push(x('validité prolongée au 21 janv. 2026','expiry extended to 21 Jan 2026'));if(retained(sc).some(c=>c.id==='inco'))t.push(x('passage en CIF Marseille-Fos','switch to CIF Marseille-Fos'));if(retained(sc).some(c=>c.id==='limit'))t.push(x('accord de limite obtenu','limit approval obtained'));
+  audit(sc,'client',x('Réponse du client : ','Client reply: ')+(t.join(', ')||x('confirmation','confirmation')),27);
+  audit(sc,'agent',x('MT707 mis à jour avec la réponse du client (brouillon indicatif)','MT707 updated with the client’s reply (indicative draft)'),1);}
+ else{audit(sc,'client',x("Réponse du donneur d'ordre : accord pour lever les réserves",'Applicant reply: agrees to waive the discrepancies'),34);
+  audit(sc,'op',x('Levée des réserves enregistrée · paiement à initier (hors démo)','Waiver recorded · payment to be initiated (outside the demo)'),2);}
+ audit(sc,'sys',x('Statut : ','Status: ')+'<b>'+STL.done+'</b>',0);
+ S.tab='report';refresh();toast(x('Réponse client enregistrée','Client reply recorded'));
+}
+
+/* ---------- export ---------- */
+function download(name,rows){const csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v).replace(/<[^>]+>/g,'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+function printReport(){const s=$('#sheet');if(!s)return;const p=$('#print');p.innerHTML='';p.appendChild(s.cloneNode(true));document.body.classList.add('printing');const off=()=>document.body.classList.remove('printing');window.addEventListener('afterprint',off,{once:true});window.print();setTimeout(off,1500);}
+
+/* ---------- toast ---------- */
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600);}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act,sc=S.cur;
+ if(b.getAttribute('aria-disabled')==='true'||b.disabled)return;
+ switch(act){
+ case 'filter':S.filter=b.dataset.v;renderQueue();break;
+ case 'bg':toast(x('Dossier d’arrière-plan : seuls les 4 dossiers « Scénario » sont détaillés dans la démo.','Background file: only the 4 “Scenario” files are detailed in the demo.'));break;
+ case 'reset':initState();S.filter='all';S.q='';renderQueue();toast(x('Démo réinitialisée','Demo reset'));break;
+ case 'tab':if(S.busy)return;S.tab=b.dataset.tab;S.edit=null;renderTabs();renderPanel();if(!isDesk()){const w=$('.work');if(w)w.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'});}const tb=$('#tab-'+S.tab);if(tb&&b.classList.contains('tab'))tb.focus();break;
+ case 'run':runAnalysis(sc);break;
+ case 'src':{const c=sc.checks.find(k=>k.id===b.dataset.id);hl([[b.dataset.f,(fin(sc,c)||c.v)==='ko'?'bad':'hl']],true);break;}
+ case 'row':hl([[b.dataset.f,'hl']],true);break;
+ case 'bulk':{const ids=sc.checks.filter(c=>c.v==='ok'&&!sc.st.dec[c.id]);ids.forEach(c=>sc.st.dec[c.id]='agree');audit(sc,'op',x(`${ids.length} contrôles conformes confirmés en lot`,`${ids.length} compliant checks confirmed in bulk`),1);recompute(sc);refresh();break;}
+ case 'agree':{const c=sc.checks.find(k=>k.id===b.dataset.id);sc.st.dec[c.id]='agree';audit(sc,'op',(c.v==='ko'?x('Réserve retenue : ','Discrepancy kept: '):c.v==='check'?x('Lecture confirmée : ','Reading confirmed: '):x('Contrôle confirmé : ','Check confirmed: '))+'<b>'+c.t+'</b>',1);recompute(sc);refresh();break;}
+ case 'ov':case 'com':S.edit={id:b.dataset.id,mode:act==='ov'?'ov':'com'};renderPanel();setTimeout(()=>{const t=$('#ed-'+b.dataset.id);if(t)t.focus();},0);break;
+ case 'cancel':S.edit=null;renderPanel();break;
+ case 'save':{const id=b.dataset.id,c=sc.checks.find(k=>k.id===id),v=($('#ed-'+id).value||'').trim();
+  if(!v){const er=$('#err-'+id);if(S.edit.mode==='ov'){er.hidden=false;$('#ed-'+id).focus();return;}S.edit=null;renderPanel();return;}
+  (sc.st.com[id]=sc.st.com[id]||[]).push({t:stamp(1),txt:v});
+  if(S.edit.mode==='ov'){sc.st.dec[id]='override';audit(sc,'op',(c.v==='ko'?x('Réserve écartée : ','Discrepancy dismissed: '):c.v==='check'?x('Lecture infirmée : ','Reading rejected: '):x('Réserve ajoutée : ','Discrepancy raised: '))+'<b>'+c.t+'</b> · '+x('motif','reason')+CL+' '+QT(esc(v)),0);}
+  else audit(sc,'op',x('Commentaire sur ','Comment on ')+'<b>'+c.t+'</b>'+CL+' '+QT(esc(v)),0);
+  S.edit=null;recompute(sc);refresh();break;}
+ case 'undo':{const c=sc.checks.find(k=>k.id===b.dataset.id);delete sc.st.dec[c.id];audit(sc,'op',x('Décision annulée : ','Decision undone: ')+'<b>'+c.t+'</b>',1);recompute(sc);refresh();break;}
+ case 'validate':openValidate(sc);break;
+ case 'dlg-cancel':$('#dlg').close();break;
+ case 'dlg-ok':finalize(sc);break;
+ case 'reply':clientReply(sc);break;
+ case 'ask':ask(sc,qaList(sc)[+b.dataset.i].q,+b.dataset.i);break;
+ case 'print':audit(sc,'op',x('Rapport imprimé / exporté en PDF','Report printed / exported to PDF'),1);printReport();break;
+ case 'csv':download(sc.ref+'-checklist.csv',[['#',x('Contrôle','Check'),x('Règle','Rule'),x('Constat agent','Agent finding'),x('Décision opérateur','Operator decision'),x('Résultat','Result'),x('Commentaires','Comments')]].concat(sc.checks.map((c,i)=>[i+1,c.t,c.rule,c.v,sc.st.dec[c.id]||'',fin(sc,c)||'pending',(sc.st.com[c.id]||[]).map(m=>m.txt).join(' | ')])));audit(sc,'op',x('Checklist exportée (.csv)','Checklist exported (.csv)'),1);renderTabs();break;
+ case 'csvlog':download(sc.ref+'-audit.csv',[[x('Horodatage','Timestamp'),x('Acteur','Actor'),x('Action','Action')]].concat(sc.st.audit.map(a=>[a.t,WHO[a.who],a.txt])));break;
+ case 'edit':{const d=$('#draft');if(d.isContentEditable){d.contentEditable='false';b.textContent=x('Modifier le brouillon','Edit the draft');}else{d.contentEditable='true';d.focus();b.textContent=x('Terminer la modification','Finish editing');
+  d.addEventListener('blur',()=>{const oid=curOut(sc),txt=d.innerText;const base=sc.st.drafts[oid]!=null?sc.st.drafts[oid]:buildDraft(sc,oid);if(txt.trim()!==base.trim()){sc.st.drafts[oid]=txt;audit(sc,'op',x('Brouillon modifié par l’opérateur','Draft edited by the operator'),1);renderTabs();}},{once:true});}break;}
+ case 'copy':{const d=$('#draft');const txt=d?d.innerText:'';(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast(x('Brouillon copié','Draft copied'))).catch(()=>toast(x('Copie impossible dans ce navigateur','Copy not available in this browser')));break;}
+ }
+});
+document.addEventListener('keydown',e=>{
+ if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-act="bg"],tr[data-act="row"]')){e.preventDefault();e.target.click();}
+ if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&e.target.classList.contains('tab')){const ts=[...document.querySelectorAll('#tabs .tab')];const i=ts.indexOf(e.target);const n=ts[(i+(e.key==='ArrowRight'?1:-1)+ts.length)%ts.length];n.click();}
+});
+document.addEventListener('mouseover',e=>{if(!S.cur||!isDesk())return;const f=e.target.closest('.f[data-id]');if(!f||f===S.hov)return;S.hov=f;const c=S.cur.checks.find(k=>k.id===f.dataset.id);if(c)hl(srcHl(S.cur,c));});
+$('#dlg').addEventListener('cancel',()=>{});
+
+route();
 })();
 </script>
 </body>
