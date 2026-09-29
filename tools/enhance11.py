@@ -95,7 +95,7 @@ CSS = r"""<style id="enh11">
   .sc-stage{position:relative;min-height:540px;overflow:hidden;border-radius:22px;background:var(--surface);border:1px solid var(--line);isolation:isolate}
   .sc-m{position:absolute;inset:0;opacity:0;transform:scale(1.08);transition:opacity .9s ease,transform 1.4s cubic-bezier(.2,.8,.2,1)}
   .sc-m.on{opacity:1;transform:scale(1)}
-  .sc-m img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+  .sc-m img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
   .sc-m.on img{animation:kb 12s ease-out both}
   @keyframes kb{from{transform:scale(1) translateY(0)}to{transform:scale(1.07) translateY(-2%)}}
   .sc-m .vis{height:100%;aspect-ratio:auto!important}
@@ -174,7 +174,7 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){
   var sec=document.getElementById('projets'), grid=sec&&sec.querySelector('.projects'); if(!grid) return;
   var cards=[].slice.call(grid.querySelectorAll('.proj')); if(!cards.length) return;
-  var MEDIA={'p-agent':'img/agent-og.jpg'};
+  var MEDIA={'p-agent':'img/preview/agent.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
   var sc=document.createElement('div'); sc.className='sc run';
   var list=document.createElement('div'); list.className='sc-list';
   var stage=document.createElement('div'); stage.className='sc-stage';
