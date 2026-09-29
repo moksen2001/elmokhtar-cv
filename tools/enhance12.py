@@ -10,10 +10,13 @@ CSS = r"""<style id="enh12">
 /* ==== ENH12 ==== */
 /* ---------- section changes ---------- */
 main{counter-reset:sec}
-section.block{counter-increment:sec;position:relative;border-top:1px solid var(--line)}
+section.block{counter-increment:sec;position:relative;border-top:0;padding-block:var(--sp)}
+:root{--sp:clamp(56px,6vw,84px);--fade:clamp(40px,5vw,72px)}
+@media (max-width:760px){:root{--sp:60px;--fade:40px}section.block{padding-block:var(--sp)!important}}
+main>.wrap>.contact,.contact{margin-top:var(--sp)!important;margin-bottom:var(--sp)!important}
 :root{--band:#FFFFFF}
 :root[data-theme="dark"]{--band:#0F203E}
-section.block:nth-of-type(even){background:var(--band)}
+section.block:nth-of-type(even){background:linear-gradient(180deg,transparent 0,var(--band) var(--fade),var(--band) calc(100% - var(--fade)),transparent 100%)}
 :root[data-theme="light"] section.block:nth-of-type(even){--surface:#F5F5F7;--surface-2:#EBEBEF}
 :root[data-theme="dark"] section.block:nth-of-type(even){--surface:#12254A;--surface-2:#183058;--line:#223A62}
 section.block .head .eyebrow::before{display:inline-block!important;content:counter(sec,decimal-leading-zero);width:auto;height:auto;background:none;

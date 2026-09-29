@@ -15,7 +15,7 @@ SKILLS = [  # FR, EN, linked experiences
   ("Scrum / Agile",          "Scrum / Agile",          ["sv","sg","bdf"]),
   ("Recette / UAT",          "Acceptance testing / UAT",["sv","sg","bdf"]),
   ("Ateliers de cadrage",    "Scoping workshops",      ["sv","bdf","pr"]),
-  ("Adoption & conduite du changement","Adoption & change management",["sv","sg"]),
+  ("Adoption & conduite du changement","Adoption & change management",["sg"]),
   ("Copilot & IA générative","Copilot & generative AI",["sg","pr"]),
   ("Agent IA",               "AI agent",               ["sg"]),
   ("Power Automate",         "Power Automate",         ["sg"]),

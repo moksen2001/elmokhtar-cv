@@ -4,14 +4,14 @@ import re
 
 T = {
  'fr': dict(badge="Démo interactive",
-   agent_note="Démo simulée, à titre illustratif (ni l'outil officiel ni l'outil final de Société Générale, données fictives) : file de travail de quatre Lettres de Crédit, extraction du MT700, contrôle de la présentation, réserves, questions au client ou amendement. L'opérateur valide chaque constat, avec journal d'audit et rapport imprimable.",
+   agent_note="Démo simulée, à titre illustratif (ni l'outil officiel ni l'outil final de Société Générale, données fictives) : choisissez un dossier de Lettre de Crédit, regardez l'agent IA lire le MT700 et repérer les anomalies en montrant la preuve, puis validez chaque point en un clic pour obtenir le message prêt à envoyer",
    agent_btn="Tester l'agent",
    bk_note="Le prototype de 2023 repensé en 2026, parcours complet : inscription par code SMS, catalogue de campagnes filtrable, fiche coopérative, vérification d'identité, paiement Wave, Orange Money ou carte, reçu, portefeuille et échéancier. Données fictives.",
    bk_btn="Tester le prototype", bk_alt="Nouvelle version de l'application Baykat : connexion et accueil",
    jb_note="Les maquettes XD du hackathon rendues jouables en 2026 : six jeux avec sons et voix (Anima, Yaram, Zik, Math Kid, Docteur Kid, Savoir-vivre), autocollants et espace parents.",
    jb_btn="Jouer à JUBOX", jb_alt="JUBOX rendu jouable : accueil des jeux et jeu Anima"),
  'en': dict(badge="Interactive demo",
-   agent_note="Simulated demo, for illustration only (not Société Générale's official or final tool, fictional data): a work queue of four Letters of Credit, MT700 extraction, presentation checks, discrepancies, client questions or amendment. The operator validates every finding, with an audit trail and a printable report.",
+   agent_note="Simulated demo, for illustration only (not Société Générale's official or final tool, fictional data): pick a Letter of Credit file, watch the AI agent read the MT700 and flag discrepancies with the evidence, then validate each point in one click to get the message ready to send",
    agent_btn="Try the agent",
    bk_note="The 2023 prototype redesigned in 2026 (in French), full journey: SMS-code sign-up, filterable campaign catalogue, cooperative profile, ID check, Wave, Orange Money or card payment, receipt, portfolio and payout schedule. Fictional data.",
    bk_btn="Try the prototype", bk_alt="Redesigned Baykat app: sign-in and home screens",
