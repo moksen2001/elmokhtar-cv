@@ -1,37 +1,31 @@
 <body>
 <header class="banner">
   <a id="backcv" href="../#projets">&larr;&nbsp;<span data-t="back">Retour au CV</span></a>
-  <span class="txt"><span class="long" data-t="bannerLong"><b>Démo</b> · Yema Watch Club, prototype mobile interactif · projet étudiant non affilié à Yema, données et prix fictifs</span><span class="short" data-t="bannerShort"><b>Démo</b> · données fictives</span></span>
-  <button class="fab" type="button" id="fab" aria-label="Informations sur le prototype" aria-controls="panel" aria-expanded="false">i</button>
-  <button class="lng" type="button" id="lngbtn" aria-label="Switch language">EN</button>
+  <span class="txt" data-t="banner"><b>Démo</b> · Yema Watch Club, prototype d’application · photos produits © YEMA, projet étudiant non affilié, paiement simulé</span>
+  <button class="lng" type="button" id="lngbtn">EN</button>
 </header>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="lumeGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></svg>
 <main class="stage">
   <div class="phone">
     <div class="app" id="app" aria-label="Yema Watch Club">
-      <div class="sbar" aria-hidden="true"><span class="t" id="clock">9:41</span><span class="r"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="1" fill="currentColor"/><rect x="10" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.4 6.8a6.6 6.6 0 0 1 9.2 0l-1.4 1.4a4.6 4.6 0 0 0-6.4 0zM1 4.4a10 10 0 0 1 14 0L13.6 5.8a8 8 0 0 0-11.2 0z" fill="currentColor"/></svg><svg class="off" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.4 6.8a6.6 6.6 0 0 1 9.2 0l-1.4 1.4a4.6 4.6 0 0 0-6.4 0zM1 4.4a10 10 0 0 1 14 0L13.6 5.8a8 8 0 0 0-11.2 0z" fill="currentColor" opacity=".3"/><path d="M2 1l12 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><rect x="23.5" y="4" width="2" height="4" rx="1" fill="currentColor" opacity=".5"/></svg></span></div>
-      <div class="sbg" aria-hidden="true"></div>
-      <div class="offbar" role="status"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-2-1.4M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 10.7 5M12 20h.01"/></svg><span id="offtxt">Hors connexion — Ma Collection reste disponible</span></div>
+      <div class="sbar" aria-hidden="true"><span id="clock">9:41</span><span class="r"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="1" fill="currentColor"/><rect x="10" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.4 6.8a6.6 6.6 0 0 1 9.2 0l-1.4 1.4a4.6 4.6 0 0 0-6.4 0zM1 4.4a10 10 0 0 1 14 0L13.6 5.8a8 8 0 0 0-11.2 0z" fill="currentColor"/></svg><svg class="off" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.4 6.8a6.6 6.6 0 0 1 9.2 0l-1.4 1.4a4.6 4.6 0 0 0-6.4 0zM1 4.4a10 10 0 0 1 14 0L13.6 5.8a8 8 0 0 0-11.2 0z" fill="currentColor" opacity=".3"/><path d="M2 1l12 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><rect x="23.5" y="4" width="2" height="4" rx="1" fill="currentColor" opacity=".5"/></svg></span></div>
       <div class="view" id="view"></div>
-      <nav class="tabbar" id="tabbar" aria-label="Navigation principale"></nav>
+      <div class="edge" id="edge" aria-hidden="true"></div>
+      <button class="offbar" type="button" id="offbar"></button>
+      <nav class="tabbar" id="tabbar"></nav>
       <div class="layer" id="layer"></div>
       <div class="toasts" id="toasts" aria-live="polite"></div>
+      <div class="hind" aria-hidden="true"></div>
     </div>
   </div>
-
   <aside class="panel" id="panel" aria-labelledby="panel-h">
     <button class="pclose" type="button" id="pclose" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <p class="kicker" data-t="pKicker">Travail final · cours Mobile Apps · MBA ESG Paris · 2026</p>
+    <p class="kicker" data-t="pKicker">Travail final · Mobile Apps · MBA ESG Paris · 2026</p>
     <h2 id="panel-h" data-t="pTitle">Yema Watch Club — prototype interactif</h2>
-    <p data-t="pIntro">Le showroom digital d’une maison horlogère française : essayage en réalité augmentée, configurateur, collection certifiée et club VIP. Les 20 écrans des maquettes, rendus entièrement cliquables.</p>
-    <p class="team" data-t="pTeam">El Mokhtar Berrada : Product Owner, UX/UI designer et chef de projet.</p>
+    <p data-t="pIntro">Vrais modèles YEMA, achat simulé de bout en bout, essayage en réalité augmentée, collection certifiée et club VIP. El Mokhtar Berrada : Product Owner, UX/UI, chef de projet.</p>
     <h3 data-t="pGuided">Parcours guidé · scénario d’Alexandre</h3>
     <ol class="steps" id="steps"></ol>
     <h3 data-t="pIndex">Index des écrans</h3>
     <div class="idx" id="idx"></div>
-    <div class="emp" id="emp"></div>
-    <div class="pctl"><div><b data-t="pOff">Simuler le hors-ligne (#18)</b><small data-t="pOffS">Aussi : appui long sur l’heure de la barre d’état</small></div><button class="tgl" type="button" role="switch" aria-checked="false" id="offtgl" aria-label="Hors-ligne"></button></div>
-    <div class="pfoot"><small data-t="pNote">Projet étudiant non affilié à Yema. Données et prix fictifs. Aucune donnée n’est envoyée : tout reste dans votre navigateur.</small><button class="reset" type="button" id="restart" data-t="pRestart">Recommencer</button></div>
+    <div class="pfoot"><small data-t="pNote">Photos produits © YEMA, utilisées à titre illustratif. Projet étudiant non affilié à YEMA, paiement simulé.</small><button class="reset" type="button" id="restart" data-t="pRestart">Recommencer</button></div>
   </aside>
 </main>
