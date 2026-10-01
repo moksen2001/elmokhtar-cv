@@ -19,7 +19,7 @@ T = {
   edu_h="Formation", edu="MSc Management de Projet, NEOMA (2026 – 27) · MBA Stratégie Digitale, MBA ESG (2024 – 26) · Licence informatique, Groupe ISM",
   lang_h="Langues", lang="Français · Anglais (TOEIC 905/990) · Arabe marocain · Wolof",
   cv="Télécharger mon CV", cvfile="cv/CV_El_Mokhtar_Berrada_FR_clair.pdf", mail="M'écrire",
-  demo="Tester la démo", demo_note="Version statique cliquable du prototype : accueil, catalogue, fiches produit et conseil."),
+  demo="Tester la démo", demo_note="Le prototype repensé en application : site web sur ordinateur, vraie app sur téléphone. Louer ou acheter du matériel photo et vidéo, publier un besoin et comparer les offres des propriétaires, questionnaire de conseil, simulateur de revenus pour les propriétaires. Photos réelles sous licence libre, paiement simulé."),
  'en': dict(
   btn="Quick read · 30 s", btn_aria="Quick read: my profile in 30 seconds", close="Close", full="See the full site",
   kicker="Quick read · 30 seconds", title="El Mokhtar Berrada",
@@ -37,7 +37,7 @@ T = {
   edu_h="Education", edu="MSc in Project Management, NEOMA (2026 – 27) · MBA in Digital Strategy, MBA ESG (2024 – 26) · BSc Business Information Systems, Groupe ISM",
   lang_h="Languages", lang="French · English (TOEIC 905/990) · Moroccan Arabic · Wolof",
   cv="Download my CV", cvfile="cv/CV_El_Mokhtar_Berrada_EN_light.pdf", mail="Email me",
-  demo="Try the demo", demo_note="Clickable static version of the prototype (in French): home, catalog, product pages and advice."),
+  demo="Try the demo", demo_note="The prototype redesigned as an app (in French): a website on desktop, a real app on phones. Rent or buy photo and video gear, post a need and compare owners' offers, an advice questionnaire, a revenue simulator for owners. Real freely licensed photos, simulated payment."),
 }
 
 CSS = r"""

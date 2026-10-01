@@ -1,0 +1,34 @@
+<body>
+<div id="app">
+  <div class="pnote" id="pnote" hidden>
+    <span>Prototype du challenge professionnel de fin d’études (MBA ESG, sept. 2026). Données fictives.</span>
+    <a href="../#projets">← Retour au CV</a>
+    <button class="x" type="button" aria-label="Masquer ce bandeau" data-act="note-x"><svg class="ico s" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <header class="topbar" id="topbar">
+    <div class="in">
+      <a class="logo" href="#/" aria-label="Focal-Shift, accueil">Focal<i></i>Shift</a>
+      <div class="mode" id="tmode" data-v="rent" role="group" aria-label="Je veux"><span class="thumb"></span><button type="button" data-mode="rent" aria-pressed="true">Louer</button><button type="button" data-mode="buy" aria-pressed="false">Acheter</button></div>
+      <form class="search" id="tsearch" role="search"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" name="q" placeholder="FX3, micro-cravate, lumière…" aria-label="Rechercher du matériel" autocomplete="off"></form>
+      <nav aria-label="Navigation principale">
+        <a class="nl" href="#/explorer" data-nav="explore">Explorer</a>
+        <a class="nl nlx" href="#/conseil" data-nav="conseil">Conseil</a>
+        <a class="nl nlx" href="#/proposer" data-nav="proposer">Proposer mon matériel</a>
+        <a class="nl" href="#/reservations" data-nav="resa">Réservations</a>
+        <a class="iconbtn" href="#/favoris" aria-label="Favoris" data-nav="fav"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="cnt" id="favcnt" hidden></span></a>
+        <a class="iconbtn" href="#/profil" aria-label="Profil" data-nav="profil"><span class="avatar s a5">LM</span></a>
+        <a class="btn btn-amber" href="#/demande" style="margin-left:6px">Publier un besoin</a>
+      </nav>
+    </div>
+  </header>
+  <main id="views"></main>
+  <nav class="tabbar" id="tabbar" aria-label="Onglets">
+    <a href="#/" data-tab="home"><svg class="ico" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20h-5v-6H9v6H4z"/></svg><span>Accueil</span></a>
+    <a href="#/explorer" data-tab="explore"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Explorer</span></a>
+    <a href="#/demande" data-tab="demande" class="plus" aria-label="Publier un besoin"><span class="pl"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><span>Demande</span></a>
+    <a href="#/reservations" data-tab="resa"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span>Réservations</span></a>
+    <a href="#/profil" data-tab="profil"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg><span>Profil</span></a>
+  </nav>
+  <div class="tray" id="tray" aria-live="polite"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
