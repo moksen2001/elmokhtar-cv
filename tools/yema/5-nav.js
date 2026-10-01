@@ -25,7 +25,7 @@ function navBar(e){
  return `<header class="nb">${left}<span class="nt"><span>${esc(titleOf(e))}</span></span><span class="sp"></span>${d.right?d.right(e.params,e):''}</header>`;
 }
 function build(e){
- const d=defOf(e);let el=e.el;
+ const d=defOf(e);let el=e.el;const fresh=!el;
  if(el){const sc=el.querySelector('.sc');if(sc)e.scroll=sc.scrollTop;if(d.unmount)try{d.unmount(el,e.params,e)}catch(x){}}
  else{el=document.createElement('section');e.el=el;el.tabIndex=-1;view.appendChild(el);}
  const off=el.classList.contains('off');
@@ -39,6 +39,7 @@ function build(e){
  if(d.mount)d.mount(el,e.params,e);
  markImgs(el);
  e.ver=VER;
+ aliveBuild(el,e,fresh);
  requestAnimationFrame(()=>fitNav(el));
 }
 function fitNav(el){const b=el.querySelector('.bk'),t=el.querySelector('.nt>span');if(!b||!t||!b.querySelector('span'))return;b.classList.remove('io');const br=b.getBoundingClientRect(),tr=t.getBoundingClientRect();if(br.width&&tr.width&&br.right+8>tr.left)b.classList.add('io');}
@@ -56,7 +57,7 @@ function chrome(){
  app.classList.toggle('tabs-on',NAV.mode==='tabs'&&d.tabs!==false);
  $$('.tb',tabbar).forEach(b=>{if(NAV.mode==='tabs'&&b.dataset.tab===NAV.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  edge.classList.toggle('on',!!e&&stk().length>1&&!d.modal&&!d.noswipe);
- badges();if(typeof panelCur==='function')panelCur();
+ badges();if(typeof panelCur==='function')panelCur();tabInd();
 }
 function go(name,params){
  if(BUSY)return;closeAllSheets();
@@ -66,6 +67,7 @@ function go(name,params){
  if(!prev)return;if(RM){hide(prev);return;}
  BUSY=true;const pe=prev.el;
  const done=()=>{hide(prev);clearA(pe,e.el,pe&&dimOf(prev));BUSY=false;};
+ const sh=takeShared(name);if(sh&&sharedPush(prev,e,sh,done))return;
  if(d.modal){anim(e.el,[{transform:'translateY(100%)'},{transform:'none'}],360).then(done);}
  else Promise.all([anim(e.el,[{transform:'translateX(100%)',boxShadow:'-10px 0 30px rgba(0,0,0,0)'},{transform:'none',boxShadow:'-10px 0 30px rgba(0,0,0,.35)'}]),anim(pe,[{transform:'none'},{transform:'translateX(-30%)'}]),anim(dimOf(prev),[{opacity:0},{opacity:.35}])]).then(done);
 }
@@ -76,6 +78,7 @@ function back(){
  const e=s.pop(),prev=top();ensure(prev);on(prev);chrome();
  const d=defOf(e);if(RM){destroy(e);return;}
  BUSY=true;const done=()=>{destroy(e);clearA(prev.el,dimOf(prev));BUSY=false;};
+ if(e.shared&&sharedPop(prev,e,done))return;
  if(d.modal)anim(e.el,[{transform:'none'},{transform:'translateY(100%)'}],300).then(done);
  else Promise.all([anim(e.el,[{transform:'none'},{transform:'translateX(100%)'}]),anim(prev.el,[{transform:'translateX(-30%)'},{transform:'none'}]),anim(dimOf(prev),[{opacity:.35},{opacity:0}])]).then(done);
 }
@@ -144,7 +147,7 @@ function openSheet(o){
  const obj={w,sh,onClose:o.onClose,data:o.data||{},prev:document.activeElement};sheets.push(obj);
  requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.classList.add('in');sh.classList.add('in');}));
  sc.addEventListener('click',()=>closeSheet(obj));
- bindDrag(obj);if(o.onMount)o.onMount(sh,obj);markImgs(sh);
+ bindDrag(obj);if(o.onMount)o.onMount(sh,obj);markImgs(sh);aliveSheet(sh);
  setTimeout(()=>{const f=sh.querySelector(o.focus||'.sh-b button,.sh-b input,.xbtn');if(f)try{f.focus({preventScroll:true})}catch(e){}},90);
  return obj;}
 function bindDrag(obj){const sh=obj.sh;let y0=null,dy=0,t0=0,v=0;
@@ -152,7 +155,7 @@ function bindDrag(obj){const sh=obj.sh;let y0=null,dy=0,t0=0,v=0;
  const mv=e=>{if(y0==null)return;const d=e.clientY-y0,t=performance.now();v=(d-dy)/Math.max(1,t-t0);t0=t;dy=d;sh.style.transform=`translateY(${d>0?d:d/4}px)`;};
  const up=()=>{if(y0==null)return;y0=null;sh.classList.remove('drag');sh.style.transform='';if(dy>110||(v>.6&&dy>20))closeSheet(obj);};
  $$('.grab,.sh-h',sh).forEach(g=>{g.addEventListener('pointerdown',dn);g.addEventListener('pointermove',mv);g.addEventListener('pointerup',up);g.addEventListener('pointercancel',up);});}
-function setSheet(obj,html){const inn=obj.sh.querySelector('.sh-in');const b=inn.querySelector('.sh-b');const st=b?b.scrollTop:0;inn.innerHTML=html;const nb=inn.querySelector('.sh-b');if(nb)nb.scrollTop=st;bindDrag(obj);markImgs(obj.sh);}
+function setSheet(obj,html){const inn=obj.sh.querySelector('.sh-in');const b=inn.querySelector('.sh-b');const st=b?b.scrollTop:0;inn.innerHTML=html;const nb=inn.querySelector('.sh-b');if(nb)nb.scrollTop=st;bindDrag(obj);markImgs(obj.sh);aliveSheet(obj.sh);}
 function closeSheet(obj){obj=obj||sheets[sheets.length-1];if(!obj)return;const i=sheets.indexOf(obj);if(i<0)return;sheets.splice(i,1);obj.sh.classList.remove('in');obj.w.querySelector('.scrim').classList.remove('in');setTimeout(()=>obj.w.remove(),RM?0:420);if(obj.onClose)obj.onClose();if(obj.prev&&document.contains(obj.prev))try{obj.prev.focus({preventScroll:true})}catch(e){}}
 function closeAllSheets(){while(sheets.length)closeSheet(sheets[sheets.length-1]);$$('.dlgw,.story',layer).forEach(d=>d.remove());}
 const topSheet=()=>sheets[sheets.length-1];

@@ -714,6 +714,68 @@ button.li:active{background:rgba(255,255,255,.06)}
 .reset{flex:none;padding:9px 14px;border-radius:99px;border:1px solid var(--gold);color:var(--gold3);font-size:12px;font-weight:700}
 .pclose{display:none}
 
+
+/* ===== alive: motion layer (transform/opacity; reduced-motion safe) ===== */
+.flip{position:absolute;z-index:98;object-fit:contain;pointer-events:none;transform-origin:0 0;will-change:transform}
+.ph img{filter:blur(10px);transition:opacity .45s,filter .55s var(--ios),transform .3s var(--ios)}
+.ph.ok img{filter:none}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+.enter .sc>*:not(.gal):not(.dhero){animation:rise .6s var(--ios) both}
+.enter .sc>*:nth-child(2){animation-delay:.05s}.enter .sc>*:nth-child(3){animation-delay:.1s}.enter .sc>*:nth-child(4){animation-delay:.15s}.enter .sc>*:nth-child(5){animation-delay:.2s}.enter .sc>*:nth-child(6){animation-delay:.25s}.enter .sc>*:nth-child(n+7){animation-delay:.3s}
+.enter .spec{animation:rise .5s var(--ios) both}.enter .spec:nth-child(1){animation-delay:.28s}.enter .spec:nth-child(2){animation-delay:.34s}.enter .spec:nth-child(3){animation-delay:.4s}
+.enter .cta{animation:ctaUp .55s .12s var(--ios) both}
+@keyframes ctaUp{from{transform:translateY(110%)}}
+.pills,.seg{position:relative}
+.pind{position:absolute;left:0;top:3px;bottom:3px;border-radius:8px;background:#4A5669;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .4s cubic-bezier(.34,1.25,.64,1),width .4s var(--ios),opacity .2s;pointer-events:none}
+.seg>.pind{top:4px;bottom:2px;border-radius:99px;background:var(--ink);box-shadow:none}
+.pills button,.seg button{position:relative;z-index:1}
+.pills button[aria-selected="true"],.seg[role="tablist"] button[aria-selected="true"]{background:none;box-shadow:none}
+.tbi{position:absolute;top:-1px;left:6px;width:calc((100% - 12px)/5);height:2px;transition:transform .45s cubic-bezier(.34,1.25,.64,1),opacity .2s;pointer-events:none}
+.tbi::after{content:"";position:absolute;left:50%;top:0;width:22px;height:2px;margin-left:-11px;border-radius:2px;background:var(--gold2);box-shadow:0 0 10px rgba(212,179,111,.7)}
+.tb.c .ring{position:relative}
+.tabbar.pulse .tb.c .ring::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--gold);animation:ringp 2.2s ease-out 1s 4;opacity:0}
+@keyframes ringp{from{transform:scale(1);opacity:.8}to{transform:scale(1.55);opacity:0}}
+.sto .ring{background:none;isolation:isolate}
+.sto .ring::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#F1DDB0,#C9A96A,#7A5A2A,#E8D3A2,#F1DDB0);animation:spin 7s linear infinite;z-index:-1}
+.sto.seen .ring::before{background:var(--line);animation:none}
+.drop .ph img{animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.2) translate(-2%,1%)}to{transform:scale(1.34) translate(2%,-2%)}}
+.drop::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(105deg,transparent 40%,rgba(232,211,162,.16) 50%,transparent 60%);transform:translateX(-100%);animation:shine 7s ease-in-out 1.5s infinite;pointer-events:none}
+@keyframes shine{22%,100%{transform:translateX(100%)}}
+@supports (animation-timeline:view()){.hscroll .wc,.hscroll .pv{animation:car linear both;animation-timeline:view(inline);animation-range:cover}@keyframes car{0%,100%{transform:scale(.9);opacity:.6}30%,72%{transform:none;opacity:1}}}
+.heart::after,.nbb[data-act="pdpHeart"]::after{content:"";position:absolute;inset:4px;border-radius:50%;border:2px solid var(--gold2);opacity:0;pointer-events:none}
+.pop[aria-pressed="true"]::after{animation:burst .55s ease-out}
+@keyframes burst{from{transform:scale(.4);opacity:.9}to{transform:scale(1.8);opacity:0}}
+.tgl::after{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.verif li.nw i{animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+.verif li.nw i path{stroke-dasharray:24;stroke-dashoffset:24;animation:draw .4s .1s forwards}
+.tkf{animation:tkf .6s}
+@keyframes tkf{30%{color:var(--gold3)}}
+.reflow .wc{animation:pop2 .42s var(--ios) both}
+.reflow .wc:nth-child(2){animation-delay:.04s}.reflow .wc:nth-child(3){animation-delay:.08s}.reflow .wc:nth-child(4){animation-delay:.12s}.reflow .wc:nth-child(n+5){animation-delay:.16s}
+@keyframes pop2{from{opacity:0;transform:scale(.94) translateY(8px)}}
+.tl{position:relative}
+.tlf{position:absolute;left:8px;width:2px;background:linear-gradient(var(--gold2),var(--gold));transform-origin:top;transition:transform .9s var(--ios)}
+.tlb{position:absolute;left:-5px;top:0;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.4),0 0 0 4px rgba(201,169,106,.22);transition:transform .9s var(--ios);z-index:2}
+.tlb .ic{width:15px;height:15px}
+.inv .bg{overflow:hidden}
+.inv .bg::after{content:"";position:absolute;inset:-20%;background:radial-gradient(30% 25% at 30% 30%,rgba(255,214,150,.32),transparent 70%),radial-gradient(25% 20% at 75% 60%,rgba(255,190,120,.24),transparent 70%);animation:leak 12s ease-in-out infinite alternate;pointer-events:none}
+@keyframes leak{to{transform:translate(8%,-6%) rotate(8deg)}}
+.inv .bg .ph{animation:fl 7s ease-in-out infinite}
+@keyframes fl{50%{translate:0 -8px}}
+.gal::before{content:"";position:absolute;left:8%;right:8%;top:10%;height:72%;border-radius:50%;background:radial-gradient(closest-side,rgba(120,160,230,.26),transparent);transform:translate(calc(var(--px,0)*-18px),calc(var(--py,0)*-12px));pointer-events:none}
+.gal .slide .ph{transform:translate(calc(var(--px,0)*10px),calc(var(--py,0)*7px)) rotate(calc(var(--px,0)*1.5deg))}
+.gal .slide:first-child .ph{animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -7px}}
+.gal::after{content:"";position:absolute;left:32%;right:32%;bottom:8%;height:16px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.5),transparent);animation:breathe 6s ease-in-out infinite;pointer-events:none}
+@keyframes breathe{50%{transform:scale(.84);opacity:.65}}
+.sweep{position:absolute;inset:0;overflow:hidden;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;pointer-events:none}
+.sweep::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.38) 50%,transparent 60%);transform:translateX(-110%);animation:swp 6.5s ease-in-out 1.4s infinite}
+@keyframes swp{28%,100%{transform:translateX(110%)}}
+.splash .appi{overflow:visible}
+.splash .appi text{fill:transparent;stroke:#D4B36F;stroke-width:1.1;stroke-dasharray:230;stroke-dashoffset:230;animation:ydraw .7s .1s ease-out forwards,yfill .35s .72s forwards}
+.splash .appi path{stroke-dasharray:28;stroke-dashoffset:28;animation:ydraw .35s .8s forwards}
+@keyframes ydraw{to{stroke-dashoffset:0}}@keyframes yfill{to{fill:#D4B36F}}
 @media (max-width:1180px){.stage{gap:32px}.panel{width:340px}}
 @media (max-width:860px){.stage{flex-direction:column;align-items:center}.phone{position:relative;top:0}.panel{position:relative;top:0;width:560px;max-width:100%;max-height:none}}
 /* ===== phones: the app IS the page ===== */

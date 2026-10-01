@@ -53,11 +53,12 @@ window.addEventListener('pagehide',stopCam);
 if(STANDALONE)document.documentElement.classList.add('standalone');
 const qp=new URLSearchParams(location.search),SHOT=qp.get('shot');
 if(SHOT){document.documentElement.classList.add('shot');NOSAVE=true;S=defState();S.onboarded=true;S.pushed=true;S.consent={analytics:true,perso:true,marketing:false};S.seenSt=[];}
+if(qp.get('video')){document.documentElement.classList.add('shot');S=defState();S.pushed=true;}
 if(!Array.isArray(S.steps)||S.steps.length!==6)S.steps=[0,0,0,0,0,0];
 LANG=(qp.get('lang')==='en'||qp.get('lang')==='fr')?qp.get('lang'):(S.lang||'fr');
 setLang(LANG);
 if(SHOT){const m={home:['home',[['home']]],pdp:['catalog',[['catalog'],['pdp',{id:qp.get('id')||'nme'}]]],ar:['home',[['home'],['pdp',{id:qp.get('id')||'nme'}],['ar',{id:qp.get('id')||'nme',live:false}]]],club:['club',[['club']]],collection:['collection',[['collection']]],watch:['collection',[['collection'],['watch',{oid:'o1'}]]]}[SHOT]||['home',[['home']]];setStack(m[0],m[1]);}
-else{startFlow('splash');firstPill();maybeInstall();}
+else{startFlow('splash');if(!qp.get('video')){firstPill();maybeInstall();}}
 const cq=qp.get('c');if(cq&&!SHOT)setTimeout(()=>toast(L(`Certificat ${esc(cq)} : authenticité vérifiée (démo)`,`Certificate ${esc(cq)}: authenticity verified (demo)`),{icon:'shield',ms:5200}),1600);
 })();
 </script>

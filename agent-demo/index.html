@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Démo · Agent IA Lettres de Crédit</title>
+<meta name="theme-color" content="#000000">
+<title>LC Check · Démo agent IA Lettres de Crédit</title>
 <meta name="description" content="Démo simulée de l'agent IA conçu au hackathon GBIS « AI for Clients » : lecture d'une Lettre de Crédit fictive, contrôles et brouillon de message. Reconstitution personnelle à but illustratif, données entièrement fictives, aucun lien avec un système de Société Générale.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Agent IA · Lettres de Crédit — démo illustrative">
+<meta property="og:title" content="Agent IA · Lettres de Crédit · démo illustrative">
 <meta property="og:description" content="Reconstitution personnelle, à but illustratif, du parcours imaginé au hackathon GBIS « AI for Clients » de Société Générale. Données entièrement fictives : ce n'est pas l'outil officiel ni final, seulement une démo pour visualiser l'idée.">
 <meta property="og:image" content="https://moksen2001.github.io/elmokhtar-cv/img/agent-og.jpg">
 <meta property="og:image:width" content="1200">
@@ -15,296 +16,460 @@
 <meta property="og:url" content="https://moksen2001.github.io/elmokhtar-cv/agent-demo/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
- --bg:#F2F3F5;--surface:#FFFFFF;--sunken:#F7F8F9;--ink:#15191E;--ink2:#3B444F;--muted:#67707C;--line:#D8DCE1;--line2:#E8EBEE;
- --accent:#143F74;--accent-h:#0E2F58;--accent-soft:#EAF0F7;
- --bad:#A3262B;--bad-soft:#FBEEEE;--warn:#8A5800;--warn-soft:#FCF3E0;--ok:#22683C;--ok-soft:#EBF4EE;--hl:#FFF1BF;
- --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+ --red:#E9041E;--red-d:#BE0318;--red-t:#FDECEE;--red-l:#F4B7BF;
+ --black:#000;--ink:#1A1A1A;--ink2:#525252;--muted:#6B6B6B;--grey:#8C8C8C;
+ --line:#E6E6E6;--line2:#D4D4D4;--bg:#F4F4F4;--surface:#FFFFFF;--sunk:#FAFAFA;
+ --ok:#1F8A4C;--ok-t:#E8F3EC;--ok-l:#B5D9C3;--warn:#B26B00;--warn-t:#FBF2E1;--warn-l:#E9CB96;
+ --sans:"Source Sans 3","Source Sans Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+ --topH:48px;--stepH:52px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 body{overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
-a{color:var(--accent)}
-button{font:inherit;color:inherit}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
 [hidden]{display:none!important}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;box-shadow:0 0 0 4px #fff}
+.top :focus-visible{box-shadow:none;outline-color:#fff}
+.mono{font-family:var(--mono)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.i{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:square;stroke-linejoin:miter}
+kbd{font-family:var(--mono);font-size:.68rem;line-height:1;padding:2px 4px;border:1px solid currentColor;border-radius:2px;opacity:.7;min-width:16px;text-align:center}
 
 /* top bar */
-.top{background:var(--surface);border-bottom:1px solid var(--line)}
-.top-in{max-width:1280px;margin:0 auto;height:52px;padding:0 24px;display:flex;align-items:center;gap:18px}
-.back{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;text-decoration:none;color:var(--ink2)}
-.back:hover{color:var(--accent)}
-.top .vr{width:1px;height:22px;background:var(--line)}
-.prod{font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:8px;min-width:0}
-.prod .mk{width:22px;height:22px;border-radius:3px;background:var(--accent);color:#fff;display:grid;place-items:center}
-.prod .mk svg{width:14px;height:14px;stroke-width:1.8}
-.prod small{font-weight:400;color:var(--muted);font-size:.85rem}
-.top .sp{flex:1}
-.lang{display:flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.lang a{padding:3px 10px;font-size:.8rem;font-weight:500;text-decoration:none;color:var(--muted)}
-.lang a+a{border-left:1px solid var(--line)}
-.lang a[aria-current]{background:var(--ink);color:#fff}
-.disc{background:#E9EDF2;border-bottom:1px solid var(--line)}
-.disc p{max-width:1280px;margin:0 auto;padding:8px 24px;font-size:.84rem;color:var(--ink2);display:flex;gap:8px;align-items:flex-start}
-.disc svg{color:var(--accent);margin-top:1px;width:16px;height:16px}
-.disc b{color:var(--ink);font-weight:600}
+.top{background:var(--black);color:#fff;position:sticky;top:0;z-index:40;border-bottom:3px solid var(--red)}
+.top-in{max-width:1600px;margin:0 auto;height:var(--topH);padding:0 24px;display:flex;align-items:center;gap:16px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;color:#CFCFCF;text-decoration:none;white-space:nowrap}
+.back:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.vr{width:1px;height:20px;background:#3D3D3D;flex:none}
+.prod{display:flex;align-items:baseline;gap:10px;min-width:0;white-space:nowrap}
+.prod b{font-weight:600;font-size:1rem;letter-spacing:.01em}
+.prod small{font-size:.84rem;color:#A3A3A3;overflow:hidden;text-overflow:ellipsis}
+.sp{flex:1}
+.tag-demo{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#CFCFCF;border:1px solid #555;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.lang{display:flex;border:1px solid #555;border-radius:2px;overflow:hidden;flex:none}
+.lang a{padding:3px 9px;font-size:.78rem;font-weight:600;text-decoration:none;color:#BDBDBD;letter-spacing:.03em}
+.lang a+a{border-left:1px solid #555}
+.lang a[aria-current]{background:#fff;color:#000}
+.tb{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;background:none;border:1px solid #555;border-radius:2px;color:#D6D6D6;font-size:.82rem;cursor:pointer;white-space:nowrap}
+.tb:hover{border-color:#999;color:#fff}
 
-main{flex:1;width:100%;max-width:1280px;margin:0 auto;padding:28px 24px 48px}
+/* stepper bar */
+.stepbar{background:var(--surface);border-bottom:1px solid var(--line2);position:sticky;top:calc(var(--topH) + 3px);z-index:35}
+.stepbar-in{max-width:1600px;margin:0 auto;padding:0 24px;height:var(--stepH);display:flex;align-items:center;gap:24px}
+ol.stepper{display:flex;align-items:stretch;list-style:none;margin:0;padding:0;height:100%}
+.stepper li{display:flex;align-items:center}
+.stepper li+li::before{content:"";width:36px;height:1px;background:var(--line2);margin:0 14px}
+.stepper li.past+li::before{background:var(--ink)}
+.stepper button{display:flex;align-items:center;gap:9px;height:100%;background:none;border:0;border-bottom:2px solid transparent;padding:2px 2px 0;cursor:pointer;font-size:.92rem;color:var(--muted);white-space:nowrap}
+.stepper .n{width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:2px;font-size:.78rem;font-weight:600;color:var(--ink2);background:#fff}
+.stepper .n svg{width:13px;height:13px;stroke-width:2.2}
+.stepper li.past button{color:var(--ink2)}
+.stepper li.past .n{background:var(--ink);border-color:var(--ink);color:#fff}
+.stepper li.cur button{color:var(--ink);font-weight:600;border-bottom-color:var(--red)}
+.stepper li.cur .n{background:var(--red);border-color:var(--red);color:#fff}
+.stepper button:disabled{cursor:default}
+.stepper li:not(.cur):not(.past) button:disabled{opacity:.6}
+.stepper button:not(:disabled):hover .l{text-decoration:underline;text-underline-offset:3px}
+.ctx{margin-left:auto;display:flex;align-items:baseline;gap:10px;min-width:0;font-size:.86rem;color:var(--ink2);white-space:nowrap}
+.ctx .mono{font-size:.78rem;color:var(--ink)}
+.ctx span:last-child{overflow:hidden;text-overflow:ellipsis}
 
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:8px 16px;border-radius:4px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:.9rem;font-weight:500;cursor:pointer;text-decoration:none;line-height:1.2;white-space:nowrap}
-.btn:hover{border-color:#B6BDC6;background:var(--sunken)}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.pri:hover{background:var(--accent-h);border-color:var(--accent-h)}
-.btn.lg{min-height:44px;padding:10px 20px;font-size:.95rem}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
-.btn.pri[disabled]:hover{background:var(--accent)}
-.lnk{background:none;border:0;padding:0;color:var(--accent);font-size:.86rem;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#B8C6D8}
-.lnk:hover{text-decoration-color:var(--accent)}
-.lnk svg{width:15px;height:15px}
+main{flex:1;width:100%;max-width:1600px;margin:0 auto;padding:24px}
 
-/* intro */
-.intro{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;align-items:start}
-.intro h1{font-size:1.75rem;line-height:1.25;font-weight:600;letter-spacing:-.01em;margin:0 0 10px;max-width:34ch}
-.lead{font-size:1.02rem;color:var(--ink2);margin:0 0 22px;max-width:62ch}
-.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--surface);margin:0 0 28px;padding:0;list-style:none;counter-reset:s}
-.how li{padding:14px 16px;counter-increment:s;font-size:.9rem;color:var(--ink2)}
-.how li+li{border-left:1px solid var(--line)}
-.how b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
-.how b::before{content:counter(s)". ";color:var(--accent)}
-h2.sec{font-size:1.05rem;font-weight:600;margin:0 0 4px}
-.sub{color:var(--muted);font-size:.88rem;margin:0 0 12px}
-.cases{border:1px solid var(--line);background:var(--surface)}
-.case{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;align-items:center;padding:16px 18px}
-.case+.case{border-top:1px solid var(--line)}
-.case h3{margin:0;font-size:1rem;font-weight:600;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
-.case h3 small{font-weight:400;font-size:.82rem;color:var(--muted)}
-.case p{margin:3px 0 0;color:var(--ink2);font-size:.9rem;max-width:64ch}
-.case .meta{margin-top:6px;font-size:.8rem;color:var(--muted);font-family:var(--mono)}
-.case .done{display:inline-flex;align-items:center;gap:5px;color:var(--ok);font-weight:500;font-size:.82rem;font-family:var(--sans)}
-.case .done svg{width:15px;height:15px}
-.case .btn{grid-row:span 2}
-.aside{display:grid;gap:16px}
-.box{background:var(--surface);border:1px solid var(--line);padding:16px 18px}
-.box h2{font-size:.95rem;font-weight:600;margin:0 0 8px}
-.box p{margin:0 0 8px;font-size:.88rem;color:var(--ink2)}
-.box p:last-child{margin:0}
-dl.gl{margin:0;display:grid;gap:10px;font-size:.87rem}
+/* generic */
+.panel{background:var(--surface);border:1px solid var(--line2);border-radius:2px;min-width:0}
+.ph{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 16px;border-bottom:1px solid var(--line)}
+.ph-t{font-size:.74rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
+.ph .r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:36px;padding:7px 14px;border-radius:2px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.2;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--red);border-color:var(--red);color:#fff}
+.btn.pri:hover{background:var(--red-d);border-color:var(--red-d)}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.dark:hover{background:#000}
+.btn.ghost{border-color:transparent;background:none;color:var(--ink2);padding-left:8px;padding-right:8px}
+.btn.ghost:hover{color:var(--ink);border-color:var(--line2)}
+.btn.sm{min-height:30px;padding:4px 10px;font-size:.84rem}
+.btn[disabled]{background:var(--bg);border-color:var(--line2);color:var(--grey);cursor:not-allowed}
+.btn kbd{margin-left:2px}
+.lnk{background:none;border:0;padding:0;color:var(--ink);font-size:.86rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:3px}
+.lnk:hover{color:var(--red)}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:1px solid var(--line2);color:var(--ink2);background:#fff;white-space:nowrap;line-height:1.35}
+.chip.bad{color:var(--red);border-color:var(--red-l);background:var(--red-t)}
+.chip.warn{color:var(--warn);border-color:var(--warn-l);background:var(--warn-t)}
+.chip.ok{color:var(--ok);border-color:var(--ok-l);background:var(--ok-t)}
+.chip.dark{color:#fff;background:var(--ink);border-color:var(--ink)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--grey);display:inline-block;flex:none}
+.dot.ok{background:var(--ok)}.dot.bad{background:var(--red)}.dot.warn{background:var(--warn)}
+.c-bad{color:var(--red)}.c-warn{color:var(--warn)}.c-ok{color:var(--ok)}
+.meter{display:inline-block;width:44px;height:4px;background:var(--line);vertical-align:middle;position:relative}
+.meter i{position:absolute;left:0;top:0;bottom:0;background:var(--ink)}
+.meter.low i{background:var(--warn)}
+.pbar{height:3px;background:var(--line)}
+.pbar i{display:block;height:100%;width:0;background:var(--red);transition:width .3s linear}
+.pbar.dark i{background:var(--ink)}
+
+/* ---------- step 1 ---------- */
+.s1{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.pagehead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin:0 0 14px}
+.eyebrow{margin:0 0 6px;font-size:.74rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.pagehead h1{margin:0;font-size:1.6rem;line-height:1.2;font-weight:600;letter-spacing:-.005em;display:flex;align-items:center;gap:12px}
+.pagehead h1::before{content:"";width:4px;height:1.15em;background:var(--red);flex:none}
+.ctxline{margin:8px 0 0;color:var(--ink2);font-size:.95rem;max-width:80ch}
+.hm{display:flex;gap:20px;font-size:.84rem;color:var(--ink2)}
+.hm b{display:block;font-size:1.25rem;font-weight:600;color:var(--ink);line-height:1.1}
+details.how{margin:0 0 16px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+details.how>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 0;font-size:.9rem;font-weight:600}
+details.how>summary::-webkit-details-marker{display:none}
+details.how>summary .chev,.chev{transition:transform .2s}
+details[open]>summary .chev{transform:rotate(180deg)}
+details.how>summary small{font-weight:400;color:var(--muted)}
+.how-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:4px 0 16px}
+.how-g>div{padding:0 20px}
+.how-g>div:first-child{padding-left:0}
+.how-g>div+div{border-left:1px solid var(--line)}
+.how-g h3{margin:0 0 8px;font-size:.74rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2)}
+.how-g p{margin:0 0 8px;font-size:.88rem;color:var(--ink2)}
+.how-g ol{margin:0;padding:0;list-style:none;display:grid;gap:8px;counter-reset:s}
+.how-g ol li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:.88rem;color:var(--ink2);counter-increment:s}
+.how-g ol li::before{content:counter(s);width:20px;height:20px;border:1px solid var(--ink);display:grid;place-items:center;font-size:.72rem;font-weight:700;color:var(--ink)}
+.how-g ol b{color:var(--ink);font-weight:600}
+dl.gl{margin:0;display:grid;gap:8px;font-size:.88rem}
 dl.gl dt{font-weight:600}
-dl.gl dd{margin:1px 0 0;color:var(--ink2)}
+dl.gl dd{margin:0;color:var(--ink2)}
 
-/* case header */
-.chead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin:0 0 18px}
-.chead .crumb{font-size:.84rem;color:var(--muted);margin:0 0 2px}
-.chead .crumb button{font-size:.84rem}
-.chead h1{font-size:1.35rem;font-weight:600;margin:0;line-height:1.3}
-.chead .facts{margin:4px 0 0;font-size:.86rem;color:var(--ink2);display:flex;flex-wrap:wrap;gap:2px 16px}
-.chead .facts span{white-space:nowrap}
-.chead .facts b{font-weight:500;color:var(--ink)}
-.steps{display:flex;list-style:none;margin:0;padding:0;font-size:.85rem;color:var(--muted)}
-.steps li{display:flex;align-items:center;gap:8px;padding:0 0 6px;border-bottom:2px solid var(--line)}
-.steps li+li{padding-left:18px}
-.steps li i{font-style:normal;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:.72rem;background:var(--surface)}
-.steps li.cur{color:var(--ink);font-weight:600;border-color:var(--accent)}
-.steps li.cur i{background:var(--accent);border-color:var(--accent);color:#fff}
-.steps li.ok{color:var(--ink2);border-color:var(--accent)}
-.steps li.ok i{border-color:var(--accent);color:var(--accent)}
-.steps li.ok i svg{width:12px;height:12px;stroke-width:2.2}
+table.q{width:100%;border-collapse:collapse}
+.q thead th{text-align:left;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--line2);background:var(--sunk);white-space:nowrap}
+.q td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+.q tbody tr:last-child td{border-bottom:0}
+.q tbody tr{cursor:pointer;transition:background .15s}
+.q tbody tr:hover{background:var(--sunk)}
+.q tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--red)}
+.q .ref{font-family:var(--mono);font-size:.78rem;color:var(--ink);white-space:nowrap}
+.q .typ{display:block;margin-top:4px;font-size:.8rem;color:var(--muted)}
+.q .nm{font-weight:600;font-size:.98rem;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.q .bl{margin:3px 0 0;color:var(--ink2);font-size:.88rem;max-width:72ch}
+.q .mt{margin:6px 0 0;font-size:.8rem;color:var(--muted)}
+.q .amt{font-family:var(--mono);font-size:.82rem;text-align:right;white-space:nowrap}
+.q th.amt{font-family:var(--sans)}
+.q .dt{white-space:nowrap;color:var(--ink2)}
+.q .stt{white-space:nowrap;font-size:.86rem}
+.q .stt span{display:inline-flex;align-items:center;gap:7px}
+.q .stt small{display:block;color:var(--muted);font-size:.8rem;margin:2px 0 0 14px;white-space:normal}
+.q .go{text-align:right;width:1%}
+.s1-side{display:grid;gap:16px}
+.side-b{padding:14px 16px}
+.side-b p{margin:0 0 8px;font-size:.88rem;color:var(--ink2)}
+.side-b p:last-child{margin:0}
+ul.scope{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:.88rem;color:var(--ink2)}
+ul.scope li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+ul.scope li svg{margin-top:2px}
+.side-b .scope-h{font-size:.8rem;font-weight:600;color:var(--ink);margin:14px 0 6px}
+.side-b .scope-h:first-child{margin-top:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px}
+.refs span{font-family:var(--mono);font-size:.74rem;border:1px solid var(--line2);padding:2px 6px;border-radius:2px;color:var(--ink2)}
 
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
-/* document */
-.doc{background:var(--surface);border:1px solid var(--line);position:sticky;top:12px}
-.doc>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:.88rem;font-weight:600;cursor:default}
-.doc>summary::-webkit-details-marker{display:none}
-.doc>summary small{font-weight:400;color:var(--muted)}
-.doc>summary .chev{margin-left:auto;display:none;color:var(--muted);transition:transform .2s}
-.doc[open]>summary .chev{transform:rotate(180deg)}
-.paper{max-height:calc(100vh - 220px);min-height:420px;overflow:auto;padding:4px 0 12px;scroll-behavior:smooth;position:relative}
-.dsec{padding:12px 16px 4px}
-.dsec h3{margin:0;font-size:.82rem;font-weight:600;color:var(--ink)}
-.dsec h3+p{margin:1px 0 8px;font-size:.78rem;color:var(--muted)}
-.dsec+.dsec{border-top:1px dashed var(--line);margin-top:8px}
-.row{display:grid;grid-template-columns:62px minmax(0,1fr) 128px;gap:10px;padding:3px 8px;margin:0 -8px;font-family:var(--mono);font-size:.75rem;line-height:1.55;border-left:3px solid transparent;transition:background .25s,border-color .25s}
-.row .k{color:var(--muted)}
-.row .v{color:var(--ink);word-break:break-word}
-.row .lb{font-family:var(--sans);font-size:.76rem;color:var(--muted);text-align:right}
-.row.scan{background:var(--accent-soft);border-left-color:#8AA3C4}
-.row.look{background:var(--accent-soft);border-left-color:var(--accent)}
-.row.hl-ev{background:var(--hl);border-left-color:#B98A00}
-.row.hl-bad{background:#FBE3E2;border-left-color:var(--bad)}
-.row.miss .v{color:var(--bad)}
-.hand{font-family:"Caveat",cursive;font-size:1.25rem;line-height:1;color:#1E3F9A;display:inline-block;transform:rotate(-3deg);padding:0 6px;border:1.5px solid #4863A8;border-radius:2px;margin-left:4px}
+/* ---------- step 2 ---------- */
+.casebar{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin:0 0 14px}
+.casebar .ref{font-family:var(--mono);font-size:.8rem;background:var(--ink);color:#fff;padding:2px 7px;border-radius:2px}
+.casebar h1{margin:0;font-size:1.25rem;font-weight:600;line-height:1.3}
+.casebar .facts{font-size:.86rem;color:var(--ink2);display:flex;flex-wrap:wrap;gap:2px 14px}
+.casebar .facts span+span::before{content:"";display:inline-block;width:1px;height:11px;background:var(--line2);margin-right:14px;vertical-align:-1px}
+.split{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(420px,1fr);gap:16px;height:calc(100vh - var(--topH) - 3px - var(--stepH) - 130px);min-height:540px}
+.split>.panel{display:flex;flex-direction:column;min-height:0}
+.vtabs{display:flex;gap:2px;margin-left:auto}
+.vtabs button{background:none;border:1px solid transparent;border-radius:2px;padding:3px 8px;font-size:.8rem;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.vtabs button:hover{border-color:var(--line2);color:var(--ink)}
+.paper{flex:1;min-height:0;overflow:auto;scroll-behavior:smooth;padding:0 0 16px;position:relative}
+.dsec{padding:0}
+.dsec-h{position:sticky;top:0;z-index:2;background:#fff;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:12px 16px 8px;border-bottom:1px solid var(--line)}
+.dsec-h b{font-size:.88rem;font-weight:600}
+.dsec-h span{font-size:.8rem;color:var(--muted)}
+.dsec+.dsec{margin-top:10px;border-top:1px solid var(--line2)}
+.row{display:grid;grid-template-columns:70px 136px minmax(0,1fr) auto;gap:0 12px;align-items:baseline;padding:5px 16px 5px 13px;border-left:3px solid transparent;font-size:.86rem;transition:background .25s,border-color .25s}
+.row+.row{border-top:1px solid #F0F0F0}
+.row .k{font-family:var(--mono);font-size:.76rem;color:var(--ink);font-weight:500}
+.row .lb{font-size:.8rem;color:var(--muted)}
+.row .v{font-family:var(--mono);font-size:.76rem;line-height:1.6;color:var(--ink);word-break:break-word}
+.row .mk{font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.row .mk:empty{display:none}
+.row.miss .v{color:var(--red);text-decoration:line-through;text-decoration-thickness:1px}
+.row.scan{background:#F5F5F5;border-left-color:var(--grey)}
+.row.look{background:#F2F2F2;border-left-color:var(--ink)}
+.row.hl-c{background:#F2F2F2;border-left-color:var(--ink)}
+.row.hl-c .mk{color:var(--ink)}
+.row.hl-x{background:var(--red-t);border-left-color:var(--red)}
+.row.hl-x .mk{color:var(--red)}
+.row.pulse{animation:pulse 1.4s ease-out 1}
+@keyframes pulse{0%{box-shadow:inset 0 0 0 2px var(--red)}70%{box-shadow:inset 0 0 0 2px rgba(233,4,30,.15)}100%{box-shadow:inset 0 0 0 2px transparent}}
+.hand{font-family:var(--sans);font-style:italic;font-size:.9rem;color:#1D3C8F;border:1px dashed #6A7FB8;padding:0 5px;margin:0 2px;border-radius:2px;white-space:nowrap}
+.hand small{font-style:normal;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-left:4px}
 
-/* work pane */
-.work{background:var(--surface);border:1px solid var(--line);min-width:0}
-.work-h{padding:14px 18px;border-bottom:1px solid var(--line)}
-.work-h h2{margin:0;font-size:1.05rem;font-weight:600}
-.work-h p{margin:2px 0 0;font-size:.88rem;color:var(--ink2)}
-.bar{height:3px;background:var(--line2)}
-.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .35s linear}
-.alist{list-style:none;margin:0;padding:8px 18px 14px}
-.alist li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);color:var(--muted);font-size:.92rem}
-.alist li:last-child{border-bottom:0}
-.alist .st{width:18px;height:18px;margin-top:2px;display:grid;place-items:center}
-.alist .st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--line)}
-.alist li.run{color:var(--ink)}
-.alist li.run .st::before{width:14px;height:14px;background:none;border:2px solid var(--accent);border-right-color:transparent;animation:spin .7s linear infinite}
-.alist li.ok{color:var(--ink)}
-.alist li.ok .st::before{display:none}
-.alist li.ok .st svg{color:var(--ok);width:18px;height:18px;stroke-width:2}
-.alist small{display:block;font-size:.84rem;color:var(--muted)}
-.alist li.ok small.bad{color:var(--bad)}
-.alist li.ok small.warn{color:var(--warn)}
-@keyframes spin{to{transform:rotate(360deg)}}
-.work-f{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;border-top:1px solid var(--line);background:var(--sunken)}
-.work-f p{margin:0;font-size:.86rem;color:var(--ink2);max-width:52ch}
+/* right pane */
+.live{display:inline-flex;align-items:center;gap:7px;font-size:.84rem;color:var(--ink2);white-space:nowrap}
+.live .mono{font-size:.76rem;color:var(--ink)}
+.live .dot.run{background:var(--red);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.pbody{flex:1;min-height:0;overflow:auto}
+ol.rlog{list-style:none;margin:0;padding:8px 16px 12px;font-size:.88rem}
+.rlog li{display:grid;grid-template-columns:66px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px solid #F0F0F0;animation:lin .25s ease-out}
+.rlog li:last-child{border-bottom:0}
+@keyframes lin{from{opacity:0;transform:translateY(3px)}}
+.rlog time{font-family:var(--mono);font-size:.74rem;color:var(--muted);padding-top:2px}
+.rlog .t{color:var(--ink)}
+.rlog .r{display:block;font-size:.84rem;color:var(--ink2)}
+.rlog .r.bad{color:var(--red)}.rlog .r.warn{color:var(--warn)}
+.rlog li.run .r{color:var(--muted)}
+.rlog li.run .r::after{content:"";display:inline-block;width:6px;height:6px;background:var(--red);margin-left:6px;animation:blink 1s steps(2) infinite}
+.pf{border-top:1px solid var(--line2);background:var(--sunk);padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.pf p{margin:0;font-size:.85rem;color:var(--ink2);flex:1;min-width:200px}
+.pf p b{color:var(--ink);font-weight:600}
+.keys{width:100%;font-size:.76rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.keys span{display:inline-flex;align-items:center;gap:5px}
+.keys kbd{opacity:1;border-color:var(--line2);color:var(--ink2);background:#fff}
 
-/* findings */
-.tally{display:flex;flex-wrap:wrap;gap:4px 18px;margin:6px 0 0;font-size:.86rem;color:var(--ink2)}
-.tally span{display:inline-flex;align-items:center;gap:6px}
-.tally svg{width:16px;height:16px}
-.c-bad{color:var(--bad)}.c-warn{color:var(--warn)}.c-ok{color:var(--ok)}
-.flist{list-style:none;margin:0;padding:0}
-.f{padding:16px 18px;border-bottom:1px solid var(--line);border-left:3px solid transparent;cursor:pointer}
-.f.act{border-left-color:var(--accent);background:#FBFCFD;cursor:default}
-.f-h{display:flex;gap:10px;align-items:flex-start}
-.f-h svg{margin-top:2px}
-.f-h h3{margin:0;font-size:.98rem;font-weight:600;flex:1;line-height:1.35}
-.f-h .kind{font-size:.8rem;font-weight:500;white-space:nowrap;margin-top:2px}
-.f-b{margin:8px 0 0 28px}
-.f-b p{margin:0 0 10px;font-size:.9rem;color:var(--ink2)}
-.ev{border:1px solid var(--line2);background:var(--sunken);padding:8px 10px;font-size:.84rem;margin:0 0 10px}
-.ev table{border-collapse:collapse;width:100%}
-.ev td{padding:2px 0;vertical-align:top}
-.ev td:first-child{color:var(--muted);padding-right:12px;width:1%;white-space:nowrap}
-.ev td b{font-weight:600}
-.ev td b.x{color:var(--bad)}
-.ev .foot{display:flex;justify-content:flex-end;margin-top:4px}
-.stamp{display:flex;align-items:center;gap:14px;border:1px solid var(--line2);background:#FAFAF7;padding:10px 12px;margin:0 0 10px;font-size:.8rem;color:var(--muted)}
-.stamp .scan{flex:none;width:150px;height:64px;background:repeating-linear-gradient(0deg,#F1EFE8 0 1px,#F7F6F1 1px 3px);border:1px solid #E1DED4;display:grid;place-items:center;position:relative}
-.stamp .scan span{font-family:"Caveat",cursive;font-size:1.7rem;color:#1E3F9A;transform:rotate(-4deg);border:2px solid #4863A8;padding:0 8px;border-radius:2px;opacity:.9;filter:blur(.25px)}
-.agent{font-size:.86rem;color:var(--ink2);margin:0 0 10px;padding-left:10px;border-left:2px solid var(--line)}
-.agent b{font-weight:600;color:var(--ink)}
+.sumg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.sumg div{padding:10px 16px}
+.sumg div+div{border-left:1px solid var(--line)}
+.sumg dt{font-size:.72rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;font-weight:600;white-space:nowrap}
+.sumg dd{margin:2px 0 0;font-size:1.15rem;font-weight:600}
+dl.sumg{margin:0}
+details.runlog{border-bottom:1px solid var(--line)}
+details.runlog>summary,details.passed>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 16px;font-size:.86rem;color:var(--ink2)}
+details.runlog>summary::-webkit-details-marker,details.passed>summary::-webkit-details-marker{display:none}
+details.runlog>summary .chev,details.passed>summary .chev{margin-left:auto;color:var(--muted)}
+details.runlog ol.rlog{padding-top:0}
+details.runlog .rlog li{animation:none}
+.sech{display:flex;align-items:center;gap:12px;padding:12px 16px 8px}
+.sech .ph-t{color:var(--ink)}
+.sech .cnt{margin-left:auto;font-size:.84rem;color:var(--ink2);display:flex;align-items:center;gap:10px}
+.sech .cnt .pbar{width:90px}
+ol.flist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.f{border-bottom:1px solid var(--line);background:#fff;position:relative}
+.f.act{box-shadow:inset 3px 0 0 var(--red)}
+.f-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:2px 10px;width:100%;text-align:left;background:none;border:0;padding:12px 16px;cursor:pointer;align-items:start}
+.f:not(.act) .f-row:hover{background:var(--sunk)}
+.f-no{font-family:var(--mono);font-size:.76rem;color:var(--muted);padding-top:2px}
+.f-t{font-weight:600;font-size:.96rem;line-height:1.35;color:var(--ink)}
+.f.done:not(.act) .f-t{color:var(--ink2);font-weight:500}
+.f-m{grid-column:2;font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 10px}
+.f-m .mono{font-size:.72rem;color:var(--ink2)}
+.f-s{grid-column:3;grid-row:1 / span 2;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.f-c{font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.f-b{padding:2px 16px 16px 56px}
+.f-b>p{margin:0 0 12px;font-size:.9rem;color:var(--ink2);max-width:68ch}
+.evt{border:1px solid var(--line);margin:0 0 12px}
+.evt-h{display:flex;align-items:center;gap:10px;padding:6px 10px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.evt-h .ph-t{font-size:.68rem}
+.evt-h .lnk{margin-left:auto;font-size:.8rem}
+.evt table{border-collapse:collapse;width:100%;font-size:.86rem}
+.evt td{padding:6px 10px;vertical-align:top;border-top:1px solid #F0F0F0}
+.evt tr:first-child td{border-top:0}
+.evt td:first-child{color:var(--muted);width:1%;white-space:nowrap;padding-right:16px}
+.evt td b{font-weight:600}
+.evt td b.x{color:var(--red)}
+.stamp{display:flex;align-items:center;gap:14px;margin:0 0 12px;font-size:.82rem;color:var(--ink2)}
+.stamp .scan{flex:none;width:168px;height:70px;background:#F6F5F1;border:1px solid #DEDBD2;display:grid;place-items:center;position:relative;overflow:hidden}
+.stamp .scan::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.025) 0 1px,transparent 1px 3px)}
+.stamp .ink{transform:rotate(-4deg);border:2px solid #3E58A0;color:#2A4590;padding:2px 8px;text-align:center;opacity:.88;filter:blur(.2px)}
+.stamp .ink small{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.08em}
+.stamp .ink span{font-style:italic;font-size:1.15rem;font-weight:500;letter-spacing:.02em}
+.sugg{border-left:2px solid var(--ink);padding:2px 0 2px 10px;margin:0 0 12px;font-size:.88rem;color:var(--ink2)}
+.sugg b{display:block;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);margin-bottom:1px}
 .acts{display:flex;flex-wrap:wrap;gap:8px}
-.dec{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.88rem}
-.dec span{display:inline-flex;align-items:center;gap:6px;font-weight:500}
-.f:not(.act) .f-b{display:none}
-.f:not(.act):hover{background:var(--sunken)}
-.pend{font-size:.84rem;color:var(--muted)}
-.f.decided .f-h h3{color:var(--ink2)}
-.f .dline{margin:6px 0 0 28px}
-.passed{border-bottom:1px solid var(--line)}
-.passed>summary{list-style:none;cursor:pointer;padding:12px 18px;font-size:.9rem;display:flex;align-items:center;gap:8px;color:var(--ink2)}
-.passed>summary::-webkit-details-marker{display:none}
-.passed>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s}
-.passed[open]>summary .chev{transform:rotate(180deg)}
-.passed ul{list-style:none;margin:0;padding:0 18px 12px 44px;display:grid;gap:8px;font-size:.86rem}
-.passed li b{font-weight:500;color:var(--ink)}
-.passed li{color:var(--ink2)}
-.next{font-size:.86rem;color:var(--ink2)}
-.next b{color:var(--ink);font-weight:600}
+.decl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:.88rem;margin:0 0 4px}
+.decl b{font-weight:600}
+.cmt{margin:12px 0 0}
+.cmt label{display:block;font-size:.78rem;font-weight:600;margin:0 0 4px}
+.cmt textarea{width:100%;min-height:64px;border:1px solid var(--line2);border-radius:2px;padding:8px 10px;font-size:.88rem;resize:vertical}
+.cmt textarea:focus{border-color:var(--ink);outline:none}
+.cmt .acts{margin-top:8px}
+.cmts{margin:10px 0 0;font-size:.84rem;color:var(--ink2);border:1px solid var(--line);background:var(--sunk);padding:6px 10px}
+.cmts b{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);margin-right:6px}
+.cmts time{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-right:6px}
+details.passed{border-bottom:1px solid var(--line)}
+details.passed ul{list-style:none;margin:0;padding:0 16px 12px 46px;display:grid;gap:6px;font-size:.86rem;color:var(--ink2)}
+details.passed li b{font-weight:600;color:var(--ink)}
+.mob-docs{display:none}
 
-/* result */
-.res{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
-.res-h{display:flex;gap:12px;align-items:flex-start;margin:0 0 16px}
-.res-h .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none}
-.res-h .ic svg{width:20px;height:20px;stroke-width:2}
-.res-h h2{margin:0;font-size:1.25rem;font-weight:600;line-height:1.3}
-.res-h p{margin:3px 0 0;color:var(--ink2);font-size:.92rem;max-width:62ch}
-.msg{background:var(--surface);border:1px solid var(--line)}
-.msg-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--sunken)}
-.msg-h h3{margin:0;font-size:.9rem;font-weight:600}
-.msg-h small{color:var(--muted);font-weight:400}
-.mhead{padding:12px 18px 0;font-size:.86rem}
-.mhead div{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid var(--line2)}
-.mhead span{color:var(--muted)}
-.mbody{margin:0;padding:14px 18px 18px;white-space:pre-wrap;font-family:var(--sans);font-size:.9rem;line-height:1.6;color:var(--ink)}
-.mbody.swift{font-family:var(--mono);font-size:.78rem;line-height:1.7}
-.sent{font-size:.82rem;color:var(--muted);margin:8px 0 0}
-.sum dl{margin:0;display:grid;font-size:.88rem}
-.sum dl div{display:grid;grid-template-columns:120px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--line2)}
-.sum dl div:last-child{border-bottom:0}
-.sum dt{color:var(--muted)}
-.sum dd{margin:0}
-.time{display:grid;gap:8px;font-size:.84rem;margin-top:4px}
-.time div{display:grid;grid-template-columns:96px 1fr 52px;gap:10px;align-items:center}
-.time i{display:block;height:8px;background:#B7C0CB}
-.time div.ag i{background:var(--accent)}
-.time b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
-.box .note{font-size:.78rem;color:var(--muted);margin-top:8px}
-ol.log{list-style:none;margin:0;padding:0;font-size:.84rem;display:grid;gap:7px}
-ol.log li{display:grid;grid-template-columns:44px 1fr;gap:8px;color:var(--ink2)}
-ol.log time{font-family:var(--mono);font-size:.76rem;color:var(--muted);padding-top:1px}
-ol.log b{font-weight:500;color:var(--ink)}
+/* ---------- step 3 ---------- */
+.outc{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;margin:0 0 16px;border-left:4px solid var(--ink)}
+.outc.bad{border-left-color:var(--red)}.outc.ok{border-left-color:var(--ok)}.outc.warn{border-left-color:var(--warn)}
+.outc .ic{width:34px;height:34px;display:grid;place-items:center;flex:none;border:1px solid currentColor;border-radius:2px}
+.outc .ic svg{width:18px;height:18px;stroke-width:2}
+.outc h1{margin:0;font-size:1.25rem;font-weight:600;line-height:1.3}
+.outc p{margin:3px 0 0;color:var(--ink2);font-size:.92rem;max-width:72ch}
+.outc .r{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.res{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.mf{display:grid;grid-template-columns:72px minmax(0,1fr);border-bottom:1px solid var(--line);font-size:.88rem;align-items:center}
+.mf>span{padding:8px 0 8px 16px;color:var(--muted)}
+.mf>b,.mf>input{padding:8px 16px 8px 0;font-weight:600}
+.mf>input{border:0;background:none;width:100%;min-width:0}
+.mf>input:hover{background:var(--sunk)}
+.mf>input:focus{outline:none;background:var(--sunk);box-shadow:inset 0 -2px 0 var(--ink)}
+.mf .ch{font-weight:400;font-family:var(--mono);font-size:.78rem}
+textarea.mbody{display:block;width:100%;min-height:360px;border:0;padding:16px 18px;resize:vertical;font-family:var(--sans);font-size:.93rem;line-height:1.6;color:var(--ink);background:#fff}
+textarea.mbody.swift{font-family:var(--mono);font-size:.8rem;line-height:1.7}
+textarea.mbody:hover{background:#FDFDFD}
+textarea.mbody:focus{outline:none;box-shadow:inset 0 0 0 2px var(--ink)}
+.edited{font-size:.78rem;color:var(--muted)}
+.res-side{display:grid;gap:16px}
+dl.kv{margin:0;display:grid;font-size:.88rem;padding:4px 16px 10px}
+dl.kv div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px solid #F0F0F0}
+dl.kv div:last-child{border-bottom:0}
+dl.kv dt{color:var(--muted)}
+dl.kv dd{margin:0}
+.time{display:grid;gap:10px;font-size:.84rem;padding:12px 16px 4px}
+.time div{display:grid;grid-template-columns:92px 1fr 52px;gap:10px;align-items:center}
+.time i{display:block;height:8px;background:var(--grey)}
+.time div.ag i{background:var(--ink)}
+.time b{font-weight:600;text-align:right}
+.note{font-size:.78rem;color:var(--muted);margin:0;padding:6px 16px 14px}
+ol.log{list-style:none;margin:0;padding:4px 16px 14px;font-size:.84rem;display:grid;gap:7px}
+ol.log li{display:grid;grid-template-columns:62px 1fr;gap:8px;color:var(--ink2)}
+ol.log time{font-family:var(--mono);font-size:.72rem;color:var(--muted);padding-top:2px}
+details.logbox>summary{list-style:none;cursor:pointer}
+details.logbox>summary::-webkit-details-marker{display:none}
+details.logbox>summary .chev{color:var(--muted)}
+details.logbox:not([open])>summary{border-bottom:0}
 .ctas{display:grid;gap:8px}
-.logbox>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:.95rem;font-weight:600}
-.logbox>summary::-webkit-details-marker{display:none}
-.logbox>summary small{font-weight:400;color:var(--muted)}
-.logbox>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s}
-.logbox[open]>summary .chev{transform:rotate(180deg)}
-.logbox[open]>summary{margin-bottom:10px}
-.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,12px);opacity:0;background:var(--ink);color:#fff;padding:9px 14px;border-radius:4px;font-size:.86rem;transition:opacity .2s,transform .2s;pointer-events:none;z-index:50}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-.fade{animation:fade .3s ease-out}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}}
 
-@media (max-width:1100px){.intro{grid-template-columns:minmax(0,1fr) 320px}.res{grid-template-columns:minmax(0,1fr) 300px}.row{grid-template-columns:58px minmax(0,1fr)}.row .lb{display:none}}
+/* footer */
+.foot{border-top:1px solid var(--line2);background:var(--surface)}
+.foot-in{max-width:1600px;margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.foot p{margin:0;max-width:110ch}
+.foot b{color:var(--ink2);font-weight:600}
+
+/* sheet (mobile evidence) */
+.sheet{position:fixed;inset:0;z-index:60}
+.sheet-bd{position:absolute;inset:0;background:rgba(0,0,0,.45);animation:fd .2s ease-out}
+.sheet-p{position:absolute;left:0;right:0;bottom:0;max-height:82vh;background:#fff;border-top:3px solid var(--red);display:flex;flex-direction:column;animation:up .25s ease-out}
+.sheet-h{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;border-bottom:1px solid var(--line)}
+.sheet-h b{font-size:.92rem;font-weight:600;flex:1;min-width:0}
+.sheet-h small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.icb{width:36px;height:36px;display:grid;place-items:center;background:none;border:1px solid var(--line2);border-radius:2px;cursor:pointer;flex:none}
+.sheet-more{padding:12px 16px}
+.sheet .paper{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+@keyframes fd{from{opacity:0}}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,10px);opacity:0;background:var(--ink);color:#fff;padding:9px 14px;border-radius:2px;font-size:.86rem;transition:opacity .2s,transform .2s;pointer-events:none;z-index:70;border-left:3px solid var(--red)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.fade{animation:fade .25s ease-out}
+@keyframes fade{from{opacity:0}}
+
+@media (max-width:1280px){
+ .row{grid-template-columns:62px minmax(0,1fr) auto}
+ .row .lb{grid-column:2;grid-row:1;font-size:.74rem}
+ .row .v{grid-column:2;grid-row:2}
+ .row .k{grid-row:1 / span 2}
+ .row .mk{grid-column:3;grid-row:1 / span 2;align-self:center}
+}
+@media (max-width:1180px){
+ .s1{grid-template-columns:minmax(0,1fr)}
+ .s1-side{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .split{grid-template-columns:minmax(0,1fr) minmax(400px,1fr)}
+ .res{grid-template-columns:minmax(0,1fr) 300px}
+}
+@media (max-width:959px){
+ .top{position:static}
+ .stepbar{top:0}
+ .split{display:block;height:auto;min-height:0}
+ .split>.viewer{display:none}
+ .split>.panel{display:block}
+ .pbody{overflow:visible}
+ .mob-docs{display:flex;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line)}
+ .pf.sticky{position:sticky;bottom:0;z-index:20;box-shadow:0 -1px 0 var(--line2)}
+ .keys,kbd{display:none!important}
+ .res{grid-template-columns:minmax(0,1fr)}
+ .outc{flex-wrap:wrap}
+ .outc .r{margin-left:0;width:100%;justify-content:flex-start}
+}
 @media (max-width:900px){
- .intro,.res,.split{grid-template-columns:minmax(0,1fr)}
- .doc{position:static}
- .doc>summary{cursor:pointer}
- .doc:not([open])>summary{border-bottom:0}
- .doc>summary .chev{display:block}
- .paper{max-height:360px;min-height:0}
+ table.q,.q tbody,.q tr,.q td{display:block}
+ .q thead{display:none}
+ .q tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:14px;border-bottom:1px solid var(--line);gap:8px 12px}
+ .q tbody tr:last-child{border-bottom:0}
+ .q td{padding:0;border:0}
+ .q td.c-ref{grid-column:1 / -1;display:flex;align-items:baseline;gap:10px}
+ .q td.c-ref .typ{margin:0}
+ .q td.c-main{grid-column:1 / -1}
+ .q td.amt{text-align:left}
+ .q td.amt::before,.q td.dt::before{content:attr(data-l);display:block;font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .q td.dt{text-align:right}
+ .q td.stt{grid-column:1}
+ .q td.go{grid-column:2;width:auto;align-self:end}
+ .q tbody tr:hover td:first-child{box-shadow:none}
 }
-@media (max-width:640px){
+@media (max-width:760px){
+ .msg .ph{flex-wrap:wrap;padding:6px 12px}
+ .msg .ph .r{margin-left:0}
  html,body{font-size:14.5px}
- .top-in{padding:0 16px;gap:12px}
- .prod small,.top .vr{display:none}
- .prod{font-size:.9rem}
- .disc p{padding:8px 16px;font-size:.8rem}
- main{padding:18px 16px 32px}
- .intro h1{font-size:1.4rem}
- .lead{font-size:.95rem}
- .how{grid-template-columns:1fr}
- .how li+li{border-left:0;border-top:1px solid var(--line)}
- .case{grid-template-columns:1fr;padding:14px}
- .case .btn{grid-row:auto;width:100%;margin-top:8px}
- .chead{margin-bottom:14px}
- .chead h1{font-size:1.15rem}
- .steps{width:100%}
- .steps li{flex:1;font-size:.78rem;gap:6px}
- .steps li+li{padding-left:8px}
- .f{padding:14px}
- .f-b{margin-left:0}
- .f .dline{margin-left:0}
- .work-h,.alist{padding-left:14px;padding-right:14px}
- .work-f{padding:10px 14px}
- .work-f.ready{position:sticky;bottom:0;z-index:5;box-shadow:0 -4px 12px rgba(20,25,30,.08)}
- .work-f .btn{width:100%}
- .stamp{flex-direction:column;align-items:flex-start}
+ .top-in{padding:0 12px;gap:10px}
+ .prod small,.tag-demo,.top .vr,.tb .l,.back .l2{display:none}
+ .stepbar-in{padding:0 12px;gap:12px}
+ .stepper li+li::before{width:14px;margin:0 8px}
+ .stepper button{font-size:.86rem;gap:6px}
+ .ctx{display:none}
+ main{padding:16px 12px 24px}
+ .pagehead h1{font-size:1.3rem}
+ .hm{display:none}
+ .how-g{grid-template-columns:1fr;gap:14px}
+ .how-g>div{padding:0!important;border:0!important}
+ .s1-side{grid-template-columns:1fr}
+ .casebar{gap:6px 12px}
+ .casebar .facts{gap:2px 12px;font-size:.84rem}
+ .casebar .facts span+span::before{display:none}
+ details.how>summary small{display:none}
+ .casebar h1{font-size:1.1rem;width:100%;order:-1}
+ .sumg div{padding:8px 10px}
+ .sumg dt{font-size:.62rem;white-space:normal;line-height:1.2;letter-spacing:.03em}
+ .sumg dd{font-size:1rem}
+ .pf.sticky{flex-wrap:nowrap;padding:8px 12px;gap:10px}
+ .pf.sticky p{min-width:0;font-size:.8rem;line-height:1.3}
+ .pf.sticky .btn{flex:none}
+ .mob-docs{padding:8px 12px}
+ .f-row{grid-template-columns:24px minmax(0,1fr);padding:12px}
+ .f-s{grid-column:2;grid-row:auto;flex-direction:row;align-items:center;flex-wrap:wrap;gap:8px}
+ .f-b{padding:2px 12px 14px 12px}
  .acts .btn{flex:1 1 auto}
- .sum dl div{grid-template-columns:104px 1fr}
- .mhead,.mbody{padding-left:14px;padding-right:14px}
+ .stamp{flex-direction:column;align-items:flex-start}
+ .ph{padding:0 12px}
+ .sech{padding:12px 12px 8px}
+ .mf{grid-template-columns:62px minmax(0,1fr)}
+ .mf>span{padding-left:12px}
+ textarea.mbody{padding:14px 12px;min-height:300px}
+ dl.kv div{grid-template-columns:116px minmax(0,1fr)}
+ .foot-in{padding:12px}
+ .row{padding:5px 12px 5px 9px;grid-template-columns:52px minmax(0,1fr)}
+ .row .mk{grid-column:2;grid-row:3;justify-self:start;margin-top:2px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="back" id="back" href="../#projets"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-t="back"></span></a>
+  <a class="back" id="back" href="../#projets"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-t="back"></span></a>
   <span class="vr" aria-hidden="true"></span>
-  <span class="prod"><span class="mk" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg></span><span data-t="prod"></span><small data-t="prod2"></small></span>
+  <span class="prod"><b>LC Check</b><small data-t="prod2"></small></span>
   <span class="sp"></span>
+  <span class="tag-demo" data-t="demo"></span>
+  <button class="tb" id="reset" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 3.5v5h5"/></svg><span class="l" data-t="reset"></span></button>
   <nav class="lang" aria-label="Langue / Language"><a href="?lang=fr" data-l="fr" lang="fr">FR</a><a href="?lang=en" data-l="en" lang="en">EN</a></nav>
 </div></header>
-<div class="disc" role="note"><p><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.4"/></svg><span id="disc"></span></p></div>
+<div class="stepbar"><div class="stepbar-in" id="stepbar"></div></div>
 <main id="app"></main>
+<footer class="foot"><div class="foot-in"><p id="disc"></p><p id="sig"></p></div></footer>
+<div class="sheet" id="sheet" hidden><div class="sheet-bd" data-close></div><div class="sheet-p" role="dialog" aria-modal="true" aria-labelledby="sheet-t"><div class="sheet-h"><b id="sheet-t"></b><button class="icb" type="button" data-close id="sheet-x"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="paper" id="sheetc"></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sr" id="sr" aria-live="polite"></div>
 <script>
 (function(){
 'use strict';
@@ -312,64 +477,72 @@ const EN=/[?&]lang=en/.test(location.search)||(!/[?&]lang=fr/.test(location.sear
 const x=(fr,en)=>EN?en:fr;
 document.documentElement.lang=EN?'en':'fr';
 const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wait=ms=>new Promise(r=>setTimeout(r,reduce?30:ms));
-const isDesk=()=>matchMedia('(min-width:901px)').matches;
+const MQ=matchMedia('(min-width:960px)');
+const isDesk=()=>MQ.matches;
+const BACK=EN?'../en/#projets':'../#projets';
 
-/* ---------- icons (one line style) ---------- */
+/* ---------- icons ---------- */
 const P={
  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
  alert:'<path d="M12 3.8L21.2 20H2.8z"/><path d="M12 10v4.6M12 17.2v.3"/>',
  help:'<circle cx="12" cy="12" r="9"/><path d="M9.7 9.6a2.4 2.4 0 1 1 3.3 2.2c-.6.3-1 .8-1 1.5v.3M12 16.6v.3"/>',
- circleCheck:'<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/>',
+ ok:'<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/>',
  xc:'<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>',
+ minus:'<path d="M6 12h12"/>',
  right:'<path d="M5 12h14M13 6l6 6-6 6"/>',
  left:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
  chev:'<path d="M6 9l6 6 6-6"/>',
- eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
- copy:'<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="1"/><path d="M15.5 8.5V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v9.5a1 1 0 0 0 1 1h3.5"/>',
- redo:'<path d="M4 12a8 8 0 0 1 14-5.3L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/>',
- mail:'<rect x="3" y="5.5" width="18" height="13" rx="1"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>',
- send:'<path d="M20.5 3.5L10 14M20.5 3.5l-6.5 17-4-6.5-6.5-4z"/>'
+ loc:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path d="M9 12h6"/>',
+ doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/>',
+ copy:'<rect x="8.5" y="8.5" width="11.5" height="11.5"/><path d="M15.5 8.5V4H4v11.5h4.5"/>',
+ redo:'<path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 3.5v5h5"/>',
+ note:'<path d="M4 5h16v11H9l-5 4z"/>'
 };
 const ic=(n,c)=>`<svg class="i${c?' '+c:''}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 
 /* ---------- static texts ---------- */
 const T={
  back:x('Retour au CV','Back to CV'),
- prod:x('Contrôle LC','LC review'),prod2:x('assistant IA · Back Office Trade Finance','AI assistant · Trade Finance Back Office'),
- disc:x("<b>Démo simulée, à but illustratif.</b> Données entièrement fictives. Ce n'est ni l'outil officiel ni l'outil final de Société Générale : les réponses de l'agent sont scriptées et rien n'est envoyé.",
+ prod2:x('Contrôle documentaire · Back Office Trade Finance','Document examination · Trade Finance Back Office'),
+ demo:x('Démo · données fictives','Demo · fictional data'),
+ reset:x('Réinitialiser','Reset'),
+ disc:x("<b>Démo simulée, à but illustratif.</b> Données entièrement fictives. Ce n'est ni l'outil officiel ni l'outil final de Société Générale : les réponses de l'agent sont scriptées et rien n'est envoyé.",
   "<b>Simulated demo, for illustration only.</b> All data is fictional. This is neither Société Générale's official tool nor a final one: the agent's answers are scripted and nothing is ever sent.")
 };
-document.querySelectorAll('[data-t]').forEach(e=>{e.textContent=T[e.dataset.t];});
+$$('[data-t]').forEach(e=>{e.textContent=T[e.dataset.t];});
 $('#disc').innerHTML=T.disc;
-document.title=x('Démo · Agent IA Lettres de Crédit','Demo · AI agent for Letters of Credit');
-$('#back').href=EN?'../en/#projets':'../#projets';
+$('#sig').innerHTML=x('Reconstitution personnelle · El Mokhtar Berrada · ','Personal reconstruction · El Mokhtar Berrada · ')+`<a href="${BACK}">${x('CV','CV')}</a>`;
+document.title=x('LC Check · Démo agent IA Lettres de Crédit','LC Check · AI agent demo for Letters of Credit');
+$('#back').href=BACK;
+$('#reset').title=x('Remettre la démo à zéro','Reset the demo');
+$('#sheet-x').setAttribute('aria-label',x('Fermer','Close'));
 $('.lang a[data-l="'+(EN?'en':'fr')+'"]').setAttribute('aria-current','true');
 
 /* ---------- fictional cases ---------- */
 // row: [tag, id, raw text, label fr, label en, opts]
-const LC_TAGS=x('Lettre de Crédit','Letter of Credit');
 const CASES=[
 {id:'A',ref:'LC-DEMO-2025-0417',kind:'pres',
  name:x('Dossier avec anomalies','File with discrepancies'),
  hint:x('Conseillé pour commencer','Best place to start'),
- blurb:x("Un exportateur ivoirien présente ses documents pour être payé 1,25 M USD de fèves de cacao. Deux problèmes se cachent dedans : l'agent doit les trouver.",
+ blurb:x("Un exportateur ivoirien présente ses documents pour être payé 1,25 M USD de fèves de cacao. Deux problèmes se cachent dedans : l'agent doit les trouver.",
   "An exporter from Côte d'Ivoire presents documents to be paid USD 1.25m for cocoa beans. Two problems are hidden in them: the agent has to find them."),
  facts:[x('Cacao','Cocoa beans'),'USD 1,250,000',x('Genève ← Abidjan','Geneva ← Abidjan')],
  parties:x('Helvetia Grain Trading SA (importateur) · Atlantic Agro Export Ltd (exportateur)','Helvetia Grain Trading SA (importer) · Atlantic Agro Export Ltd (exporter)'),
  received:x('présentation reçue le 5 déc. 2025','presentation received 5 Dec 2025'),
  man:55,ag:14,
  docs:[
-  {h:x('Lettre de Crédit · message SWIFT MT700','Letter of Credit · SWIFT MT700 message'),s:x('Émise le 10 sept. 2025 par la banque de l\'importateur','Issued on 10 Sept 2025 by the importer\'s bank'),rows:[
+  {tab:'MT700',h:x('Lettre de Crédit · message SWIFT MT700','Letter of Credit · SWIFT MT700 message'),s:x('Émise le 10 sept. 2025 par la banque de l\'importateur','Issued on 10 Sept 2025 by the importer\'s bank'),rows:[
    [':40A:','form','FORM OF DOC. CREDIT: IRREVOCABLE','Forme','Form'],
    [':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0417','Référence','Reference'],
    [':31D:','exp','EXPIRY 251215 PLACE GENEVA','Fin de validité','Expiry'],
    [':50:','app','APPLICANT: HELVETIA GRAIN TRADING SA (FICTITIOUS), GENEVA','Importateur','Importer'],
    [':59:','ben','BENEFICIARY: ATLANTIC AGRO EXPORT LTD (FICTITIOUS), ABIDJAN','Exportateur','Exporter'],
    [':32B:','amt','CURRENCY/AMOUNT: USD 1,250,000.00','Montant','Amount'],
-   [':39A:','tol','PCT CREDIT AMOUNT TOLERANCE: 05/05','Marge ± 5 %','± 5% margin'],
+   [':39A:','tol','PCT CREDIT AMOUNT TOLERANCE: 05/05','Marge ± 5 %','± 5% margin'],
    [':43P:','pship','PARTIAL SHIPMENTS: NOT ALLOWED','Envoi en plusieurs fois','Partial shipments'],
    [':44E/F:','port',"SAN PEDRO, CÔTE D'IVOIRE → ANTWERP, BELGIUM",'Ports','Ports'],
    [':44C:','ship','LATEST DATE OF SHIPMENT 251120','Expédier avant le','Ship no later than'],
@@ -377,7 +550,7 @@ const CASES=[
    [':46A:','docs','+SIGNED COMMERCIAL INVOICE IN 3 ORIGINALS +FULL SET CLEAN ON BOARD B/L +INSURANCE CERTIFICATE 110 PCT CIF VALUE +CERTIFICATE OF ORIGIN +PHYTOSANITARY CERTIFICATE','Documents exigés','Documents required'],
    [':47A:','add','ALL DOCUMENTS MUST INDICATE THE CREDIT NUMBER','Condition','Condition'],
    [':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY','Délai pour présenter','Time to present']]},
-  {h:x("Documents présentés par l'exportateur",'Documents presented by the exporter'),s:x('Reçus le 5 déc. 2025 via sa banque','Received on 5 Dec 2025 through their bank'),rows:[
+  {tab:x('Documents présentés','Presented documents'),h:x("Documents présentés par l'exportateur",'Documents presented by the exporter'),s:x('Reçus le 5 déc. 2025 via sa banque','Received on 5 Dec 2025 through their bank'),rows:[
    ['INV','p-inv','COMMERCIAL INVOICE · USD 1,318,750.00 · 2,510 MT RAW COCOA BEANS · 3 ORIGINALS','Facture','Invoice'],
    ['B/L','p-bl','BILL OF LADING · SHIPPED ON BOARD 251118 · SAN PEDRO → ANTWERP · CLEAN · 2,510 MT','Connaissement','Bill of lading'],
    ['INS','p-ins','INSURANCE CERTIFICATE · USD 1,450,625.00 · CIF VALUE + 10 PCT','Assurance','Insurance'],
@@ -385,36 +558,36 @@ const CASES=[
    ['PHY','p-phy','PHYTOSANITARY CERTIFICATE · NOT PRESENTED','Certificat sanitaire','Phytosanitary cert.',{miss:1}],
    ['PRES','p-date','DOCUMENTS PRESENTED 251205 · CREDIT NO. QUOTED ON 4/4','Présentation','Presentation']]}],
  run:[
-  {t:x('Lire la Lettre de Crédit','Read the Letter of Credit'),r:x('14 conditions relevées','14 conditions captured'),scan:0},
-  {t:x('Lire les documents présentés','Read the presented documents'),r:x('4 documents reçus sur 5 attendus','4 of the 5 expected documents received'),scan:1,c:'warn'},
-  {t:x('Contrôler les dates','Check the dates'),r:x('Expédition et présentation dans les délais','Shipment and presentation on time'),rows:['ship','p-bl','per','exp','p-date']},
-  {t:x('Contrôler montants et quantités','Check amounts and quantities'),r:x('1 écart de montant','1 amount mismatch'),rows:['amt','tol','p-inv','goods','p-ins'],c:'bad'},
-  {t:x('Contrôler la liste des documents','Check the list of documents'),r:x('1 document manquant','1 missing document'),rows:['docs','p-phy'],c:'bad'},
-  {t:x('Rédiger les conclusions','Write up the findings'),r:x('2 anomalies à faire valider','2 discrepancies to be validated')}],
+  {t:x('Lecture de la Lettre de Crédit (MT700)','Reading the Letter of Credit (MT700)'),r:x('14 conditions relevées','14 conditions captured'),scan:0},
+  {t:x('Lecture des documents présentés','Reading the presented documents'),r:x('4 documents reçus sur 5 attendus','4 of the 5 expected documents received'),scan:1,c:'warn'},
+  {t:x('Contrôle des dates','Date checks'),r:x('Expédition et présentation dans les délais','Shipment and presentation on time'),rows:['ship','p-bl','per','exp','p-date']},
+  {t:x('Contrôle des montants et quantités','Amount and quantity checks'),r:x('1 écart de montant','1 amount mismatch'),rows:['amt','tol','p-inv','goods','p-ins'],c:'bad'},
+  {t:x('Contrôle de la liste des documents','Document list check'),r:x('1 document manquant','1 missing document'),rows:['docs','p-phy'],c:'bad'},
+  {t:x('Rédaction des conclusions','Writing up the findings'),r:x('2 anomalies à faire valider','2 discrepancies to be validated')}],
  findings:[
-  {id:'amt',k:'ko',t:x('La facture dépasse le montant autorisé','The invoice exceeds the amount allowed'),
-   p:x("La Lettre de Crédit prévoit 1 250 000 USD, avec une marge de 5 % : la banque peut payer au maximum 1 312 500 USD. La facture réclame 1 318 750 USD, soit 6 250 USD de trop.",
+  {id:'amt',k:'ko',conf:99,tags:':32B: :39A:',refs:'UCP 600 art. 18(b)',t:x('La facture dépasse le montant autorisé','The invoice exceeds the amount allowed'),
+   p:x("La Lettre de Crédit prévoit 1 250 000 USD, avec une marge de 5 % : la banque peut payer au maximum 1 312 500 USD. La facture réclame 1 318 750 USD, soit 6 250 USD de trop.",
     "The Letter of Credit covers USD 1,250,000 with a 5% margin, so the bank can pay at most USD 1,312,500. The invoice claims USD 1,318,750, which is USD 6,250 too much."),
-   ev:[[x('Prévu (32B + 39A)','Allowed (32B + 39A)'),'USD 1,250,000 + 5 % = <b>USD 1,312,500</b>'],[x('Facturé','Invoiced'),'<b class="x">USD 1,318,750</b>']],
+   ev:[[x('Prévu (32B + 39A)','Allowed (32B + 39A)'),'USD 1,250,000 + 5 % = <b>USD 1,312,500</b>'],[x('Facturé','Invoiced'),'<b class="x">USD 1,318,750</b>']],
    bad:['p-inv'],hl:['amt','tol'],
-   ag:x("retenir l'anomalie. Une banque peut aussi choisir de payer seulement le montant autorisé : c'est à vous de trancher.","keep it as a discrepancy. A bank may also choose to pay only the permitted amount: your call."),
+   ag:x("retenir l'anomalie. Une banque peut aussi choisir de payer seulement le montant autorisé : c'est à vous de trancher.","keep it as a discrepancy. A bank may also choose to pay only the permitted amount: your call."),
    yes:x("Retenir l'anomalie",'Keep the discrepancy'),no:x('Écarter','Dismiss'),
    yesS:x('Anomalie retenue','Discrepancy kept'),noS:x('Écartée par l\'opérateur','Dismissed by the operator'),
-   notice:x('Montant facturé et présenté de 1 318 750 USD, supérieur au maximum autorisé de 1 312 500 USD (32B + tolérance de 5 % en 39A).','Invoiced and claimed amount of USD 1,318,750 exceeds the maximum allowed of USD 1,312,500 (32B + 5% tolerance under 39A).')},
-  {id:'phy',k:'ko',t:x('Un document exigé est manquant','A required document is missing'),
+   notice:x('Montant facturé et présenté de 1 318 750 USD, supérieur au maximum autorisé de 1 312 500 USD (32B + tolérance de 5 % en 39A).','Invoiced and claimed amount of USD 1,318,750 exceeds the maximum allowed of USD 1,312,500 (32B + 5% tolerance under 39A).')},
+  {id:'phy',k:'ko',conf:97,tags:':46A:',refs:'UCP 600 art. 14(a)',t:x('Un document exigé est manquant','A required document is missing'),
    p:x("La Lettre de Crédit exige 5 documents, dont un certificat phytosanitaire (il atteste que des produits végétaux sont sains à l'export). Il n'a pas été fourni.",
     "The Letter of Credit requires 5 documents, including a phytosanitary certificate (it certifies that plant products are healthy for export). It was not provided."),
    ev:[[x('Exigés (46A)','Required (46A)'),x('facture, connaissement, assurance, origine, <b>certificat phytosanitaire</b>','invoice, bill of lading, insurance, origin, <b>phytosanitary certificate</b>')],[x('Reçus','Received'),x('4 sur 5 · <b class="x">certificat phytosanitaire absent</b>','4 of 5 · <b class="x">phytosanitary certificate missing</b>')]],
    bad:['p-phy'],hl:['docs'],
-   ag:x("retenir l'anomalie : un document manquant ne peut pas être ignoré.","keep the discrepancy: a missing document cannot be overlooked."),
+   ag:x("retenir l'anomalie : un document manquant ne peut pas être ignoré.","keep the discrepancy: a missing document cannot be overlooked."),
    yes:x("Retenir l'anomalie",'Keep the discrepancy'),no:x('Écarter','Dismiss'),
    yesS:x('Anomalie retenue','Discrepancy kept'),noS:x('Écartée par l\'opérateur','Dismissed by the operator'),
    notice:x('Certificat phytosanitaire exigé en 46A non présenté.','Phytosanitary certificate required under 46A not presented.')}],
  passed:[
   [x("Date d'expédition",'Shipment date'),x('18 nov., avant la limite du 20 nov.','18 Nov, before the 20 Nov limit')],
   [x('Délai de présentation','Presentation period'),x('17 jours après expédition (21 max.), avant la fin de validité','17 days after shipment (21 max.), before expiry')],
-  [x('Quantité','Quantity'),x('2 510 t pour 2 500 t prévues, dans la marge de 5 %','2,510 MT for 2,500 MT, within the 5% margin')],
-  [x('Assurance','Insurance'),x('110 % de la valeur facturée, comme exigé','110% of the invoiced value, as required')],
+  [x('Quantité','Quantity'),x('2 510 t pour 2 500 t prévues, dans la marge de 5 %','2,510 MT for 2,500 MT, within the 5% margin')],
+  [x('Assurance','Insurance'),x('110 % de la valeur facturée, comme exigé','110% of the invoiced value, as required')],
   [x('Cohérence entre documents','Consistency across documents'),x('marchandise, ports et quantités identiques partout','goods, ports and quantities match everywhere')],
   [x('Référence du crédit','Credit reference'),x('présente sur les 4 documents','shown on all 4 documents')]],
  comply:x("Le paiement sera effectué dans la limite du montant autorisé de 1 312 500 USD, selon vos instructions de règlement.","Payment will be made within the permitted amount of USD 1,312,500, as per your settlement instructions."),
@@ -423,14 +596,14 @@ const CASES=[
 {id:'B',ref:'LC-DEMO-2025-0452',kind:'pres',
  name:x('Dossier conforme, une date à vérifier','Compliant file, one date to check'),
  hint:'',
- blurb:x("Des vannes industrielles importées de Turquie. Tout semble en ordre, mais une date est écrite à la main : l'agent sait qu'il n'est pas sûr de sa lecture et vous demande de regarder.",
+ blurb:x("Des vannes industrielles importées de Turquie. Tout semble en ordre, mais une date est écrite à la main : l'agent sait qu'il n'est pas sûr de sa lecture et vous demande de regarder.",
   "Industrial valves imported from Türkiye. Everything looks fine, but one date is handwritten: the agent knows it is not sure of its reading and asks you to look."),
  facts:[x('Vannes industrielles','Industrial valves'),'EUR 486,000',x('Lyon ← Izmir','Lyon ← Izmir')],
  parties:x('Rhodania Industrie SAS (importateur) · Ege Valve Components AS (exportateur)','Rhodania Industrie SAS (importer) · Ege Valve Components AS (exporter)'),
  received:x('présentation reçue le 3 déc. 2025','presentation received 3 Dec 2025'),
  man:45,ag:10,
  docs:[
-  {h:x('Lettre de Crédit · message SWIFT MT700','Letter of Credit · SWIFT MT700 message'),s:x('Émise le 26 sept. 2025 par la banque de l\'importateur','Issued on 26 Sept 2025 by the importer\'s bank'),rows:[
+  {tab:'MT700',h:x('Lettre de Crédit · message SWIFT MT700','Letter of Credit · SWIFT MT700 message'),s:x('Émise le 26 sept. 2025 par la banque de l\'importateur','Issued on 26 Sept 2025 by the importer\'s bank'),rows:[
    [':40A:','form','FORM OF DOC. CREDIT: IRREVOCABLE','Forme','Form'],
    [':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0452','Référence','Reference'],
    [':31D:','exp','EXPIRY 251231 PLACE PARIS','Fin de validité','Expiry'],
@@ -444,7 +617,7 @@ const CASES=[
    [':46A:','docs','+COMMERCIAL INVOICE +FULL SET CLEAN ON BOARD B/L +INSURANCE CERTIFICATE 110 PCT CIF VALUE +PACKING LIST +CERTIFICATE OF ORIGIN','Documents exigés','Documents required'],
    [':47A:','add','ALL DOCUMENTS MUST INDICATE THE CREDIT NUMBER','Condition','Condition'],
    [':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY','Délai pour présenter','Time to present']]},
-  {h:x("Documents présentés par l'exportateur",'Documents presented by the exporter'),s:x('Reçus le 3 déc. 2025 via sa banque','Received on 3 Dec 2025 through their bank'),rows:[
+  {tab:x('Documents présentés','Presented documents'),h:x("Documents présentés par l'exportateur",'Documents presented by the exporter'),s:x('Reçus le 3 déc. 2025 via sa banque','Received on 3 Dec 2025 through their bank'),rows:[
    ['INV','p-inv','COMMERCIAL INVOICE · EUR 486,000.00 · 1,800 UNITS BALL VALVES DN150','Facture','Invoice'],
    ['B/L','p-bl','BILL OF LADING · SHIPPED ON BOARD','Connaissement','Bill of lading',{hand:'24.11.2025',after:' · IZMIR → FOS-SUR-MER · CLEAN'}],
    ['INS','p-ins','INSURANCE CERTIFICATE · EUR 534,600.00 · CIF VALUE + 10 PCT','Assurance','Insurance'],
@@ -452,29 +625,29 @@ const CASES=[
    ['COO','p-coo','CERTIFICATE OF ORIGIN · TÜRKİYE','Origine','Origin'],
    ['PRES','p-date','DOCUMENTS PRESENTED 251203 · CREDIT NO. QUOTED ON 5/5','Présentation','Presentation']]}],
  run:[
-  {t:x('Lire la Lettre de Crédit','Read the Letter of Credit'),r:x('13 conditions relevées','13 conditions captured'),scan:0},
-  {t:x('Lire les documents présentés','Read the presented documents'),r:x('5 documents reçus sur 5 attendus','5 of 5 expected documents received'),scan:1},
-  {t:x('Contrôler les dates','Check the dates'),r:x('1 date manuscrite, lue avec 72 % de confiance','1 handwritten date, read with 72% confidence'),rows:['ship','p-bl','per','p-date'],c:'warn'},
-  {t:x('Contrôler montants et quantités','Check amounts and quantities'),r:x('1 800 × 270 EUR = 486 000 EUR, conforme','1,800 × EUR 270 = EUR 486,000, compliant'),rows:['amt','goods','p-inv','p-pkl','p-ins']},
-  {t:x('Contrôler la liste des documents','Check the list of documents'),r:x('Tous les documents exigés sont là','All required documents are there'),rows:['docs','add','p-date']},
-  {t:x('Rédiger les conclusions','Write up the findings'),r:x('0 anomalie, 1 point à confirmer','0 discrepancies, 1 point to confirm')}],
+  {t:x('Lecture de la Lettre de Crédit (MT700)','Reading the Letter of Credit (MT700)'),r:x('13 conditions relevées','13 conditions captured'),scan:0},
+  {t:x('Lecture des documents présentés','Reading the presented documents'),r:x('5 documents reçus sur 5 attendus','5 of 5 expected documents received'),scan:1},
+  {t:x('Contrôle des dates','Date checks'),r:x('1 date manuscrite, lue avec 72 % de confiance','1 handwritten date, read with 72% confidence'),rows:['ship','p-bl','per','p-date'],c:'warn'},
+  {t:x('Contrôle des montants et quantités','Amount and quantity checks'),r:x('1 800 × 270 EUR = 486 000 EUR, conforme','1,800 × EUR 270 = EUR 486,000, compliant'),rows:['amt','goods','p-inv','p-pkl','p-ins']},
+  {t:x('Contrôle de la liste des documents','Document list check'),r:x('Tous les documents exigés sont là','All required documents are there'),rows:['docs','add','p-date']},
+  {t:x('Rédaction des conclusions','Writing up the findings'),r:x('0 anomalie, 1 point à confirmer','0 discrepancies, 1 point to confirm')}],
  findings:[
-  {id:'bl',k:'check',t:x("Date d'embarquement écrite à la main",'Handwritten shipping date'),
-   p:x("Sur le connaissement (le reçu du transporteur maritime), la date d'embarquement est un tampon manuscrit. L'agent le lit « 24.11.2025 », mais avec 72 % de confiance seulement. Sous 85 %, il ne décide jamais seul : il vous demande de regarder.",
+  {id:'bl',k:'check',conf:72,tags:':44C: B/L',refs:'UCP 600 art. 20(a)(ii)',t:x("Date d'embarquement écrite à la main",'Handwritten shipping date'),
+   p:x("Sur le connaissement (le reçu du transporteur maritime), la date d'embarquement est un tampon manuscrit. L'agent le lit « 24.11.2025 », mais avec 72 % de confiance seulement. Sous 85 %, il ne décide jamais seul : il vous demande de regarder.",
     "On the bill of lading (the shipping company's receipt), the date the goods went on board is a handwritten stamp. The agent reads it as “24.11.2025”, but with only 72% confidence. Below 85% it never decides alone: it asks you to look."),
    stamp:1,
-   ev:[[x('Lecture de l\'agent','Agent reading'),'<b>24.11.2025</b> · '+x('confiance 72 %','72% confidence')],[x('Limite (44C)','Limit (44C)'),x('30.11.2025 : si la lecture est juste, c\'est dans les délais','30.11.2025: if the reading is right, it is on time')]],
+   ev:[[x('Lecture de l\'agent','Agent reading'),'<b>24.11.2025</b> · '+x('confiance 72 %','72% confidence')],[x('Limite (44C)','Limit (44C)'),x('30.11.2025 : si la lecture est juste, c\'est dans les délais','30.11.2025: if the reading is right, it is on time')]],
    bad:[],hl:['p-bl','ship'],
    ag:x("vérifier le tampon. Si la date est bien le 24.11.2025, le dossier est conforme.","check the stamp. If the date is indeed 24.11.2025, the file is compliant."),
    yes:x('Oui, c\'est le 24.11.2025','Yes, it reads 24.11.2025'),no:x('Non, date différente','No, a different date'),
-   yesS:x('Date confirmée par l\'opérateur','Date confirmed by the operator'),noS:x('Date contestée : anomalie','Date disputed: discrepancy'),
-   notice:x("Date de mise à bord du connaissement non confirmée : le tampon manuscrit ne permet pas d'établir la date d'expédition.",'On-board date on the bill of lading not confirmed: the handwritten stamp does not establish the shipment date.')}],
+   yesS:x('Date confirmée par l\'opérateur','Date confirmed by the operator'),noS:x('Date contestée : anomalie','Date disputed: discrepancy'),
+   notice:x("Date de mise à bord du connaissement non confirmée : le tampon manuscrit ne permet pas d'établir la date d'expédition.",'On-board date on the bill of lading not confirmed: the handwritten stamp does not establish the shipment date.')}],
  passed:[
   [x("Date d'expédition",'Shipment date'),x('24 nov. (si confirmée), avant la limite du 30 nov.','24 Nov (if confirmed), before the 30 Nov limit')],
   [x('Délai de présentation','Presentation period'),x('9 jours après expédition (21 max.)','9 days after shipment (21 max.)')],
   [x('Montant','Amount'),x('1 800 × 270 EUR = 486 000 EUR','1,800 × EUR 270 = EUR 486,000')],
   [x('Description','Description'),x('vannes à bille DN150, identique au crédit','DN150 ball valves, same as the credit')],
-  [x('Assurance','Insurance'),x('110 % de 486 000 EUR','110% of EUR 486,000')],
+  [x('Assurance','Insurance'),x('110 % de 486 000 EUR','110% of EUR 486,000')],
   [x('Documents exigés','Required documents'),x('5 sur 5, avec la référence du crédit','5 of 5, all quoting the credit reference')],
   [x('Cohérence entre documents','Consistency across documents'),x('1 800 unités sur facture, colisage et connaissement','1,800 units on invoice, packing list and bill of lading')]],
  comply:x("Conformément aux termes du crédit (paiement différé à 60 jours date d'embarquement), nous nous engageons à payer 486 000 EUR à l'échéance du 23 janvier 2026.","In accordance with the credit terms (deferred payment 60 days after the on-board date), we undertake to pay EUR 486,000 at maturity on 23 January 2026."),
@@ -483,14 +656,14 @@ const CASES=[
 {id:'C',ref:'LC-DEMO-2025-0509',kind:'amd',
  name:x('Demande de modification du client','Change request from the client'),
  hint:'',
- blurb:x("L'importateur veut modifier sa Lettre de Crédit : plus de marchandise, plus de temps pour expédier. L'agent vérifie que la demande tient debout avant qu'on l'envoie au vendeur.",
+ blurb:x("L'importateur veut modifier sa Lettre de Crédit : plus de marchandise, plus de temps pour expédier. L'agent vérifie que la demande tient debout avant qu'on l'envoie au vendeur.",
   "The importer wants to change its Letter of Credit: more goods, more time to ship. The agent checks that the request holds together before it goes to the seller."),
  facts:[x('Panneaux solaires','Solar panels'),'USD 840,000 → 907,200',x('Marseille ← Ningbo','Marseille ← Ningbo')],
  parties:x('Lumière Solaire Distribution SARL (importateur) · Eastshore PV Modules Co. Ltd (exportateur)','Lumière Solaire Distribution SARL (importer) · Eastshore PV Modules Co. Ltd (exporter)'),
  received:x('demande reçue le 8 déc. 2025','request received 8 Dec 2025'),
  man:40,ag:9,
  docs:[
-  {h:x('Lettre de Crédit en vigueur · MT700','Letter of Credit in force · MT700'),s:x('Émise le 20 oct. 2025','Issued on 20 Oct 2025'),rows:[
+  {tab:'MT700',h:x('Lettre de Crédit en vigueur · MT700','Letter of Credit in force · MT700'),s:x('Émise le 20 oct. 2025','Issued on 20 Oct 2025'),rows:[
    [':20:','n','DOC. CREDIT NO. LC-DEMO-2025-0509','Référence','Reference'],
    [':31D:','exp','EXPIRY 260110 PLACE PARIS','Fin de validité','Expiry'],
    [':50:','app','APPLICANT: LUMIERE SOLAIRE DISTRIBUTION SARL (FICTITIOUS), MARSEILLE','Importateur','Importer'],
@@ -501,7 +674,7 @@ const CASES=[
    [':45A:','goods','14,000 PHOTOVOLTAIC MODULES 450 W AT USD 60.00, FOB NINGBO INCOTERMS 2020','Marchandise','Goods'],
    [':46A:','docs','+COMMERCIAL INVOICE +FULL SET CLEAN ON BOARD B/L +PACKING LIST +CERTIFICATE OF ORIGIN','Documents exigés','Documents required'],
    [':48:','per','PRESENTATION WITHIN 21 DAYS AFTER SHIPMENT DATE BUT WITHIN VALIDITY','Délai pour présenter','Time to present']]},
-  {h:x("Demande de modification n° 1 de l'importateur",'Change request no. 1 from the importer'),s:x('Formulaire signé reçu le 8 déc. 2025','Signed form received on 8 Dec 2025'),rows:[
+  {tab:x('Demande n° 1','Request no. 1'),h:x("Demande de modification n° 1 de l'importateur",'Change request no. 1 from the importer'),s:x('Formulaire signé reçu le 8 déc. 2025','Signed form received on 8 Dec 2025'),rows:[
    ['REQ','a-req','REQUESTED BY APPLICANT · SIGNED FORM · SIGNATURE CHECKED (SIMULATED)','Demandeur','Requested by'],
    ['44C','a-ship','LATEST DATE OF SHIPMENT: 251210 → 251231','Nouvelle date','New date'],
    ['32B','a-amt','INCREASE BY USD 67,200.00 → NEW AMOUNT USD 907,200.00','Augmentation','Increase'],
@@ -509,15 +682,15 @@ const CASES=[
    ['46A','a-docs','ADD: INSURANCE CERTIFICATE 110 PCT CIF VALUE','Document ajouté','Added document'],
    ['31D','a-exp','EXPIRY: UNCHANGED (260110)','Fin de validité','Expiry']]}],
  run:[
-  {t:x('Lire la Lettre de Crédit en vigueur','Read the Letter of Credit in force'),r:x('10 conditions relevées','10 conditions captured'),scan:0},
-  {t:x('Lire la demande de modification','Read the change request'),r:x('5 changements demandés, formulaire signé','5 changes requested, signed form'),scan:1},
-  {t:x('Refaire les calculs','Redo the calculations'),r:x('15 120 × 60 USD = 907 200 USD, cohérent','15,120 × USD 60 = USD 907,200, consistent'),rows:['amt','goods','a-amt','a-goods']},
-  {t:x('Contrôler les dates','Check the dates'),r:x('Délai de présentation réduit à 10 jours','Presentation window cut to 10 days'),rows:['exp','per','a-ship','a-exp'],c:'bad'},
-  {t:x('Contrôler la cohérence des conditions','Check that the terms fit together'),r:x("Assurance demandée incompatible avec l'Incoterm",'Requested insurance clashes with the Incoterm'),rows:['goods','a-docs'],c:'bad'},
-  {t:x('Vérifier ce qui sort de mon périmètre','Flag what is outside my scope'),r:x('Limite de crédit : accès réservé à l\'opérateur','Credit limit: operator access only'),rows:['a-amt'],c:'warn'},
-  {t:x('Rédiger les conclusions','Write up the findings'),r:x('2 questions pour le client, 1 point à vérifier','2 questions for the client, 1 point to check')}],
+  {t:x('Lecture de la Lettre de Crédit en vigueur','Reading the Letter of Credit in force'),r:x('10 conditions relevées','10 conditions captured'),scan:0},
+  {t:x('Lecture de la demande de modification','Reading the change request'),r:x('5 changements demandés, formulaire signé','5 changes requested, signed form'),scan:1},
+  {t:x('Recalcul des montants','Recalculating the amounts'),r:x('15 120 × 60 USD = 907 200 USD, cohérent','15,120 × USD 60 = USD 907,200, consistent'),rows:['amt','goods','a-amt','a-goods']},
+  {t:x('Contrôle des dates','Date checks'),r:x('Délai de présentation réduit à 10 jours','Presentation window cut to 10 days'),rows:['exp','per','a-ship','a-exp'],c:'bad'},
+  {t:x('Contrôle de cohérence des conditions','Consistency of the terms'),r:x("Assurance demandée incompatible avec l'Incoterm",'Requested insurance clashes with the Incoterm'),rows:['goods','a-docs'],c:'bad'},
+  {t:x('Contrôle du périmètre de l\'agent','Agent scope check'),r:x('Limite de crédit : accès réservé à l\'opérateur','Credit limit: operator access only'),rows:['a-amt'],c:'warn'},
+  {t:x('Rédaction des conclusions','Writing up the findings'),r:x('2 questions pour le client, 1 point à vérifier','2 questions for the client, 1 point to check')}],
  findings:[
-  {id:'window',k:'ko',t:x('Le vendeur aurait trop peu de temps pour présenter','The seller would have too little time to present'),
+  {id:'window',k:'ko',conf:98,tags:':44C: :31D: :48:',refs:'UCP 600 art. 14(c)',t:x('Le vendeur aurait trop peu de temps pour présenter','The seller would have too little time to present'),
    p:x("Le client repousse la date limite d'expédition au 31 décembre, mais pas la fin de validité (10 janvier). Le vendeur n'aurait plus que 10 jours pour présenter ses documents, au lieu des 21 prévus. L'agent propose de demander au client s'il veut prolonger la validité au 21 janvier.",
     "The client pushes the latest shipment date to 31 December but not the expiry date (10 January). The seller would only have 10 days to present documents instead of the 21 agreed. The agent suggests asking the client whether to extend the expiry to 21 January."),
    ev:[[x('Nouvelle expédition','New shipment date'),'<b>31.12.2025</b>'],[x('Fin de validité','Expiry'),'<b>10.01.2026</b> '+x('(inchangée)','(unchanged)')],[x('Délai restant','Time left'),'<b class="x">'+x('10 jours au lieu de 21','10 days instead of 21')+'</b>']],
@@ -526,8 +699,8 @@ const CASES=[
    yes:x('Poser la question','Ask the client'),no:x('Ignorer','Ignore'),
    yesS:x('Question ajoutée au message','Question added to the message'),noS:x('Ignoré par l\'opérateur','Ignored by the operator'),
    notice:x('Souhaitez-vous prolonger la validité du crédit au 21 janvier 2026, afin de préserver le délai de présentation de 21 jours ?','Would you like to extend the expiry to 21 January 2026, to preserve the 21-day presentation period?')},
-  {id:'inco',k:'ko',t:x("L'assurance demandée ne colle pas avec le contrat",'The requested insurance does not fit the contract'),
-   p:x("La vente est conclue « FOB » : c'est l'acheteur qui assure le transport. Le client demande pourtant au vendeur un certificat d'assurance. Il faut soit passer en « CIF » (le vendeur assure), soit retirer cette exigence.",
+  {id:'inco',k:'ko',conf:94,tags:':45A: :46A:',refs:'Incoterms 2020 FOB / CIF',t:x("L'assurance demandée ne colle pas avec le contrat",'The requested insurance does not fit the contract'),
+   p:x("La vente est conclue « FOB » : c'est l'acheteur qui assure le transport. Le client demande pourtant au vendeur un certificat d'assurance. Il faut soit passer en « CIF » (le vendeur assure), soit retirer cette exigence.",
     "The sale is on “FOB” terms: the buyer insures the transport. Yet the client asks the seller for an insurance certificate. Either the terms move to “CIF” (the seller insures), or the requirement is dropped."),
    ev:[[x('Contrat (45A)','Contract (45A)'),'<b>FOB NINGBO</b> · '+x("assurance à la charge de l'acheteur","insurance paid by the buyer")],[x('Demandé (46A)','Requested (46A)'),'<b class="x">'+x("certificat d'assurance du vendeur","insurance certificate from the seller")+'</b>']],
    bad:['a-docs'],hl:['goods'],
@@ -535,44 +708,47 @@ const CASES=[
    yes:x('Poser la question','Ask the client'),no:x('Ignorer','Ignore'),
    yesS:x('Question ajoutée au message','Question added to the message'),noS:x('Ignoré par l\'opérateur','Ignored by the operator'),
    notice:x("Confirmez-vous le passage de l'Incoterm FOB Ningbo à CIF Marseille-Fos ? À défaut, nous proposons de retirer l'exigence du certificat d'assurance.",'Do you confirm switching the Incoterm from FOB Ningbo to CIF Marseille-Fos? Otherwise, we suggest dropping the insurance certificate requirement.')},
-  {id:'limit',k:'check',t:x('Limite de crédit du client','Client credit limit'),
-   p:x("Augmenter la Lettre de Crédit de 67 200 USD consomme une partie de la limite de crédit accordée au client. L'agent n'a volontairement pas accès à ces données : c'est à vous de vérifier.",
+  {id:'limit',k:'check',conf:null,tags:':32B:',refs:x('Contrôle opérateur','Operator check'),t:x('Limite de crédit du client','Client credit limit'),
+   p:x("Augmenter la Lettre de Crédit de 67 200 USD consomme une partie de la limite de crédit accordée au client. L'agent n'a volontairement pas accès à ces données : c'est à vous de vérifier.",
     "Increasing the Letter of Credit by USD 67,200 uses part of the client's credit limit. The agent deliberately has no access to that data: you need to check."),
-   ev:[[x('Augmentation','Increase'),'<b>USD 67,200</b> (+8 %)'],[x('Limite du client','Client limit'),x('non visible par l\'agent','not visible to the agent')]],
+   ev:[[x('Augmentation','Increase'),'<b>USD 67,200</b> (+8 %)'],[x('Limite du client','Client limit'),x('non visible par l\'agent','not visible to the agent')]],
    bad:[],hl:['a-amt'],
    ag:x('vérifier dans l\'outil de limites (hors démo).','check in the limits system (outside the demo).'),
    yes:x('Limite suffisante','Limit is sufficient'),no:x('Limite insuffisante','Limit is insufficient'),
-   yesS:x('Limite vérifiée par l\'opérateur','Limit checked by the operator'),noS:x('Limite insuffisante : ajouté au message','Limit insufficient: added to the message'),
-   notice:x("L'augmentation de 67 200 USD nécessite un accord préalable sur votre limite : nous revenons vers vous dès qu'il sera obtenu.",'The USD 67,200 increase requires prior approval on your limit: we will revert as soon as it is obtained.')}],
+   yesS:x('Limite vérifiée par l\'opérateur','Limit checked by the operator'),noS:x('Limite insuffisante : ajouté au message','Limit insufficient: added to the message'),
+   notice:x("L'augmentation de 67 200 USD nécessite un accord préalable sur votre limite : nous revenons vers vous dès qu'il sera obtenu.",'The USD 67,200 increase requires prior approval on your limit: we will revert as soon as it is obtained.')}],
  passed:[
   [x('Demande recevable','Request admissible'),x("émise par l'importateur, formulaire signé (contrôle simulé)",'issued by the importer, signed form (simulated check)')],
   [x('Calcul du nouveau montant','New amount'),x('15 120 × 60 USD = 907 200 USD, prix unitaire inchangé','15,120 × USD 60 = USD 907,200, unit price unchanged')],
-  [x('Accord du vendeur','Seller consent'),x("la modification ne l'engage qu'après son acceptation : suivi prévu",'the change only binds the seller once accepted: follow-up planned')]],
+  [x('Accord du vendeur','Seller consent'),x("la modification ne l'engage qu'après son acceptation : suivi prévu",'the change only binds the seller once accepted: follow-up planned')]],
  presDate:x('8 déc. 2025','8 Dec 2025')}
 ];
 
 /* ---------- state ---------- */
-const S={scr:'intro',c:null,dec:{},act:null,done:{},log:[],runToken:0};
+const fresh=()=>({step:1,c:null,dec:{},com:{},comOpen:null,act:null,done:{},log:[],rlog:[],tok:0,analysed:false,clock:0,tEnd:'',edit:null});
+let S=fresh();
 const issues=c=>c.findings.filter(f=>(f.k==='ko'&&S.dec[f.id]==='yes')||(f.k==='check'&&S.dec[f.id]==='no'));
+const isIssue=f=>(f.k==='ko'&&S.dec[f.id]==='yes')||(f.k==='check'&&S.dec[f.id]==='no');
 const allDecided=c=>c.findings.every(f=>S.dec[f.id]);
+const nDecided=c=>c.findings.filter(f=>S.dec[f.id]).length;
 function outcome(c){const n=issues(c).length;if(c.kind==='amd')return n?'ask':'mt707';return n?'refuse':'comply';}
 const OUT={
- refuse:{t:x('Présentation refusée : avis de refus prêt','Presentation refused: refusal notice ready'),
+ refuse:{t:x('Présentation refusée : avis de refus prêt','Presentation refused: refusal notice ready'),
   d:x("La banque ne paie pas en l'état. Le message ci-dessous informe la banque de l'exportateur des anomalies retenues.","The bank does not pay as things stand. The message below tells the exporter's bank which discrepancies were kept."),
   next:x("Refuser la présentation et prévenir la banque de l'exportateur","Refuse the presentation and notify the exporter's bank"),
-  msg:x('Avis de refus','Refusal notice'),ic:'alert',col:'bad'},
- comply:{t:x('Présentation conforme : paiement autorisé','Compliant presentation: payment approved'),
+  msg:x('Avis de refus','Refusal notice'),ch:x('SWIFT MT734 · avis de refus (simulé)','SWIFT MT734 · advice of refusal (simulated)'),ic:'alert',col:'bad'},
+ comply:{t:x('Présentation conforme : paiement autorisé','Compliant presentation: payment approved'),
   d:x("Aucune anomalie retenue. Le message ci-dessous confirme à la banque de l'exportateur que les documents sont conformes.","No discrepancy kept. The message below confirms to the exporter's bank that the documents comply."),
   next:x("Déclarer les documents conformes et autoriser le paiement","Declare the documents compliant and approve payment"),
-  msg:x('Avis de conformité','Notice of compliance'),ic:'check',col:'ok'},
+  msg:x('Avis de conformité','Notice of compliance'),ch:x('SWIFT · message libre (simulé)','SWIFT · free-format message (simulated)'),ic:'check',col:'ok'},
  ask:{t:x('Questions prêtes à envoyer au client','Questions ready to send to the client'),
   d:x("La modification n'est pas émise tant que le client n'a pas répondu. Le message ci-dessous reprend les points que vous avez retenus.","The change is not issued until the client replies. The message below lists the points you kept."),
   next:x("Envoyer les questions au client avant d'émettre la modification","Send the questions to the client before issuing the change"),
-  msg:x('Message au client','Message to the client'),ic:'help',col:'warn'},
+  msg:x('Message au client','Message to the client'),ch:x('Messagerie client (simulée)','Client messaging (simulated)'),ic:'help',col:'warn'},
  mt707:{t:x('Modification prête à émettre (MT707)','Amendment ready to issue (MT707)'),
-  d:x("Aucun point bloquant retenu : l'agent a préparé le message SWIFT de modification, à émettre par les outils habituels.","No blocking point kept: the agent has prepared the SWIFT amendment message, to be issued through the usual tools."),
+  d:x("Aucun point bloquant retenu : l'agent a préparé le message SWIFT de modification, à émettre par les outils habituels.","No blocking point kept: the agent has prepared the SWIFT amendment message, to be issued through the usual tools."),
   next:x('Préparer la modification telle que demandée (MT707)','Prepare the amendment as requested (MT707)'),
-  msg:x('Brouillon MT707','MT707 draft'),ic:'check',col:'ok'}
+  msg:x('Brouillon MT707','MT707 draft'),ch:x('SWIFT MT707 (simulé)','SWIFT MT707 (simulated)'),ic:'check',col:'ok'}
 };
 const SIG=x('Back Office Trade Finance (démo simulée)','Trade Finance Back Office (simulated demo)');
 function draft(c){
@@ -593,229 +769,371 @@ function draft(c){
 /* ---------- helpers ---------- */
 let tm=null;
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>t.classList.remove('on'),1800);}
-let clockM=9*60+4;
-function now(step){clockM+=step||1;return String(Math.floor(clockM/60)).padStart(2,'0')+':'+String(clockM%60).padStart(2,'0');}
-function logp(t){S.log.push({t:now(),txt:t});}
-const docCount=c=>c.docs.reduce((a,d)=>a+d.rows.length,0);
+function say(m){const s=$('#sr');s.textContent='';setTimeout(()=>{s.textContent=m;},30);}
+const pad=n=>String(n).padStart(2,'0');
+function clk(step){S.clock+=step||1;const t=S.clock;return pad(Math.floor(t/3600))+':'+pad(Math.floor(t/60)%60)+':'+pad(t%60);}
+function logp(t,step){S.log.push({t:clk(step||12),txt:t});}
+const fno=(c,f)=>pad(c.findings.indexOf(f)+1);
+const sevOf=(c,f)=>f.k==='ko'?(c.kind==='amd'?['warn',x('Question client','Client question')]:['bad',x('Anomalie','Discrepancy')]):['warn',x('À vérifier','To check')];
+const typeOf=c=>c.kind==='amd'?x('Modification','Amendment'):x('Présentation','Presentation');
 
-/* ---------- intro ---------- */
-function renderIntro(){
- S.scr='intro';
+/* ---------- stepper ---------- */
+function stepbar(){
+ const c=S.c,can=[true,!!c,!!(c&&S.analysed&&allDecided(c))];
+ const L=[x('Dossier','File'),x('Contrôle','Review'),x('Message','Message')];
+ $('#stepbar').innerHTML=`<ol class="stepper" aria-label="${x('Étapes','Steps')}">${L.map((l,k)=>{const n=k+1,cur=S.step===n,past=n<S.step;
+  return `<li class="${cur?'cur':''}${past?' past':''}"><button type="button" data-step="${n}"${cur?' aria-current="step"':''}${!can[k]||cur?' disabled':''}><span class="n">${past?ic('check'):n}</span><span class="l">${l}</span></button></li>`;}).join('')}</ol>
+  ${c&&S.step>1?`<span class="ctx"><span class="mono">${c.ref}</span><span>${esc(c.name)}</span></span>`:''}`;
+}
+$('#stepbar').addEventListener('click',e=>{const b=e.target.closest('[data-step]');if(!b||b.disabled)return;go(+b.dataset.step);});
+function go(n){
+ closeSheet();
+ if(n===1){S.tok++;renderFiles();}
+ else if(n===2&&S.c){if(S.analysed){S.step=2;renderCheck();}else startCase(S.c.id);}
+ else if(n===3&&S.c&&S.analysed&&allDecided(S.c))renderMessage();
+ window.scrollTo(0,0);
+}
+
+/* ---------- step 1 : files ---------- */
+function renderFiles(){
+ S.step=1;stepbar();
  const nextC=CASES.find(k=>!S.done[k.id]);
- const cs=CASES.map(c=>{const d=S.done[c.id];
-  return `<div class="case"><div><h3>${esc(c.name)}${c.hint&&!d?` <small>${esc(c.hint)}</small>`:''}</h3><p>${esc(c.blurb)}</p>
-   <div class="meta">${c.facts.map(esc).join(' · ')}${d?` · <span class="done">${ic('check')}${x('Traité : ','Done: ')}${esc(d)}</span>`:''}</div></div>
-   <button class="btn ${c===nextC?'pri':''} lg" data-go="${c.id}">${d?x('Recommencer','Run again'):x('Commencer','Start')} ${ic('right')}</button></div>`;}).join('');
- $('#app').innerHTML=`<div class="intro fade">
- <div>
-  <h1>${x("Un agent IA qui contrôle les Lettres de Crédit, un humain qui décide","An AI agent that checks Letters of Credit, a human who decides")}</h1>
-  <p class="lead">${x("Dans une banque, des opérateurs vérifient à la main que les documents d'un exportateur respectent chaque condition d'une Lettre de Crédit avant de payer. Ici, l'agent lit tout, repère les écarts en montrant la preuve et prépare le message. Vous validez.",
-   "In a bank, operators check by hand that an exporter's documents meet every condition of a Letter of Credit before paying. Here the agent reads everything, spots the mismatches with the evidence, and drafts the message. You validate.")}</p>
-  <ol class="how">
-   <li><b>${x('Choisissez un cas','Pick a case')}</b>${x('Trois dossiers fictifs, de difficulté différente.','Three fictional files, each a different situation.')}</li>
-   <li><b>${x("Regardez l'agent travailler","Watch the agent work")}</b>${x('Il lit le dossier et le contrôle en quelques secondes.','It reads and checks the file in a few seconds.')}</li>
-   <li><b>${x('Validez ses conclusions','Validate its findings')}</b>${x('Un clic par point, puis le message est prêt.','One click per point, then the message is ready.')}</li>
-  </ol>
-  <h2 class="sec">${x('Choisissez un dossier','Choose a file')}</h2>
-  <p class="sub">${x('Environ une minute par cas. Aucune connaissance en commerce international nécessaire.','About a minute per case. No trade finance knowledge needed.')}</p>
-  <div class="cases">${cs}</div>
+ const nDone=Object.keys(S.done).length;
+ const rows=CASES.map(c=>{const d=S.done[c.id];
+  return `<tr data-open="${c.id}">
+   <td class="c-ref"><span class="ref">${c.ref}</span><span class="typ">${typeOf(c)}</span></td>
+   <td class="c-main"><div class="nm">${esc(c.name)}${c.hint&&!d?` <span class="chip dark">${esc(c.hint)}</span>`:''}</div><p class="bl">${esc(c.blurb)}</p><p class="mt">${esc(c.facts[0])} · ${esc(c.facts[2])} · ${esc(c.parties)}</p></td>
+   <td class="amt" data-l="${x('Montant','Amount')}">${esc(c.facts[1])}</td>
+   <td class="dt" data-l="${x('Reçu le','Received')}">${esc(c.presDate)}</td>
+   <td class="stt">${d?`<span><i class="dot ok"></i>${x('Traité','Done')}</span><small>${esc(d)}</small>`:`<span><i class="dot"></i>${x('À traiter','To review')}</span>`}</td>
+   <td class="go"><button type="button" class="btn ${c===nextC?'pri':''}">${d?x('Rouvrir','Reopen'):x('Ouvrir','Open')}${ic('right')}</button></td></tr>`;}).join('');
+ $('#app').innerHTML=`<div class="s1 fade">
+ <div class="s1-main">
+  <div class="pagehead"><div><p class="eyebrow">${x('Back Office Trade Finance · file de contrôle','Trade Finance Back Office · review queue')}</p>
+   <h1>${x('Dossiers à contrôler','Files to review')}</h1>
+   <p class="ctxline">${x("Un agent IA lit la Lettre de Crédit et les documents, relève les écarts avec la preuve et prépare le message. L'opérateur valide chaque point.","An AI agent reads the Letter of Credit and the documents, flags mismatches with the evidence and drafts the message. The operator validates each point.")}</p></div>
+   <div class="hm"><div><b>${CASES.length-nDone}</b>${x('à traiter','to review')}</div><div><b>${nDone}</b>${x(nDone>1?'traités':'traité','done')}</div></div></div>
+  <details class="how"><summary>${ic('help')}${x('Comment ça marche','How it works')} <small>· ${x('environ une minute par dossier, aucune connaissance en commerce international nécessaire','about a minute per file, no trade finance knowledge needed')}</small>${ic('chev','chev')}</summary>
+   <div class="how-g">
+    <div><h3>${x('Déroulé','Workflow')}</h3><ol>
+     <li><span><b>${x('Dossier','File')}</b> · ${x('Trois dossiers fictifs, de difficulté différente.','Three fictional files, each a different situation.')}</span></li>
+     <li><span><b>${x('Contrôle','Review')}</b> · ${x("L'agent lit le dossier et le contrôle en quelques secondes. Un clic par point pour valider ses conclusions.",'The agent reads and checks the file in a few seconds. One click per point to validate its findings.')}</span></li>
+     <li><span><b>${x('Message','Message')}</b> · ${x('Le message est prêt : avis de refus, de conformité ou questions au client.','The message is ready: refusal notice, notice of compliance or questions to the client.')}</span></li></ol></div>
+    <div><h3>${x('Le métier','The job')}</h3><p>${x("Dans une banque, des opérateurs vérifient à la main que les documents d'un exportateur respectent chaque condition d'une Lettre de Crédit avant de payer. Ici, l'agent lit tout, repère les écarts en montrant la preuve et prépare le message. Vous validez.",
+     "In a bank, operators check by hand that an exporter's documents meet every condition of a Letter of Credit before paying. Here the agent reads everything, spots the mismatches with the evidence, and drafts the message. You validate.")}</p></div>
+    <div><h3>${x('Trois mots à connaître','Three terms to know')}</h3><dl class="gl">
+     <div><dt>${x('Lettre de Crédit','Letter of Credit')}</dt><dd>${x("Engagement d'une banque de payer un exportateur, à condition qu'il présente exactement les documents prévus.","A bank's promise to pay an exporter, provided they present exactly the documents agreed.")}</dd></div>
+     <div><dt>MT700</dt><dd>${x('Le message SWIFT standard qui contient les conditions de la Lettre de Crédit.','The standard SWIFT message that holds the Letter of Credit terms.')}</dd></div>
+     <div><dt>${x('Anomalie','Discrepancy')}</dt><dd>${x("Un écart entre les documents et les conditions. S'il est retenu, la banque peut refuser de payer.","A mismatch between the documents and the terms. If kept, the bank may refuse to pay.")}</dd></div></dl></div>
+   </div></details>
+  <section class="panel"><table class="q"><caption class="sr">${x('Dossiers à contrôler','Files to review')}</caption>
+   <thead><tr><th scope="col">${x('Référence','Reference')}</th><th scope="col">${x('Dossier','File')}</th><th scope="col" class="amt">${x('Montant','Amount')}</th><th scope="col">${x('Reçu le','Received')}</th><th scope="col">${x('Statut','Status')}</th><th scope="col"><span class="sr">${x('Action','Action')}</span></th></tr></thead>
+   <tbody>${rows}</tbody></table></section>
  </div>
- <div class="aside">
-  <section class="box"><h2>${x('Le contexte','Background')}</h2>
-   <p>${x("Idée présentée au hackathon GBIS « AI for Clients » de Société Générale CIB (oct.–nov. 2025), finaliste parmi plus de 80 équipes. Cette page en est une reconstitution personnelle.",
+ <aside class="s1-side">
+  <section class="panel"><div class="ph"><span class="ph-t">${x('Contexte','Background')}</span></div><div class="side-b">
+   <p>${x("Idée présentée au hackathon GBIS « AI for Clients » de Société Générale CIB (oct.–nov. 2025), finaliste parmi plus de 80 équipes. Cette page en est une reconstitution personnelle.",
     "Idea presented at Société Générale CIB's GBIS “AI for Clients” hackathon (Oct–Nov 2025), finalist among more than 80 teams. This page is a personal reconstruction of it.")}</p>
-   <p>${x("Mon rôle : cadrer le cas d'usage et choisir quelles tâches automatiser selon leur valeur et leur risque, entre logique métier et faisabilité technique.",
-    "My role: scoping the use case and choosing which tasks to automate by value and risk, between business logic and technical feasibility.")}</p></section>
-  <section class="box"><h2>${x('Trois mots à connaître','Three terms to know')}</h2>
-   <dl class="gl">
-    <div><dt>${x('Lettre de Crédit','Letter of Credit')}</dt><dd>${x("Engagement d'une banque de payer un exportateur, à condition qu'il présente exactement les documents prévus.","A bank's promise to pay an exporter, provided they present exactly the documents agreed.")}</dd></div>
-    <div><dt>MT700</dt><dd>${x('Le message SWIFT standard qui contient les conditions de la Lettre de Crédit.','The standard SWIFT message that holds the Letter of Credit terms.')}</dd></div>
-    <div><dt>${x('Anomalie','Discrepancy')}</dt><dd>${x("Un écart entre les documents et les conditions. S'il est retenu, la banque peut refuser de payer.","A mismatch between the documents and the terms. If kept, the bank may refuse to pay.")}</dd></div>
-   </dl></section>
- </div></div>`;
- $('#app').querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>startCase(b.dataset.go)));
+   <p>${x("Mon rôle : cadrer le cas d'usage et choisir quelles tâches automatiser selon leur valeur et leur risque, entre logique métier et faisabilité technique.",
+    "My role: scoping the use case and choosing which tasks to automate by value and risk, between business logic and technical feasibility.")}</p></div></section>
+  <section class="panel"><div class="ph"><span class="ph-t">${x("Périmètre de l'agent","Agent scope")}</span></div><div class="side-b">
+   <p class="scope-h">${x('Ce que fait l\'agent','What the agent does')}</p>
+   <ul class="scope"><li>${ic('check','c-ok')}<span>${x('Lit le MT700 et les documents présentés','Reads the MT700 and the presented documents')}</span></li>
+    <li>${ic('check','c-ok')}<span>${x('Contrôle dates, montants, quantités et liste des documents','Checks dates, amounts, quantities and the document list')}</span></li>
+    <li>${ic('check','c-ok')}<span>${x('Montre la preuve de chaque écart et rédige le message','Shows the evidence for each mismatch and drafts the message')}</span></li></ul>
+   <p class="scope-h">${x('Ce qui reste à l\'opérateur','What stays with the operator')}</p>
+   <ul class="scope"><li>${ic('minus')}<span>${x('La décision sur chaque point. Sous 85 % de confiance, l\'agent demande toujours.','The decision on each point. Below 85% confidence the agent always asks.')}</span></li>
+    <li>${ic('minus')}<span>${x('Les limites de crédit des clients : l\'agent n\'y a pas accès.','Client credit limits: the agent has no access to them.')}</span></li>
+    <li>${ic('minus')}<span>${x("L'envoi : rien n'est envoyé dans cette démo.",'Sending: nothing is sent in this demo.')}</span></li></ul>
+   <p class="scope-h">${x('Règles de place citées','Market rules referenced')}</p>
+   <div class="refs"><span>UCP 600</span><span>ISBP 821</span><span>Incoterms 2020</span></div></div></section>
+ </aside></div>`;
+ $('#app').querySelector('tbody').addEventListener('click',e=>{const tr=e.target.closest('[data-open]');if(tr)startCase(tr.dataset.open);});
 }
 
-/* ---------- case shell ---------- */
-function stepsHtml(i){const L=[x('Analyse','Analysis'),x('Vérification','Review'),x('Résultat','Result')];
- return `<ol class="steps" aria-label="${x('Étapes','Steps')}">${L.map((l,k)=>`<li class="${k<i?'ok':k===i?'cur':''}"${k===i?' aria-current="step"':''}><i>${k<i?ic('check'):k+1}</i>${l}</li>`).join('')}</ol>`;}
-function headHtml(c,i){
- return `<div class="chead"><div><p class="crumb"><button class="lnk" data-home>${ic('left')}${x('Tous les cas','All cases')}</button></p>
-  <h1>${esc(c.name)}</h1>
-  <p class="facts"><span><b>${c.ref}</b></span><span>${c.facts.map(esc).join(' · ')}</span><span>${esc(c.received)}</span></p></div>
-  ${stepsHtml(i)}</div>`;}
-function docHtml(c){
- const rows=r=>{const o=r[5]||{};return `<div class="row${o.miss?' miss':''}" id="r-${r[1]}"><span class="k">${esc(r[0])}</span><span class="v">${esc(r[2])}${o.hand?` <span class="hand">${o.hand}</span>${esc(o.after||'')}`:''}</span><span class="lb">${esc(x(r[3],r[4]))}</span></div>`;};
- return `<details class="doc" id="doc"${isDesk()?' open':''}><summary>${ic('mail')}<span>${x('Dossier','File')} <small>· ${x('Lettre de Crédit et documents','Letter of Credit and documents')}</small></span>${ic('chev','chev')}</summary>
-  <div class="paper" id="paper">${c.docs.map(d=>`<div class="dsec"><h3>${esc(d.h)}</h3><p>${esc(d.s)}</p>${d.rows.map(rows).join('')}</div>`).join('')}</div></details>`;}
-function wireShell(){
- const h=$('#app').querySelector('[data-home]');if(h)h.addEventListener('click',goHome);
- const d=$('#doc');if(d)d.querySelector('summary').addEventListener('click',e=>{if(isDesk())e.preventDefault();});
+/* ---------- document viewer ---------- */
+function rowHtml(r){const o=r[5]||{};
+ return `<div class="row${o.miss?' miss':''}" id="r-${r[1]}"><span class="k">${esc(r[0])}</span><span class="lb">${esc(x(r[3],r[4]))}</span><span class="v">${esc(r[2])}${o.hand?` <span class="hand">${o.hand}<small>${x('manuscrit','handwritten')}</small></span>${esc(o.after||'')}`:''}</span><span class="mk"></span></div>`;}
+function paperHtml(c){return c.docs.map((d,i)=>`<div class="dsec" id="ds-${i}"><div class="dsec-h"><b>${esc(d.h)}</b><span>${esc(d.s)}</span></div>${d.rows.map(rowHtml).join('')}</div>`).join('');}
+function viewerHtml(c){
+ return `<section class="panel viewer" aria-label="${x('Documents du dossier','File documents')}"><div class="ph"><span class="ph-t">${x('Documents du dossier','File documents')}</span>
+  <nav class="vtabs" aria-label="${x('Aller à','Jump to')}">${c.docs.map((d,i)=>`<button type="button" data-jump="${i}">${esc(d.tab)}</button>`).join('')}</nav></div>
+  <div class="paper" id="paper">${paperHtml(c)}</div></section>`;
 }
-function goHome(){S.runToken++;renderIntro();window.scrollTo(0,0);}
-function clearHL(){document.querySelectorAll('.row').forEach(r=>r.classList.remove('scan','look','hl-ev','hl-bad'));}
-function scrollDocTo(id,open){
- const r=document.getElementById('r-'+id),p=$('#paper'),d=$('#doc');if(!r||!p)return;
- if(open&&d&&!d.open)d.open=true;
- if(!d.open)return;
- const top=p.scrollTop+(r.getBoundingClientRect().top-p.getBoundingClientRect().top)-p.clientHeight/3;
- p.scrollTo({top:Math.max(0,top),behavior:reduce?'auto':'smooth'});
- if(open&&!isDesk())d.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+function scrollPaper(p,el,smooth,third){
+ if(!p||!el)return;
+ const h=p.querySelector('.dsec-h'),off=third?p.clientHeight/3:(h?h.offsetHeight:0)+40;
+ const top=p.scrollTop+(el.getBoundingClientRect().top-p.getBoundingClientRect().top)-off;
+ p.scrollTo({top:Math.max(0,top),behavior:smooth&&!reduce?'smooth':'auto'});
+}
+function clearHL(){$$('.row').forEach(r=>{r.classList.remove('scan','look','hl-c','hl-x','pulse');const m=r.querySelector('.mk');if(m)m.textContent='';});}
+function applyHL(pulse){
+ clearHL();const c=S.c,f=c&&c.findings.find(k=>k.id===S.act);if(!f)return;
+ const n=fno(c,f);
+ const mark=(id,cls,lab)=>{const el=document.getElementById('r-'+id);if(!el)return null;el.classList.add(cls);el.querySelector('.mk').textContent=n+' · '+lab;if(pulse){void el.offsetWidth;el.classList.add('pulse');}return el;};
+ f.bad.forEach(id=>mark(id,'hl-x',x('Écart','Mismatch')));f.hl.forEach(id=>mark(id,'hl-c',x('Preuve','Evidence')));
+ const p=$('#sheet').hidden?$('#paper'):$('#sheetc');
+ const first=p&&p.querySelector('.hl-c,.hl-x');
+ if(first)scrollPaper(p,first,true);
 }
 
-/* ---------- analysis ---------- */
+/* ---------- step 2 : check ---------- */
 function startCase(id){
- const c=CASES.find(k=>k.id===id);S.c=c;S.dec={};S.act=null;S.log=[];clockM=9*60+4;
- logp(x('Dossier ouvert par l\'opérateur','File opened by the operator'));
- S.scr='run';
- $('#app').innerHTML=`<div class="fade">${headHtml(c,0)}<div class="split">${docHtml(c)}
-  <section class="work" aria-live="polite"><div class="work-h"><h2>${x("L'agent analyse le dossier","The agent is analysing the file")}</h2><p>${x('Il lit chaque ligne et compare les documents aux conditions de la Lettre de Crédit.','It reads every line and compares the documents with the Letter of Credit terms.')}</p></div>
-  <div class="bar"><i id="pbar"></i></div>
-  <ol class="alist" id="alist">${c.run.map(s=>`<li><span class="st"></span><span>${esc(s.t)}<small></small></span></li>`).join('')}</ol>
-  <div class="work-f"><p>${x('Environ 6 secondes. Un opérateur y passe en moyenne ','About 6 seconds. An operator spends on average ')+c.man+x(' min à la main (estimation).',' min by hand (estimate).')}</p><button class="lnk" id="skip">${x("Passer l'animation","Skip animation")}</button></div></section></div></div>`;
- wireShell();window.scrollTo(0,0);
- const tok=++S.runToken;
- $('#skip').addEventListener('click',()=>{if(S.runToken!==tok)return;S.runToken++;finishRun(c);});
- runAnim(c,tok);
+ const c=CASES.find(k=>k.id===id);
+ S.c=c;S.dec={};S.com={};S.comOpen=null;S.act=null;S.log=[];S.rlog=[];S.analysed=false;S.edit=null;S.clock=9*3600+4*60;
+ logp(x('Dossier ouvert par l\'opérateur','File opened by the operator'),0);
+ S.step=2;renderCheck();window.scrollTo(0,0);
+ runAnim(c,++S.tok);
 }
+function renderCheck(){
+ const c=S.c;S.step=2;stepbar();
+ $('#app').innerHTML=`<div class="s2">
+  <div class="casebar"><span class="ref">${c.ref}</span><h1>${esc(c.name)}</h1><span class="facts"><span>${typeOf(c)}</span>${c.facts.map(f=>`<span>${esc(f)}</span>`).join('')}<span>${esc(c.received)}</span></span></div>
+  <div class="split">${isDesk()?viewerHtml(c):''}<section class="panel pane" id="pane" aria-label="${x('Analyse et points à valider','Analysis and points to validate')}"></section></div></div>`;
+ const v=$('.viewer');
+ if(v)v.addEventListener('click',e=>{const b=e.target.closest('[data-jump]');if(b)scrollPaper($('#paper'),$('#ds-'+b.dataset.jump),true);});
+ $('#pane').addEventListener('click',onPane);
+ $('#pane').addEventListener('input',e=>{if(e.target.id==='cmt-in')S.comDraft=e.target.value;});
+ if(S.analysed){paneReview();applyHL(false);}else paneRun(c);
+}
+function paneRun(c){
+ $('#pane').innerHTML=`<div class="ph"><span class="ph-t">${x('Analyse automatique','Automated analysis')}</span><span class="live"><i class="dot run"></i>${x('En cours','Running')}</span><span class="r"><button type="button" class="lnk" id="skip">${x("Passer l'animation","Skip animation")}</button></span></div>
+  <div class="pbar"><i id="pb"></i></div>
+  <div class="pbody"><ol class="rlog" id="rlog" aria-live="polite"></ol></div>
+  <div class="pf"><p>${x('Environ 6 secondes. Un opérateur y passe en moyenne ','About 6 seconds. An operator spends on average ')+c.man+x(' min à la main (estimation).',' min by hand (estimate).')}</p></div>`;
+}
+function rlogLi(l,run){return `<li class="${run?'run':''}"><time>${l.time}</time><span><span class="t">${esc(l.t)}</span><span class="r ${l.c||''}">${run?x('en cours','running'):esc(l.r)}</span></span></li>`;}
 async function runAnim(c,tok){
- const lis=[...document.querySelectorAll('#alist li')],bar=$('#pbar'),n=c.run.length;
- await wait(350);
+ const n=c.run.length;
+ await wait(300);
  for(let i=0;i<n;i++){
-  if(S.runToken!==tok)return;
-  const s=c.run[i],li=lis[i];li.className='run';
+  if(S.tok!==tok)return;
+  const s=c.run[i],l={time:clk(i?2:1),t:s.t,r:s.r,c:s.c};
+  const ol=$('#rlog');if(!ol)return;
+  ol.insertAdjacentHTML('beforeend',rlogLi(l,true));const li=ol.lastElementChild;
   if(s.scan!=null){
-   const rows=c.docs[s.scan].rows.map(r=>r[1]);
-   for(const id of rows){if(S.runToken!==tok)return;const el=document.getElementById('r-'+id);if(el){el.classList.add('scan');if(isDesk())scrollDocTo(id);}await wait(70);}
-   await wait(150);rows.forEach(id=>{const el=document.getElementById('r-'+id);if(el)el.classList.remove('scan');});
+   const ids=c.docs[s.scan].rows.map(r=>r[1]);
+   if(isDesk())scrollPaper($('#paper'),$('#ds-'+s.scan),true);
+   for(const id of ids){if(S.tok!==tok)return;const el=document.getElementById('r-'+id);if(el)el.classList.add('scan');await wait(65);}
+   await wait(160);ids.forEach(id=>{const el=document.getElementById('r-'+id);if(el)el.classList.remove('scan');});
   }else if(s.rows){
    s.rows.forEach(id=>{const el=document.getElementById('r-'+id);if(el)el.classList.add('look');});
-   if(isDesk())scrollDocTo(s.rows[0]);
-   await wait(750);
-   if(S.runToken!==tok)return;
+   if(isDesk())scrollPaper($('#paper'),document.getElementById('r-'+s.rows[0]),true,true);
+   await wait(720);
+   if(S.tok!==tok)return;
    s.rows.forEach(id=>{const el=document.getElementById('r-'+id);if(el)el.classList.remove('look');});
-  }else await wait(600);
-  if(S.runToken!==tok)return;
-  li.className='ok';li.querySelector('.st').innerHTML=ic('check');const sm=li.querySelector('small');sm.textContent=s.r;if(s.c)sm.className=s.c;
-  bar.style.width=Math.round(100*(i+1)/n)+'%';
+  }else await wait(560);
+  if(S.tok!==tok)return;
+  S.rlog.push(l);li.outerHTML=rlogLi(l,false);
+  const pb=$('#pb');if(pb)pb.style.width=Math.round(100*(i+1)/n)+'%';
  }
- await wait(700);
- if(S.runToken!==tok)return;
- S.runToken++;finishRun(c);
+ await wait(600);
+ if(S.tok!==tok)return;
+ finishRun(c);
 }
 function finishRun(c){
+ S.tok++;
+ for(let i=S.rlog.length;i<c.run.length;i++){const s=c.run[i];S.rlog.push({time:clk(i?2:1),t:s.t,r:s.r,c:s.c});}
+ S.tEnd=S.rlog[S.rlog.length-1].time;
  const ko=c.findings.filter(f=>f.k==='ko').length,ck=c.findings.length-ko;
- logp(x('Analyse terminée par l\'agent : ','Analysis completed by the agent: ')+(c.kind==='amd'?c.findings.length+x(' points relevés',' points raised'):ko+x(' anomalie(s), ',' discrepancy(ies), ')+ck+x(' point(s) à confirmer',' point(s) to confirm')));
- S.act=c.findings[0].id;renderReview();
+ S.clock+=1;
+ logp(x('Analyse terminée par l\'agent : ','Analysis completed by the agent: ')+(c.kind==='amd'?c.findings.length+x(' points relevés',' points raised'):ko+x(' anomalie(s), ',' discrepancy(ies), ')+ck+x(' point(s) à confirmer',' point(s) to confirm')),1);
+ S.analysed=true;S.act=c.findings[0].id;
+ clearHL();paneReview();applyHL(true);stepbar();
+ say(x('Analyse terminée. ','Analysis complete. ')+c.findings.length+x(' point(s) à valider.',' point(s) to validate.'));
 }
-
-/* ---------- review ---------- */
 function fHtml(c,f){
- const d=S.dec[f.id],act=S.act===f.id;
- const icon=f.k==='ko'?(c.kind==='amd'?ic('help','c-warn'):ic('alert','c-bad')):ic('help','c-warn');
- const kind=f.k==='ko'?(c.kind==='amd'?x('Question','Question'):x('Anomalie','Discrepancy')):x('À vérifier par vous','For you to check');
- const res=d?(d==='yes'?f.yesS:f.noS):'';
- const resIssue=d&&((f.k==='ko'&&d==='yes')||(f.k==='check'&&d==='no'));
- return `<li class="f${act?' act':''}${d?' decided':''}" data-f="${f.id}">
-  <div class="f-h">${d?(resIssue?(c.kind==='amd'?ic('help','c-warn'):ic('xc','c-bad')):ic('circleCheck','c-ok')):icon}<h3>${esc(f.t)}</h3><span class="kind ${d?'':(f.k==='ko'&&c.kind!=='amd'?'c-bad':'c-warn')}">${d?'':kind}</span></div>
-  ${d?`<div class="dec dline"><span>${esc(res)}</span><button class="lnk" data-undo="${f.id}">${x('Modifier','Change')}</button></div>`:(act?'':`<p class="dline pend">${x('À décider ensuite · cliquer pour ouvrir','To decide next · click to open')}</p>`)}
-  <div class="f-b">
+ const d=S.dec[f.id],act=S.act===f.id,n=fno(c,f),[sc,sl]=sevOf(c,f);
+ const iss=d&&isIssue(f);
+ const dchip=d?(iss?(c.kind==='amd'?`<span class="chip warn">${x('Au message','In message')}</span>`:`<span class="chip bad">${x('Retenu','Kept')}</span>`):`<span class="chip ok">${x('Levé','Cleared')}</span>`):`<span class="chip ${sc}">${sl}</span>`;
+ const conf=f.conf==null?`<span class="f-c">${x('Hors périmètre agent','Outside agent scope')}</span>`:`<span class="f-c">${x('Confiance','Confidence')} ${f.conf} %<span class="meter${f.conf<85?' low':''}"><i style="width:${f.conf}%"></i></span></span>`;
+ const com=S.com[f.id];
+ return `<li class="f${act?' act':''}${d?' done':''}" id="f-${f.id}">
+  <button type="button" class="f-row" data-sel="${f.id}" aria-expanded="${act}"><span class="f-no">${n}</span><span class="f-t">${esc(f.t)}</span>
+   <span class="f-s">${dchip}${conf}</span>
+   <span class="f-m"><span class="mono">${esc(f.tags)}</span><span>${esc(f.refs)}</span>${d&&!act?`<span class="${iss?(c.kind==='amd'?'c-warn':'c-bad'):'c-ok'}">${esc(d==='yes'?f.yesS:f.noS)}</span>`:''}${com&&!act?`<span>${ic('note')} ${x('Commenté','Commented')}</span>`:''}</span></button>
+  ${act?`<div class="f-b">
    <p>${esc(f.p)}</p>
-   ${f.stamp?`<div class="stamp"><div class="scan" aria-label="${x('Extrait du connaissement : tampon manuscrit','Bill of lading extract: handwritten stamp')}"><span>24.11.2025</span></div><div>${x('Extrait du connaissement scanné. Le « 4 » du jour peut se lire « 1 ».','Extract from the scanned bill of lading. The “4” in the day could read as “1”.')}</div></div>`:''}
-   <div class="ev"><table>${f.ev.map(e=>`<tr><td>${e[0]}</td><td>${e[1]}</td></tr>`).join('')}</table>
-    <div class="foot"><button class="lnk" data-see="${f.id}">${ic('eye')}${x('Voir dans le document','Show in the document')}</button></div></div>
-   ${d?'':`<p class="agent"><b>${x("Proposition de l'agent :","Agent's suggestion:")}</b> ${esc(f.ag)}</p>
-   <div class="acts"><button class="btn pri" data-yes="${f.id}">${esc(f.yes)}</button><button class="btn" data-no="${f.id}">${esc(f.no)}</button></div>`}
-  </div></li>`;
+   ${f.stamp?`<div class="stamp"><div class="scan" role="img" aria-label="${x('Extrait du connaissement : tampon manuscrit','Bill of lading extract: handwritten stamp')}"><div class="ink"><small>SHIPPED ON BOARD</small><span>24.11.2025</span></div></div><div>${x('Extrait du connaissement scanné. Le « 4 » du jour peut se lire « 1 ».','Extract from the scanned bill of lading. The “4” in the day could read as “1”.')}</div></div>`:''}
+   <div class="evt"><div class="evt-h"><span class="ph-t">${x('Éléments de preuve','Evidence')}</span><button type="button" class="lnk" data-loc="${f.id}">${ic(isDesk()?'loc':'doc')}${isDesk()?x('Localiser dans le document','Locate in document'):x('Voir la preuve','View evidence')}</button></div>
+    <table>${f.ev.map(e=>`<tr><td>${e[0]}</td><td>${e[1]}</td></tr>`).join('')}</table></div>
+   ${d?`<div class="decl">${iss?ic(c.kind==='amd'?'help':'xc',c.kind==='amd'?'c-warn':'c-bad'):ic('ok','c-ok')}<b>${esc(d==='yes'?f.yesS:f.noS)}</b><button type="button" class="lnk" data-undo="${f.id}">${x('Modifier','Change')}</button></div>`
+    :`<div class="sugg"><b>${x("Proposition de l'agent","Agent's suggestion")}</b>${esc(f.ag.charAt(0).toUpperCase()+f.ag.slice(1))}</div>
+   <div class="acts"><button type="button" class="btn pri" data-yes="${f.id}">${ic('check')}${esc(f.yes)}<kbd>A</kbd></button><button type="button" class="btn" data-no="${f.id}">${esc(f.no)}<kbd>R</kbd></button><button type="button" class="btn ghost" data-com="${f.id}" aria-expanded="${S.comOpen===f.id}">${ic('note')}${x('Commenter','Comment')}<kbd>C</kbd></button></div>`}
+   ${S.comOpen===f.id?`<div class="cmt"><label for="cmt-in">${x('Commentaire interne (journal du dossier)','Internal comment (file log)')}</label><textarea id="cmt-in" rows="2">${esc(S.comDraft||'')}</textarea><div class="acts"><button type="button" class="btn dark sm" data-csave="${f.id}">${x('Enregistrer','Save')}</button><button type="button" class="btn ghost sm" data-ccancel>${x('Annuler','Cancel')}</button></div></div>`:''}
+   ${com?`<p class="cmts"><b>${x('Commentaire','Comment')}</b><time>${com.t}</time>${esc(com.txt)}</p>`:''}
+  </div>`:''}</li>`;
 }
-function renderReview(){
- const c=S.c;S.scr='review';
+function paneReview(){
+ const c=S.c,pane=$('#pane');if(!pane)return;
+ const old=pane.querySelector('.pbody'),st=old?old.scrollTop:0;
  const ko=c.findings.filter(f=>f.k==='ko').length,ck=c.findings.length-ko;
- const left=c.findings.filter(f=>!S.dec[f.id]).length;
- const o=OUT[outcome(c)];
- const tally=c.kind==='amd'
-  ?`<span class="c-warn">${ic('help')}${ko} ${x('questions pour le client','questions for the client')}</span><span class="c-warn">${ic('help')}${ck} ${x('point à vérifier par vous','point for you to check')}</span>`
-  :(ko?`<span class="c-bad">${ic('alert')}${ko} ${x(ko>1?'anomalies':'anomalie',ko>1?'discrepancies':'discrepancy')}</span>`:'')+(ck?`<span class="c-warn">${ic('help')}${ck} ${x('point à vérifier par vous','point for you to check')}</span>`:'');
- $('#app').innerHTML=`<div>${headHtml(c,1)}<div class="split">${docHtml(c)}
-  <section class="work"><div class="work-h"><h2>${x("Conclusions de l'agent","The agent's findings")}</h2>
-   <p>${x('Pour chaque point, lisez l\'explication puis décidez. La décision finale vous appartient.','For each point, read the explanation, then decide. The final decision is yours.')}</p>
-   <p class="tally">${tally}<span class="c-ok">${ic('circleCheck')}${c.passed.length} ${x('contrôles conformes','checks passed')}</span></p></div>
-   <ul class="flist" id="flist">${c.findings.map(f=>fHtml(c,f)).join('')}</ul>
-   <details class="passed"><summary>${ic('circleCheck','c-ok')}${x('Voir les ','See the ')+c.passed.length+x(' contrôles conformes',' checks that passed')}${ic('chev','chev')}</summary>
-    <ul>${c.passed.map(p=>`<li><b>${esc(p[0])}</b>${x(' : ',': ')}${esc(p[1])}</li>`).join('')}</ul></details>
-   <div class="work-f${left?'':' ready'}"><p class="next" id="next">${left?x(`Encore ${left} point${left>1?'s':''} à décider.`,`${left} point${left>1?'s':''} left to decide.`):`${x('Suite : ','Next step: ')}<b>${esc(o.next)}</b>`}</p>
-    <button class="btn pri lg" id="validate"${left?' disabled':''}>${x('Valider le dossier','Validate the file')} ${ic('right')}</button></div>
-  </section></div></div>`;
- wireShell();
- applyHL();
- const fl=$('#flist');
- fl.addEventListener('click',e=>{
-  const b=e.target.closest('button');const li=e.target.closest('.f');
-  if(b&&b.dataset.yes)return decide(b.dataset.yes,'yes');
-  if(b&&b.dataset.no)return decide(b.dataset.no,'no');
-  if(b&&b.dataset.undo){delete S.dec[b.dataset.undo];S.act=b.dataset.undo;logp(x('Décision rouverte : ','Decision reopened: ')+c.findings.find(f=>f.id===b.dataset.undo).t);return rerender(b.dataset.undo);}
-  if(b&&b.dataset.see){S.act=b.dataset.see;applyHL(true);return;}
-  if(li&&S.act!==li.dataset.f){S.act=li.dataset.f;rerender(li.dataset.f);}
- });
- $('#validate').addEventListener('click',()=>{if(!allDecided(c))return;finish();});
+ const dn=nDecided(c),tot=c.findings.length,left=tot-dn,o=OUT[outcome(c)];
+ const kv=c.kind==='amd'
+  ?[[x('Questions client','Client questions'),ko,'c-warn'],[x('À vérifier','To check'),ck,'c-warn']]
+  :[[x('Anomalies','Discrepancies'),ko,ko?'c-bad':''],[x('À vérifier','To check'),ck,ck?'c-warn':'']];
+ kv.push([x('Conformes','Passed'),c.passed.length,'c-ok'],[x('Seuil confiance','Confidence bar'),'85 %','']);
+ const runOpen=pane.querySelector('details.runlog[open]')?' open':'';
+ const pasOpen=pane.querySelector('details.passed[open]')?' open':'';
+ pane.innerHTML=`<div class="ph"><span class="ph-t">${x('Analyse automatique','Automated analysis')}</span><span class="live"><i class="dot ok"></i>${x('Terminée à ','Completed at ')}<span class="mono">${S.tEnd}</span></span></div>
+  <div class="pbody">
+   <dl class="sumg">${kv.map(k=>`<div><dt>${k[0]}</dt><dd class="${k[2]}">${k[1]}</dd></div>`).join('')}</dl>
+   <details class="runlog"${runOpen}><summary>${ic('doc')}${x("Journal d'analyse","Analysis log")} (${S.rlog.length})${ic('chev','chev')}</summary><ol class="rlog">${S.rlog.map(l=>rlogLi(l,false)).join('')}</ol></details>
+   <div class="mob-docs"><button type="button" class="btn sm" data-docs>${ic('doc')}${x('Consulter les documents','View the documents')}</button></div>
+   <div class="sech"><span class="ph-t">${x('Points à valider','Points to validate')}</span><span class="cnt"><span><b>${dn}</b>/${tot} ${x(dn>1?'validés':'validé','validated')}</span><span class="pbar dark"><i style="width:${Math.round(100*dn/tot)}%"></i></span></span></div>
+   <ol class="flist" id="flist">${c.findings.map(f=>fHtml(c,f)).join('')}</ol>
+   <details class="passed"${pasOpen}><summary>${ic('ok','c-ok')}${c.passed.length} ${x('contrôles conformes','checks passed')}${ic('chev','chev')}</summary>
+    <ul>${c.passed.map(p=>`<li><b>${esc(p[0])}</b>${x(' : ',': ')}${esc(p[1])}</li>`).join('')}</ul></details>
+  </div>
+  <div class="pf${isDesk()?'':' sticky'}"><p id="next">${left?x(`${left} point${left>1?'s':''} à décider.`,`${left} point${left>1?'s':''} left to decide.`):`${x('Suite : ','Next step: ')}<b>${esc(o.next)}</b>`}</p>
+   <button type="button" class="btn pri" id="gen"${left?' disabled':''}>${x('Préparer le message','Prepare the message')}${ic('right')}</button>
+   <span class="keys" aria-hidden="true"><span><kbd>J</kbd><kbd>K</kbd>${x('point suivant / précédent','next / previous point')}</span><span><kbd>A</kbd>${x('accepter','accept')}</span><span><kbd>R</kbd>${x('rejeter','reject')}</span><span><kbd>C</kbd>${x('commenter','comment')}</span></span></div>`;
+ const nb=pane.querySelector('.pbody');if(nb&&isDesk())nb.scrollTop=st;
 }
-function rerender(focusId){
- const y=window.scrollY;renderReview();window.scrollTo(0,y);
- if(focusId){const el=document.querySelector(`.f[data-f="${focusId}"]`);if(el&&!isDesk()){const r=el.getBoundingClientRect();if(r.top<60||r.top>innerHeight-120)el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}}
-}
-function applyHL(open){
- clearHL();const c=S.c,f=c.findings.find(k=>k.id===S.act);if(!f)return;
- f.hl.forEach(id=>{const el=document.getElementById('r-'+id);if(el)el.classList.add('hl-ev');});
- f.bad.forEach(id=>{const el=document.getElementById('r-'+id);if(el)el.classList.add('hl-bad');});
- const first=(f.bad[0]||f.hl[0]);
- if(isDesk()||open)scrollDocTo(first,open);
+function select(id,focus){
+ if(!S.c.findings.some(f=>f.id===id))return;
+ S.act=id;S.comOpen=null;S.comDraft='';paneReview();applyHL(true);
+ const el=$('#f-'+id);
+ if(el){
+  if(isDesk())el.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
+  else{const r=el.getBoundingClientRect();if(r.top<110||r.top>innerHeight-160)window.scrollTo({top:scrollY+r.top-110,behavior:reduce?'auto':'smooth'});}
+  if(focus)el.querySelector('.f-row').focus({preventScroll:true});
+ }
 }
 function decide(id,v){
- const c=S.c,f=c.findings.find(k=>k.id===id);S.dec[id]=v;
- logp(x('Opérateur · ','Operator · ')+f.t+' → '+(v==='yes'?f.yesS:f.noS));
- const nx=c.findings.find(k=>!S.dec[k.id]);S.act=nx?nx.id:null;
- rerender(nx?nx.id:null);
- if(!nx&&!isDesk()){const v2=$('#validate');if(v2)v2.focus({preventScroll:true});}
+ const c=S.c,f=c.findings.find(k=>k.id===id);if(!f||S.dec[id])return;S.dec[id]=v;
+ logp(x('Opérateur · ','Operator · ')+f.t+' → '+(v==='yes'?f.yesS:f.noS),25);
+ const nx=c.findings.find(k=>!S.dec[k.id]);
+ stepbar();
+ say((v==='yes'?f.yesS:f.noS)+'. '+(nx?x('Point suivant : ','Next point: ')+nx.t:x('Tous les points sont validés.','All points are validated.')));
+ if(nx)select(nx.id,true);
+ else{S.act=id;S.comOpen=null;paneReview();applyHL(false);const g=$('#gen');if(g){g.focus({preventScroll:true});if(!isDesk())g.scrollIntoView({block:'nearest'});}}
+}
+function undo(id){const c=S.c,f=c.findings.find(k=>k.id===id);delete S.dec[id];logp(x('Décision rouverte : ','Decision reopened: ')+f.t,8);stepbar();select(id,true);}
+function openComment(id){S.act=id;S.comOpen=id;S.comDraft=(S.com[id]&&S.com[id].txt)||'';paneReview();applyHL(false);const t=$('#cmt-in');if(t){t.focus();t.setSelectionRange(t.value.length,t.value.length);}}
+function saveComment(id){
+ const t=$('#cmt-in'),v=t?t.value.trim():'';const f=S.c.findings.find(k=>k.id===id);
+ if(v){S.clock+=10;const tt=clk(0);S.com[id]={t:tt.slice(0,5),txt:v};S.log.push({t:tt,txt:x('Commentaire · ','Comment · ')+f.t+x(' : ',': ')+v});toast(x('Commentaire enregistré','Comment saved'));}
+ S.comOpen=null;S.comDraft='';paneReview();applyHL(false);const b=document.querySelector(`#f-${id} [data-com], #f-${id} .f-row`);if(b)b.focus({preventScroll:true});
+}
+function onPane(e){
+ const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(b.id==='skip'){if(S.analysed)return;finishRun(S.c);return;}
+ if(b.id==='gen'){if(allDecided(S.c))go(3);return;}
+ if(d.sel){if(S.act!==d.sel)select(d.sel,false);else if(isDesk())applyHL(true);return;}
+ if(d.yes)return decide(d.yes,'yes');
+ if(d.no)return decide(d.no,'no');
+ if(d.undo)return undo(d.undo);
+ if(d.com)return S.comOpen===d.com?(S.comOpen=null,paneReview(),applyHL(false)):openComment(d.com);
+ if(d.csave)return saveComment(d.csave);
+ if('ccancel' in d){const id=S.comOpen;S.comOpen=null;S.comDraft='';paneReview();applyHL(false);const bb=document.querySelector(`#f-${id} [data-com]`);if(bb)bb.focus();return;}
+ if(d.loc){if(isDesk())applyHL(true);else openSheet(d.loc,b);return;}
+ if('docs' in d)return openSheet(null,b);
 }
 
-/* ---------- result ---------- */
-function finish(){
- const c=S.c,oid=outcome(c),o=OUT[oid],m=draft(c);
- logp(x('Dossier validé par l\'opérateur','File validated by the operator'));
- logp(x('Message préparé : ','Message prepared: ')+o.msg+x(' (non envoyé, démo)',' (not sent, demo)'));
- S.done[c.id]=o.msg;S.scr='result';
- const n=issues(c).length;const saved=c.man-c.ag;
- const colBg={bad:'var(--bad-soft)',ok:'var(--ok-soft)',warn:'var(--warn-soft)'}[o.col];
- $('#app').innerHTML=`<div class="fade">${headHtml(c,2)}<div class="res">
-  <div><div class="res-h"><span class="ic c-${o.col}" style="background:${colBg}">${ic(o.ic)}</span><div><h2>${esc(o.t)}</h2><p>${esc(o.d)}</p></div></div>
-   <section class="msg"><div class="msg-h"><h3>${esc(o.msg)} <small>· ${x("rédigé par l'agent, relu par vous",'drafted by the agent, reviewed by you')}</small></h3><button class="btn" id="copy">${ic('copy')}${x('Copier','Copy')}</button></div>
-    <div class="mhead"><div><span>${x('À','To')}</span><b>${esc(m.to)}</b></div><div><span>${x('Objet','Subject')}</span><b>${esc(m.sub)}</b></div></div>
-    <pre class="mbody${m.swift?' swift':''}" id="mbody">${esc(m.body)}</pre></section>
-   <p class="sent">${x("Rien n'est envoyé : c'est une démo simulée avec des données fictives.",'Nothing is sent: this is a simulated demo with fictional data.')}</p></div>
-  <div class="aside">
-   <section class="box sum"><h2>${x('Récapitulatif','Summary')}</h2><dl>
-    <div><dt>${x('Dossier','File')}</dt><dd>${c.ref}</dd></div>
-    <div><dt>${x('Décision','Decision')}</dt><dd>${esc(o.next)}</dd></div>
-    <div><dt>${c.kind==='amd'?x('Points retenus','Points kept'):x('Anomalies retenues','Discrepancies kept')}</dt><dd>${n} ${x('sur','of')} ${c.findings.length}</dd></div>
-    <div><dt>${x('Contrôles conformes','Checks passed')}</dt><dd>${c.passed.length}</dd></div>
-   </dl></section>
-   <section class="box"><h2>${x('Temps de traitement','Processing time')}</h2>
-    <div class="time"><div><span>${x('À la main','By hand')}</span><i style="width:100%"></i><b>${c.man} min</b></div>
-     <div class="ag"><span>${x('Avec l\'agent','With the agent')}</span><i style="width:${Math.round(100*c.ag/c.man)}%"></i><b>${c.ag} min</b></div></div>
-    <p class="note">${x(`Estimation illustrative, non mesurée : environ ${saved} minutes gagnées, surtout sur la lecture et la rédaction.`,`Illustrative estimate, not measured: about ${saved} minutes saved, mostly on reading and drafting.`)}</p></section>
-   <details class="box logbox"${isDesk()?' open':''}><summary>${x('Journal du dossier','File log')} <small>(${S.log.length})</small>${ic('chev','chev')}</summary><ol class="log">${S.log.map(l=>`<li><time>${l.t}</time><span>${esc(l.txt)}</span></li>`).join('')}</ol></details>
-   <div class="ctas"><button class="btn pri lg" id="again">${ic('redo')}${x('Essayer un autre cas','Try another case')}</button><a class="btn lg" href="${EN?'../en/#projets':'../#projets'}">${ic('left')}${x('Retour au CV','Back to CV')}</a></div>
-  </div></div></div>`;
- wireShell();window.scrollTo(0,0);
- $('#again').addEventListener('click',goHome);
- $('#copy').addEventListener('click',()=>{const t=(x('À : ','To: ')+m.to+'\n'+x('Objet : ','Subject: ')+m.sub+'\n\n'+m.body);
-  const ok=()=>toast(x('Texte copié','Text copied'));
-  try{navigator.clipboard.writeText(t).then(ok,()=>toast(x('Copie impossible dans ce navigateur','Copy not available in this browser')));}catch(e){toast(x('Copie impossible dans ce navigateur','Copy not available in this browser'));}});
+/* ---------- bottom sheet (mobile evidence) ---------- */
+let sheetRet=null;
+function openSheet(fid,from){
+ const c=S.c,sh=$('#sheet');sheetRet=from||null;
+ const f=fid&&c.findings.find(k=>k.id===fid);
+ $('#sheet-t').innerHTML=f?`${x('Preuve','Evidence')} ${fno(c,f)} · ${esc(f.t)}<small>${esc(f.tags)} · ${esc(f.refs)}</small>`:`${x('Documents du dossier','File documents')}<small>${c.ref}</small>`;
+ const ids=f?[...f.bad,...f.hl]:null;
+ $('#sheetc').innerHTML=f?c.docs.map((d,i)=>{const rr=d.rows.filter(r=>ids.includes(r[1]));return rr.length?`<div class="dsec"><div class="dsec-h"><b>${esc(d.h)}</b><span>${x('Extrait','Extract')} · ${rr.length}/${d.rows.length} ${x('champs','fields')}</span></div>${rr.map(rowHtml).join('')}</div>`:'';}).join('')+`<div class="sheet-more"><button type="button" class="btn sm" id="sheet-all">${ic('doc')}${x('Afficher le dossier complet','Show the full file')}</button></div>`:paperHtml(c);
+ sh.hidden=false;document.body.style.overflow='hidden';
+ $('#sheetc').scrollTop=0;
+ if(f){const keep=S.act;S.act=fid;applyHL(true);S.act=keep;$('#sheetc').scrollTop=0;
+  $('#sheet-all').addEventListener('click',()=>{$('#sheetc').innerHTML=paperHtml(c);const k=S.act;S.act=fid;applyHL(false);S.act=k;});}
+ $('#sheet-x').focus();
 }
+function closeSheet(){
+ const sh=$('#sheet');if(sh.hidden)return;
+ sh.hidden=true;document.body.style.overflow='';$('#sheetc').innerHTML='';
+ if(sheetRet&&document.contains(sheetRet))sheetRet.focus();sheetRet=null;
+}
+$('#sheet').addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeSheet();});
+
+/* ---------- step 3 : message ---------- */
+function renderMessage(){
+ const c=S.c;if(!allDecided(c))return;
+ S.step=3;
+ const oid=outcome(c),o=OUT[oid],m=draft(c),sig=JSON.stringify(S.dec);
+ if(!S.edit||S.edit.sig!==sig){
+  S.edit={sig,sub:m.sub,body:m.body,mod:false};
+  logp(x('Dossier validé par l\'opérateur','File validated by the operator'),20);
+  logp(x('Message préparé : ','Message prepared: ')+o.msg+x(' (non envoyé, démo)',' (not sent, demo)'),4);
+ }
+ S.done[c.id]=o.msg;stepbar();
+ const n=issues(c).length,saved=c.man-c.ag,tot=c.findings.length;
+ const nextC=CASES.find(k=>!S.done[k.id]);
+ $('#app').innerHTML=`<div class="s3 fade">
+  <section class="panel outc ${o.col}"><span class="ic c-${o.col}">${ic(o.ic)}</span><div><h1>${esc(o.t)}</h1><p>${esc(o.d)}</p></div></section>
+  <div class="res">
+   <section class="panel msg" aria-label="${esc(o.msg)}">
+    <div class="ph"><span class="ph-t">${esc(o.msg)}</span><span class="edited" id="edited"${S.edit.mod?'':' hidden'}>· ${x('modifié','edited')}</span>
+     <span class="r"><button type="button" class="btn sm" id="copy">${ic('copy')}${x('Copier','Copy')}</button><button type="button" class="btn sm ghost" id="restart">${ic('redo')}${x('Recommencer','Start over')}</button></span></div>
+    <div class="mf"><span>${x('À','To')}</span><b>${esc(m.to)}</b></div>
+    <div class="mf"><label for="msub" class="sr">${x('Objet','Subject')}</label><span aria-hidden="true">${x('Objet','Subject')}</span><input id="msub" type="text"></div>
+    <div class="mf"><span>${x('Canal','Channel')}</span><b class="ch">${esc(o.ch)}</b></div>
+    <label for="mbody" class="sr">${x('Corps du message','Message body')}</label>
+    <textarea class="mbody${m.swift?' swift':''}" id="mbody" spellcheck="false"></textarea>
+    <div class="pf"><p>${x("Rédigé par l'agent, relu et modifiable par vous. Rien n'est envoyé : c'est une démo simulée avec des données fictives.","Drafted by the agent, reviewed and editable by you. Nothing is sent: this is a simulated demo with fictional data.")}</p></div>
+   </section>
+   <aside class="res-side">
+    <section class="panel"><div class="ph"><span class="ph-t">${x('Récapitulatif','Summary')}</span></div><dl class="kv">
+     <div><dt>${x('Dossier','File')}</dt><dd class="mono" style="font-size:.8rem">${c.ref}</dd></div>
+     <div><dt>${x('Décision','Decision')}</dt><dd>${esc(o.next)}</dd></div>
+     <div><dt>${c.kind==='amd'?x('Points retenus','Points kept'):x('Anomalies retenues','Discrepancies kept')}</dt><dd>${n} ${x('sur','of')} ${tot}</dd></div>
+     <div><dt>${x('Points validés','Points validated')}</dt><dd>${tot}/${tot} <span class="pbar dark" style="display:inline-block;width:70px;vertical-align:middle;margin-left:6px"><i style="width:100%"></i></span></dd></div>
+     <div><dt>${x('Contrôles conformes','Checks passed')}</dt><dd>${c.passed.length}</dd></div>
+    </dl></section>
+    <section class="panel"><div class="ph"><span class="ph-t">${x('Temps de traitement','Processing time')}</span></div>
+     <div class="time"><div><span>${x('À la main','By hand')}</span><i style="width:100%"></i><b>${c.man} min</b></div>
+      <div class="ag"><span>${x('Avec l\'agent','With the agent')}</span><i style="width:${Math.round(100*c.ag/c.man)}%"></i><b>${c.ag} min</b></div></div>
+     <p class="note">${x(`Estimation illustrative, non mesurée : environ ${saved} minutes gagnées, surtout sur la lecture et la rédaction.`,`Illustrative estimate, not measured: about ${saved} minutes saved, mostly on reading and drafting.`)}</p></section>
+    <details class="panel logbox"${isDesk()?' open':''}><summary class="ph"><span class="ph-t">${x('Journal du dossier','File log')}</span><span class="edited">(${S.log.length})</span><span class="r">${ic('chev','chev')}</span></summary>
+     <ol class="log">${S.log.map(l=>`<li><time>${l.t}</time><span>${esc(l.txt)}</span></li>`).join('')}</ol></details>
+    <div class="ctas">${nextC?`<button type="button" class="btn pri" id="nextf">${x('Dossier suivant','Next file')} · <span class="mono" style="font-weight:500;font-size:.8rem">${nextC.ref}</span>${ic('right')}</button>`:''}
+     <button type="button" class="btn" id="tolist">${ic('left')}${x('Retour à la liste','Back to the list')}</button></div>
+   </aside></div></div>`;
+ const sub=$('#msub'),body=$('#mbody');
+ sub.value=S.edit.sub;body.value=S.edit.body;
+ const fit=()=>{body.style.height='auto';body.style.height=Math.max(isDesk()?360:300,body.scrollHeight+2)+'px';};
+ fit();
+ const mark=()=>{S.edit.mod=true;$('#edited').hidden=false;};
+ sub.addEventListener('input',()=>{S.edit.sub=sub.value;mark();});
+ body.addEventListener('input',()=>{S.edit.body=body.value;mark();fit();});
+ $('#copy').addEventListener('click',()=>{
+  const t=x('À : ','To: ')+m.to+'\n'+x('Objet : ','Subject: ')+sub.value+'\n\n'+body.value;
+  const ok=()=>toast(x('Texte copié','Text copied')),ko=()=>toast(x('Copie impossible dans ce navigateur','Copy not available in this browser'));
+  try{navigator.clipboard.writeText(t).then(ok,ko);}catch(e){ko();}
+ });
+ $('#restart').addEventListener('click',()=>{
+  S.dec={};S.com={};S.comOpen=null;S.edit=null;S.act=c.findings[0].id;
+  logp(x('Contrôle recommencé par l\'opérateur','Review restarted by the operator'),10);
+  delete S.done[c.id];S.step=2;renderCheck();window.scrollTo(0,0);
+ });
+ const nf=$('#nextf');if(nf)nf.addEventListener('click',()=>startCase(nextC.id));
+ $('#tolist').addEventListener('click',()=>go(1));
+}
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){if(!$('#sheet').hidden){closeSheet();return;}if(S.comOpen){const id=S.comOpen;S.comOpen=null;paneReview();applyHL(false);const b=document.querySelector(`#f-${id} [data-com]`);if(b)b.focus();}return;}
+ if(e.metaKey||e.ctrlKey||e.altKey)return;
+ const tg=e.target;if(tg&&(tg.tagName==='INPUT'||tg.tagName==='TEXTAREA'||tg.isContentEditable))return;
+ if(S.step!==2||!S.analysed||!$('#sheet').hidden)return;
+ const c=S.c,k=e.key.toLowerCase(),i=c.findings.findIndex(f=>f.id===S.act);
+ if(k==='j'){e.preventDefault();select(c.findings[Math.min(c.findings.length-1,i+1)].id,true);}
+ else if(k==='k'){e.preventDefault();select(c.findings[Math.max(0,i-1)].id,true);}
+ else if(k==='a'&&S.act&&!S.dec[S.act]){e.preventDefault();decide(S.act,'yes');}
+ else if(k==='r'&&S.act&&!S.dec[S.act]){e.preventDefault();decide(S.act,'no');}
+ else if(k==='c'&&S.act){e.preventDefault();openComment(S.act);}
+});
 
 /* ---------- boot ---------- */
-document.querySelectorAll('.lang a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();location.href='?lang='+a.dataset.l;}));
-renderIntro();
+$('#reset').addEventListener('click',()=>{S.tok++;closeSheet();S=fresh();renderFiles();window.scrollTo(0,0);toast(x('Démo réinitialisée','Demo reset'));});
+MQ.addEventListener('change',()=>{closeSheet();if(S.step===2&&S.analysed)renderCheck();else if(S.step===3)renderMessage();});
+renderFiles();
 })();
 </script>
 </body>
