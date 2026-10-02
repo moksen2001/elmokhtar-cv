@@ -108,9 +108,9 @@ JS = r"""
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') dls.forEach(function(d){ d.open=false; }); });
   /* hiring filter */
   var MAP={
-    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
+    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-gainde','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
     ia:{rel:['sg','sv'],proj:['p-agent','p-focal','p-veille'],sk:[1,4],cst:['sg','pr']},
-    dx:{rel:['bdf','so','ism','sv'],proj:['p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
+    dx:{rel:['bdf','so','ism','sv'],proj:['p-gainde','p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
   };
   var RELID=['sv','sg','bdf','so','ism'];
   var rels=[].slice.call(document.querySelectorAll('.rel')), projs=[].slice.call(document.querySelectorAll('.proj')), sks=[].slice.call(document.querySelectorAll('.skills .sk'));

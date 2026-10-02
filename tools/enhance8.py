@@ -11,6 +11,8 @@ T = {
    jb_note="Les maquettes XD du hackathon rendues jouables en 2026 : six jeux avec sons et voix (Anima, Yaram, Zik, Math Kid, Docteur Kid, Savoir-vivre), autocollants et espace parents.",
    ym_note="Les 20 écrans des maquettes rendus cliquables comme une vraie app, avec les montres et les prix réels de YEMA : catalogue, essayage en réalité augmentée (caméra ou mode démo), choix de la taille et du bracelet, achat de bout en bout (paiement simulé), suivi de commande, collection avec authenticité vérifiée, Club VIP et conciergerie. Projet étudiant non affilié à YEMA.",
    ym_btn="Tester le prototype",
+   gd_note="Le prototype complet, pensé comme une vraie app sur téléphone : prochain match et compte à rebours, rediffusion minute par minute du Sénégal 5-0 Irak avec les données FIFA réelles, vote de l'Homme du match, pronostics, quiz, coulisses et vidéos FSF TV, billetterie et boutique (paiement simulé), carte de supporter. Concept personnel, non affilié à la FSF.",
+   gd_btn="Tester l'app",
    jb_btn="Jouer à JUBOX", jb_alt="JUBOX rendu jouable : accueil des jeux et jeu Anima"),
  'en': dict(badge="Interactive demo",
    agent_note="Simulated demo, for illustration only (not Société Générale's official or final tool, fictional data): pick a Letter of Credit file, watch the AI agent read the MT700 and flag discrepancies with the evidence, then validate each point in one click to get the message ready to send",
@@ -20,6 +22,8 @@ T = {
    jb_note="The hackathon XD mockups made playable in 2026 (in French): six games with sound and voice (Anima, Yaram, Zik, Math Kid, Docteur Kid, Savoir-vivre), stickers and a parents' area.",
    ym_note="All 20 mockup screens made clickable like a real app, with YEMA's actual watches and prices: catalogue, augmented-reality try-on (camera or demo mode), size and strap choice, end-to-end purchase (simulated payment), order tracking, collection with verified authenticity, VIP Club and concierge. Student project not affiliated with YEMA.",
    ym_btn="Try the prototype",
+   gd_note="The full prototype, built to feel like a real phone app: next match and countdown, a minute-by-minute replay of Senegal 5-0 Iraq with real FIFA data, Player of the Match vote, predictions, quiz, behind-the-scenes stories and FSF TV videos, ticketing and shop (simulated payment), supporter card. Personal concept, not affiliated with the FSF.",
+   gd_btn="Try the app",
    jb_btn="Play JUBOX", jb_alt="Playable JUBOX: game home screen and the Anima game"),
 }
 CSS = r"""
@@ -49,14 +53,15 @@ def run(path,lang):
     s=re.sub(r'(<button class="card proj[^"]*" data-p="p-jubox">\s*<div class="vis">)(?:<div class="typo jubox">.*?</div>|<img [^>]*class="jb"[^>]*>)',
              lambda m:m.group(1)+'<img src="%simg/jubox-app.jpg" alt="%s" loading="lazy" decoding="async" class="jb">'%(pre,t['jb_alt']),s,count=1,flags=re.S)
     # badges on cards that have a demo
-    for pid in ('p-agent','p-focal','p-baykat','p-jubox','p-yema'):
+    for pid in ('p-agent','p-gainde','p-focal','p-baykat','p-jubox','p-yema'):
         i=s.index('data-p="%s"'%pid); j=s.index('<div class="vis">',i)+len('<div class="vis">')
         s=s[:j]+'<!--ENH8:b--><span class="demo-b">%s</span><!--/ENH8:b-->'%t['badge']+s[j:]
     # panel call-to-actions (after the first meta line of each panel)
     for pid,note,href,btn in (('p-agent',t['agent_note'],pre+'agent-demo/'+('?lang=en' if lang=='en' else ''),t['agent_btn']),
                               ('p-baykat',t['bk_note'],pre+'baykat-demo/',t['bk_btn']),
                               ('p-jubox',t['jb_note'],pre+'jubox-demo/',t['jb_btn']),
-                              ('p-yema',t['ym_note'],pre+'yema-demo/'+('?lang=en' if lang=='en' else ''),t['ym_btn'])):
+                              ('p-yema',t['ym_note'],pre+'yema-demo/'+('?lang=en' if lang=='en' else ''),t['ym_btn']),
+                              ('p-gainde',t['gd_note'],pre+'fsf-demo/'+('?lang=en' if lang=='en' else ''),t['gd_btn'])):
         i=s.index('<div id="%s"'%pid); mi=s.index('<div class="meta">',i); me=s.index('</div>',mi)+6
         s=s[:me]+cta(note,href,btn)+s[me:]
     open(path,'w',encoding='utf-8').write(s); print('ok',path)

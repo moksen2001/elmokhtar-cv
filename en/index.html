@@ -1519,6 +1519,16 @@ section.block .head.rv:not(.pre) .eyebrow{animation:ebin .7s cubic-bezier(.2,.8,
           </div>
         </button>
 
+        <button class="card proj big rv" data-p="p-gainde">
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Interactive demo</span><!--/ENH8:b--><img src="../img/preview/gainde.jpg" alt="Gaïndé app: match replay, home screen with countdown and player profile" loading="lazy" decoding="async"></div>
+          <div class="pb">
+            <span class="ctx2">Personal project · concept · Oct. 2026</span>
+            <h3>Gaïndé</h3>
+            <p>A supporters' app for Senegal's national teams: before, during and after the match, all in one place.</p>
+            <div class="foot"><span class="award">Product vision · UX/UI · Prototype</span><span class="open-lbl">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
         <button class="card proj rv" data-p="p-focal">
           <div class="vis"><!--ENH8:b--><span class="demo-b">Interactive demo</span><!--/ENH8:b--><img src="../img/focal-site.jpg" alt="Focal-Shift prototype home page: photo and video gear rental and resale" loading="lazy" decoding="async" class="shot"></div>
           <div class="pb">
@@ -1582,6 +1592,17 @@ section.block .head.rv:not(.pre) .eyebrow{animation:ebin .7s cubic-bezier(.2,.8,
           <div class="meta"><span class="tag">Power Automate</span><span class="tag">Power Platform</span><span class="tag">Generative AI</span></div>
           <h4>Key takeaway</h4>
           <p>AI only creates value in the Back Office if it fits into an existing process without weakening its robustness or compliance. It's the rule I apply today as a Product Owner.</p>
+        </div>
+        <div id="p-gainde" data-k="Personal project · App concept for the Senegalese Football Federation">
+          <h3>Gaïndé</h3>
+          <div class="meta"><span class="award">Product vision · UX/UI · Prototype</span><span class="tag">Personal project</span><span class="tag">October 2026</span></div><!--ENH8:cta--><div class="demo-cta"><p>The full prototype, built to feel like a real phone app: next match and countdown, a minute-by-minute replay of Senegal 5-0 Iraq with real FIFA data, Player of the Match vote, predictions, quiz, behind-the-scenes stories and FSF TV videos, ticketing and shop (simulated payment), supporter card. Personal concept, not affiliated with the FSF.</p><a class="btn" href="../fsf-demo/?lang=en" target="_blank" rel="noopener">Try the app ↗</a></div><!--/ENH8:cta-->
+          <p>The FSF already posts on its website, Instagram, YouTube, TikTok, X and Facebook, but fans have to jump from one channel to another to find out when their team plays, buy a ticket or rewatch a goal. <b>Gaïndé</b> ("lion" in Wolof) brings it all into a single app, for the Lions and the Lionesses as well as the U-23, U-20, U-17 and beach soccer teams.</p>
+          <h4>What the app does</h4>
+          <p>A countdown to the next match, fixtures for every national team and the AFCON 2027 qualifying table, a <b>minute-by-minute replay of Senegal 5-0 Iraq</b> from the 2026 World Cup using real FIFA data (goals, line-ups, stats), a Player of the Match vote with a shareable card, predictions with friends, a quiz on the Lions' history, FSF TV videos and behind-the-scenes stories, profiles of every player in the squad, ticketing with seat selection and a QR ticket, a shop, a supporter card with points and levels, and every official account of the federation and its players in one place.</p>
+          <h4>My choices</h4>
+          <p>Start from what fans actually do rather than from the federation's org chart: five tabs (Home, Matches, Behind the scenes, Team, Me), every key action within two taps. Data is real and sourced (fsfoot.sn, FIFA reports); what can't be, such as payments or prices, is simulated and labelled as such. Photos are freely licensed and the app uses neither the FSF crest nor sponsors' logos.</p>
+          <h4>Tools</h4>
+          <div class="meta"><span class="tag">Product Discovery</span><span class="tag">UX/UI</span><span class="tag">JavaScript</span><span class="tag">PWA</span></div>
         </div>
         <div id="p-yema" data-k="MBA ESG Paris · Mobile Apps course · Final project">
           <h3>Yema Watch Club</h3>
@@ -2195,9 +2216,9 @@ section.block .head.rv:not(.pre) .eyebrow{animation:ebin .7s cubic-bezier(.2,.8,
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') dls.forEach(function(d){ d.open=false; }); });
   /* hiring filter */
   var MAP={
-    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
+    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-gainde','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
     ia:{rel:['sg','sv'],proj:['p-agent','p-focal','p-veille'],sk:[1,4],cst:['sg','pr']},
-    dx:{rel:['bdf','so','ism','sv'],proj:['p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
+    dx:{rel:['bdf','so','ism','sv'],proj:['p-gainde','p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
   };
   var RELID=['sv','sg','bdf','so','ism'];
   var rels=[].slice.call(document.querySelectorAll('.rel')), projs=[].slice.call(document.querySelectorAll('.proj')), sks=[].slice.call(document.querySelectorAll('.skills .sk'));
@@ -2338,7 +2359,7 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){
   var sec=document.getElementById('projets'), grid=sec&&sec.querySelector('.projects'); if(!grid) return;
   var cards=[].slice.call(grid.querySelectorAll('.proj')); if(!cards.length) return;
-  var MEDIA={'p-agent':'img/preview/agent.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
+  var MEDIA={'p-agent':'img/preview/agent.jpg','p-gainde':'img/preview/gainde.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
   var sc=document.createElement('div'); sc.className='sc run';
   var list=document.createElement('div'); list.className='sc-list';
   var stage=document.createElement('div'); stage.className='sc-stage';
@@ -2437,7 +2458,7 @@ var st=document.querySelector('.sc-stage');
 if(st && !st.querySelector('.sc-media')){ var md=document.createElement('div'); md.className='sc-media'; st.insertBefore(md,st.firstChild);
   [].slice.call(st.querySelectorAll(':scope > .sc-m')).forEach(function(m){ md.appendChild(m); }); var nv=st.querySelector(':scope > .sc-nav'); if(nv) md.appendChild(nv); }
 /* previews in the project cards (used by the phone carousel) */
-var PV={'p-agent':'agent','p-focal':'focal','p-baykat':'baykat','p-jubox':'jubox','p-yema':'yema','p-veille':'veille'};
+var PV={'p-agent':'agent','p-gainde':'gainde','p-focal':'focal','p-baykat':'baykat','p-jubox':'jubox','p-yema':'yema','p-veille':'veille'};
 [].forEach.call(document.querySelectorAll('.projects .proj'),function(c){
   var k=PV[c.getAttribute('data-p')], v=c.querySelector('.vis'); if(!k||!v) return;
   var src=PRE+'img/preview/'+k+'.jpg', im=v.querySelector('img');

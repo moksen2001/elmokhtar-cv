@@ -1519,6 +1519,16 @@ section.block .head.rv:not(.pre) .eyebrow{animation:ebin .7s cubic-bezier(.2,.8,
           </div>
         </button>
 
+        <button class="card proj big rv" data-p="p-gainde">
+          <div class="vis"><!--ENH8:b--><span class="demo-b">Démo interactive</span><!--/ENH8:b--><img src="img/preview/gainde.jpg" alt="Application Gaïndé : rediffusion du match, accueil avec compte à rebours et fiche joueur" loading="lazy" decoding="async"></div>
+          <div class="pb">
+            <span class="ctx2">Projet personnel · concept · oct. 2026</span>
+            <h3>Gaïndé</h3>
+            <p>Application des supporters des équipes nationales du Sénégal : avant, pendant et après le match, au même endroit.</p>
+            <div class="foot"><span class="award">Vision produit · UX/UI · Prototype</span><span class="open-lbl">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </div>
+        </button>
+
         <button class="card proj rv" data-p="p-focal">
           <div class="vis"><!--ENH8:b--><span class="demo-b">Démo interactive</span><!--/ENH8:b--><img src="img/focal-site.jpg" alt="Page d'accueil du prototype Focal-Shift : location et revente de matériel photo et vidéo" loading="lazy" decoding="async" class="shot"></div>
           <div class="pb">
@@ -1582,6 +1592,17 @@ section.block .head.rv:not(.pre) .eyebrow{animation:ebin .7s cubic-bezier(.2,.8,
           <div class="meta"><span class="tag">Power Automate</span><span class="tag">Power Platform</span><span class="tag">IA générative</span></div>
           <h4>Ce que j'en retiens</h4>
           <p>L'IA ne crée de valeur en Back Office que si elle s'intègre à un process existant sans en fragiliser la robustesse ni la conformité. C'est la règle que j'applique aujourd'hui comme Product Owner.</p>
+        </div>
+        <div id="p-gainde" data-k="Projet personnel · Concept d'application pour la Fédération Sénégalaise de Football">
+          <h3>Gaïndé</h3>
+          <div class="meta"><span class="award">Vision produit · UX/UI · Prototype</span><span class="tag">Projet personnel</span><span class="tag">Octobre 2026</span></div><!--ENH8:cta--><div class="demo-cta"><p>Le prototype complet, pensé comme une vraie app sur téléphone : prochain match et compte à rebours, rediffusion minute par minute du Sénégal 5-0 Irak avec les données FIFA réelles, vote de l'Homme du match, pronostics, quiz, coulisses et vidéos FSF TV, billetterie et boutique (paiement simulé), carte de supporter. Concept personnel, non affilié à la FSF.</p><a class="btn" href="fsf-demo/" target="_blank" rel="noopener">Tester l'app ↗</a></div><!--/ENH8:cta-->
+          <p>La FSF communique déjà sur son site, Instagram, YouTube, TikTok, X et Facebook, mais le supporter doit passer d'un canal à l'autre pour savoir quand joue son équipe, acheter un billet ou revoir un but. <b>Gaïndé</b> (« lion » en wolof) réunit tout dans une seule application, pour les Lions comme pour les Lionnes, les U-23, U-20, U-17 et le beach soccer.</p>
+          <h4>Ce que fait l'application</h4>
+          <p>Compte à rebours jusqu'au prochain match, calendrier de toutes les sélections et classement des éliminatoires de la CAN 2027, <b>rediffusion du Sénégal 5-0 Irak</b> du Mondial 2026 minute par minute avec les vraies données FIFA (buts, compositions, statistiques), vote de l'Homme du match avec carte à partager, pronostics entre amis, quiz sur l'histoire des Lions, vidéos FSF TV et stories des coulisses, fiches de tous les joueurs de la liste, billetterie avec choix de place et billet QR, boutique, carte de supporter avec points et niveaux, et tous les comptes officiels de la fédération et des joueurs réunis.</p>
+          <h4>Mes choix</h4>
+          <p>Partir des usages du supporter plutôt que de l'organigramme de la fédération : cinq onglets (Accueil, Matchs, Coulisses, Équipe, Moi), chaque action importante à deux gestes au plus. Les données sont réelles et sourcées (fsfoot.sn, rapports FIFA) ; ce qui ne peut pas l'être, comme les paiements ou les prix, est simulé et signalé comme tel. Les photos sont sous licence libre et l'application n'utilise ni le logo de la FSF ni ceux des sponsors.</p>
+          <h4>Outils</h4>
+          <div class="meta"><span class="tag">Product Discovery</span><span class="tag">UX/UI</span><span class="tag">JavaScript</span><span class="tag">PWA</span></div>
         </div>
         <div id="p-yema" data-k="MBA ESG Paris · Cours Mobile Apps · Travail final">
           <h3>Yema Watch Club</h3>
@@ -2193,9 +2214,9 @@ section.block .head.rv:not(.pre) .eyebrow{animation:ebin .7s cubic-bezier(.2,.8,
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') dls.forEach(function(d){ d.open=false; }); });
   /* hiring filter */
   var MAP={
-    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
+    po:{rel:['sv','sg','bdf'],proj:['p-agent','p-gainde','p-yema','p-focal'],sk:[0,3],cst:['sv','sg','bdf']},
     ia:{rel:['sg','sv'],proj:['p-agent','p-focal','p-veille'],sk:[1,4],cst:['sg','pr']},
-    dx:{rel:['bdf','so','ism','sv'],proj:['p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
+    dx:{rel:['bdf','so','ism','sv'],proj:['p-gainde','p-yema','p-focal','p-baykat','p-jubox'],sk:[2,5],cst:['bdf','so','ism','pr']}
   };
   var RELID=['sv','sg','bdf','so','ism'];
   var rels=[].slice.call(document.querySelectorAll('.rel')), projs=[].slice.call(document.querySelectorAll('.proj')), sks=[].slice.call(document.querySelectorAll('.skills .sk'));
@@ -2336,7 +2357,7 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){
   var sec=document.getElementById('projets'), grid=sec&&sec.querySelector('.projects'); if(!grid) return;
   var cards=[].slice.call(grid.querySelectorAll('.proj')); if(!cards.length) return;
-  var MEDIA={'p-agent':'img/preview/agent.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
+  var MEDIA={'p-agent':'img/preview/agent.jpg','p-gainde':'img/preview/gainde.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
   var sc=document.createElement('div'); sc.className='sc run';
   var list=document.createElement('div'); list.className='sc-list';
   var stage=document.createElement('div'); stage.className='sc-stage';
@@ -2435,7 +2456,7 @@ var st=document.querySelector('.sc-stage');
 if(st && !st.querySelector('.sc-media')){ var md=document.createElement('div'); md.className='sc-media'; st.insertBefore(md,st.firstChild);
   [].slice.call(st.querySelectorAll(':scope > .sc-m')).forEach(function(m){ md.appendChild(m); }); var nv=st.querySelector(':scope > .sc-nav'); if(nv) md.appendChild(nv); }
 /* previews in the project cards (used by the phone carousel) */
-var PV={'p-agent':'agent','p-focal':'focal','p-baykat':'baykat','p-jubox':'jubox','p-yema':'yema','p-veille':'veille'};
+var PV={'p-agent':'agent','p-gainde':'gainde','p-focal':'focal','p-baykat':'baykat','p-jubox':'jubox','p-yema':'yema','p-veille':'veille'};
 [].forEach.call(document.querySelectorAll('.projects .proj'),function(c){
   var k=PV[c.getAttribute('data-p')], v=c.querySelector('.vis'); if(!k||!v) return;
   var src=PRE+'img/preview/'+k+'.jpg', im=v.querySelector('img');

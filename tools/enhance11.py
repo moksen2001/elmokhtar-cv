@@ -174,7 +174,7 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){
   var sec=document.getElementById('projets'), grid=sec&&sec.querySelector('.projects'); if(!grid) return;
   var cards=[].slice.call(grid.querySelectorAll('.proj')); if(!cards.length) return;
-  var MEDIA={'p-agent':'img/preview/agent.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
+  var MEDIA={'p-agent':'img/preview/agent.jpg','p-gainde':'img/preview/gainde.jpg','p-focal':'img/preview/focal.jpg','p-baykat':'img/preview/baykat.jpg','p-jubox':'img/preview/jubox.jpg','p-yema':'img/preview/yema.jpg','p-veille':'img/preview/veille.jpg'};
   var sc=document.createElement('div'); sc.className='sc run';
   var list=document.createElement('div'); list.className='sc-list';
   var stage=document.createElement('div'); stage.className='sc-stage';

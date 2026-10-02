@@ -133,7 +133,7 @@ var st=document.querySelector('.sc-stage');
 if(st && !st.querySelector('.sc-media')){ var md=document.createElement('div'); md.className='sc-media'; st.insertBefore(md,st.firstChild);
   [].slice.call(st.querySelectorAll(':scope > .sc-m')).forEach(function(m){ md.appendChild(m); }); var nv=st.querySelector(':scope > .sc-nav'); if(nv) md.appendChild(nv); }
 /* previews in the project cards (used by the phone carousel) */
-var PV={'p-agent':'agent','p-focal':'focal','p-baykat':'baykat','p-jubox':'jubox','p-yema':'yema','p-veille':'veille'};
+var PV={'p-agent':'agent','p-gainde':'gainde','p-focal':'focal','p-baykat':'baykat','p-jubox':'jubox','p-yema':'yema','p-veille':'veille'};
 [].forEach.call(document.querySelectorAll('.projects .proj'),function(c){
   var k=PV[c.getAttribute('data-p')], v=c.querySelector('.vis'); if(!k||!v) return;
   var src=PRE+'img/preview/'+k+'.jpg', im=v.querySelector('img');
