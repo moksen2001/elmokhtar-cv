@@ -80,8 +80,8 @@ CSS = """<style id="enh10">
 JS = """<script id="enh10">(function(){
   var bar=document.querySelector('.tabbar'); if(!bar||!('IntersectionObserver' in window)) return;
   var tabs={}; [].forEach.call(bar.querySelectorAll('a'),function(a){ tabs[a.dataset.t]=a; });
-  var group={profil:'accueil',monde:'parcours',parcours:'parcours',chiffres:'parcours',cas:'parcours',projets:'projets',temoignages:'projets',
-    formation:'competences',certifications:'competences',competences:'competences',ia:'competences',engagements:'competences',contact:'contact'};
+  var group={profil:'accueil',monde:'parcours',parcours:'parcours',chiffres:'parcours',cas:'parcours',projets:'projets',temoignages:'parcours',
+    formation:'parcours',certifications:'competences',competences:'competences',ia:'competences',engagements:'competences',contact:'contact'};
   function set(k){ for(var t in tabs) tabs[t].classList.toggle('on',t===k); }
   var hero=document.querySelector('.hero'); if(hero) hero.dataset.tab='accueil';
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) set(e.target.dataset.tab||group[e.target.id]); }); },{rootMargin:'-40% 0px -55% 0px'});
