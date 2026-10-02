@@ -1,0 +1,30 @@
+{
+ "name": "Gaïndé · supporters du Sénégal (concept)",
+ "short_name": "Gaïndé",
+ "lang": "fr",
+ "description": "Concept d’application pour les supporters des Lions du Sénégal, imaginé par El Mokhtar Berrada. Non officiel, non affilié à la FSF.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#06140C",
+ "theme_color": "#06140C",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

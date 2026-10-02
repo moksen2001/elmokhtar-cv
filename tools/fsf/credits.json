@@ -1,0 +1,408 @@
+{
+ "team": {
+  "t": "Senegal team France v Senegal 16 June 2026-304.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Senegal_team_France_v_Senegal_16_June_2026-304.jpg",
+  "alt": {
+   "fr": "Les Lions alignés pour l’hymne avant France–Sénégal, Mondial 2026",
+   "en": "The Lions lined up for the anthem before France–Senegal, 2026 World Cup"
+  },
+  "pos": "50% 40%",
+  "w": 900,
+  "h": 600
+ },
+ "p-koulibaly": {
+  "t": "Kalidou Koulibaly France v Senegal 16 June 2026-370 (cropped).jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Kalidou_Koulibaly_France_v_Senegal_16_June_2026-370_%28cropped%29.jpg",
+  "alt": {
+   "fr": "Kalidou Koulibaly",
+   "en": "Kalidou Koulibaly"
+  },
+  "pos": "50% 22%",
+  "w": 669,
+  "h": 900
+ },
+ "p-isarr": {
+  "t": "Ismaila Sarr France v Senegal 16 June 2026-425 (cropped).jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Ismaila_Sarr_France_v_Senegal_16_June_2026-425_%28cropped%29.jpg",
+  "alt": {
+   "fr": "Ismaïla Sarr",
+   "en": "Ismaïla Sarr"
+  },
+  "pos": "50% 20%",
+  "w": 600,
+  "h": 900
+ },
+ "a-sarr": {
+  "t": "Ismaila Sarr France v Senegal 16 June 2026-411.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Ismaila_Sarr_France_v_Senegal_16_June_2026-411.jpg",
+  "alt": {
+   "fr": "Ismaïla Sarr en action, Mondial 2026",
+   "en": "Ismaïla Sarr in action, 2026 World Cup"
+  },
+  "pos": "50% 30%",
+  "w": 600,
+  "h": 900
+ },
+ "p-jackson": {
+  "t": "Nicolas Jackson France v Senegal 16 June 2026-369 (cropped).jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Nicolas_Jackson_France_v_Senegal_16_June_2026-369_%28cropped%29.jpg",
+  "alt": {
+   "fr": "Nicolas Jackson",
+   "en": "Nicolas Jackson"
+  },
+  "pos": "50% 20%",
+  "w": 600,
+  "h": 900
+ },
+ "a-jackson": {
+  "t": "Nicolas Jackson France v Senegal 16 June 2026-422.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Nicolas_Jackson_France_v_Senegal_16_June_2026-422.jpg",
+  "alt": {
+   "fr": "Nicolas Jackson de dos, maillot n°11",
+   "en": "Nicolas Jackson from behind, number 11 shirt"
+  },
+  "pos": "50% 35%",
+  "w": 600,
+  "h": 900
+ },
+ "p-iliman": {
+  "t": "Iliman Ndiaye France v Senegal 16 June 2026-475.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Iliman_Ndiaye_France_v_Senegal_16_June_2026-475.jpg",
+  "alt": {
+   "fr": "Iliman Ndiaye",
+   "en": "Iliman Ndiaye"
+  },
+  "pos": "50% 18%",
+  "w": 600,
+  "h": 900
+ },
+ "p-pgueye": {
+  "t": "Pape Gueye France v Senegal 16 June 2026-359 (cropped).jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Pape_Gueye_France_v_Senegal_16_June_2026-359_%28cropped%29.jpg",
+  "alt": {
+   "fr": "Pape Gueye",
+   "en": "Pape Gueye"
+  },
+  "pos": "45% 18%",
+  "w": 574,
+  "h": 900
+ },
+ "p-pmsarr": {
+  "t": "Pape Matar Sarr France v Senegal 16 June 2026-227.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Pape_Matar_Sarr_France_v_Senegal_16_June_2026-227.jpg",
+  "alt": {
+   "fr": "Pape Matar Sarr",
+   "en": "Pape Matar Sarr"
+  },
+  "pos": "50% 18%",
+  "w": 600,
+  "h": 900
+ },
+ "p-ehmdiouf": {
+  "t": "El Hadji Malick Diouf France v Senegal 16 June 2026-384 (cropped).jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:El_Hadji_Malick_Diouf_France_v_Senegal_16_June_2026-384_%28cropped%29.jpg",
+  "alt": {
+   "fr": "El Hadji Malick Diouf",
+   "en": "El Hadji Malick Diouf"
+  },
+  "pos": "50% 18%",
+  "w": 600,
+  "h": 900
+ },
+ "p-niakhate": {
+  "t": "Moussa Niakhate France v Senegal 16 June 2026-343.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Moussa_Niakhate_France_v_Senegal_16_June_2026-343.jpg",
+  "alt": {
+   "fr": "Moussa Niakhaté",
+   "en": "Moussa Niakhaté"
+  },
+  "pos": "50% 15%",
+  "w": 600,
+  "h": 900
+ },
+ "p-mbaye": {
+  "t": "Ibrahim Mbaye France v Senegal 16 June 2026-498.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Ibrahim_Mbaye_France_v_Senegal_16_June_2026-498.jpg",
+  "alt": {
+   "fr": "Ibrahim Mbaye",
+   "en": "Ibrahim Mbaye"
+  },
+  "pos": "50% 15%",
+  "w": 600,
+  "h": 900
+ },
+ "p-camara": {
+  "t": "Lamine Camara France v Senegal 16 June 2026-445.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Lamine_Camara_France_v_Senegal_16_June_2026-445.jpg",
+  "alt": {
+   "fr": "Lamine Camara",
+   "en": "Lamine Camara"
+  },
+  "pos": "50% 22%",
+  "w": 600,
+  "h": 900
+ },
+ "p-bara": {
+  "t": "Bara Ndiaye France v Senegal 16 June 2026-305.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Bara_Ndiaye_France_v_Senegal_16_June_2026-305.jpg",
+  "alt": {
+   "fr": "Bara Sapoko Ndiaye",
+   "en": "Bara Sapoko Ndiaye"
+  },
+  "pos": "50% 18%",
+  "w": 600,
+  "h": 900
+ },
+ "p-diao": {
+  "t": "Assane Diao France v Senegal 16 June 2026-241.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Assane_Diao_France_v_Senegal_16_June_2026-241.jpg",
+  "alt": {
+   "fr": "Assane Diao",
+   "en": "Assane Diao"
+  },
+  "pos": "50% 18%",
+  "w": 600,
+  "h": 900
+ },
+ "a-mane": {
+  "t": "Sadio Mane France v Senegal 16 June 2026-329.jpg",
+  "a": "Bryan Berlin / WikiPortraits",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Sadio_Mane_France_v_Senegal_16_June_2026-329.jpg",
+  "alt": {
+   "fr": "Sadio Mané, n°10, Mondial 2026",
+   "en": "Sadio Mané, number 10, 2026 World Cup"
+  },
+  "pos": "50% 35%",
+  "w": 600,
+  "h": 900
+ },
+ "p-igueye": {
+  "t": "Idrissa Gueye (cropped).jpg",
+  "a": "Екатерина Лаут",
+  "l": "CC BY-SA 3.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Idrissa_Gueye_%28cropped%29.jpg",
+  "alt": {
+   "fr": "Idrissa Gana Gueye",
+   "en": "Idrissa Gana Gueye"
+  },
+  "pos": "50% 25%",
+  "w": 278,
+  "h": 359
+ },
+ "p-ydiouf": {
+  "t": "Diouf asse sr 2425.png",
+  "a": "Paté kroute",
+  "l": "CC0",
+  "lu": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Diouf_asse_sr_2425.png",
+  "alt": {
+   "fr": "Yehvann Diouf",
+   "en": "Yehvann Diouf"
+  },
+  "pos": "50% 20%",
+  "w": 534,
+  "h": 711
+ },
+ "p-msarr": {
+  "t": "Sarr asse rcsa 2425.jpg",
+  "a": "Paté kroute",
+  "l": "CC0",
+  "lu": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Sarr_asse_rcsa_2425.jpg",
+  "alt": {
+   "fr": "Mamadou Sarr",
+   "en": "Mamadou Sarr"
+  },
+  "pos": "50% 12%",
+  "w": 569,
+  "h": 798
+ },
+ "p-diakhon": {
+  "t": "Diakhon asse sr 2425.png",
+  "a": "Paté kroute",
+  "l": "CC0",
+  "lu": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Diakhon_asse_sr_2425.png",
+  "alt": {
+   "fr": "Mamadou Diakhon",
+   "en": "Mamadou Diakhon"
+  },
+  "pos": "50% 15%",
+  "w": 614,
+  "h": 828
+ },
+ "p-sima": {
+  "t": "Abdallah Sima 2023.jpg",
+  "a": "Jim Easton",
+  "l": "CC BY-SA 2.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Abdallah_Sima_2023.jpg",
+  "alt": {
+   "fr": "Abdallah Sima",
+   "en": "Abdallah Sima"
+  },
+  "pos": "45% 15%",
+  "w": 900,
+  "h": 792
+ },
+ "p-dia": {
+  "t": "Boulaye Dia Reims.jpg",
+  "a": "Bigmatbasket",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Boulaye_Dia_Reims.jpg",
+  "alt": {
+   "fr": "Boulaye Dia",
+   "en": "Boulaye Dia"
+  },
+  "pos": "50% 8%",
+  "w": 321,
+  "h": 900
+ },
+ "p-vieira": {
+  "t": "Patrick Vieira NYCFC.JPG",
+  "a": "Simon Heseltine",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Patrick_Vieira_NYCFC.JPG",
+  "alt": {
+   "fr": "Patrick Vieira",
+   "en": "Patrick Vieira"
+  },
+  "pos": "50% 12%",
+  "w": 600,
+  "h": 900
+ },
+ "p-malang": {
+  "t": "Malang Sarr - 2021 FIFA Club World Cup Final (cropped).jpg",
+  "a": "محمد امین انصاری / Fars News Agency",
+  "l": "CC BY 4.0",
+  "lu": "https://creativecommons.org/licenses/by/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Malang_Sarr_-_2021_FIFA_Club_World_Cup_Final_%28cropped%29.jpg",
+  "alt": {
+   "fr": "Malang Sarr",
+   "en": "Malang Sarr"
+  },
+  "pos": "50% 20%",
+  "w": 499,
+  "h": 646
+ },
+ "fans-1": {
+  "t": "Senegal fans Russia 2018.jpg",
+  "a": "Екатерина Лаут",
+  "l": "CC BY-SA 3.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Senegal_fans_Russia_2018.jpg",
+  "alt": {
+   "fr": "Supporters sénégalais en tribune, Mondial 2018",
+   "en": "Senegal supporters in the stands, 2018 World Cup"
+  },
+  "pos": "50% 40%",
+  "w": 900,
+  "h": 570
+ },
+ "fans-2": {
+  "t": "Japan-Senegal in Yekaterinburg (FIFA World Cup 2018) 09.jpg",
+  "a": "Wild Child",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Japan-Senegal_in_Yekaterinburg_%28FIFA_World_Cup_2018%29_09.jpg",
+  "alt": {
+   "fr": "Supportrice sénégalaise avec le drapeau, Iekaterinbourg 2018",
+   "en": "Senegal supporter with the flag, Yekaterinburg 2018"
+  },
+  "pos": "55% 50%",
+  "w": 900,
+  "h": 675
+ },
+ "fans-3": {
+  "t": "La victoire sénégalaise.jpg",
+  "a": "Coumba Mendy",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:La_victoire_s%C3%A9n%C3%A9galaise.jpg",
+  "alt": {
+   "fr": "Supportrices fêtant le titre de champion d’Afrique, 6 février 2022",
+   "en": "Fans celebrating the AFCON title, 6 February 2022"
+  },
+  "pos": "50% 35%",
+  "w": 675,
+  "h": 900
+ },
+ "fans-4": {
+  "t": "La lionne.jpg",
+  "a": "Coumba Mendy",
+  "l": "CC BY-SA 4.0",
+  "lu": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:La_lionne.jpg",
+  "alt": {
+   "fr": "Supportrice des Lions, 6 février 2022",
+   "en": "A Lions supporter, 6 February 2022"
+  },
+  "pos": "50% 30%",
+  "w": 675,
+  "h": 900
+ },
+ "dakar-1": {
+  "t": "Pointe des Almadies - Senegal.jpg",
+  "a": "Jeff Attaway",
+  "l": "CC BY 2.0",
+  "lu": "https://creativecommons.org/licenses/by/2.0/",
+  "u": "https://commons.wikimedia.org/wiki/File:Pointe_des_Almadies_-_Senegal.jpg",
+  "alt": {
+   "fr": "La pointe des Almadies à Dakar",
+   "en": "Pointe des Almadies, Dakar"
+  },
+  "pos": "50% 50%",
+  "w": 900,
+  "h": 672
+ }
+}
