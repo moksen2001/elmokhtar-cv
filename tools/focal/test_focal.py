@@ -145,7 +145,7 @@ async def run(p, phone):
         await click_top(pg, f'a.card[data-id="{i}"] [data-cmp]'); await settle(pg, 250)
     await settle(pg, 400)
     check(await pg.locator('#tray.on').count() == 1, 'plateau de comparaison visible')
-    await pg.locator('#tray .btn-amber').click(); await settle(pg, 1000)
+    await pg.locator('#tray .btn-wood').click(); await settle(pg, 1000)
     rows = await pg.evaluate(f"{TOP}.querySelectorAll('.cmp tbody tr').length")
     check(rows >= 8, f'comparateur : tableau de {rows} lignes')
     await shot('comparateur'); await layout_ok(pg, 'comparateur', phone)

@@ -47,7 +47,7 @@ function calendar(id, a, b, months = 2) {
     }
     out.push(`<div><div class="mh">${first.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}</div><div class="wd">${['lu', 'ma', 'me', 'je', 've', 'sa', 'di'].map(x => `<span>${x}</span>`).join('')}</div><div class="days">${d}</div></div>`);
   }
-  return `<div class="cal" style="--m:${months}">${out.join('')}</div><div class="cal-legend"><span><i style="background:var(--ink)"></i>Vos dates</span><span><i style="background:var(--sunk);box-shadow:inset 0 0 0 1px #bbb"></i>Déjà réservé</span><span>Remise de 10 % dès 3 jours, 20 % dès 7 jours</span></div>`;
+  return `<div class="cal" style="--m:${months}">${out.join('')}</div><div class="cal-legend"><span><i style="background:var(--wood-l)"></i>Vos dates</span><span><i style="background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line-2)"></i>Déjà réservé</span><span>Remise de 10 % dès 3 jours, 20 % dès 7 jours</span></div>`;
 }
 /* Sélecteur : clic 1 = début, clic 2 = fin ; refuse une plage qui chevauche une réservation */
 function calPicker(root, id, get, set) {
@@ -99,12 +99,12 @@ SCREENS.product = ([id]) => {
     ? `<div class="pr num">${eur0(it.day)} <small>/ jour</small></div><div class="sub">Au lieu d’acheter ${eur0(it.ref)} neuf · remise dès 3 jours</div><div class="bown"><span class="avatar s a${u.id}">${initials(u.name)}</span><div><b class="small">${esc(u.name)}</b><div class="xs muted">${esc(u.city)}, ${km(u.km)} · ${u.rating ? '★ ' + String(u.rating.toFixed(1)).replace('.', ',') : 'Nouveau'} · identité vérifiée</div></div></div>
        <button class="datebtn" type="button" data-act="dates"><span><small>Du</small><b data-da>${dLong(a)}</b></span><span><small>Au</small><b data-db>${dLong(b)}</b></span></button>
        ${durChips}${rentLines(q)}
-       <div class="acts"><button class="btn btn-amber btn-l" type="button" data-act="reserve">Réserver</button><button class="heart inline" type="button" data-fav="${it.id}" aria-pressed="${S.favs.includes(it.id)}" aria-label="Favori">${ico('heart')}</button><button class="iconbtn heart inline" type="button" data-cmp="${it.id}" aria-pressed="${S.compare.includes(it.id)}" aria-label="Comparer">${ico('compare')}</button></div>
+       <div class="acts"><button class="btn btn-wood btn-l" type="button" data-act="reserve">Réserver</button><button class="heart inline" type="button" data-fav="${it.id}" aria-pressed="${S.favs.includes(it.id)}" aria-label="Favori">${ico('heart')}</button><button class="iconbtn heart inline" type="button" data-cmp="${it.id}" aria-pressed="${S.compare.includes(it.id)}" aria-label="Comparer">${ico('compare')}</button></div>
        <div class="note-ok">${ico('lock', 's')}<span>Aucun débit avant la confirmation du propriétaire. Annulation gratuite jusqu’à 48 h avant.</span></div>`
     : `<div class="pr num">${eur0(it.price)}</div><div class="sub"><s>${eur0(it.ref)} neuf</s> · <b style="color:var(--ok)">−${disc} %, soit ${eur0(it.ref - it.price)} économisés</b></div><div class="bown"><span class="avatar s a${u.id}">${initials(u.name)}</span><div><b class="small">${esc(u.name)}</b><div class="xs muted">${esc(u.city)}, ${km(u.km)} · ${u.rating ? '★ ' + String(u.rating.toFixed(1)).replace('.', ',') : 'Nouveau'} · identité vérifiée</div></div></div>
        <div class="lines num"><div><span>Prix</span><span>${eur(it.price)}</span></div><div><span>Frais de service (5 %)</span><span>${eur(it.price * .05)}</span></div><div><span>Livraison assurée ou main propre</span><span>0 à 15 €</span></div><div class="tot"><span>Total dès</span><span>${eur(it.price * 1.05)}</span></div></div>
        ${it.warranty ? `<div class="note-ok" style="margin:0 0 14px">${ico('shield', 's')}<span>Garantie Focal-Shift ${it.warranty} mois, 14 jours pour signaler un écart avec l’annonce.</span></div>` : ''}
-       <div class="acts"><button class="btn btn-amber btn-l" type="button" data-act="buy">Acheter</button><button class="heart inline" type="button" data-fav="${it.id}" aria-pressed="${S.favs.includes(it.id)}" aria-label="Favori">${ico('heart')}</button><button class="iconbtn heart inline" type="button" data-cmp="${it.id}" aria-pressed="${S.compare.includes(it.id)}" aria-label="Comparer">${ico('compare')}</button></div>
+       <div class="acts"><button class="btn btn-wood btn-l" type="button" data-act="buy">Acheter</button><button class="heart inline" type="button" data-fav="${it.id}" aria-pressed="${S.favs.includes(it.id)}" aria-label="Favori">${ico('heart')}</button><button class="iconbtn heart inline" type="button" data-cmp="${it.id}" aria-pressed="${S.compare.includes(it.id)}" aria-label="Comparer">${ico('compare')}</button></div>
        <div class="note-ok">${ico('lock', 's')}<span>Le paiement est conservé par Focal-Shift et versé au vendeur après votre réception.</span></div>`;
   const checks = [
     it.checked ? 'Contrôle physique par l’équipe Focal-Shift' : 'Annonce vérifiée, contrôle physique sur demande',
@@ -117,7 +117,7 @@ SCREENS.product = ([id]) => {
   const specs = [['Marque et modèle', fullName(it)], ['Catégorie', CAT1[it.cat]], it.mount && ['Monture', it.mount], it.weight && ['Poids', it.weight + ' g'], ['Acheté en', it.year], ['État', STATE[it.state]], ['Prix neuf de référence', eur0(it.ref)], it.shots && ['Déclenchements', nf0.format(it.shots)]].filter(Boolean);
   const SC = ['Autofocus', 'Basse lumière', 'Stabilisation', 'Rafale', 'Vidéo', 'Prise en main'];
   const titleBlock = `<div class="ptitle"><div class="brand">${esc(it.brand)} · ${CAT1[it.cat]}${it.mount ? ', monture ' + it.mount : ''}</div><h1>${esc(it.model)}</h1></div>
-      <div class="pmeta"><span class="tag ${rent ? 'amber' : 'ink'}">${rent ? 'À louer' : 'À vendre'}</span><span class="tag">État : ${STATE[it.state]}</span>${it.checked ? `<span class="tag ok">${ico('shield')}Contrôlé</span>` : ''}${it.warranty && !rent ? `<span class="tag">Garantie ${it.warranty} mois</span>` : ''}</div>`;
+      <div class="pmeta"><span class="tag ${rent ? 'wood' : 'ink'}">${rent ? 'À louer' : 'À vendre'}</span><span class="tag">État : ${STATE[it.state]}</span>${it.checked ? `<span class="tag ok">${ico('shield')}Contrôlé</span>` : ''}${it.warranty && !rent ? `<span class="tag">Garantie ${it.warranty} mois</span>` : ''}</div>`;
   const main = `
     ${app ? '' : `<div class="crumbs"><a href="#/">Accueil</a><span>/</span><a href="#/explorer">${rent ? 'Louer' : 'Acheter'}</a><span>/</span><a href="#/explorer?cat=${it.cat}">${CATS[it.cat]}</a><span>/</span><span>${esc(it.model)}</span></div>`}
     ${app ? '' : titleBlock}
@@ -138,8 +138,8 @@ SCREENS.product = ([id]) => {
     ${kit.length ? `<section class="sec">${secHead('Compléter le kit', rent ? 'Compatible et disponible aux mêmes dates.' : 'Compatible avec cette annonce.', null, !app)}${rail(kit.map((x, i) => card(x, { i, sizes: '(max-width:600px) 66vw, 264px' })).join(''))}</section>` : ''}
     ${sim.length ? `<section class="sec">${secHead('Annonces similaires', '', ['Tout voir', '#/explorer?cat=' + it.cat], !app)}${rail(sim.map((x, i) => card(x, { i, sizes: '(max-width:600px) 66vw, 264px' })).join(''))}</section>` : ''}`;
   const bar = rent
-    ? `<div class="p"><b class="num" data-v="total">${eur(q.total)}</b><span data-pbs>${plural(q.n, 'jour')}, ${period(a, b)}</span></div><button class="btn btn-amber btn-l" type="button" data-act="reserve">Réserver</button>`
-    : `<div class="p"><b class="num">${eur0(it.price)}</b><span>Garantie ${it.warranty || 0} mois · ${esc(u.city)}</span></div><button class="btn btn-amber btn-l" type="button" data-act="buy">Acheter</button>`;
+    ? `<div class="p"><b class="num" data-v="total">${eur(q.total)}</b><span data-pbs>${plural(q.n, 'jour')}, ${period(a, b)}</span></div><button class="btn btn-wood btn-l" type="button" data-act="reserve">Réserver</button>`
+    : `<div class="p"><b class="num">${eur0(it.price)}</b><span>Garantie ${it.warranty || 0} mois · ${esc(u.city)}</span></div><button class="btn btn-wood btn-l" type="button" data-act="buy">Acheter</button>`;
   return {
     title: it.model, hideTabs: true, navOver: true, overAt: 300, large: false, bar: app ? bar : '', pcls: 'pp', html: main,
     actions: `<button class="iconbtn heart" type="button" data-fav="${it.id}" aria-pressed="${S.favs.includes(it.id)}" aria-label="Favori" style="position:static;color:var(--ink);filter:none">${ico('heart')}</button><button class="iconbtn" type="button" data-act="share" aria-label="Partager">${ico('share')}</button>`,
@@ -208,7 +208,7 @@ SCREENS.checkout = ([id], qs) => {
         <label class="check" style="margin-top:16px"><input type="checkbox" data-cgu> J’accepte les conditions de location, dont l’état des lieux au départ et au retour.</label></div>
     </div>
     <div><div class="box" style="position:sticky;top:16px"><h2>Récapitulatif</h2><div data-lines>${rentLines(q)}</div><div class="lines num" style="margin-top:-6px" data-shiprow hidden><div><span>Livraison assurée</span><span>15 €</span></div></div>
-      <button class="btn btn-amber btn-l btn-block" type="button" data-pay disabled>Payer ${eur(q.total)} (simulé)</button>
+      <button class="btn btn-wood btn-l btn-block" type="button" data-pay disabled>Payer ${eur(q.total)} (simulé)</button>
       <p class="xs muted" style="margin:10px 0 0">Annulation gratuite jusqu’à 48 h avant le début. La caution n’est débitée qu’en cas de dommage constaté contradictoirement.</p></div></div></div>`;
   return {
     title: 'Réservation', hideTabs: true, html,
@@ -248,7 +248,7 @@ SCREENS.buy = ([id]) => {
     </div>
     <div><div class="box" style="position:sticky;top:16px"><h2>Récapitulatif</h2><div class="lines num"><div><span>Prix</span><span>${eur(q.price)}</span></div><div><span>Frais de service (5 %)</span><span>${eur(q.fee)}</span></div><div><span>Livraison</span><span data-ship>Gratuit</span></div><div class="tot"><span>Total</span><span data-v="total">${eur(q.total)}</span></div></div>
       ${it.warranty ? `<div class="note-ok" style="margin:0 0 14px">${ico('shield', 's')}<span>Garantie ${it.warranty} mois et 14 jours pour signaler un écart.</span></div>` : ''}
-      <button class="btn btn-amber btn-l btn-block" type="button" data-pay disabled>Payer ${eur(q.total)} (simulé)</button></div></div></div>`;
+      <button class="btn btn-wood btn-l btn-block" type="button" data-pay disabled>Payer ${eur(q.total)} (simulé)</button></div></div></div>`;
   return {
     title: 'Achat', hideTabs: true, html,
     mount(el) {

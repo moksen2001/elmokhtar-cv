@@ -132,7 +132,7 @@ const Nav = {
       tb.classList.toggle('hide', !!t.scr.hideTabs);
       $$('a', tb).forEach(a => a.toggleAttribute('aria-current', false));
       const a = $(`a[data-tab="${this.tab}"]`, tb); a && a.setAttribute('aria-current', 'page');
-      const tc = t.scr.theme; document.querySelector('meta[name=theme-color]').content = tc || '#f2f2ef';
+      const tc = t.scr.theme; document.querySelector('meta[name=theme-color]').content = tc || '#1b2127';
     }
     const m = { explore: 'explore', product: 'explore', conseil: 'conseil', conseilRes: 'conseil', proposer: 'proposer', listing: 'proposer', resa: 'resa', resaView: 'resa', favs: 'fav', profil: 'profil' }[t.scr.route];
     $$('#topbar [data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === m));

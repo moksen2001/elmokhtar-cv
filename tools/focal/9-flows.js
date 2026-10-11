@@ -94,7 +94,7 @@ SCREENS.conseilRes = () => {
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:${isApp() ? '0' : '12px'} 0 22px"><span class="tag">${esc(summary)}</span><a class="link small" href="#/conseil" data-act="back">Modifier mes réponses</a></div>
     ${res.length ? res.map((c, i) => `<div class="box reco">
       ${pic(photosOf(c.m)[0], { sizes: '200px' })}
-      <div class="rb"><span class="xs muted">${i === 0 ? '<span class="tag amber" style="height:20px">Meilleur choix</span> ' : ''}${esc(c.m.brand)}</span><h3 style="font-size:1.15rem;margin:4px 0 2px"><a href="#/p/${c.m.id}" style="text-decoration:none">${esc(c.m.model)}</a></h3>
+      <div class="rb"><span class="xs muted">${i === 0 ? '<span class="tag wood" style="height:20px">Meilleur choix</span> ' : ''}${esc(c.m.brand)}</span><h3 style="font-size:1.15rem;margin:4px 0 2px"><a href="#/p/${c.m.id}" style="text-decoration:none">${esc(c.m.model)}</a></h3>
         <div class="small muted">${esc(c.m.blurb || '')}</div>
         <ul class="pros">${c.pros.map(p => `<li class="p">${ico('check')}<span>Pour vous : ${p}</span></li>`).join('')}${c.con ? `<li class="c">${ico('minus')}<span>Compromis : ${c.con}</span></li>` : ''}</ul>
         <div class="small" style="margin-top:10px"><b class="num">${eur0(c.prix)}</b> ${buy ? '' : `pour ${plural(CQ.jours, 'jour')}`}${c.m.weight ? ` · <span class="mono">${c.m.weight} g</span>` : ''}${c.lens ? ` · Kit conseillé : + ${esc(fullName(c.lens))} (${eur0(buy ? c.lens.price : c.lens.day * CQ.jours)})` : ''}</div>
@@ -108,7 +108,7 @@ SCREENS.conseilRes = () => {
       requestAnimationFrame(() => setTimeout(() => $$('.ring .fg', el).forEach(c => { c.style.strokeDashoffset = c.dataset.off; }), 120));
       el.addEventListener('click', ev => {
         const k = ev.target.closest('[data-kit]');
-        if (k) { const ids = k.dataset.kit.split(',').filter(Boolean).map(Number); ids.forEach(id => { if (!S.favs.includes(id)) S.favs.push(id); }); save(); syncCounts(); $$('[data-fav]').forEach(b => b.setAttribute('aria-pressed', S.favs.includes(+b.dataset.fav))); k.innerHTML = ico('check', 's') + 'Kit ajouté aux favoris'; k.classList.replace('btn-ink', 'btn-amber'); toast(plural(ids.length, 'élément') + ' ajouté' + (ids.length > 1 ? 's' : '') + ' à vos favoris', 'heart'); track('add_kit', { items: ids }); }
+        if (k) { const ids = k.dataset.kit.split(',').filter(Boolean).map(Number); ids.forEach(id => { if (!S.favs.includes(id)) S.favs.push(id); }); save(); syncCounts(); $$('[data-fav]').forEach(b => b.setAttribute('aria-pressed', S.favs.includes(+b.dataset.fav))); k.innerHTML = ico('check', 's') + 'Kit ajouté aux favoris'; k.classList.replace('btn-ink', 'btn-wood'); toast(plural(ids.length, 'élément') + ' ajouté' + (ids.length > 1 ? 's' : '') + ' à vos favoris', 'heart'); track('add_kit', { items: ids }); }
         const c = ev.target.closest('[data-cmpall]');
         if (c) { S.compare = c.dataset.cmpall.split(',').map(Number); save(); Nav.go('/comparer'); }
         const bk = ev.target.closest('[data-act="back"]'); if (bk) { ev.preventDefault(); Nav.back(); }
@@ -127,7 +127,7 @@ SCREENS.kit = ([code]) => {
     <div class="kithd" style="display:grid;grid-template-columns:${isApp() ? '1fr' : '1fr 1fr'};gap:${isApp() ? 18 : 40}px;align-items:center">
       ${pic(DB.P[st.ph][0], { cls: 'r43', eager: true, cover: true, sizes: '(max-width:600px) 100vw, 640px' })}
       <div>${isApp() ? '' : `<span class="tag ink">Kit par projet</span><h1 style="margin:14px 0 10px">${esc(st.name)}</h1>`}<p class="lead">${esc(st.d)}</p>
-        <div class="box" style="margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><span class="xs muted">Le kit complet</span><div class="outv num">${eur0(day)} <span class="small muted" style="font-weight:400">/ jour</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-line" type="button" data-addall>${ico('heart', 's')}Tout en favoris</button><a class="btn btn-amber" href="#/demande?kit=${st.code}">Demander ce kit</a></div></div></div>
+        <div class="box" style="margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><span class="xs muted">Le kit complet</span><div class="outv num">${eur0(day)} <span class="small muted" style="font-weight:400">/ jour</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-line" type="button" data-addall>${ico('heart', 's')}Tout en favoris</button><a class="btn btn-wood" href="#/demande?kit=${st.code}">Demander ce kit</a></div></div></div>
     </div>
     <h2 style="margin:48px 0 18px;font-size:1.3rem">Ce que contient le kit, et pourquoi</h2>
     <div class="grid kitgrid stag">${rows.map((r, i) => r.items.map((it, k) => `<div class="kitcell"><span class="stepno">${String(i + 1).padStart(2, '0')} · ${CAT1[r.cat]}</span><p class="small">${esc(r.why)}</p>${card(it, { i: i + k, cmp: true })}</div>`).join('')).join('')}</div>`;
@@ -204,7 +204,7 @@ SCREENS.demande = (p, q) => {
         $$('.prog i', el).forEach((x, i) => x.classList.toggle('on', i <= DR.step));
         prev.style.visibility = DR.step ? 'visible' : 'hidden';
         next.textContent = DR.step === 2 ? 'Publier ma demande' : 'Continuer';
-        next.classList.toggle('btn-amber', DR.step === 2); next.classList.toggle('btn-ink', DR.step !== 2);
+        next.classList.toggle('btn-wood', DR.step === 2); next.classList.toggle('btn-ink', DR.step !== 2);
         next.disabled = !ok(DR.step);
       };
       el.addEventListener('click', ev => {
@@ -230,7 +230,7 @@ SCREENS.demande = (p, q) => {
 };
 function drow(d) {
   const n = visibleOffers(d).length, when = d.a ? period(fromIso(d.a), fromIso(d.b)) : period(addDays(today, d.d0), addDays(today, d.d1));
-  return `<a class="drow" href="#/demande/${d.id}"><div><span class="xs muted">${esc(d.type)} · ${esc(d.city)}</span><div class="strong" style="margin:2px 0">${esc(d.title)}</div><span class="small muted">${when}, ${eur0(d.budget)} max</span></div><span class="tag ${n ? 'amber' : ''}">${plural(n, 'offre')}</span></a>`;
+  return `<a class="drow" href="#/demande/${d.id}"><div><span class="xs muted">${esc(d.type)} · ${esc(d.city)}</span><div class="strong" style="margin:2px 0">${esc(d.title)}</div><span class="small muted">${when}, ${eur0(d.budget)} max</span></div><span class="tag ${n ? 'wood' : ''}">${plural(n, 'offre')}</span></a>`;
 }
 function openDemDates(el) {
   let x = fromIso(DR.a), y = fromIso(DR.b);
@@ -241,13 +241,13 @@ function openDemDates(el) {
 function offerCard(d, o, isNew) {
   const u = user(o.o), n = d.a ? nDays(fromIso(d.a), fromIso(d.b)) : (d.d1 - d.d0 + 1);
   const items = (o.items || []).map(byId).filter(Boolean);
-  return `<article class="offer${isNew ? ' new' : ''}" data-offer="${o.o}">${isNew ? '<span class="tag amber newb">Nouvelle offre</span>' : ''}
+  return `<article class="offer${isNew ? ' new' : ''}" data-offer="${o.o}">${isNew ? '<span class="tag wood newb">Nouvelle offre</span>' : ''}
     <div class="hd"><span class="avatar a${u.id}">${initials(u.name)}</span><div><b>${esc(u.name)}</b><div class="xs muted">${u.rating ? '★ ' + String(u.rating.toFixed(1)).replace('.', ',') + ' · ' + u.n + ' locations' : 'Nouveau'} · Identité vérifiée</div></div><label class="check xs" style="align-items:center"><input type="checkbox" data-ocmp="${o.o}"> Comparer</label></div>
     ${items.length ? `<div class="kitrow">${items.map(i => `<a href="#/p/${i.id}" title="${esc(fullName(i))}">${pic(photosOf(i)[0], { sizes: '100px' })}</a>`).join('')}</div>` : ''}
     <div><b class="small">${esc(o.kit)}</b></div>
     <div class="facts"><span>${ico('pin', 's')}${esc(o.mode)}, ${km(o.km)}</span><span>${ico('lock', 's')}Caution ${eur0(o.dep)}</span><span>${ico('cal', 's')}${plural(n, 'jour')}</span></div>
     ${o.msg ? `<p class="msg">« ${esc(o.msg)} »</p>` : ''}
-    <div class="ft"><div><span class="xs muted">Prix total, frais compris</span><div class="tot num">${eur0(o.total)}</div></div><button class="btn btn-amber" type="button" data-accept="${o.o}">Accepter cette offre</button></div>
+    <div class="ft"><div><span class="xs muted">Prix total, frais compris</span><div class="tot num">${eur0(o.total)}</div></div><button class="btn btn-wood" type="button" data-accept="${o.o}">Accepter cette offre</button></div>
   </article>`;
 }
 SCREENS.demandeView = ([id]) => {
@@ -257,7 +257,7 @@ SCREENS.demandeView = ([id]) => {
   let sort = 'prix';
   const html = `${isApp() ? '' : `<div class="crumbs"><a href="#/demande">Demandes</a><span>/</span><span>${esc(d.title)}</span></div>`}
     <div style="max-width:880px">
-      <span class="tag ${d.mine ? 'amber' : ''}">${d.mine ? 'Ma demande' : 'Demande de ' + esc(d.who)} · ${esc(d.type)}</span>
+      <span class="tag ${d.mine ? 'wood' : ''}">${d.mine ? 'Ma demande' : 'Demande de ' + esc(d.who)} · ${esc(d.type)}</span>
       <h1 style="margin:12px 0 8px">${esc(d.title)}</h1>${d.desc ? `<p class="lead" style="font-size:1.02rem">${esc(d.desc)}</p>` : ''}
       <div class="dsum" style="margin:18px 0 28px"><div><small>Cherche</small><b>${d.cats.map(c => CAT1[c]).join(', ')}</b></div><div><small>Budget</small><b>${eur0(d.budget)}</b></div><div><small>Quand</small><b>${period(a, b)}</b></div><div><small>Où</small><b>${esc(d.city)}</b></div><div><small>Possède déjà</small><b>${esc(d.has)}</b></div></div>
       ${d.mine ? `<div class="sec-h" style="margin-bottom:12px"><div><h2 style="font-size:1.3rem" data-oc></h2></div><select class="select" data-sort style="width:auto;min-height:40px" aria-label="Trier les offres"><option value="prix">Prix</option><option value="km">Distance</option><option value="note">Note</option></select></div>
@@ -309,7 +309,7 @@ function openOfferCompare(d, ids) {
   openSheet({ title: 'Comparer les offres', wide: true,
     html: `<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>${os.map(o => `<th>${esc(user(o.o).name)}</th>`).join('')}</tr></thead><tbody>
       ${row('Kit', o => esc(o.kit))}${row('Prix total', o => eur0(o.total), o => o.total)}${row('Caution', o => eur0(o.dep), o => o.dep)}${row('Remise', o => esc(o.mode))}${row('Distance', o => km(o.km), o => o.km)}${row('Note', o => user(o.o).rating ? '★ ' + String(user(o.o).rating.toFixed(1)).replace('.', ',') : 'Nouveau', o => user(o.o).rating || 0, false)}
-      <tr><th></th>${os.map(o => `<td><button class="btn btn-amber" type="button" data-acc="${o.o}" style="min-height:38px">Accepter</button></td>`).join('')}</tr></tbody></table></div><p class="xs muted" style="margin-top:10px">En gras, la meilleure valeur de chaque ligne.</p>`,
+      <tr><th></th>${os.map(o => `<td><button class="btn btn-wood" type="button" data-acc="${o.o}" style="min-height:38px">Accepter</button></td>`).join('')}</tr></tbody></table></div><p class="xs muted" style="margin-top:10px">En gras, la meilleure valeur de chaque ligne.</p>`,
     onMount(el, s) { el.addEventListener('click', ev => { const b = ev.target.closest('[data-acc]'); if (b) { s.close(); setTimeout(() => acceptOffer(d, +b.dataset.acc), 300); } }); },
   });
 }
@@ -319,7 +319,7 @@ function acceptOffer(d, oid) {
   openSheet({ title: 'Accepter l’offre de ' + u.name,
     html: `<div class="lines num"><div><span>${esc(o.kit)}</span><span></span></div><div><span>${period(a, b)}</span><span></span></div><div class="tot"><span>Total</span><span>${eur(o.total)}</span></div><div class="cau"><span>Caution, bloquée puis libérée</span><span>${eur0(o.dep)}</span></div></div>
       <div class="simpay">${ico('info')}<div><b>Paiement simulé.</b> Aucun moyen de paiement n’est demandé dans ce prototype.</div></div>`,
-    foot: `<button class="btn btn-amber btn-l btn-block" type="button" data-pay>Payer ${eur(o.total)} (simulé)</button>`,
+    foot: `<button class="btn btn-wood btn-l btn-block" type="button" data-pay>Payer ${eur(o.total)} (simulé)</button>`,
     onMount(el, s) {
       $('[data-pay]', el).onclick = ev => {
         const btn = ev.currentTarget; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Paiement en cours';

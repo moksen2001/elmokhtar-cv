@@ -169,7 +169,7 @@ const NOPHOTO = '<svg viewBox="0 0 120 90" fill="none" stroke="currentColor" str
 function pic(p, o = {}) {
   if (!p) return `<div class="ph nophoto ${o.cls || ''}" role="img" aria-label="${esc(o.alt || 'Photo à venir')}">${NOPHOTO}<span class="np">Photo à venir</span></div>`;
   const fit = !o.cover && p.bg && (p.h / p.w > .82);
-  const lite = fit && parseInt(p.bg.slice(1, 3), 16) > 200;
+  const lite = p.bg && parseInt(p.bg.slice(1, 3), 16) > 200;
   if (!fit && !o.pos && p.h > p.w * 1.1) o.pos = '50% 10%';
   const st = `--c:${p.c};--q:url(${p.q})${p.bg ? `;--bg:${p.bg}` : ''}`;
   const sizes = o.sizes || '(max-width: 600px) 50vw, 300px';
@@ -183,7 +183,7 @@ function card(it, o = {}) {
   const u = user(it.o), fav = S.favs.includes(it.id), cmp = S.compare.includes(it.id);
   const disc = it.mode === 'buy' ? Math.round((1 - it.price / it.ref) * 100) : 0;
   const ov = [];
-  if (disc >= 25) ov.push(`<span class="tag amber">−${disc} %</span>`);
+  if (disc >= 25) ov.push(`<span class="tag wood">−${disc} %</span>`);
   if (it.checked) ov.push(`<span class="tag">${ico('shield')}Contrôlé</span>`);
   return `<a class="card" href="#/p/${it.id}" data-id="${it.id}" style="--i:${o.i || 0}">
     <div style="position:relative">${pic(photosOf(it)[0], { cls: 'r43', alt: fullName(it), sizes: o.sizes })}
@@ -255,7 +255,7 @@ function renderTray() {
   const hide = !n || !scr || !ok.includes(scr.scr.route);
   t.classList.toggle('on', !hide);
   if (!n) return;
-  t.innerHTML = `<div class="thumbs">${S.compare.map(id => pic(photosOf(byId(id))[0], { sizes: '60px' })).join('')}</div><b>${plural(n, 'annonce')} à comparer</b><button class="btn btn-amber" type="button" data-go="#/comparer"${n < 2 ? ' disabled' : ''}>Comparer</button><button class="iconbtn" type="button" data-act="cmp-clear" aria-label="Vider la comparaison" style="color:#fff">${ico('close', 's')}</button>`;
+  t.innerHTML = `<div class="thumbs">${S.compare.map(id => pic(photosOf(byId(id))[0], { sizes: '60px' })).join('')}</div><b>${plural(n, 'annonce')} à comparer</b><button class="btn btn-wood" type="button" data-go="#/comparer"${n < 2 ? ' disabled' : ''}>Comparer</button><button class="iconbtn" type="button" data-act="cmp-clear" aria-label="Vider la comparaison">${ico('close', 's')}</button>`;
 }
 function syncCounts() {
   const c = $('#favcnt'); if (c) { c.hidden = !S.favs.length; c.textContent = S.favs.length; }

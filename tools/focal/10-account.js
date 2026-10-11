@@ -7,11 +7,11 @@ function segTabs(opts, cur, attr) {
 }
 function bkRow(b) {
   const it = byId(b.item), past = fromIso(b.b) < today, st = b.status === 'confirmée' && past ? 'terminée' : b.status;
-  return `<a class="bk" href="#/reservation/${b.ref}">${pic(photosOf(it)[0], { sizes: '130px' })}<div><span class="xs muted mono">${esc(b.ref)}</span><h3 style="margin:2px 0">${esc(b.kit || fullName(it))}</h3><div class="small muted">${period(fromIso(b.a), fromIso(b.b))} · ${esc(user(it.o).name)}</div></div><div style="text-align:right"><span class="tag ${st === 'confirmée' ? 'amber' : st === 'terminée' ? '' : 'ok'}">${st.charAt(0).toUpperCase() + st.slice(1)}</span><div class="strong num" style="margin-top:6px">${eur(b.total)}</div></div></a>`;
+  return `<a class="bk" href="#/reservation/${b.ref}">${pic(photosOf(it)[0], { sizes: '130px' })}<div><span class="xs muted mono">${esc(b.ref)}</span><h3 style="margin:2px 0">${esc(b.kit || fullName(it))}</h3><div class="small muted">${period(fromIso(b.a), fromIso(b.b))} · ${esc(user(it.o).name)}</div></div><div style="text-align:right"><span class="tag ${st === 'confirmée' ? 'wood' : st === 'terminée' ? '' : 'ok'}">${st.charAt(0).toUpperCase() + st.slice(1)}</span><div class="strong num" style="margin-top:6px">${eur(b.total)}</div></div></a>`;
 }
 function orRow(o) {
   const it = byId(o.item);
-  return `<a class="bk" href="#/reservation/${o.ref}">${pic(photosOf(it)[0], { sizes: '130px' })}<div><span class="xs muted mono">${esc(o.ref)}</span><h3 style="margin:2px 0">${esc(fullName(it))}</h3><div class="small muted">Commandé le ${dShort(fromIso(o.at))} · ${o.ship === 'liv' || o.ship === 'livraison' ? 'Livraison assurée' : 'Main propre'}</div></div><div style="text-align:right"><span class="tag ${o.status === 'livrée' ? '' : 'amber'}">${o.status.charAt(0).toUpperCase() + o.status.slice(1)}</span><div class="strong num" style="margin-top:6px">${eur(o.total)}</div></div></a>`;
+  return `<a class="bk" href="#/reservation/${o.ref}">${pic(photosOf(it)[0], { sizes: '130px' })}<div><span class="xs muted mono">${esc(o.ref)}</span><h3 style="margin:2px 0">${esc(fullName(it))}</h3><div class="small muted">Commandé le ${dShort(fromIso(o.at))} · ${o.ship === 'liv' || o.ship === 'livraison' ? 'Livraison assurée' : 'Main propre'}</div></div><div style="text-align:right"><span class="tag ${o.status === 'livrée' ? '' : 'wood'}">${o.status.charAt(0).toUpperCase() + o.status.slice(1)}</span><div class="strong num" style="margin-top:6px">${eur(o.total)}</div></div></a>`;
 }
 SCREENS.resa = (p, q) => {
   const t = q.t === 'achats' ? 'achats' : 'locations';
@@ -57,7 +57,7 @@ SCREENS.profil = () => {
     <div class="menu">${li('#/conseil', 'spark', 'Conseil en 5 questions')}${li('#/kit/interview', 'video', 'Kits par projet')}</div>
     <div class="mhd">Le prototype</div>
     <div class="menu">${li('#/a-propos', 'info', 'À propos du projet')}${li('#/confidentialite', 'lock', 'Confidentialité et cookies')}${li('#/credits', 'image', 'Crédits photos', DB.credits.length)}${isApp() ? li('', 'phone', 'Installer l’application', null, 'install-how') : ''}${li('../#projets', 'back', 'Retour au CV d’El Mokhtar')}</div>
-    ${isApp() ? `<div class="about"><b>Prototype du challenge professionnel de fin d’études</b><p class="small" style="margin:6px 0 10px;color:#cfcfca">MBA ESG, septembre 2026. Données fictives, paiement simulé.</p><a href="../#projets">← Retour au CV</a></div>` : ''}
+    ${isApp() ? `<div class="about"><b>Prototype du challenge professionnel de fin d’études</b><p class="small" style="margin:6px 0 10px;color:var(--ink-2)">MBA ESG, septembre 2026. Données fictives, paiement simulé.</p><a href="../#projets">← Retour au CV</a></div>` : ''}
     <button class="btn btn-ghost small" type="button" data-act="reset" style="margin-top:18px;color:var(--mute)">Réinitialiser la démo</button></div>`;
   return { title: 'Profil', root: true, live: true, html };
 };
@@ -65,9 +65,9 @@ SCREENS.myListings = () => {
   const own = ITEMS.filter(i => i.o === 5);
   const rev = 2 * 10 * .88;
   const html = `${isApp() ? '' : '<h1 style="margin-bottom:8px">Mes annonces</h1>'}<p class="muted" style="margin-bottom:20px">Ce mois-ci : 2 jours loués, ${eur(rev)} reversés après commission.</p>
-    <div style="max-width:860px">${S.listings.map(l => `<div class="bk">${pic(l.ph ? DB.P[l.ph][0] : null, { sizes: '130px' })}<div><span class="xs muted mono">${esc(l.ref)}</span><h3 style="margin:2px 0">${esc(l.name)}</h3><div class="small muted">${l.mode === 'rent' ? eur0(l.day) + ' / jour' : eur0(l.price)} · ${esc(STATE[l.state])}</div></div><span class="tag amber">${ico('clock')}En vérification</span></div>`).join('')}
+    <div style="max-width:860px">${S.listings.map(l => `<div class="bk">${pic(l.ph ? DB.P[l.ph][0] : null, { sizes: '130px' })}<div><span class="xs muted mono">${esc(l.ref)}</span><h3 style="margin:2px 0">${esc(l.name)}</h3><div class="small muted">${l.mode === 'rent' ? eur0(l.day) + ' / jour' : eur0(l.price)} · ${esc(STATE[l.state])}</div></div><span class="tag wood">${ico('clock')}En vérification</span></div>`).join('')}
     ${own.map(it => `<a class="bk" href="#/p/${it.id}">${pic(photosOf(it)[0], { sizes: '130px' })}<div><span class="xs muted">${it.mode === 'rent' ? 'Location' : 'Vente'}</span><h3 style="margin:2px 0">${esc(fullName(it))}</h3><div class="small muted">${it.mode === 'rent' ? eur0(it.day) + ' / jour' : eur0(it.price)} · ${STATE[it.state]}</div></div><span class="tag ok">${ico('check')}En ligne</span></a>`).join('')}</div>
-    <a class="btn btn-amber" href="#/proposer/annonce" style="margin-top:20px">${ico('plus', 's')}Nouvelle annonce</a>`;
+    <a class="btn btn-wood" href="#/proposer/annonce" style="margin-top:20px">${ico('plus', 's')}Nouvelle annonce</a>`;
   return { title: 'Mes annonces', live: true, html };
 };
 
@@ -113,7 +113,7 @@ SCREENS.proposer = () => ({
     <div style="display:grid;grid-template-columns:${isApp() ? '1fr' : '1.1fr .9fr'};gap:40px;align-items:center;margin-bottom:36px">
       <div>${isApp() ? '' : '<h1>Votre matériel dort ? Faites-le travailler.</h1>'}<p class="lead" style="margin-top:${isApp() ? 0 : 14}px">Publier est gratuit. Une commission de 12 % n’est prélevée que si une location a lieu, 5 % sur une vente.</p>
         <ul class="checks" style="grid-template-columns:1fr;margin:18px 0 22px">${['Assurance casse et vol et caution séparée dans chaque devis', 'État des lieux photographié, validé par les deux parties', 'Vous choisissez vos jours libres et vos remises', 'Payé après le retour du matériel, net affiché d’avance'].map(t => `<li>${ico('check')}<span>${t}</span></li>`).join('')}</ul>
-        <a class="btn btn-amber btn-l" href="#/proposer/annonce">Publier une annonce</a></div>
+        <a class="btn btn-wood btn-l" href="#/proposer/annonce">Publier une annonce</a></div>
       ${pic(DB.P['h-studio'][0], { cls: 'r43', cover: true, sizes: '(max-width:600px) 100vw, 520px', alt: 'Studio photo avec boîtes à lumière' })}
     </div>
     <h2 style="margin-bottom:6px">Vendre ou louer ? Comparez en net.</h2><p class="muted" style="margin-bottom:18px">Le simulateur du prototype, avec les mêmes hypothèses que l’estimation serveur.</p>${simBlock()}`,
@@ -153,7 +153,7 @@ SCREENS.listing = () => {
         w.innerHTML = `<div class="wstep${back ? ' back' : ''}">${steps[LD.step]()}</div>`;
         $$('.prog i', el).forEach((x, i) => x.classList.toggle('on', i <= LD.step));
         prev.style.visibility = LD.step ? 'visible' : 'hidden'; next.textContent = LD.step === 2 ? 'Envoyer en vérification' : 'Continuer';
-        next.classList.toggle('btn-amber', LD.step === 2); next.classList.toggle('btn-ink', LD.step !== 2); next.disabled = !LD.ref;
+        next.classList.toggle('btn-wood', LD.step === 2); next.classList.toggle('btn-ink', LD.step !== 2); next.disabled = !LD.ref;
       };
       el.addEventListener('click', ev => {
         const t = ev.target;

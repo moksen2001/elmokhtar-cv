@@ -83,7 +83,7 @@ function howBlock() {
         ${d.offers.map(o => { const u = user(o.o); return `<div class="mini off"><span class="avatar s a${o.o}">${initials(u.name)}</span><div><b class="small">${esc(u.name)}</b><div class="xs muted">${esc(o.kit)}</div></div><b>${eur0(o.total)}</b></div>`; }).join('')}
       </div>
       <div class="st" data-st="2">
-        <div class="mini" style="box-shadow:inset 0 0 0 2px var(--ink)">
+        <div class="mini" style="box-shadow:inset 0 0 0 2px var(--wood-l)">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div style="display:flex;gap:10px;align-items:center"><span class="avatar s a1">CR</span><div><b class="small">Camille R.</b><div class="xs muted">4,2 km, main propre</div></div></div><span class="tag ok">${ico('check')}Réservé</span></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px">${[3, 4].map(id => pic(photosOf(byId(id))[0], { cls: 'r43', sizes: '200px' })).join('')}</div>
           <div class="lines" style="margin-bottom:0"><div><span>Kit pour 1 jour</span><span>45 €</span></div><div class="cau"><span>Caution, bloquée puis libérée</span><span>300 €</span></div></div>
@@ -109,15 +109,15 @@ function ownerBand() {
     <div>
       <h2>Votre matériel dort entre deux tournages ? Il peut payer le prochain.</h2>
       <p class="lead" style="margin-top:14px">Publiez gratuitement. Assurance, caution et état des lieux photographié protègent chaque location ; vous êtes payé une fois le matériel rendu.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px"><a class="btn btn-amber" href="#/proposer/annonce">Proposer mon matériel</a><a class="btn btn-line" href="#/proposer">Simuler mes revenus</a></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px"><a class="btn btn-wood" href="#/proposer/annonce">Proposer mon matériel</a><a class="btn btn-line" href="#/proposer">Simuler mes revenus</a></div>
     </div>
     <div class="simi">
-      <div class="small" style="color:#bdbdb7">Un Sony A7 IV acheté 2 800 €, loué</div>
-      <div style="display:flex;align-items:baseline;gap:10px;margin:6px 0 2px"><span class="outv" style="color:#fff" data-jm-v>4 jours</span><span style="color:#bdbdb7" class="small">par mois</span></div>
+      <div class="small" style="color:var(--ink-2)">Un Sony A7 IV acheté 2 800 €, loué</div>
+      <div style="display:flex;align-items:baseline;gap:10px;margin:6px 0 2px"><span class="outv" style="color:var(--ink)" data-jm-v>4 jours</span><span style="color:var(--ink-2)" class="small">par mois</span></div>
       <input class="range" type="range" min="1" max="12" value="4" data-jm aria-label="Jours de location par mois">
-      <div class="small" style="color:#bdbdb7;margin-top:14px">vous rapporte, commission de 12 % déduite</div>
+      <div class="small" style="color:var(--ink-2);margin-top:14px">vous rapporte, commission de 12 % déduite</div>
       <div class="big num" data-jm-out>218 €</div>
-      <div class="small" style="color:#bdbdb7;margin-top:2px">par mois, à 62 € la journée</div>
+      <div class="small" style="color:var(--ink-2);margin-top:2px">par mois, à 62 € la journée</div>
     </div>
   </div>`;
 }
@@ -140,7 +140,7 @@ SCREENS.home = () => {
   const head = app ? `<div class="apphead" style="display:none"><span class="logo">Focal<i></i>Shift</span>${modeToggle()}</div>` : '';
   const hero = app ? `
     ${installHint()}
-    <a class="mhero" href="#/demande">${heroVF({ inner: `<div class="txt"><b>Décrivez votre tournage. Les propriétaires vous font une offre.</b><span class="btn btn-amber" style="min-height:40px">Publier un besoin</span></div>` })}</a>
+    <a class="mhero" href="#/demande">${heroVF({ inner: `<div class="txt"><b>Décrivez votre tournage. Les propriétaires vous font une offre.</b><span class="btn btn-wood" style="min-height:40px">Publier un besoin</span></div>` })}</a>
     <button class="msearch" type="button" data-go="#/explorer?focus=1">${ico('search')}${esc(C.ph)}</button>`
     : `<section class="hero">
       <div>
