@@ -146,6 +146,7 @@ SCREENS.product = ([id]) => {
     mount(el) {
       track('view_item', { item_id: it.id, item_name: fullName(it), price: rent ? it.day : it.price });
       mountGallery(el, it);
+      if (!app) Motion.split($('.ptitle h1', el));
       if (Nav.vtId === it.id) { const im = $('[data-gal] .ph', el); if (im) im.style.viewTransitionName = 'pimg'; Nav.vtId = null; }
       const setR = (x, y, partial) => {
         a = x; b = y;
@@ -225,7 +226,7 @@ SCREENS.checkout = ([id], qs) => {
           S.bookings.unshift({ ref, item: it.id, a: iso(a), b: iso(b), total: tot, dep: q.dep, status: 'confirmée', ship, at: iso(today) });
           S.dates = null; save();
           track('purchase', { transaction_id: ref, value: tot, currency: 'EUR', items: [{ item_id: it.id, item_name: fullName(it) }] });
-          Nav.go('/ok/' + ref, { replace: true });
+          Motion.shutter(() => Nav.go('/ok/' + ref, { replace: true }));
         }, 1100);
       });
     },
@@ -261,7 +262,7 @@ SCREENS.buy = ([id]) => {
           const ref = 'FS-A-' + String(Math.floor(1000 + Math.random() * 8999));
           S.orders.unshift({ ref, item: it.id, total: t, status: 'payée', ship, at: iso(today) }); save();
           track('purchase', { transaction_id: ref, value: t, currency: 'EUR', items: [{ item_id: it.id }] });
-          Nav.go('/ok/' + ref, { replace: true });
+          Motion.shutter(() => Nav.go('/ok/' + ref, { replace: true }));
         }, 1100);
       });
     },
@@ -295,5 +296,5 @@ SCREENS.done = ([ref]) => {
     body = `<div class="done"><div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div><h1>Annonce envoyée.</h1><p class="lead" style="margin:12px auto 0">${esc(l.name)} est en vérification. L’équipe contrôle chaque annonce avant sa mise en ligne, sous 48 h.</p><div class="ref">Référence ${esc(ref)}</div></div>`;
   } else body = `<div class="done"><h1>Référence introuvable</h1><p class="muted">Cette confirmation n’existe plus dans ce navigateur.</p></div>`;
   const cta = b ? ['Voir mes réservations', '#/reservations'] : o ? ['Voir mes achats', '#/reservations?t=achats'] : l ? ['Voir mes annonces', '#/annonces'] : ['Accueil', '#/'];
-  return { title: 'Confirmation', hideTabs: true, terminal: true, large: false, html: `<div class="narrow" style="max-width:760px;margin:0 auto">${body}<div style="display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap"><a class="btn btn-ink btn-l" href="${cta[1]}">${cta[0]}</a><a class="btn btn-line btn-l" href="#/">Retour à l’accueil</a></div></div>` };
+  return { title: 'Confirmation', hideTabs: true, terminal: true, large: false, mount(el) { Motion.split($('.done h1', el), { delay: 120 }); }, html: `<div class="narrow" style="max-width:760px;margin:0 auto">${body}<div style="display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap"><a class="btn btn-ink btn-l" href="${cta[1]}">${cta[0]}</a><a class="btn btn-line btn-l" href="#/">Retour à l’accueil</a></div></div>` };
 };

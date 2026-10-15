@@ -6,7 +6,7 @@ D = os.path.dirname(os.path.abspath(__file__)) + '/'
 OUT = os.path.normpath(D + '../../focal-shift-demo') + '/'
 rd = lambda f: open(D + f, encoding='utf-8').read()
 head, body, css = rd('1-head.html'), rd('2-body.html'), rd('style.css')
-FILES = ['3-data.js', '4-core.js', '5-nav.js', '6-home.js', '7-explore.js', '8-product.js', '9-flows.js', '10-account.js', '11-init.js']
+FILES = ['3-data.js', '4-core.js', '4m-motion.js', '5-nav.js', '6-home.js', '7-explore.js', '8-product.js', '9-flows.js', '10-account.js', '11-init.js']
 js = '\n'.join(rd(f) for f in FILES)
 ES = ['npx', '-y', 'esbuild@0.23.0']
 if '--min' in sys.argv:

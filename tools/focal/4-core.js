@@ -208,13 +208,18 @@ function secHead(title, sub, more, nav) {
 }
 
 /* Nombre animé */
-function countTo(el, to, fmt = eur) {
+function countTo(el, to, fmt = eur, dur = 520) {
   if (!el) return;
-  const from = parseFloat(el.dataset.cv || el.textContent.replace(/[^0-9,]/g, '').replace(',', '.') || '0'); el.dataset.cv = to;
-  if (RM.matches || from === to) { el.textContent = fmt(to); return; }
-  const t0 = performance.now(), dur = 520;
-  const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(from + (to - from) * e); if (k < 1) requestAnimationFrame(step); };
+  // part de la valeur affichée (et non de la cible précédente) si une animation est interrompue
+  const from = el._cv != null ? el._cv : parseFloat(el.dataset.cv || el.textContent.replace(/[^0-9,]/g, '').replace(',', '.') || '0'); el.dataset.cv = to;
+  const id = (el._cid = (el._cid || 0) + 1);
+  if (RM.matches || from === to) { el._cv = to; el.textContent = fmt(to); return; }
+  const t0 = performance.now();
+  const step = t => { if (el._cid !== id) return; const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el._cv = from + (to - from) * e; el.textContent = fmt(el._cv); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
+  // léger « recalage » du chiffre, comme une bague de mise au point (une seule animation à la fois)
+  if (el.animate && !(el._bump && el._bump.playState === 'running'))
+    el._bump = el.animate([{ opacity: .5, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.16, 1, .3, 1)' });
 }
 
 /* Toast */

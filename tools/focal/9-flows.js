@@ -328,7 +328,7 @@ function acceptOffer(d, oid) {
           S.bookings.unshift({ ref, item: (o.items || [])[0] || 3, items: o.items, kit: o.kit, a: iso(a), b: iso(b), total: o.total, dep: o.dep, status: 'confirmée', ship: 'main', at: iso(today) });
           d.accepted = oid; save(); s.close();
           track('purchase', { transaction_id: ref, value: o.total, currency: 'EUR', source: 'offre' });
-          setTimeout(() => Nav.go('/ok/' + ref, { push: true }), 250);
+          setTimeout(() => Motion.shutter(() => Nav.go('/ok/' + ref, { push: true })), 120);
         }, 1000);
       };
     },

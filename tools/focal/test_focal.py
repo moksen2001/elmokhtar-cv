@@ -29,7 +29,7 @@ async def layout_ok(pg, label, phone):
       const de = document.documentElement;
       const over = de.scrollWidth > innerWidth + 1 || (sc && sc.scrollWidth > sc.clientWidth + 1);
       let wide = [];
-      if (sc) sc.querySelectorAll('*').forEach(e => {{ const b = e.getBoundingClientRect(); if (b.width && b.right > innerWidth + 1 && !e.closest('.rail, .mchips, .track, .kitrow, .cmpwrap, .gal, .lb')) wide.push(e.className || e.tagName); }});
+      if (sc) sc.querySelectorAll('*').forEach(e => {{ const b = e.getBoundingClientRect(); if (b.width && b.right > innerWidth + 1 && !e.closest('.rail, .mchips, .track, .kitrow, .cmpwrap, .gal, .lb, .tk-vp')) wide.push(e.className || e.tagName); }});
       return {{ over, wide: wide.slice(0, 5), docScroll: de.scrollHeight - innerHeight, y: scrollY }};
     }})()""")
     check(not r['over'] and not r['wide'], f"{label} : pas de débordement horizontal {r['wide'] if r['wide'] else ''}")

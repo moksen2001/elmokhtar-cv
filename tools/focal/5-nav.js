@@ -120,7 +120,9 @@ const Nav = {
   refresh() {
     const t = this.top(); if (!t) return;
     const sc = $('.sc', t.el), y = sc ? sc.scrollTop : 0;
-    const n = this.build(t.path); t.el.replaceWith(n.el); t.scr.destroy && t.scr.destroy(); Object.assign(t, n); t.mounted = false; t.el._e = t;
+    const n = this.build(t.path);
+    if (!Motion.loud) Motion.still(n.el); Motion.loud = false; // reconstruit sur place : pas de nouvelle révélation, sauf changement de mode
+    t.el.replaceWith(n.el); t.scr.destroy && t.scr.destroy(); Object.assign(t, n); t.mounted = false; t.el._e = t;
     this.mount(t); if (t.scr.onShow) t.scr.onShow(t.el);
     const sc2 = $('.sc', t.el); if (sc2) sc2.scrollTop = y;
     this.chrome();
@@ -132,6 +134,10 @@ const Nav = {
       tb.classList.toggle('hide', !!t.scr.hideTabs);
       $$('a', tb).forEach(a => a.toggleAttribute('aria-current', false));
       const a = $(`a[data-tab="${this.tab}"]`, tb); a && a.setAttribute('aria-current', 'page');
+      // indicateur unique qui glisse vers l'onglet actif, petit appui de l'icône
+      const ind = $('.tb-ind', tb); if (ind) { ind.style.setProperty('--ti', Object.keys(TABS).indexOf(this.tab)); ind.classList.toggle('hid', this.tab === 'demande'); }
+      if (a && this._tb && this._tb !== this.tab && !RM.matches) { const ic = $('.ico', a); ic && ic.animate && ic.animate([{ transform: 'scale(.84)' }, { transform: 'scale(1.06)', offset: .55 }, { transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.2, .8, .2, 1)' }); }
+      this._tb = this.tab;
       const tc = t.scr.theme; document.querySelector('meta[name=theme-color]').content = tc || '#1b2127';
     }
     const m = { explore: 'explore', product: 'explore', conseil: 'conseil', conseilRes: 'conseil', proposer: 'proposer', listing: 'proposer', resa: 'resa', resaView: 'resa', favs: 'fav', profil: 'profil' }[t.scr.route];
@@ -203,8 +209,12 @@ const Nav = {
     if (cur) { const sc = $('.sc', cur.el); this.scrolls[cur.path] = sc ? sc.scrollTop : 0; }
     const isBack = this.web.length > 1 && this.web[this.web.length - 2].path === path && !it.push;
     const e = this.build(path);
-    const swap = () => {
-      if (cur) { cur.el.remove(); cur.scr.destroy && cur.scr.destroy(); }
+    const swap = fade => {
+      if (cur) {
+        cur.scr.destroy && cur.scr.destroy();
+        if (fade) { const o = cur.el; o.classList.add('leave'); o.inert = true; o.setAttribute('aria-hidden', 'true'); setTimeout(() => o.remove(), 260); } // fondu enchaîné
+        else cur.el.remove();
+      }
       if (isBack) this.web.pop(); else if (it.replace) this.web[this.web.length - 1] = e; else this.web.push(e);
       if (isBack) this.web[this.web.length - 1] = e;
       if (this.web.length > 30) this.web.splice(0, this.web.length - 30);
@@ -212,10 +222,10 @@ const Nav = {
       this.reveal(e);
       const sc = $('.sc', e.el);
       if (isBack && this.scrolls[path] != null) sc.scrollTop = this.scrolls[path];
-      else if (!this.vt && !RM.matches) e.el.classList.add('enter-fade');
+      if (fade) e.el.classList.add('enter-fade');
     };
-    if (this.vt && document.startViewTransition && !RM.matches) { const vt = this.vt; this.vt = null; document.startViewTransition(() => { swap(); }).finished.finally(() => $$('[style*="view-transition-name"]').forEach(x => x.style.viewTransitionName = '')); void vt; }
-    else { this.vt = null; swap(); }
+    if (this.vt && document.startViewTransition && !RM.matches) { const vt = this.vt; this.vt = null; document.startViewTransition(() => { swap(false); }).finished.finally(() => $$('[style*="view-transition-name"]').forEach(x => x.style.viewTransitionName = '')); void vt; }
+    else { this.vt = null; swap(!RM.matches && !!cur); }
   },
 };
 function tabFor(name) {

@@ -96,13 +96,21 @@ function mountSim(el) {
     const r = cote(cat, prix, age, etat, jm);
     let seuil = null; for (let j = 0; j <= 20; j++) { if (cote(cat, prix, age, etat, j).tot > r.v * 1.1) { seuil = j; break; } }
     const louer = r.tot > r.v * 1.1, mx = Math.max(r.v, r.tot);
-    $('[data-verdict]', box).textContent = louer ? `Louer rapporte environ ${eur0(r.tot - r.v)} de plus sur un an que vendre aujourd’hui.` : (r.tot > r.v ? 'Vendre ou louer se valent à ce rythme : l’écart ne couvre pas le temps passé.' : 'À ce rythme, vendre maintenant est plus intéressant.');
+    const vd = $('[data-verdict]', box), v0 = vd.textContent;
+    vd.textContent = louer ? `Louer rapporte environ ${eur0(r.tot - r.v)} de plus sur un an que vendre aujourd’hui.` : (r.tot > r.v ? 'Vendre ou louer se valent à ce rythme : l’écart ne couvre pas le temps passé.' : 'À ce rythme, vendre maintenant est plus intéressant.');
     countTo($('[data-mv]', box), Math.round(r.v), eur0); countTo($('[data-ml]', box), Math.round(r.tot), eur0);
     $('[data-mld]', box).textContent = `${eur0(r.rev)} de locations + ${eur0(r.v12)} de revente dans un an`;
-    $('[data-bv]', box).style.width = (r.v / mx * 100) + '%'; $('[data-br]', box).style.width = (r.rev / mx * 100) + '%'; $('[data-brs]', box).style.width = (r.v12 / mx * 100) + '%';
+    // barres en transform (scaleX) : la revente se place au bout des locations
+    const fr = x => (mx > 0 ? x / mx : 0);
+    $('[data-bv]', box).style.setProperty('--w', fr(r.v)); $('[data-br]', box).style.setProperty('--w', fr(r.rev));
+    const rs = $('[data-brs]', box); rs.style.setProperty('--x', fr(r.rev)); rs.style.setProperty('--w', fr(r.v12));
     $('[data-pj]', box).textContent = eur0(r.pj) + ' / jour'; countTo($('[data-mo]', box), Math.round(r.monthly), eur0);
     $('[data-seuil]', box).textContent = seuil == null ? 'jamais, avec ces hypothèses' : plural(seuil, 'jour') + ' par mois';
+    if (v0 && v0 !== vd.textContent) Motion.swap(vd);
   };
+  // à la première apparition du résultat, les montants se comptent depuis zéro pendant que les barres poussent
+  const res = $$('.box', box)[1];
+  Motion.onReveal(res, () => { $$('[data-mv], [data-ml], [data-mo]', box).forEach(x => { x._cv = 0; }); run(); });
   box.addEventListener('input', run); box.addEventListener('change', run);
   box.addEventListener('click', ev => { const b = ev.target.closest('[data-se]'); if (b) { etat = b.dataset.se; $$('[data-se]', box).forEach(x => x.setAttribute('aria-pressed', x === b)); run(); } });
   run();
@@ -177,7 +185,7 @@ SCREENS.listing = () => {
         const ref = 'FS-N-' + String(Math.floor(1000 + Math.random() * 8999));
         S.listings.unshift({ ref, name: LD.ref, ph: r[2], mode: LD.mode === 'buy' ? 'buy' : 'rent', day: LD.day || Math.round(r[1] * HYP[r[0]][2]), price: LD.price || e.mid, state: LD.state });
         save(); LD = null; track('listing_submitted', { ref });
-        Nav.go('/ok/' + ref, { replace: true });
+        Motion.shutter(() => Nav.go('/ok/' + ref, { replace: true }));
       };
       draw();
     },

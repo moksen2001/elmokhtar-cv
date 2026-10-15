@@ -36,6 +36,8 @@ function gtag(){ dataLayer.push(arguments); }
 gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted' });
 /* Mode application sur téléphone, décidé avant le premier rendu */
 if (matchMedia('(max-width: 600px)').matches) document.documentElement.classList.add('app');
+/* Iris d'ouverture : une fois par session, jamais si l'utilisateur limite les animations */
+try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('fs-intro')) { sessionStorage.setItem('fs-intro', '1'); document.documentElement.classList.add('fs-intro'); } } catch (e) {}
 </script>
 <style>
 </style>

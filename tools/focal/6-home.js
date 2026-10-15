@@ -20,7 +20,7 @@ function heroVF(o = {}) {
     ${HERO.map((h, i) => { const p = DB.P[h.k][0]; return `<div class="slide${i === 0 ? ' on' : ''}" data-i="${i}"><img src="${p.s}" alt="${esc(h.cap)}" style="object-position:${h.pos}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false"></div>`; }).join('')}
     <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="af" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <div class="rec" aria-hidden="true"><b></b><span>REC</span></div>
+    <div class="rec" aria-hidden="true"><b></b><span>REC</span><span class="tc" data-tc>00:00:00:00</span></div>
     <div class="dots" aria-hidden="true">${HERO.map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div>
     <div class="exif"><div><div class="cap" data-cap>${esc(HERO[0].cap)}</div><div class="mono" data-kit></div></div></div>
     ${o.inner || ''}
@@ -30,10 +30,22 @@ function heroKit(i) { const h = HERO[i]; return h.kit.map(id => shortName(byId(i
 function runHero(root) {
   const vf = $('[data-hero]', root); if (!vf) return () => {};
   const slides = $$('.slide', vf), dots = $$('.dots i', vf), af = $('.af', vf);
-  let i = 0, timers = [];
+  let i = 0, timers = [], seen = true, n = 0;
   const later = (f, ms) => timers.push(setTimeout(f, ms));
+  // hors écran : le diaporama et le compteur s'arrêtent
+  const ob = 'IntersectionObserver' in window ? new IntersectionObserver(es => { seen = es[es.length - 1].isIntersecting; }) : null;
+  ob && ob.observe(vf);
+  // compteur de temps de prise de vue (25 images/s), à côté de REC
+  const tc = $('[data-tc]', vf), p2 = v => String(v).padStart(2, '0');
+  let f0 = 0;
+  const tci = RM.matches ? 0 : setInterval(() => {
+    if (!f0 || !seen || document.hidden || vf.closest('.below')) return;
+    const fr = Math.floor((performance.now() - f0) / 40), s = Math.floor(fr / 25);
+    tc.textContent = `00:${p2(Math.floor(s / 60) % 60)}:${p2(s % 60)}:${p2(fr % 25)}`;
+  }, 40);
   const focus = s => {
     $('[data-kit]', vf).textContent = heroKit(i); $('[data-cap]', vf).textContent = HERO[i].cap;
+    if (n++) Motion.swap($('.exif > div', vf));
     if (RM.matches) { s.classList.add('sharp'); return; }
     const p = HERO[i].af || [50, 46]; af.style.left = p[0] + '%'; af.style.top = p[1] + '%';
     af.classList.remove('lock', 'hunt'); void af.offsetWidth; af.classList.add('hunt');
@@ -43,17 +55,32 @@ function runHero(root) {
     later(() => { s.classList.add('drift'); }, 1400);
   };
   const img = $('img', slides[0]);
-  const start = () => focus(slides[0]);
-  if (img.complete) setTimeout(start, 120); else img.addEventListener('load', start, { once: true });
+  // le cadre « verrouille » puis la mise au point se fait, une fois l'iris d'ouverture passé
+  const start = () => Motion.after(() => { vf.classList.add('live'); f0 = performance.now(); focus(slides[0]); });
+  if (img.complete) setTimeout(start, 120); else { img.addEventListener('load', start, { once: true }); img.addEventListener('error', start, { once: true }); }
   const iv = setInterval(() => {
-    if (!vf.isConnected || vf.closest('.below') || document.hidden) return;
+    if (!vf.isConnected || vf.closest('.below') || document.hidden || !seen) return;
     const prev = slides[i]; i = (i + 1) % slides.length; const s = slides[i];
     s.classList.remove('sharp', 'drift'); prev.classList.remove('on');
     setTimeout(() => prev.classList.remove('sharp', 'drift'), 1200);
     s.classList.add('on'); dots.forEach((d, k) => { d.classList.remove('on'); if (k === i) { void d.offsetWidth; d.classList.add('on'); } });
     focus(s);
   }, 6000);
-  return () => { clearInterval(iv); timers.forEach(clearTimeout); };
+  return () => { clearInterval(iv); clearInterval(tci); timers.forEach(clearTimeout); ob && ob.disconnect(); };
+}
+
+/* Bandeau « récemment loué près de chez vous » : activité fictive, cohérente avec les annonces */
+const TK_DAYS = [3, 1, 2, 7, 2, 1, 3, 4, 2, 1];
+const TK_AGO = [4, 11, 19, 27, 38, 52, 66, 84, 107, 131];
+const ago = m => (m < 60 ? `il y a ${m} min` : `il y a ${Math.floor(m / 60)} h`);
+function tickerBlock(m) {
+  const items = POP[m].slice(0, 10).map(byId).filter(it => it && photosOf(it).length);
+  const row = dup => items.map((it, k) => { const u = user(it.o); return `<a class="tk-i" href="#/p/${it.id}"${dup ? ' tabindex="-1"' : ''}>${pic(photosOf(it)[0], { sizes: '64px', alt: '' })}<span><b>${esc(shortName(it))}</b><small>${m === 'rent' ? `Loué ${plural(TK_DAYS[k], 'jour')}` : 'Vendu'} · ${esc(u.city)}</small></span><span class="tk-a">${ago(TK_AGO[k])}</span></a>`; }).join('');
+  return `<section class="ticker" aria-label="${m === 'rent' ? 'Récemment loué' : 'Récemment vendu'}">
+    <span class="tk-l eyebrow"><b class="tk-dot" aria-hidden="true"></b>${m === 'rent' ? 'Récemment loué près de chez vous' : 'Récemment vendu entre créateurs'}</span>
+    <div class="tk-vp"><div class="tk-track"><div class="tk-set">${row(false)}</div><div class="tk-set" aria-hidden="true">${row(true)}</div></div></div>
+    <button class="tk-p" type="button" aria-pressed="false" aria-label="Mettre en pause le défilement"><svg class="ico pa" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="ico pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+  </section>`;
 }
 
 /* Comment ça marche : trois étapes animées */
@@ -141,7 +168,8 @@ SCREENS.home = () => {
   const hero = app ? `
     ${installHint()}
     <a class="mhero" href="#/demande">${heroVF({ inner: `<div class="txt"><b>Décrivez votre tournage. Les propriétaires vous font une offre.</b><span class="btn btn-wood" style="min-height:40px">Publier un besoin</span></div>` })}</a>
-    <button class="msearch" type="button" data-go="#/explorer?focus=1">${ico('search')}${esc(C.ph)}</button>`
+    <button class="msearch" type="button" data-go="#/explorer?focus=1">${ico('search')}${esc(C.ph)}</button>
+    ${tickerBlock(m)}`
     : `<section class="hero">
       <div>
         <span class="tag ink" style="height:28px">${m === 'rent' ? 'Location entre créateurs, Paris et petite couronne' : 'Occasion contrôlée, garantie incluse'}</span>
@@ -156,7 +184,8 @@ SCREENS.home = () => {
         <div class="hero-alt">${ico('msg')}<span>Vous hésitez ? <a class="link" href="#/demande">Décrivez votre projet</a>, les propriétaires vous répondent, ou <a class="link" href="#/conseil">répondez à 5 questions</a>.</span></div>
       </div>
       ${heroVF()}
-    </section>`;
+    </section>
+    <div class="sec" style="margin-top:64px">${tickerBlock(m)}</div>`;
   const html = `${head}${hero}
     <section class="sec">${secHead('Par catégorie', '', ['Tout explorer', '#/explorer'], !app)}${rail(['boitier', 'objectif', 'lumiere', 'son', 'stabilisation', 'accessoire'].map(catTile).join(''), { cls: 'cats stag' })}</section>
     <section class="sec">${secHead(m === 'rent' ? 'Disponible près de chez vous' : 'Les meilleures affaires d’occasion', m === 'rent' ? 'Chez des propriétaires vérifiés, à moins de 10 km de Paris 18e.' : 'Prix du neuf affiché, état contrôlé, garantie comprise.', ['Voir tout', '#/explorer'], !app)}${rail(pop.map((it, i) => card(it, { i, sizes: '(max-width:600px) 66vw, 264px' })).join(''), { cls: 'stag' })}</section>
@@ -170,7 +199,12 @@ SCREENS.home = () => {
     html: html,
     mount(el) {
       if (app) { const ah = $('.apphead', el); const nb = $('.navbar', el); nb.replaceWith(ah); ah.style.display = ''; }
-      cleanup.push(runHero(el), runHow(el));
+      cleanup.push(runHero(el), runHow(el), Motion.ticker(el));
+      // titre d'accueil révélé ligne par ligne, puis le reste du bloc
+      const hb = $('.hero', el) || $('.mhero', el), ht = $('.hero h1', el) || $('.mhero .txt b', el);
+      if (el._still) hb && hb.classList.add('go'); else Motion.split(ht, { then: () => hb && hb.classList.add('go') });
+      // le gain mensuel se compte quand le bandeau propriétaire apparaît
+      Motion.onReveal($('.owner', el), () => { const o = $('[data-jm-out]', el), r = $('[data-jm]', el); if (!o || !r) return; o._cv = 0; countTo(o, Math.round(cote('boitier', 2800, 0, 'excellent', +r.value).monthly), eur0, 1400); });
       const typ = $('[data-type]', el);
       const r = $('[data-jm]', el);
       if (r) r.addEventListener('input', () => {

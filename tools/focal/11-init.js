@@ -51,6 +51,7 @@ addEventListener('resize', () => {
   $('#pnote').hidden = !S.note;
   $$('#tmode').forEach(x => { x.dataset.v = S.mode; $$('button', x).forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === S.mode)); });
   Nav.init(); railDrag(); edgeSwipe(); syncCounts();
+  Motion.ready();
   setTimeout(consentBanner, 1400);
   // Les offres continuent d’arriver même quand on est ailleurs dans l’application
   setInterval(() => { if (S.extraDem.length) syncBadges(); }, 1500);
