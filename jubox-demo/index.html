@@ -420,6 +420,7 @@ img{display:block;max-width:100%}
   .kid{transition:none!important}
 }
 /*VT*/@view-transition{navigation:auto}/*END-VT*/
+/*EMO*/img.emo{display:inline-block;width:1.14em;height:1.14em;margin:0 .02em;vertical-align:-.2em;object-fit:contain;-webkit-user-drag:none;user-select:none;filter:drop-shadow(0 .05em .06em rgba(11,47,90,.2))}/*END-EMO*/
 </style>
 </head>
 <body>
@@ -438,7 +439,7 @@ img{display:block;max-width:100%}
       <section class="screen doodle" id="s-splash" aria-labelledby="splash-h">
         <span class="floaty" style="left:8%;top:14%">⭐</span>
         <span class="floaty" style="right:10%;top:18%;animation-delay:-2s">🎈</span>
-        <span class="floaty" style="left:12%;bottom:18%;animation-delay:-4s">🎵</span>
+        <span class="floaty" style="left:7%;top:47%;animation-delay:-4s">🎵</span>
         <span class="floaty" style="right:12%;bottom:22%;animation-delay:-1s">🦁</span>
         <div data-masc="big"></div>
         <h1 class="logo-word" id="splash-h" tabindex="-1">JUBOX</h1>
@@ -1146,5 +1147,19 @@ if(S.avatar){$('#splash-hello').textContent='Re-bonjour, '+avatar()[2]+' !';}
 show('s-splash',{nofocus:true});updateBadges();
 })();
 </script>
+<script>/*EMO*/
+/* JUBOX : les emojis du système (différents sur chaque appareil) sont remplacés par un même jeu
+   d'images en volume (Fluent Emoji, Microsoft, licence MIT). L'emoji reste en texte alternatif. */
+(function(){var M={"👁":"1f441-fe0f","🕊":"1f54a-fe0f","🗣":"1f5e3-fe0f","😉":"1f609","👗":"1f457","🦉":"1f989","🥤":"1f964","🔥":"1f525","🎻":"1f3bb","🌟":"1f31f","🐬":"1f42c","🎁":"1f381","🍋":"1f34b","🏥":"1f3e5","🚦":"1f6a6","🏆":"1f3c6","🍎":"1f34e","🚶":"1f6b6","💧":"1f4a7","🎺":"1f3ba","🧈":"1f9c8","🐸":"1f438","🌙":"1f319","🪘":"1fa98","🎷":"1f3b7","🐑":"1f411","🦆":"1f986","🦒":"1f992","⭐":"2b50","🩺":"1fa7a","🚀":"1f680","🦅":"1f985","🍬":"1f36c","🎈":"1f388","🔢":"1f522","🐢":"1f422","🛵":"1f6f5","🎹":"1f3b9","🥭":"1f96d","🚌":"1f68c","🏫":"1f3eb","🌍":"1f30d","🌳":"1f333","🚗":"1f697","🐒":"1f412","🚕":"1f695","🧩":"1f9e9","💬":"1f4ac","🐻":"1f43b","💥":"1f4a5","🐣":"1f423","🐄":"1f404","🩹":"1fa79","🐺":"1f43a","🍪":"1f36a","🍫":"1f36b","🧊":"1f9ca","🦁":"1f981","🐾":"1f43e","🐞":"1f41e","🎵":"1f3b5","🦷":"1f9b7","🔊":"1f50a","🐓":"1f413","🐟":"1f41f","🐖":"1f416","👋":"1f44b","🐘":"1f418","🐤":"1f424","🎸":"1f3b8","🪥":"1faa5","🧍":"1f9cd","✋":"270b","🏠":"1f3e0","🥁":"1f941","🚰":"1f6b0","🐍":"1f40d","🧼":"1f9fc","🚙":"1f699","🍌":"1f34c","🧑🏾‍⚕":"1f9d1-1f3fe-200d-2695","🧑🏾":"1f9d1-1f3fe","👦🏾":"1f466-1f3fe","👧🏾":"1f467-1f3fe","🧒🏾":"1f9d2-1f3fe","👂🏾":"1f442-1f3fe","🎮":"1f3ae"},ks=Object.keys(M).sort(function(a,b){return b.length-a.length});
+var re=new RegExp(ks.map(function(k){return k.replace(/\uFE0F/g,'')+'\uFE0F?'}).join('|'),'gu');
+function parse(root){if(!root||root.nodeType!==1)return;var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),l=[],n;
+ while(n=w.nextNode()){var p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|TITLE|OPTION|NOSCRIPT)$/.test(p.nodeName))continue;re.lastIndex=0;if(re.test(n.nodeValue))l.push(n)}
+ l.forEach(function(t){var f=document.createDocumentFragment(),s=t.nodeValue,i=0,m;re.lastIndex=0;
+  while(m=re.exec(s)){var cp=M[m[0]]||M[m[0].replace(/\uFE0F/g,'')];if(!cp)continue;if(m.index>i)f.appendChild(document.createTextNode(s.slice(i,m.index)));
+   var im=document.createElement('img');im.className='emo';im.src='emo/'+cp+'.webp';im.alt=m[0];im.draggable=false;im.decoding='async';f.appendChild(im);i=m.index+m[0].length}
+  if(i<s.length)f.appendChild(document.createTextNode(s.slice(i)));if(t.parentNode)t.parentNode.replaceChild(f,t)})}
+parse(document.body);
+new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='characterData'){parse(m.target.parentNode)}else for(var i=0;i<m.addedNodes.length;i++){var n=m.addedNodes[i];parse(n.nodeType===1?n:n.parentNode)}})}).observe(document.body,{childList:true,subtree:true,characterData:true});
+})();/*END-EMO*/</script>
 </body>
 </html>

@@ -12,7 +12,8 @@ const DKR={
  coop:{top:['.topbar'],aside:['.box:has(.map)','.box.agro','.pad:has(.lnk-card)','.note']}
 };
 function DK(id,el){
- HB.sync();
+ HB.sync();TABIND(id);
+ if(id==='conditions'&&el&&!el.querySelector('.credits'))el.insertAdjacentHTML('beforeend',credits());
  app.classList.toggle('pre',PRE.includes(id));
  const on=TABS.includes(id)?'':(DKP[id]||id);
  $$('.tabbar [data-tab],.tabbar [data-dk]').forEach(b=>(b.dataset.tab||b.dataset.dk)===on?b.setAttribute('data-on',''):b.removeAttribute('data-on'));
@@ -37,7 +38,7 @@ function DK(id,el){
  tb.insertAdjacentHTML('beforeend',`<p class="dk dk-lbl">Mon espace</p>${b('wallet',I.wallet,'Portefeuille')}${b('feed',I.leaf,'Nouvelles du terrain')}${b('messages',I.chat,'Messagerie','<span class="dk-n" hidden></span>')}${b('faq',I.help,'Aide et FAQ')}<div class="dk dk-cta" hidden><b>Mode découverte</b>Créez un compte pour investir dès 10${NB}000${NB}FCFA.<button type="button" data-act="join">Créer un compte</button></div><div class="dk dk-spacer"></div><div class="dk dk-user"></div>`);
  tb.addEventListener('click',e=>{const t=e.target.closest('[data-dk]');if(!t)return;const id=t.dataset.dk;if(S.guest&&(id==='wallet'||id==='messages')){toast('Créez un compte pour accéder à cet espace.');return}stack.length=0;stack.push('home',id);show(id,'tab')});
  const lt=$('.login-top');
- lt.insertAdjacentHTML('beforeend',`<ul class="dk-proof"><li><b>8</b>campagnes suivies</li><li><b>10${NB}000</b>FCFA pour commencer</li><li><b>100${NN}%</b>suivi par un agronome</li></ul><div class="dk-field" aria-hidden="true">${art('oignon')}</div>`);
+ lt.insertAdjacentHTML('beforeend',`<ul class="dk-proof"><li><b>8</b>campagnes suivies</li><li><b>10${NB}000</b>FCFA pour commencer</li><li><b>100${NN}%</b>suivi par un agronome</li></ul>`);
  const sw=$('.viewsw'),MQ=matchMedia('(min-width:960px)');
  const pref=()=>{try{return localStorage.getItem('bk-view')}catch(e){return null}};
  function apply(re){const d=MQ.matches&&pref()!=='phone';const was=DESK();HT.classList.toggle('desk',d);if(!d)HT.classList.remove('imp-open');
@@ -46,6 +47,7 @@ function DK(id,el){
  sw.addEventListener('click',e=>{const t=e.target.closest('[data-view]');if(!t)return;try{localStorage.setItem('bk-view',t.dataset.view)}catch(e){}apply(true)});
  MQ.addEventListener('change',()=>apply(true));
  const ib=$('.imp-btn'),pn=$('#panel');
+ ($('#panel-body')||pn).insertAdjacentHTML('beforeend',credits());
  pn.insertAdjacentHTML('afterbegin',`<button class="dk dk-close" type="button" aria-label="Fermer le panneau">${I.x}</button>`);
  const imp=o=>{HT.classList.toggle('imp-open',o);ib.setAttribute('aria-expanded',String(o))};
  ib.addEventListener('click',()=>imp(!HT.classList.contains('imp-open')));

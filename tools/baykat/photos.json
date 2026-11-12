@@ -1,0 +1,156 @@
+{
+ "cols": {
+  "oignon": "#5a5d4e",
+  "oignon-2": "#4b4635",
+  "goutte": "#585538",
+  "riz": "#6a874c",
+  "riz-2": "#628a45",
+  "riz-3": "#848471",
+  "pluie": "#6b7a79",
+  "arachide": "#7e8f3c",
+  "arachide-2": "#72736e",
+  "fleurs": "#504b0e",
+  "mangue": "#67715a",
+  "mangue-2": "#98804f",
+  "mangue-3": "#6c6e3b",
+  "pasteque": "#858b63",
+  "pasteque-2": "#9da564",
+  "tomate": "#537355",
+  "tomate-2": "#233a1d",
+  "tomate-3": "#4e6143",
+  "mais": "#788263",
+  "mais-2": "#786b61",
+  "anacarde": "#776d3b",
+  "anacarde-2": "#85603f",
+  "pousses": "#484936",
+  "graines": "#7b7765",
+  "cloture": "#615c3e"
+ },
+ "cred": {
+  "oignon": {
+   "title": "Ognons ( sénégal ) 22.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "oignon-2": {
+   "title": "Ognons ( sénégal ) 20.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "goutte": {
+   "title": "Ognons ( sénégal ) 21.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "riz": {
+   "title": "Irrigated rice cultivation in the Senegal River Valley - panoramio (72).jpg",
+   "by": "Africa Rice Center",
+   "lic": "CC BY-SA 3.0"
+  },
+  "riz-2": {
+   "title": "Irrigated rice cultivation in the Senegal River Valley - panoramio (92).jpg",
+   "by": "Africa Rice Center",
+   "lic": "CC BY-SA 3.0"
+  },
+  "riz-3": {
+   "title": "Irrigated rice cultivation in the Senegal River Valley - panoramio (9).jpg",
+   "by": "Africa Rice Center",
+   "lic": "CC BY-SA 3.0"
+  },
+  "pluie": {
+   "title": "Irrigated rice cultivation in the Senegal River Valley - panoramio (40).jpg",
+   "by": "Africa Rice Center",
+   "lic": "CC BY-SA 3.0"
+  },
+  "arachide": {
+   "title": "Cultivation of peanut crop in Junagadh region of Western India.jpg",
+   "by": "Abhay iari",
+   "lic": "CC BY-SA 4.0"
+  },
+  "arachide-2": {
+   "title": "Woman carring peanut bush.jpg",
+   "by": "Sanghesenegalafrica",
+   "lic": "CC BY-SA 4.0"
+  },
+  "fleurs": {
+   "title": "Arachis hypogaea Flower.jpg",
+   "by": "Tu7uh",
+   "lic": "CC BY 3.0"
+  },
+  "mangue": {
+   "title": "Mangue ( senegal ) 03.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "mangue-2": {
+   "title": "Mangoes from Senegal 01.jpg",
+   "by": "Wuzyprod",
+   "lic": "CC BY-SA 4.0"
+  },
+  "mangue-3": {
+   "title": "Young Mangoes from Diamniadio, Senegal 03.jpg",
+   "by": "Wuzyprod",
+   "lic": "CC BY-SA 4.0"
+  },
+  "pasteque": {
+   "title": "Le champs de pastèque à Maradi. 02.jpg",
+   "by": "Tawaye",
+   "lic": "CC BY-SA 4.0"
+  },
+  "pasteque-2": {
+   "title": "Pastèque à Djissa Aliou ( kaolack ) 12.jpg",
+   "by": "Amadou250599Ba",
+   "lic": "CC BY-SA 4.0"
+  },
+  "tomate": {
+   "title": "Tomates ( sénégal ) 08.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "tomate-2": {
+   "title": "Tomates ( sénégal ) 05.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "tomate-3": {
+   "title": "Tomates ( sénégal ) 01.jpg",
+   "by": "Pacocreat",
+   "lic": "CC BY-SA 4.0"
+  },
+  "mais": {
+   "title": "Champ de maïs en fin septembre au Burkina Faso (86033).jpg",
+   "by": "Ibrahim Somgalia Guitti",
+   "lic": "CC BY-SA 4.0"
+  },
+  "mais-2": {
+   "title": "Maize sprouting early 02.jpg",
+   "by": "Jozef020",
+   "lic": "CC BY-SA 4.0"
+  },
+  "anacarde": {
+   "title": "Anacardium occidentale MS 4693.JPG",
+   "by": "Marco Schmidt",
+   "lic": "CC BY-SA 2.5"
+  },
+  "anacarde-2": {
+   "title": "Préparation traditionnelle et manuelle des noix de Cajou, fruit de l'Anacardier, île de Sipo, delta du Sine Saloum, Sénégal.jpg",
+   "by": "Julien saison",
+   "lic": "CC BY-SA 4.0"
+  },
+  "pousses": {
+   "title": "Semis de poivron dans un alvéole pépinière 08.jpg",
+   "by": "Thiamlanaa",
+   "lic": "CC BY-SA 4.0"
+  },
+  "graines": {
+   "title": "Mil du Sénégal 06.jpg",
+   "by": "Kabkia",
+   "lic": "CC0"
+  },
+  "cloture": {
+   "title": "Maize Field Entrance Barricade.jpg",
+   "by": "Collins Musonda",
+   "lic": "CC BY-SA 4.0"
+  }
+ }
+}
