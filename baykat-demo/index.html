@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+<script>/*DESK-PRE*/try{if(matchMedia("(min-width:960px)").matches&&localStorage.getItem("bk-view")!=="phone")document.documentElement.classList.add("desk")}catch(e){}</script>
 <style>
 /* =========================================================
    Baykat · système de design
@@ -912,6 +913,160 @@ blockquote.idq{margin:16px 16px 0;padding:0 0 0 16px;border-left:3px solid var(-
   .chart .ln{stroke-dashoffset:0}
   .spin,.phone-ill .ring{animation:spin 2s linear infinite!important}
 }
+
+/*DESK-CSS*/
+/* =========================================================
+   Baykat · version ordinateur (html.desk)
+   Activée à partir de 960px, sauf si l'utilisateur choisit
+   « Téléphone » dans le bandeau. Barre latérale, colonnes,
+   grilles : mêmes écrans, même logique, autre mise en page.
+   ========================================================= */
+.viewsw,.banner .imp-btn{display:none}
+html:not(.desk) .dk{display:none!important}
+@media (min-width:960px){
+  .viewsw{display:inline-flex;flex:none;padding:2px;border:1px solid #5B4A36;border-radius:var(--r1)}
+  .viewsw button{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:#BFB29C;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:6px}
+  .viewsw button svg{width:15px;height:15px}
+  .viewsw button[aria-pressed="true"]{background:var(--y);color:var(--ink)}
+}
+html.desk{--sb:0px;--side:248px}
+html.desk body{background:var(--bg);overflow:hidden}
+html.desk .banner .imp-btn{display:inline-block;flex:none;border:1px solid #5B4A36;background:transparent;color:#E9DFCC;border-radius:var(--r1);padding:5px 12px;font-size:12.5px;font-weight:600;white-space:nowrap}
+html.desk .banner .imp-btn:hover{background:#3A2A18}
+html.desk .stage{display:block;padding:0;min-height:0}
+html.desk .phone{position:static;width:100%;height:calc(100vh - var(--bh));padding:0;border-radius:0;background:none;box-shadow:none}
+html.desk .app{border-radius:0;font-size:15.5px}
+html.desk .statusbar{display:none}
+
+/* Panneau « Ce que j'ai amélioré » : tiroir à droite */
+html.desk .panel{position:fixed;z-index:60;top:var(--bh);right:0;bottom:0;width:460px;padding:28px 32px 40px;background:#fff;border-left:1px solid var(--line);box-shadow:-24px 0 48px -24px rgba(43,29,14,.25);overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+html.desk.imp-open .panel{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+html.desk .panel h2{font-size:32px}
+html.desk .panel .dk-close{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:var(--r1);background:none}
+html.desk .panel .dk-close:hover{background:var(--bg)}
+html.desk .panel .dk-close svg{width:22px;height:22px}
+
+/* Barre latérale (la barre d'onglets, redéployée) */
+html.desk .app .tabbar{display:flex;flex-direction:column;align-items:stretch;gap:2px;left:0;top:0;bottom:0;right:auto;width:var(--side);height:auto;padding:20px 14px 16px;background:#fff;border-top:0;border-right:1px solid var(--line);overflow-y:auto}
+html.desk .app.pre .tabbar{display:none}
+html.desk .tabbar>p,html.desk .tabbar>div{flex:none}
+html.desk .tabbar button{display:flex;flex:none;flex-direction:row;justify-content:flex-start;gap:12px;min-height:44px;padding:0 12px;font-size:15px;font-weight:500;color:var(--ink2);text-align:left;transition:background-color .15s,color .15s}
+html.desk .tabbar button:hover{background:var(--bg);color:var(--ink)}
+html.desk .tabbar button .ti{width:24px;height:24px}
+html.desk .tabbar button .ti svg{width:21px;height:21px}
+html.desk .tabbar [aria-current="page"],html.desk .tabbar [data-on]{background:var(--y1);color:var(--ink);font-weight:600}
+html.desk .tabbar [aria-current="page"] .ti::after{display:none}
+html.desk .tabbar [data-on] svg{stroke-width:2.4}
+.dk-brand{align-items:center;gap:10px;padding:0 10px 20px;font-family:var(--fd);font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--ink)}
+html.desk .dk-brand{display:flex}
+.dk-brand svg{width:34px;height:34px}
+.dk-lbl{margin:20px 12px 6px;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut2)}
+.dk-n{margin-left:auto;min-width:20px;padding:1px 6px;border-radius:10px;background:var(--red);color:#fff;font-size:11.5px;font-weight:700;text-align:center}
+.dk-cta{margin:16px 0 0;padding:16px;border-radius:var(--r2);background:var(--ink);color:#E9DFCC;font-size:13.5px;line-height:1.4}
+.dk-cta b{display:block;color:#fff;font-family:var(--fd);font-size:16px;margin-bottom:4px}
+html.desk .tabbar .dk-cta button{margin-top:12px;width:100%;justify-content:center;min-height:40px;background:var(--y);color:var(--ink);font-weight:700;font-size:14px}
+html.desk .tabbar .dk-cta button:hover{background:var(--y-press);color:var(--ink)}
+html.desk .dk-user{display:flex;align-items:center;gap:10px;margin-top:auto;padding:14px 8px 0;border-top:1px solid var(--line2)}
+.dk-user .av{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--y);font-family:var(--fd);font-weight:700;font-size:13.5px}
+.dk-user div{min-width:0;line-height:1.25;font-size:14px;font-weight:600;color:var(--ink)}
+.dk-user small{display:block;font-size:12px;font-weight:400;color:var(--mut)}
+html.desk .dk-spacer{flex:1;min-height:16px}
+
+/* Zone de contenu */
+html.desk .screen{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+html.desk .screen::-webkit-scrollbar{display:block;width:10px}
+html.desk .screen::-webkit-scrollbar-thumb{background:var(--line);border-radius:5px;border:2px solid var(--bg)}
+html.desk .app:not(.pre) .screen{left:var(--side);padding:20px max(24px,calc((100% - var(--side) - 1128px)/2)) 56px}
+html.desk .app.tabs .screen{padding-bottom:56px}
+html.desk .in-push,html.desk .in-pop,html.desk .in-tab{animation:dkIn .26s cubic-bezier(.2,.8,.2,1) both;box-shadow:none}
+html.desk .out-push,html.desk .out-pop,html.desk .out-tab{animation:fadeOut .12s ease-in both}
+@keyframes dkIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+html.desk .topbar{position:static;display:flex;gap:12px;min-height:0;padding:4px 16px 12px;background:none;border:0}
+html.desk .topbar .icon-btn{background:#fff;border:1px solid var(--line)}
+html.desk .topbar h1{font-family:var(--fd);font-size:26px;font-weight:700;letter-spacing:-.02em;text-align:left}
+html.desk .topbar .icon-btn.r{margin-left:auto}
+html.desk .ph h1{font-size:34px}
+html.desk .ph p{font-size:15.5px}
+html.desk .sec-head h2{font-size:20px}
+html.desk .toast{left:calc(50% + var(--side)/2);right:auto;bottom:32px;width:max-content;max-width:480px;transform:translate(-50%,8px)}
+html.desk .toast.on{transform:translate(-50%,0)}
+html.desk .app.pre .toast{left:50%}
+
+/* Grille deux colonnes posée par DK() */
+.dk-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:8px 16px;align-items:start}
+.dk-grid.eq{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.dk-aside{position:sticky;top:0;display:flex;flex-direction:column}
+.dk-main>:first-child,.dk-aside>:first-child{margin-top:16px}
+.dk-main>.sec-head:first-child,.dk-aside>.sec-head:first-child{margin-top:24px}
+html.desk .dk-aside .sticky-cta{position:static;margin:12px 16px 0;border:1px solid var(--line);border-radius:var(--r2);padding:16px}
+html.desk .dk-aside .help-cta{margin-top:16px}
+
+/* Accueil */
+html.desk .hhead{padding-top:4px}
+html.desk .hhead h1{font-size:32px}
+html.desk .hhead .mark{width:44px;height:44px}
+html.desk .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+html.desk .ccard{transition:transform .2s,box-shadow .2s}
+html.desk .ccard:hover{transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(43,29,14,.45)}
+html.desk .stories{gap:20px}
+html.desk .pf .big{font-size:34px}
+
+/* Explorer */
+html.desk #s-explore .search{max-width:560px}
+html.desk .rlist{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:none;border:0;overflow:visible}
+html.desk .rc,html.desk .rc:first-child{border:1px solid var(--line);border-radius:var(--r2);transition:transform .2s,box-shadow .2s}
+html.desk .rc:hover{transform:translateY(-2px);box-shadow:0 12px 24px -18px rgba(43,29,14,.45)}
+html.desk .rc .t{width:96px;height:96px}
+@media (min-width:1500px){html.desk .rlist{grid-template-columns:repeat(3,minmax(0,1fr))}html.desk .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Détail */
+html.desk .hero{height:320px}
+html.desk .facts{grid-template-columns:repeat(4,1fr)}
+html.desk #s-detail .prose,html.desk #s-coop .prose{font-size:16px;max-width:68ch}
+
+/* Fil du terrain */
+html.desk .feed.posts{display:block;columns:2;column-gap:16px;margin:16px 16px 0}
+html.desk .post{break-inside:avoid;margin:0 0 16px;border:1px solid var(--line);border-radius:var(--r2);overflow:hidden}
+html.desk .post-img{height:200px}
+@media (min-width:1500px){html.desk .feed.posts{columns:3}}
+
+/* Écrans « formulaire » : colonne centrée */
+html.desk #s-don,html.desk #s-faq,html.desk #s-contact,html.desk #s-identite,html.desk #s-conditions,html.desk #s-messages,html.desk #s-notifs,html.desk #s-paym,html.desk #s-kyc,html.desk #s-pay,html.desk #s-receipt,html.desk #s-ok,html.desk #s-donok,html.desk #s-chat,html.desk #s-profil{padding-left:max(24px,calc((100% - var(--side) - 720px)/2));padding-right:max(24px,calc((100% - var(--side) - 720px)/2))}
+html.desk #s-chat{padding-top:0;padding-bottom:0}
+html.desk .chat{min-height:100%;background:#fff;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+html.desk .chat .topbar{padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+html.desk .chat .topbar .who h1{font-family:var(--ft);font-size:16px;letter-spacing:0}
+html.desk .prof{border-radius:var(--r2);margin:0 16px}
+html.desk .pstats{margin:-24px 32px 0}
+
+/* Feuilles, stories */
+html.desk .sheet-wrap{justify-content:flex-start;align-items:flex-end;padding:72px 32px 32px}
+html.desk .sheet{width:420px;max-height:calc(100% - 40px);border-radius:var(--r2);box-shadow:0 24px 48px -16px rgba(43,29,14,.4);animation:dkIn .22s both}
+html.desk .sheet .grab{display:none}
+html.desk .story{inset:auto;left:50%;top:50%;width:420px;height:min(780px,calc(100% - 48px));transform:translate(-50%,-50%);border-radius:24px;overflow:hidden;box-shadow:0 0 0 100vmax rgba(20,14,8,.78)}
+
+/* Avant connexion : écran partagé */
+html.desk .screen.login{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:stretch}
+html.desk .login-top{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px clamp(32px,6vw,96px);text-align:left;position:relative;overflow:hidden}
+html.desk .login-top .tagline{font-family:var(--fd);font-size:clamp(34px,3.6vw,54px);line-height:1.02;font-weight:800;letter-spacing:-.03em;max-width:12ch;margin-top:28px}
+html.desk .login-card{align-self:center;justify-self:center;width:min(440px,calc(100% - 48px));margin:24px;padding:32px 28px 24px}
+html.desk .login-card h1{font-size:28px}
+.dk-proof{display:none}
+html.desk .dk-proof{display:grid;grid-template-columns:repeat(3,auto);gap:28px;margin:36px 0 0;padding:20px 0 0;border-top:2px solid rgba(43,29,14,.14);list-style:none;font-size:13.5px;color:var(--ink2)}
+html.desk .dk-proof b{display:block;font-family:var(--fd);font-size:26px;letter-spacing:-.02em;color:var(--ink)}
+html.desk .dk-field{position:absolute;right:-40px;bottom:-30px;width:min(62%,520px);opacity:.9;pointer-events:none}
+html.desk .app.pre .screen:not(.login){background:var(--y);padding:32px 24px;display:flex}
+html.desk .dk-card{position:relative;margin:auto;width:min(500px,100%);background:var(--bg);border-radius:24px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(43,29,14,.45);padding-bottom:8px}
+html.desk .dk-card .topbar{padding:16px 16px 8px}
+html.desk .dk-card .topbar h1{font-size:20px}
+html.desk .dk-card .onb{min-height:640px}
+html.desk .dk-card:has(.onb){padding:0}
+@media (prefers-reduced-motion:reduce){html.desk .panel{transition:none}}
+@media (max-width:1240px){html.desk{--side:212px}.dk-grid{grid-template-columns:minmax(0,1fr) 320px}html.desk .facts{grid-template-columns:1fr 1fr}html.desk .hero{height:260px}}
+@media (max-width:1080px){html.desk .cards{grid-template-columns:minmax(0,1fr)}html.desk .feed.posts{columns:1}.dk-grid{grid-template-columns:minmax(0,1fr) 300px}}
+@view-transition{navigation:auto}
+/*END-DESK-CSS*/
 </style>
 </head>
 <body>
@@ -922,7 +1077,7 @@ blockquote.idq{margin:16px 16px 0;padding:0 0 0 16px;border-left:3px solid var(-
 <header class="banner">
   <a href="../#projets">&larr;&nbsp;Retour au CV</a>
   <span class="txt"><span class="long"><b>Démo</b> · prototype Baykat repensé en 2026 à partir de la maquette XD de 2023 (Groupe ISM) · données fictives</span><span class="short"><b>Démo</b> · données fictives</span></span>
-  <button class="jump" type="button" data-panel-jump>Avant / après</button>
+  <span class="viewsw" role="group" aria-label="Affichage"><button type="button" data-view="desk" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M8.5 20h7M12 16.5V20"/></svg>Ordinateur</button><button type="button" data-view="phone" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 17.5h2"/></svg>Téléphone</button></span><button class="imp-btn" type="button" aria-expanded="false" aria-controls="panel">Ce que j’ai amélioré</button><button class="jump" type="button" data-panel-jump>Avant / après</button>
 </header>
 
 <main class="stage">
@@ -1015,6 +1170,8 @@ blockquote.idq{margin:16px 16px 0;padding:0 0 0 16px;border-left:3px solid var(-
         <li><b>Parcours sans impasse</b>&#8239;: inscription et code SMS, catalogue filtrable, fiche coopérative, vérification d’identité au 1<sup>er</sup> investissement, paiement mobile money, reçu, portefeuille avec échéancier, FAQ.</li>
         <li><b>Suivi concret</b>&#8239;: étapes datées, photos de l’agronome, stade de la culture, pour que l’investisseur voie où en est son argent.</li>
         <li><b>Système de design</b>&#8239;: un jaune, une encre brune, des gris chauds, deux rayons d’angle, deux polices et des chiffres tabulaires pour les montants.</li>
+      
+        <li data-desk-li><b>Version ordinateur</b>&#8239;: barre latérale, colonnes et grilles pour les grands écrans. Le parcours reste le même, et le bandeau permet de passer de l’affichage Ordinateur à Téléphone.</li>
       </ol>
       <div class="jumps"><p>Accès direct aux écrans&#8239;:</p><div>
         <button type="button" data-jump="onb">Inscription</button><button type="button" data-jump="explore">Catalogue</button><button type="button" data-jump="coop">Coopérative</button><button type="button" data-jump="invest">Investir &amp; payer</button><button type="button" data-jump="wallet">Portefeuille</button><button type="button" data-jump="feed">Fil du terrain</button><button type="button" data-jump="chat">Messagerie</button><button type="button" data-jump="faq">FAQ</button></div></div>
@@ -1595,7 +1752,7 @@ const CV0=clone(CV);
 const pmLogo=m=>m==='cb'?`<span class="logo-b lc" aria-hidden="true">${I.card}</span>`:`<span class="logo-b ${m==='wave'?'lw':'lo'}" aria-hidden="true">${m==='wave'?'W':'OM'}</span>`;
 const COLS=['#eb6834','#2a78d6','#1baf7a','#eda100'];
 const colOf=v=>COLS[(v.col||0)%COLS.length];
-function rerender(id){const el=$('#s-'+id);if(!el||el.hidden)return;const sc=el.scrollTop;el.innerHTML=R[id]();el.scrollTop=sc}
+function rerender(id){const el=$('#s-'+id);if(!el||el.hidden)return;const sc=el.scrollTop;el.innerHTML=R[id]();DK(id,el);el.scrollTop=sc}
 function restoreDemo(){if(S.acct!=='new')return;Object.assign(S,clone(DEMO));S.kyc=true;S.acct='demo';S.sel='arachide';CV.splice(0,CV.length,...clone(CV0))}
 function createAccount(){const u=S.su,cc=u.cc.split(' ')[1],d=u.tel.replace(/\D/g,'');
  S.acct='new';S.guest=false;S.user={first:u.first,last:u.last,since:'2026',tel:`${cc} ${d.slice(0,2)} ••• •• ${d.slice(-2)}`,country:u.country};
@@ -1858,7 +2015,7 @@ function show(id,mode){
  const next=$('#s-'+id);if(!next)return;
  if(finish)finish();
  const prev=cur;scrollMem[prev.id]=prev.scrollTop;
- if(R[id])next.innerHTML=R[id]();
+ if(R[id])next.innerHTML=R[id]();DK(id,next);
  app.classList.toggle('tabs',TABS.includes(id));app.dataset.bar=YB[id]?'y':'c';
  $$('.tabbar button').forEach(b=>b.dataset.tab===id?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
  next.hidden=false;next.inert=false;next.scrollTop=mode==='pop'?(scrollMem[next.id]||0):0;
@@ -2044,7 +2201,7 @@ function act(a,t){
  case 'set':S.amount=Math.min(+t.dataset.v,+$('#amt-range').max);return updInvest();
  case 'confirm':if(!S.ack)return;S.pend={kind:'inv',id:S.cid,amount:S.amount,pay:S.pay};if(!S.kyc){S.kycNext='pay';S.kycCap={};return go('kyc')}return go('pay');
  case 'follow':S.sel=t.dataset.id;return tab('suivi');
- case 'sel':S.sel=t.dataset.id;{const sc=$('#s-suivi').scrollTop;$('#s-suivi').innerHTML=R.suivi();$('#s-suivi').scrollTop=Math.min(sc,90);$(`#s-suivi .chip[data-id="${S.sel}"]`).focus()}return;
+ case 'sel':S.sel=t.dataset.id;{const sc=$('#s-suivi').scrollTop;$('#s-suivi').innerHTML=R.suivi();DK('suivi',$('#s-suivi'));$('#s-suivi').scrollTop=Math.min(sc,90);$(`#s-suivi .chip[data-id="${S.sel}"]`).focus()}return;
  case 'donate':if(S.damt<500)return;S.pend={kind:'don',dp:S.dp,amount:S.damt,pay:S.dpay};return go('pay');
  case 'send':{const m=$('#c-msg');if(!m.value.trim()){m.focus();return toast('Écrivez un message avant d’envoyer.')}m.value='';return toast('Message envoyé. Réponse sous 24&nbsp;h (démo).')}
  }
@@ -2102,6 +2259,83 @@ $$('[data-jump]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.j
  if(k==='onb')S.onb=0;if(k==='coop')S.cid='arachide';if(k==='invest'){S.cid='oignon';S.ack=false;S.amount=50000}if(k==='chat')S.cv=0;
  stack.length=0;stack.push(...seq);show(seq[seq.length-1],'tab');
  if(matchMedia('(max-width:899px)').matches)$('.phone').scrollIntoView({behavior:RM.matches?'auto':'smooth',block:'start'})}));
+
+/*DESK-JS*/
+/* ---------- Bouton Retour du navigateur / du téléphone ----------
+   Chaque écran ouvert dans le prototype ajoute une entrée d'historique ; Retour referme
+   l'écran courant au lieu de quitter la démo. HB.init(profondeur, retour) puis HB.sync()
+   après chaque navigation interne. */
+const HB=(()=>{let n=0,mute=0,lock=false,pend=false,t=0,depth=null,fn=null;
+ try{if(history.state&&history.state.hb)history.replaceState(null,'')}catch(e){}
+ const run=()=>{t=0;if(lock||!depth)return;if(mute>0){pend=true;return}
+  let d=0;try{d=Math.max(0,depth()|0)}catch(e){return}
+  try{if(d>n){while(n<d){n++;history.pushState({hb:n},'')}}
+   else if(d<n){const k=d-n;n=d;mute++;history.go(k)}}catch(e){}};
+ const sync=()=>{if(!t)t=setTimeout(run,0)};
+ addEventListener('popstate',e=>{
+  if(mute>0){mute--;if(!mute&&pend){pend=false;sync()}return}
+  if(!fn)return;const i=(e.state&&e.state.hb)||0;
+  if(i>n){mute++;history.go(n-i);return}
+  let k=n-i;n=i;lock=true;try{while(k-->0)fn()}catch(x){}lock=false;setTimeout(sync,450)});
+ return {init(d,b){depth=d;fn=b},sync}})();
+
+/* ---------- Version ordinateur ---------- */
+const HT=document.documentElement,DESK=()=>HT.classList.contains('desk');
+const PRE=['login','onb','signup','otp'];
+const DKP={detail:'explore',invest:'explore',pay:'explore',kyc:'explore',ok:'explore',coop:'explore',receipt:'wallet',donok:'don',chat:'messages',notifs:'home',identite:'profil',conditions:'profil',contact:'profil',paym:'profil'};
+const DKR={
+ home:{top:['.hhead'],aside:['.pf','.ticker','.feed-prev']},
+ detail:{top:['.topbar'],aside:['.fundbox','.sticky-cta','.box.agro','.help-cta','.note']},
+ invest:{top:['.topbar'],aside:['.mini-c','.proj','.sticky-cta']},
+ wallet:{top:['.topbar'],aside:['.wal','.box:has(.alloc)','.note']},
+ suivi:{top:['.ph','.chips'],aside:['.box:has(.sv-head)','.box:has(.chart)']},
+ coop:{top:['.topbar'],aside:['.box:has(.map)','.box.agro','.pad:has(.lnk-card)','.note']}
+};
+function DK(id,el){
+ HB.sync();
+ app.classList.toggle('pre',PRE.includes(id));
+ const on=TABS.includes(id)?'':(DKP[id]||id);
+ $$('.tabbar [data-tab],.tabbar [data-dk]').forEach(b=>(b.dataset.tab||b.dataset.dk)===on?b.setAttribute('data-on',''):b.removeAttribute('data-on'));
+ const u=$('.dk-user');if(u){const g=S.guest,nm=g?'Mode découverte':`${S.user.first} ${S.user.last||''}`.trim();u.innerHTML=`<span class="av" aria-hidden="true">${g?'?':ini(nm).slice(0,2)}</span><div>${esc(nm)}<small>${g?'Sans compte':S.kyc?'Identité vérifiée':'Investisseur'}</small></div>`}
+ const c=$('.dk-cta');if(c)c.hidden=!S.guest;
+ const mn=$('.dk-n');if(mn){const k=CV.reduce((s,x)=>s+(x.unread||0),0);mn.hidden=!k||S.guest;mn.textContent=k}
+ if(!DESK()||!el)return;
+ if(PRE.includes(id)){if(id==='login')return;const w=document.createElement('div');w.className='dk-card';w.append(...el.childNodes);el.append(w);return}
+ const r=DKR[id];if(!r)return;
+ const kids=[...el.children],g=document.createElement('div'),m=document.createElement('div'),a=document.createElement('div');
+ g.className='dk-grid';m.className='dk-main';a.className='dk-aside';
+ const pick=sel=>kids.filter(k=>k.matches(sel));
+ const top=r.top.flatMap(pick),as=[];
+ r.aside.forEach(sel=>pick(sel).forEach(k=>{const p=k.previousElementSibling;if(p&&p.classList.contains('sec-head')&&!as.includes(p))as.push(p);as.push(k)}));
+ kids.forEach(k=>{if(!top.includes(k)&&!as.includes(k))m.append(k)});
+ a.append(...as);g.append(m,a);el.append(g);
+}
+(function(){
+ const tb=$('.tabbar');
+ const b=(k,ic,l,x='')=>`<button class="dk" type="button" data-dk="${k}"><span class="ti">${ic}</span>${l}${x}</button>`;
+ tb.insertAdjacentHTML('afterbegin',`<div class="dk dk-brand" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#mark"/></svg>Baykat</div>`);
+ tb.insertAdjacentHTML('beforeend',`<p class="dk dk-lbl">Mon espace</p>${b('wallet',I.wallet,'Portefeuille')}${b('feed',I.leaf,'Nouvelles du terrain')}${b('messages',I.chat,'Messagerie','<span class="dk-n" hidden></span>')}${b('faq',I.help,'Aide et FAQ')}<div class="dk dk-cta" hidden><b>Mode découverte</b>Créez un compte pour investir dès 10${NB}000${NB}FCFA.<button type="button" data-act="join">Créer un compte</button></div><div class="dk dk-spacer"></div><div class="dk dk-user"></div>`);
+ tb.addEventListener('click',e=>{const t=e.target.closest('[data-dk]');if(!t)return;const id=t.dataset.dk;if(S.guest&&(id==='wallet'||id==='messages')){toast('Créez un compte pour accéder à cet espace.');return}stack.length=0;stack.push('home',id);show(id,'tab')});
+ const lt=$('.login-top');
+ lt.insertAdjacentHTML('beforeend',`<ul class="dk-proof"><li><b>8</b>campagnes suivies</li><li><b>10${NB}000</b>FCFA pour commencer</li><li><b>100${NN}%</b>suivi par un agronome</li></ul><div class="dk-field" aria-hidden="true">${art('oignon')}</div>`);
+ const sw=$('.viewsw'),MQ=matchMedia('(min-width:960px)');
+ const pref=()=>{try{return localStorage.getItem('bk-view')}catch(e){return null}};
+ function apply(re){const d=MQ.matches&&pref()!=='phone';const was=DESK();HT.classList.toggle('desk',d);if(!d)HT.classList.remove('imp-open');
+  $$('button',sw).forEach(x=>x.setAttribute('aria-pressed',String((x.dataset.view==='desk')===d)));
+  if(re&&was!==d){const id=stack[stack.length-1];if(id==='login'){DK('login',cur)}else show(id,'none')}}
+ sw.addEventListener('click',e=>{const t=e.target.closest('[data-view]');if(!t)return;try{localStorage.setItem('bk-view',t.dataset.view)}catch(e){}apply(true)});
+ MQ.addEventListener('change',()=>apply(true));
+ const ib=$('.imp-btn'),pn=$('#panel');
+ pn.insertAdjacentHTML('afterbegin',`<button class="dk dk-close" type="button" aria-label="Fermer le panneau">${I.x}</button>`);
+ const imp=o=>{HT.classList.toggle('imp-open',o);ib.setAttribute('aria-expanded',String(o))};
+ ib.addEventListener('click',()=>imp(!HT.classList.contains('imp-open')));
+ $('.dk-close',pn).addEventListener('click',()=>{imp(false);ib.focus()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&HT.classList.contains('imp-open'))imp(false)});
+ $$('[data-jump]',pn).forEach(x=>x.addEventListener('click',()=>{if(DESK())imp(false)}));
+ HB.init(()=>stack.length-1,()=>back());
+ apply(false);DK('login',cur);
+})();
+/*END-DESK-JS*/
 })();
 </script>
 </body>

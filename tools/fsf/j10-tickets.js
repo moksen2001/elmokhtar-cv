@@ -53,9 +53,9 @@ A.payPick=t=>{const e=top();e.params.pay=t.dataset.v;const sc=$('.sc',e.el).scro
 A.payGo=async t=>{const e=top();if(!e.params.pay)return;t.classList.add('busy');const kind=e.params.kind,pay=e.params.pay;
  const ov=document.createElement('div');ov.className='payov';ov.innerHTML=`<div class="po-in"><div class="po-ph">${ic(pay==='card'?'cardpay':'mobile')}<span class="po-ring"></span><span class="po-ok">${ic('check')}</span></div><b class="h3">${L('Paiement simulé…','Simulated payment…')}</b><small>${pay==='wave'?L('Confirmation dans l’app Wave (démo)','Confirming in the Wave app (demo)'):pay==='om'?L('Confirmation Orange Money (démo)','Orange Money confirmation (demo)'):L('Autorisation carte (démo)','Card authorisation (demo)')}</small></div>`;layer.appendChild(ov);
  await wait(RM?200:1500);ov.classList.add('ok');$('b',ov).textContent=L('Paiement validé · Jërëjëf !','Payment confirmed · Jërëjëf!');$('small',ov).textContent=L('Aucun débit réel','No real charge');buzz([10,40,20]);await wait(RM?200:900);ov.classList.add('out');setTimeout(()=>ov.remove(),400);
- if(kind==='ticket'){const no='TK-'+Math.random().toString(36).slice(2,8).toUpperCase();S.tickets.unshift({no,zone:TK.zone,seats:TK.seats,ts:Date.now(),pay});save();TK=null;
+ if(kind==='ticket'){const no='TK-'+Math.random().toString(36).slice(2,8).toUpperCase();S.tickets.unshift({no,zone:TK.zone,seats:TK.seats,ts:NOW(),pay});save();TK=null;
   const tkS=stk().find(x=>x.name==='tickets');if(tkS)tkS.ver=0;collapseTo(['seatmap','seats','checkout'],'eticket',{no,fresh:1});earn('ticket-'+no,150,{fr:'Billet Sénégal – Soudan',en:'Senegal – Sudan ticket'});step(2);}
- else{const no='GD-'+Math.random().toString(36).slice(2,7).toUpperCase();const items=checkoutItems('shop');S.orders.unshift({no,items,ts:Date.now(),pay});S.cart=[];save();
+ else{const no='GD-'+Math.random().toString(36).slice(2,7).toUpperCase();const items=checkoutItems('shop');S.orders.unshift({no,items,ts:NOW(),pay});S.cart=[];save();
   collapseTo(['cart','checkout','product'],'order',{no});earn('order-'+no,80,{fr:'Commande boutique',en:'Shop order'});}};
 /* e-ticket */
 SCR.eticket={title:()=>L('Mon billet','My ticket'),render:(p)=>{const t=S.tickets.find(x=>x.no===p.no)||S.tickets[0];if(!t)return '';const z=ZONES.find(x=>x.id===t.zone);

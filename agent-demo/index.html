@@ -452,6 +452,7 @@ details.logbox:not([open])>summary{border-bottom:0}
  .row .mk{grid-column:2;grid-row:3;justify-self:start;margin-top:2px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/*VT*/@view-transition{navigation:auto}/*END-VT*/
 </style>
 </head>
 <body>
@@ -473,6 +474,24 @@ details.logbox:not([open])>summary{border-bottom:0}
 <script>
 (function(){
 'use strict';
+/*HB*//* ---------- Bouton Retour du navigateur / du téléphone ----------
+   Chaque écran ouvert dans le prototype ajoute une entrée d'historique ; Retour referme
+   l'écran courant au lieu de quitter la démo. HB.init(profondeur, retour) puis HB.sync()
+   après chaque navigation interne. */
+const HB=(()=>{let n=0,mute=0,lock=false,pend=false,t=0,depth=null,fn=null;
+ try{if(history.state&&history.state.hb)history.replaceState(null,'')}catch(e){}
+ const run=()=>{t=0;if(lock||!depth)return;if(mute>0){pend=true;return}
+  let d=0;try{d=Math.max(0,depth()|0)}catch(e){return}
+  try{if(d>n){while(n<d){n++;history.pushState({hb:n},'')}}
+   else if(d<n){const k=d-n;n=d;mute++;history.go(k)}}catch(e){}};
+ const sync=()=>{if(!t)t=setTimeout(run,0)};
+ addEventListener('popstate',e=>{
+  if(mute>0){mute--;if(!mute&&pend){pend=false;sync()}return}
+  if(!fn)return;const i=(e.state&&e.state.hb)||0;
+  if(i>n){mute++;history.go(n-i);return}
+  let k=n-i;n=i;lock=true;try{while(k-->0)fn()}catch(x){}lock=false;setTimeout(sync,450)});
+ return {init(d,b){depth=d;fn=b},sync}})();
+HB.init(()=>S.step-1,()=>go(S.step-1));/*END-HB*/
 const EN=/[?&]lang=en/.test(location.search)||(!/[?&]lang=fr/.test(location.search)&&/\/en\//.test(document.referrer));
 const x=(fr,en)=>EN?en:fr;
 document.documentElement.lang=EN?'en':'fr';
@@ -778,7 +797,7 @@ const sevOf=(c,f)=>f.k==='ko'?(c.kind==='amd'?['warn',x('Question client','Clien
 const typeOf=c=>c.kind==='amd'?x('Modification','Amendment'):x('Présentation','Presentation');
 
 /* ---------- stepper ---------- */
-function stepbar(){
+function stepbar(){HB.sync();
  const c=S.c,can=[true,!!c,!!(c&&S.analysed&&allDecided(c))];
  const L=[x('Dossier','File'),x('Contrôle','Review'),x('Message','Message')];
  $('#stepbar').innerHTML=`<ol class="stepper" aria-label="${x('Étapes','Steps')}">${L.map((l,k)=>{const n=k+1,cur=S.step===n,past=n<S.step;
@@ -787,7 +806,7 @@ function stepbar(){
 }
 $('#stepbar').addEventListener('click',e=>{const b=e.target.closest('[data-step]');if(!b||b.disabled)return;go(+b.dataset.step);});
 function go(n){
- closeSheet();
+ closeSheet();HB.sync();
  if(n===1){S.tok++;renderFiles();}
  else if(n===2&&S.c){if(S.analysed){S.step=2;renderCheck();}else startCase(S.c.id);}
  else if(n===3&&S.c&&S.analysed&&allDecided(S.c))renderMessage();

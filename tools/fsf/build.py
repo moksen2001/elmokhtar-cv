@@ -6,7 +6,7 @@ D = os.path.dirname(os.path.abspath(__file__)) + '/'
 OUT = D + '../../fsf-demo/'
 rd = lambda f: open(D + f, encoding='utf-8').read()
 CSS = ['c1-base.css', 'c2-components.css', 'c3-screens.css', 'c4-live.css', 'c5-support.css']
-JS = ['j0-core.js', 'j1-data.js', 'j2-nav.js', 'j3-ui.js', 'j4-home.js', 'j5-match.js', 'j6-live.js',
+JS = ['j0-core.js', '../shared/hb.js', 'j1-data.js', 'j2-nav.js', 'j3-ui.js', 'j4-home.js', 'j5-match.js', 'j6-live.js',
       'j7-coulisses.js', 'j8-games.js', 'j9-team.js', 'j10-tickets.js', 'j11-shop.js', 'j12-me.js', 'j13-init.js']
 head = rd('h-head.html'); body = rd('h-body.html')
 css = '\n'.join(rd(f) for f in CSS)

@@ -48,7 +48,7 @@ A.shareNative=async()=>{const sh=topSheet();if(!sh||!sh.data.canvas)return;try{c
 /* ---------- pronos ---------- */
 const LB=[['Moussa D.','Dakar',145],['Aïssatou N.','Thiès',132],['Ibrahima S.','Milan',118],['Fatou K.','Paris',104],['Cheikh B.','Montréal',96],['Mariama T.','Ziguinchor',81]];
 SCR.pronos={title:()=>'Pronos',bar:1,render:(p)=>{const f=nextLions();if(!f)return `<div class="empty">${ic('target')}<p>${L('Pas de match des Lions à pronostiquer pour le moment.','No Lions match to predict right now.')}</p></div>`;
- const saved=S.pronos[f.id];const v=p.v||saved||{h:1,a:0,sc:null};const closed=Date.now()>Date.parse(f.ko);
+ const saved=S.pronos[f.id];const v=p.v||saved||{h:1,a:0,sc:null};const closed=NOW()>Date.parse(f.ko);
  const fw=SQ.filter(x=>x.p==='FW'||x.id==='pgueye'||x.id==='camara').slice(0,12);
  const myPts=ptsTotal();const board=LB.map(r=>({n:r[0],c:r[1],p:r[2]})).concat([{n:`${S.user.first} ${S.user.last[0]}.`,c:S.user.city,p:Math.min(150,40+(Object.keys(S.pronos).length*20)),me:1}]).sort((a,b)=>b.p-a.p);
  return `<div class="wrap"><div class="pr-m"><span class="kick">${esc(tx(f.comp))} · ${esc(whenTxt(f))}</span><div class="pr-t">${flag(f.h,56)}<div class="pr-sc">
@@ -63,11 +63,11 @@ SCR.pronos={title:()=>'Pronos',bar:1,render:(p)=>{const f=nextLions();if(!f)retu
  <div class="pr-rules"><span><b class="disp">5</b>${L('score exact','exact score')}</span><span><b class="disp">2</b>${L('bon vainqueur','right winner')}</span><span><b class="disp">3</b>${L('bon buteur','right scorer')}</span></div>
  <div class="sec-h" style="padding:0;margin:22px 0 10px"><h2 class="h3">${L('Classement des amis','Friends leaderboard')}</h2>${demoTag()}</div>
  <div class="lb">${board.map((r,i)=>`<div class="lb-r ${r.me?'me':''}"><span class="pos disp">${i+1}</span><span class="av" style="width:34px;height:34px;font-size:14px">${esc(r.n.split(' ').map(w=>w[0]).join(''))}</span><span class="lb-n"><b>${esc(r.n)}${r.me?` · ${L('vous','you')}`:''}</b><small>${esc(r.c)}</small></span><b class="disp tn">${r.p}</b></div>`).join('')}</div></div>`;},
- after:()=>{const f=nextLions();if(!f||S.pronos[f.id]||Date.now()>Date.parse(f.ko))return '';return `<div class="cta-bar"><button class="btn y block" type="button" data-act="prSave">${ic('target')}${L('Valider mon prono','Lock in my prediction')}</button></div>`;}};
+ after:()=>{const f=nextLions();if(!f||S.pronos[f.id]||NOW()>Date.parse(f.ko))return '';return `<div class="cta-bar"><button class="btn y block" type="button" data-act="prSave">${ic('target')}${L('Valider mon prono','Lock in my prediction')}</button></div>`;}};
 A.pronos=()=>{if(top()&&top().name==='pronos')return;go('pronos');};
 A.prStep=t=>{const e=top();const f=nextLions();const v=e.params.v||Object.assign({},S.pronos[f.id]||{h:1,a:0,sc:null});const k=t.dataset.k;v[k]=clamp(v[k]+ +t.dataset.d,0,9);e.params.v=v;const n=$(k==='h'?'#prH':'#prA',e.el);n.textContent=v[k];if(!RM)n.animate([{transform:`translateY(${+t.dataset.d>0?'40%':'-40%'})`,opacity:0},{transform:'none',opacity:1}],{duration:260,easing:'cubic-bezier(.34,1.56,.64,1)'});buzz(4);};
 A.prScorer=t=>{const e=top();const f=nextLions();const v=e.params.v||Object.assign({},S.pronos[f.id]||{h:1,a:0,sc:null});v.sc=v.sc===t.dataset.id?null:t.dataset.id;e.params.v=v;$$('[data-act="prScorer"]',e.el).forEach(b=>b.setAttribute('aria-pressed',b.dataset.id===v.sc));buzz(4);};
-A.prSave=t=>{const e=top();const f=nextLions();const v=e.params.v||{h:1,a:0,sc:null};S.pronos[f.id]=Object.assign({ts:Date.now()},v);save();buzz([8,30,12]);confetti(.5,.3,60);build(e);earn('prono-'+f.id,20,{fr:'Prono Sénégal – Comores',en:'Senegal – Comoros prediction'},true);step(4);};
+A.prSave=t=>{const e=top();const f=nextLions();const v=e.params.v||{h:1,a:0,sc:null};S.pronos[f.id]=Object.assign({ts:NOW()},v);save();buzz([8,30,12]);confetti(.5,.3,60);build(e);earn('prono-'+f.id,20,{fr:'Prono Sénégal – Comores',en:'Senegal – Comoros prediction'},true);step(4);};
 A.prEdit=()=>{const f=nextLions();const e=top();e.params.v=Object.assign({},S.pronos[f.id]);delete S.pronos[f.id];save();build(e);};
 
 /* ---------- quiz ---------- */
@@ -83,5 +83,5 @@ A.quiz=()=>go('quiz',{i:0,sc:0});
 A.qzPick=t=>{const e=top();const q=QUIZ[e.params.i||0];const j=+t.dataset.j;e.params.a=j;if(j===q.a){e.params.sc=(e.params.sc||0)+1;buzz([8,30,8]);}else buzz([40]);build(e);
  const b=$(`.qo[data-j="${j}"]`,e.el);if(b&&!RM)b.animate(j===q.a?[{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'none'}]:[{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(-4px)'},{transform:'none'}],{duration:400});
  if(j===q.a&&b){const r=b.getBoundingClientRect(),a=app.getBoundingClientRect();confetti((r.left+r.width/2-a.left)/a.width,(r.top-a.top)/a.height,26);}};
-A.qzNext=()=>{const e=top();const i=(e.params.i||0)+1;if(i>=QUIZ.length){const sc=e.params.sc||0;S.quiz.last=sc;S.quiz.best=Math.max(S.quiz.best||0,sc);save();replace('quiz',{end:1,sc});if(sc)earn('quiz-'+Date.now(),sc*10,{fr:`Quiz Lions ${sc}/10`,en:`Lions quiz ${sc}/10`});step(4);if(sc>=6)setTimeout(()=>confetti(.5,.3,110),300);return;}e.params.i=i;e.params.a=null;e.scroll=0;build(e);};
+A.qzNext=()=>{const e=top();const i=(e.params.i||0)+1;if(i>=QUIZ.length){const sc=e.params.sc||0;S.quiz.last=sc;S.quiz.best=Math.max(S.quiz.best||0,sc);save();replace('quiz',{end:1,sc});if(sc)earn('quiz-'+NOW(),sc*10,{fr:`Quiz Lions ${sc}/10`,en:`Lions quiz ${sc}/10`});step(4);if(sc>=6)setTimeout(()=>confetti(.5,.3,110),300);return;}e.params.i=i;e.params.a=null;e.scroll=0;build(e);};
 A.qzRetry=()=>replace('quiz',{i:0,sc:0});

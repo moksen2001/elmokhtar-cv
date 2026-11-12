@@ -1,5 +1,7 @@
 /* ================= core: helpers, icons, brand, i18n, state ================= */
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+/* horloge de démo : l'app vit à la date de ses données (2 oct. 2026), quel que soit le jour de la visite */
+const NOW0=Date.parse('2026-10-02T08:00:00Z'),T0=Date.now(),NOW=()=>NOW0+(Date.now()-T0);
 const RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -121,7 +123,7 @@ const ftime=d=>fdate(d,{hour:'2-digit',minute:'2-digit'});
 const fcfa=n=>new Intl.NumberFormat(LOC()).format(n).replace(/ | /g,' ')+' FCFA';
 const eurOf=n=>new Intl.NumberFormat(LOC(),{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n/655.957);
 const nfmt=n=>new Intl.NumberFormat(LOC()).format(n).replace(/ /g,' ');
-const ago=ts=>{const m=Math.round((Date.now()-ts)/60000);if(m<1)return L('À l’instant','Just now');if(m<60)return L(`Il y a ${m} min`,`${m} min ago`);const h=Math.round(m/60);if(h<24)return L(`Il y a ${h} h`,`${h}h ago`);const d=Math.round(h/24);if(d===1)return L('Hier','Yesterday');if(d<7)return L(`Il y a ${d} jours`,`${d} days ago`);return fdate(ts,{day:'numeric',month:'short'});};
+const ago=ts=>{const m=Math.round((NOW()-ts)/60000);if(m<1)return L('À l’instant','Just now');if(m<60)return L(`Il y a ${m} min`,`${m} min ago`);const h=Math.round(m/60);if(h<24)return L(`Il y a ${h} h`,`${h}h ago`);const d=Math.round(h/24);if(d===1)return L('Hier','Yesterday');if(d<7)return L(`Il y a ${d} jours`,`${d} days ago`);return fdate(ts,{day:'numeric',month:'short'});};
 const greet=()=>{const h=new Date().getHours();return h<5||h>=18?L('Bonsoir','Good evening'):h<12?L('Bonjour','Good morning'):L('Bon après-midi','Good afternoon');};
 
 /* real QR code (byte mode, versions 2-5, EC level L, mask 0) */
@@ -160,7 +162,7 @@ function defState(){return{
  alerts:{'sen-com':true},
  pronos:{},votes:{},quiz:{best:null,last:null},
  tickets:[],orders:[],cart:[],
- pts:[{k:'join',p:120,ts:Date.now()-86400e3*40,l:{fr:'Bienvenue dans la Tanière',en:'Welcome to the Den'}}],
+ pts:[{k:'join',p:120,ts:NOW()-86400e3*40,l:{fr:'Bienvenue dans la Tanière',en:'Welcome to the Den'}}],
  seenSt:[],steps:[0,0,0,0,0,0],replay:{done:false}
 };}
 function load(){let s=null;try{const raw=localStorage.getItem(KEY);if(raw)s=JSON.parse(raw);}catch(e){}const d=defState();if(!s||s.v!==1)return d;return Object.assign(d,s);}
@@ -171,6 +173,6 @@ let S=load();
 const LEVELS=[{n:{fr:'Lionceau',en:'Cub'},min:0},{n:{fr:'Lion',en:'Lion'},min:300},{n:{fr:'Grand Lion',en:'Great Lion'},min:700},{n:{fr:'Légende',en:'Legend'},min:1300}];
 const ptsTotal=()=>S.pts.reduce((a,p)=>a+p.p,0);
 const levelOf=p=>{let i=0;LEVELS.forEach((l,j)=>{if(p>=l.min)i=j;});return i;};
-function earn(k,p,l,once){if(once&&S.pts.some(x=>x.k===k))return false;const before=levelOf(ptsTotal());S.pts.push({k,p,ts:Date.now(),l});save();
+function earn(k,p,l,once){if(once&&S.pts.some(x=>x.k===k))return false;const before=levelOf(ptsTotal());S.pts.push({k,p,ts:NOW(),l});save();
  const after=levelOf(ptsTotal());if(typeof toast==='function')toast(L(`+${p} points · Carte supporter`,`+${p} points · Supporter card`),{icon:'star'});
  if(after>before&&typeof levelUp==='function')setTimeout(()=>levelUp(after),900);return true;}

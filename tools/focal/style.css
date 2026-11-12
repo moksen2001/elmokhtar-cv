@@ -1048,3 +1048,6 @@ html.app .tabbar .tb-ind.hid { opacity: 0; }
   .tk-p { display: none; }
   .tk-dot, .vf .rec b { animation: none !important; }
 }
+
+/* fondu entre le CV et la démo (navigateurs compatibles) */
+@view-transition{navigation:auto}

@@ -1,6 +1,5 @@
 /* ================= data (sources: tools/fsf/sources.md — checked 2 Oct 2026) ================= */
 const CREDITS=/*CREDITS*/{};
-const NOW0=Date.parse('2026-10-02T08:00:00Z'); // data snapshot
 
 /* ---------- official channels (verified, see sources.md §3) ---------- */
 const SOCIAL=[
@@ -105,7 +104,7 @@ const STAFF=[
 ];
 const POS={GK:{fr:'Gardiens',en:'Goalkeepers'},DF:{fr:'Défenseurs',en:'Defenders'},MF:{fr:'Milieux',en:'Midfielders'},FW:{fr:'Attaquants',en:'Forwards'}};
 const P=id=>SQ.find(p=>p.id===id);
-const ageOf=dob=>{if(!dob)return null;const d=new Date(dob),n=new Date();let a=n.getFullYear()-d.getFullYear();if(n.getMonth()<d.getMonth()||(n.getMonth()===d.getMonth()&&n.getDate()<d.getDate()))a--;return a;};
+const ageOf=dob=>{if(!dob)return null;const d=new Date(dob),n=new Date(NOW());let a=n.getFullYear()-d.getFullYear();if(n.getMonth()<d.getMonth()||(n.getMonth()===d.getMonth()&&n.getDate()<d.getDate()))a--;return a;};
 const initials=n=>n.split(/[\s-]+/).filter(w=>/^[A-ZÀ-Ý]/.test(w)).map(w=>w[0]).join('').slice(-2);
 const shortN=n=>{const p=SQ.find(x=>x.n===n);if(p&&p.sn)return p.sn;const w=n.split(' ');return w[w.length-1];};
 

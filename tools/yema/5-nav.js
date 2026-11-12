@@ -58,6 +58,7 @@ function chrome(){
  $$('.tb',tabbar).forEach(b=>{if(NAV.mode==='tabs'&&b.dataset.tab===NAV.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  edge.classList.toggle('on',!!e&&stk().length>1&&!d.modal&&!d.noswipe);
  badges();if(typeof panelCur==='function')panelCur();tabInd();
+ HB.sync();
 }
 function go(name,params){
  if(BUSY)return;closeAllSheets();
@@ -144,7 +145,7 @@ function openSheet(o){
  const w=document.createElement('div');
  w.innerHTML=`<div class="scrim" ${o.clear?'style="background:transparent"':''}></div><div class="sheet ${o.light?'light':''}" role="dialog" aria-modal="true" aria-label="${esc(o.label||'')}" ${o.max?`style="max-height:${o.max}"`:''}><div class="grab"><i></i></div><div class="sh-in" style="display:flex;flex-direction:column;min-height:0;flex:1">${o.html}</div></div>`;
  layer.appendChild(w);const sh=w.querySelector('.sheet'),sc=w.querySelector('.scrim');
- const obj={w,sh,onClose:o.onClose,data:o.data||{},prev:document.activeElement};sheets.push(obj);
+ const obj={w,sh,onClose:o.onClose,data:o.data||{},prev:document.activeElement};sheets.push(obj);HB.sync();
  requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.classList.add('in');sh.classList.add('in');}));
  sc.addEventListener('click',()=>closeSheet(obj));
  bindDrag(obj);if(o.onMount)o.onMount(sh,obj);markImgs(sh);aliveSheet(sh);
@@ -156,7 +157,7 @@ function bindDrag(obj){const sh=obj.sh;let y0=null,dy=0,t0=0,v=0;
  const up=()=>{if(y0==null)return;y0=null;sh.classList.remove('drag');sh.style.transform='';if(dy>110||(v>.6&&dy>20))closeSheet(obj);};
  $$('.grab,.sh-h',sh).forEach(g=>{g.addEventListener('pointerdown',dn);g.addEventListener('pointermove',mv);g.addEventListener('pointerup',up);g.addEventListener('pointercancel',up);});}
 function setSheet(obj,html){const inn=obj.sh.querySelector('.sh-in');const b=inn.querySelector('.sh-b');const st=b?b.scrollTop:0;inn.innerHTML=html;const nb=inn.querySelector('.sh-b');if(nb)nb.scrollTop=st;bindDrag(obj);markImgs(obj.sh);aliveSheet(obj.sh);}
-function closeSheet(obj){obj=obj||sheets[sheets.length-1];if(!obj)return;const i=sheets.indexOf(obj);if(i<0)return;sheets.splice(i,1);obj.sh.classList.remove('in');obj.w.querySelector('.scrim').classList.remove('in');setTimeout(()=>obj.w.remove(),RM?0:420);if(obj.onClose)obj.onClose();if(obj.prev&&document.contains(obj.prev))try{obj.prev.focus({preventScroll:true})}catch(e){}}
+function closeSheet(obj){obj=obj||sheets[sheets.length-1];if(!obj)return;const i=sheets.indexOf(obj);if(i<0)return;sheets.splice(i,1);HB.sync();obj.sh.classList.remove('in');obj.w.querySelector('.scrim').classList.remove('in');setTimeout(()=>obj.w.remove(),RM?0:420);if(obj.onClose)obj.onClose();if(obj.prev&&document.contains(obj.prev))try{obj.prev.focus({preventScroll:true})}catch(e){}}
 function closeAllSheets(){while(sheets.length)closeSheet(sheets[sheets.length-1]);$$('.dlgw,.story',layer).forEach(d=>d.remove());}
 const topSheet=()=>sheets[sheets.length-1];
 function confirmDlg(o){return new Promise(res=>{const w=document.createElement('div');w.className='dlgw';w.innerHTML=`<div class="scrim in"></div><div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="dlgt"><h2 class="h3" id="dlgt">${o.title}</h2><p>${o.text}</p><div class="acts"><button class="btn ${o.danger?'danger':'gold'}" type="button" data-r="1">${o.ok}</button><button class="btn ghost" type="button" data-r="0">${o.cancel||L('Annuler','Cancel')}</button></div></div>`;layer.appendChild(w);const d=w.querySelector('.dlg');requestAnimationFrame(()=>d.classList.add('in'));const done=v=>{d.classList.remove('in');setTimeout(()=>w.remove(),220);document.removeEventListener('keydown',kd,true);res(v);};const kd=e=>{if(e.key==='Escape'){e.stopPropagation();done(false);}};document.addEventListener('keydown',kd,true);w.addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(b)done(b.dataset.r==='1');else if(e.target.classList.contains('scrim'))done(false);});setTimeout(()=>d.querySelector('[data-r="1"]').focus(),60);});}
@@ -171,3 +172,6 @@ function dl(name,content,type){const b=content instanceof Blob?content:new Blob(
 function step(i){if(S.steps[i])return;S.steps[i]=1;save();if(typeof renderSteps==='function')renderSteps();}
 A.back=()=>back();
 A.closeSheet=()=>closeSheet();
+
+/* historique du navigateur : Retour referme la feuille ou l'écran courant */
+HB.init(()=>stk().length-1+sheets.length+(NAV.mode==='tabs'&&NAV.tab!=='home'?1:0),()=>back());

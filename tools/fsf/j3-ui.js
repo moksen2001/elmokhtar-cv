@@ -6,7 +6,7 @@ function pic(id,o){o=o||{};if(!hasPh(id))return o.fb!=null?o.fb:`<span class="ph
  return `<span class="ph ${o.cls||''}"${o.style?` style="${o.style}"`:''}><img src="${src}" alt="${esc(o.alt!=null?o.alt:tx(c.alt)||'')}" loading="${o.eager?'eager':'lazy'}" decoding="async" draggable="false"${c.pos?` style="object-position:${c.pos}"`:''}${o.fp?' fetchpriority="high"':''}></span>`;}
 function initialsTile(p,cls,size){return `<span class="initials ${cls||''}" role="img" aria-label="${esc(p.n)}"><b style="font-size:${size||34}px">${esc(initials(p.n))}</b>${p.no?`<i style="font-size:${Math.round((size||34)*.62)}px">${p.no}</i>`:''}</span>`;}
 function face(p,o){o=o||{};return hasPh(p.ph)?pic(p.ph,Object.assign({alt:p.n},o)):initialsTile(p,o.cls,o.size);}
-const isPast=f=>koOf(f,true)<Date.now();
+const isPast=f=>koOf(f,true)<NOW();
 function koOf(f,end){if(f.ko)return Date.parse(f.ko)+(end?2*3600e3:0);if(f.day)return Date.parse((end&&f.end?f.end:f.day)+'T'+(end?'23:59:00Z':'12:00:00Z'));if(f.month){const [y,m]=f.month.split('-').map(Number);return end?Date.UTC(y,m,0,23,59):Date.UTC(y,m-1,1);}return 0;}
 const upcoming=(t)=>FIX.filter(f=>!isPast(f)&&(!t||t==='all'||f.t===t)).sort((a,b)=>koOf(a)-koOf(b));
 const nextLions=()=>upcoming('A').find(f=>f.ko)||null;
@@ -32,7 +32,7 @@ function mountCountdown(root,target){const el=$('.cd',root);if(!el)return;const 
  const setD=(k,v,animate)=>{const n=$(`[data-k="${k}"]`,el);if(!n)return;const old=cur[k];if(old===v)return;cur[k]=v;const [t,b,ft,fb]=$$(':scope>span>em',n);
   if(!animate||RM||NOSAVE||old==null){t.textContent=b.textContent=ft.textContent=fb.textContent=v;return;}
   ft.textContent=old;b.textContent=old;t.textContent=v;fb.textContent=v;n.classList.remove('go');void n.offsetWidth;n.classList.add('go');setTimeout(()=>{b.textContent=v;n.classList.remove('go');},640);};
- const tick=(a)=>{if(!el.isConnected){CDT.delete(tick);return;}let s=Math.max(0,Math.floor((target-Date.now())/1000));const d=Math.min(99,Math.floor(s/86400));s-=d*86400;const h=Math.floor(s/3600);s-=h*3600;const m=Math.floor(s/60);s-=m*60;
+ const tick=(a)=>{if(!el.isConnected){CDT.delete(tick);return;}let s=Math.max(0,Math.floor((target-NOW())/1000));const d=Math.min(99,Math.floor(s/86400));s-=d*86400;const h=Math.floor(s/3600);s-=h*3600;const m=Math.floor(s/60);s-=m*60;
   [['d',d],['h',h],['m',m],['s',s]].forEach(([k,v])=>{const t=String(v).padStart(2,'0');setD(k+'0',t[0],a);setD(k+'1',t[1],a);});el.setAttribute('aria-label',`${d} ${L('jours','days')} ${h} h ${m} min`);};
  tick(false);CDT.add(tick);}
 setInterval(()=>CDT.forEach(f=>f(true)),1000);

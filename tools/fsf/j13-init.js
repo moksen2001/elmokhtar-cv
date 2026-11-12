@@ -43,7 +43,7 @@ LANG=(qp.get('lang')==='en'||qp.get('lang')==='fr')?qp.get('lang'):(S.lang||'fr'
 setLang(LANG);
 if(SHOT){
  if(SHOT==='live'||SHOT==='lineup'){const upto=SHOT==='live'?71:59;LIVE.ph=2;LIVE.c=upto+.5;R.ev.forEach((e,i)=>{const at=evPhase(e)===1?evAt(e):evAt(e);if(evPhase(e)===1||(e.ht)||(e.m<=upto&&e.k!=='ft')){LIVE.fired.push(i);if(e.k==='goal')LIVE.sc[e.s==='h'?0:1]++;e._sc=`${LIVE.sc[0]}-${LIVE.sc[1]}`;}});}
- if(SHOT==='ticket'){S.tickets=[{no:'TK-4F7Q2A',zone:'ouest',seats:['C7','C8'],ts:Date.now(),pay:'wave'}];}
+ if(SHOT==='ticket'){S.tickets=[{no:'TK-4F7Q2A',zone:'ouest',seats:['C7','C8'],ts:NOW(),pay:'wave'}];}
  const m={home:['home',[['home']]],live:['home',[['home'],['live',{tab:'feed'}]]],lineup:['home',[['home'],['live',{tab:'xi'}]]],ticket:['home',[['home'],['tickets'],['eticket',{no:'TK-4F7Q2A'}]]],coulisses:['coulisses',[['coulisses']]],player:['equipe',[['equipe'],['player',{id:qp.get('id')||'koulibaly'}]]],card:['moi',[['moi'],['card']]],shop:['home',[['home'],['shop'],['product',{id:'home',name:'SARR',no:'18',back:1}]]],matchs:['matchs',[['matchs']]]}[SHOT]||['home',[['home']]];
  setStack(m[0],m[1]);}
 else{startFlow('splash');firstPill();maybeInstall();}

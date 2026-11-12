@@ -183,3 +183,6 @@ html.shot .app{border-radius:0}html.shot .sbar,html.shot .hind{display:flex}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* fondu entre le CV et la démo (navigateurs compatibles) */
+@view-transition{navigation:auto}
